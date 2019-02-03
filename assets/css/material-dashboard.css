@@ -18821,4 +18821,25 @@ Copyright (c) 2015 Daniel Eden
 }
 
 
+/* --------------------------------------------------------------- */
+.daw-miniatures .card-img{
+  width:100px;
+  heigth: 100px;
+}
+
+.daw-miniatures .card{
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+
+.daw-miniatures .card-title{
+  background: #8E8E8E;
+  text-align: center;
+}
+
+.daw-buttons{
+  justify-content: space-between;
+}
+
 /*# sourceMappingURL=dashboard-free.css.map */
