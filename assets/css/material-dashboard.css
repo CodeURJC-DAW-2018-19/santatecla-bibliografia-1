@@ -18882,6 +18882,42 @@ Copyright (c) 2015 Daniel Eden
 .author-form {
   margin-left: auto;
   margin-right: auto;
+padding-bottom: 30px;
+}
+
+/* BOOKS PAGE*/
+
+.book-page .daw-miniatures .card-title{
+  background: #8E8E8E;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.book .flex-direction{
+  display: flex;
+  flex-direction: column;
+}
+
+.book-page .daw-miniatures {
+  height: auto;
+  overflow-x: hidden;
+  max-height: 25vh;
+  padding-bottom: 25px;
+}
+
+.book-page .daw-buttons{
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.book-form {
+  margin-left: auto;
+  margin-right: auto;
   padding-bottom: 30px;
 }
 
