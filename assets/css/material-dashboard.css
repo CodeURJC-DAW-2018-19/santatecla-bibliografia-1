@@ -18851,6 +18851,8 @@ Copyright (c) 2015 Daniel Eden
 }
 
 /* AUTHOR PAGE */
+.
+
 .author-page .daw-miniatures .card-title .theme-page{
   background: #8E8E8E;
   text-align: center;
@@ -18955,7 +18957,7 @@ daw-miniatures.card-title{
   background: #8E8E8E;
 }
 
-.card{
+.card-custom{
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
   border: 0;
   margin-bottom: 30px;
@@ -19047,5 +19049,12 @@ daw-miniatures.card-title{
 
 .btn{
   height: 40px;
+}
+
+
+.bottom-part .daw-miniatures .card-title{
+  background: #8E8E8E;
+  text-align: center;
+  margin-top: 10px;
 }
 /*# sourceMappingURL=dashboard-free.css.map */
