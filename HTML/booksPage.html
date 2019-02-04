@@ -41,7 +41,7 @@
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                     <span class="navbar-toggler-bar navbar-kebab"><img src="../assets/img/icons/menu.png" alt=""></span>
                     <span class="navbar-toggler-icon">
-                </span>
+						</span>
                 </button>
 
                 <!-- Navbar links -->
@@ -68,8 +68,8 @@
                             </div>
                         </li>
                         <!--<li class="nav-item">
-                          <a class="nav-link disabled" href="#">Disabled</a>
-                        </li>-->
+                      <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>-->
                     </ul>
                 </div>
 
@@ -83,93 +83,83 @@
         <!-- Content -->
         <div class="content">
             <div class="container-fluid">
-                <div class="author-page flex-container">
-                    <!-- Author FORM -->
+                <div class="book-page flex-container">
+                    <!-- Book FORM -->
                     <div class="row top-row">
-                        <div class="author-form">
-                            <div class="card">
-                                <div class="container row">
-                                    <form class="form-horizontal col-sm-8">
-                                        <div class="form-group form-inline">
-                                            <label class=" col-sm-0">Nombre</label>
-                                            <div class="col-sm-10">
-                                                <label class="form-control">Alan Mathison Turing</label>
-                                            </div>
+                        <div class="book-form col">
+                            <div class="book-card card">
+                                <div class="container-row">
+                                    <div class="card-header card-header-text card-header-primary">
+                                        <div class="card-text">
+                                            <h4 class="card-title">Libro</h4>
                                         </div>
-                                        <div class="form-group form-inline ">
-                                            <label class=" col-sm-0">URL Imagen</label>
-                                            <div class="col-sm-10">
-                                                <label class="form-control text-truncate" style="max-width: 300px">https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Alan_Turing_Aged_16.jpg/440px-Alan_Turing_Aged_16.jpg</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="form-inline ">
-                                                    <div class="form-group form-inline col-sm-0">
-                                                        <label class=" col-sm-0">Fecha de nacimiento</label>
-                                                        <div class="col-sm-4">
-                                                            <label class="form-control">23/06/1912</label>
-                                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <!--    <form>-->
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group row">
+                                                    <label for="colFormLabel1" class="col-md-3 col-form-label">Título
+                                                        obra</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" id="colFormLabel1"
+                                                               placeholder="Título de la obra">
                                                     </div>
 
-                                                    <div class="form-group form-inline col-sm-6">
-                                                        <label class="col-md">Fecha de defunción</label>
-                                                        <div class="col-sm-1">
-                                                            <label class="form-control text-truncate"
-                                                                   style="max-width: 300px">7/06/1954</label>
-                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 col-form-label">URL portada</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" id="URLPortada"
+                                                               placeholder="URL de la portada">
                                                     </div>
                                                 </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 col-form-label"> Fecha</label>
+                                                    <div class="col-md-6">
+                                                        <input type="date" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="colFormLabel2"
+                                                           class="col-md-3 col-form-label">Editorial</label>
+                                                    <div class="col-md-6">
+                                                        <input type="name" class="form-control" id="colFormLabel2"
+                                                               placeholder="Nombre de la editorial">
+                                                    </div>
 
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 col-form-label">URL editorial</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" id="URLEditorial"
+                                                               placeholder="URL de la editorial">
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        <div class="form-group form-inline">
-                                            <label class=" col-sm-0">Lugar de nacimiento</label>
-                                            <div class="col-sm-8">
-                                                <label class="form-control text-truncate">Maida Vale, Reino Unido de
-                                                    Gran Bretaña e Irlanda</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-inline">
-                                            <label class=" col-sm-0">URL del mapa</label>
-                                            <div class="col-sm-10">
-                                                <label class="form-control text-truncate" style="max-width: 300px">https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Alan_Turing_Aged_16.jpg/440px-Alan_Turing_Aged_16.jpg</label>
-                                            </div>
-                                        </div>
-
-                                    </form>
-
-                                    <form class="form-vertical col">
-                                        <div class="row">
-                                            <div class="text-center col-sm-10">
-                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Alan_Turing_Aged_16.jpg/440px-Alan_Turing_Aged_16.jpg"
-                                                     class="float-right rounded" alt="..."
-                                                     style="max-width: 100px;padding: 5px;">
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="text-center col-sm-10">
-                                                <div id="map-container-google-1" class="z-depth-1-half map-container"
-                                                     style=" height: 200px;width:200px;float: right;padding: 5px">
-                                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d75132.22175705049!2d-0.2604624272851899!3d51.53606625037453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761009a098e00b%3A0x261185c6bcdb02a2!2sMaida+Vale%2C+Londres%2C+Reino+Unido!5e0!3m2!1ses!2ses!4v1549226048515"
-                                                            frameborder="0"
-                                                            style="border:0"></iframe>
+                                            <div class="col">
+                                                <div class="col-md">
+                                                    <img id="imagen portada" alt="Imagen portada"
+                                                         src="../assets/img/books.png" style="width: 140px">
+                                                    <label for="imagen portada">Imagen portada</label>
+                                                </div>
+                                                <div class="col-md">
+                                                    <img id="imagen editorial" alt="Imagen portada"
+                                                         src="../assets/img/books.png" style="width: 140px">
+                                                    <label for="imagen editorial">Imagen editorial</label>
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+
+                                    </div>
                                 </div>
-
+                                <!--   </form>-->
                             </div>
-
                         </div>
                     </div>
-                    <!-- END AUTHOR FORM-->
+                    <!-- END Book FORM-->
 
-                    <!-- Author Bottom-->
+                    <!-- Book Bottom-->
                     <div class="row bottom-row">
                         <!-- TEMA -->
                         <div class="temas-box col-sm-12 col-md-6 col-lg-4">
@@ -230,7 +220,7 @@
 
                         <!-- OBRAS -->
                         <div class="temas-box col-sm-12 col-md-6 col-lg-4">
-                            <div class="card cajas">
+                            <div class="card">
                                 <div class="card-header card-header-text card-header-primary">
                                     <div class="card-text">
                                         <h4 class="card-title">Obras</h4>
@@ -362,9 +352,10 @@
             </div>
         </div>
         <!-- End Content -->
-
     </div>
 </div>
+<!-- End Content -->
+
 
 <!-- Footer -->
 <footer class="footer">
