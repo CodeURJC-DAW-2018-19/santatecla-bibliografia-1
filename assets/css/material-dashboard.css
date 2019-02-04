@@ -18886,4 +18886,34 @@ Copyright (c) 2015 Daniel Eden
 }
 
 
+/* -- G1 CSS -- */
+.main-page .daw-miniatures .card-title{
+  background: #8E8E8E;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.main-page .daw-miniatures {
+  height: auto;
+  overflow-x: hidden;
+  max-height: 60vh;
+  padding-bottom: 85px;
+}
+
+.main-page .daw-buttons{
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  background-color: #fff;
+}
+
+/* Main page boxes to have the same heigth*/
+.main-page .cajas{
+  height: 70vh;
+}
+
+
 /*# sourceMappingURL=dashboard-free.css.map */
