@@ -18893,30 +18893,22 @@ Copyright (c) 2015 Daniel Eden
 
 
 .grid-container{
-
   display: grid;
   grid-template-columns: [col1-start] 50%  [col2-start] 50%  [col2-end];
   grid-template-rows: [row1-start] 100% [row1-end];
   grid-gap: 20px;
   height:600px;
-
 }
 
-.cajas-bot{
-  overflow-y: scroll;
-  height:300px;
-  margin: 5px;
-}
 
 .title-theme{
   border: 1px solid darkgray ;
   border-radius: 10px;
   text-align: center;
   padding: 5px;
-  margin: 0px 15px 0px 15px;
+  margin: 0px 15px 20px 15px;
   background: linear-gradient(80deg, #7cfba7, #b0fcff)!important;
 }
-
 
 .html-generator{
   grid-column: col2-start ;
@@ -18944,18 +18936,8 @@ Copyright (c) 2015 Daniel Eden
   overflow-y: scroll;
 }
 
-.card-title{
-  color: #fff;
-  margin:5px!important;
-}
 
-.card .card-title .card .cajas {
-  margin: 20px;
-}
 
-daw-miniatures.card-title{
-  background: #8E8E8E;
-}
 
 .card-custom{
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
@@ -18974,29 +18956,10 @@ daw-miniatures.card-title{
   font-size: .875rem;
 }
 
-.card [class*="card-header-"]:not(.card-header-icon):not(.card-header-text):not(.card-header-image){
+.card-custom [class*="card-header-"]:not(.card-header-icon):not(.card-header-text):not(.card-header-image){
   border-radius: 3px;
   margin-top: -30px;
   padding: 2%;
-}
-
-.card .card-header-warning:not(.card-header-icon):not(.card-header-text){
-  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 152, 0, 0.4);
-}
-
-.card [class*="card-header-"]{
-  margin: 0px 15px 0 15px;
-  padding: 0;
-  position: relative;
-}
-
-.card .card-header{
-  z-index: 3 !important;
-}
-
-.card .card-body{
-  padding: 0.9375rem 20px;
-  position: relative;
 }
 
 
@@ -19010,7 +18973,6 @@ daw-miniatures.card-title{
   grid-template-columns: [col1-start] 50%  [col2-start] 50% [col2-end];
   grid-template-rows: [row1-start] auto [row2-start] auto [row2-end];
   grid-gap: 5px;
-
 }
 
 .texto-referencia{
@@ -19056,5 +19018,26 @@ daw-miniatures.card-title{
   background: #8E8E8E;
   text-align: center;
   margin-top: 10px;
+}
+
+.bottom-part .daw-miniatures {
+  height: auto;
+  overflow-x: hidden;
+  max-height: 60vh;
+  padding-bottom: 85px;
+}
+
+.bottom-part .daw-buttons{
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.bottom-part .cajas{
+  height: 70vh;
 }
 /*# sourceMappingURL=dashboard-free.css.map */
