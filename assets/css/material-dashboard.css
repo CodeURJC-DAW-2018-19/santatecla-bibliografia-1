@@ -18892,6 +18892,9 @@ padding-bottom: 30px;
   text-align: center;
   margin-top: 10px;
 }
+.book-card {
+	width: 100%;
+}
 
 .book .flex-direction{
   display: flex;
@@ -18920,6 +18923,13 @@ padding-bottom: 30px;
   margin-right: auto;
   padding-bottom: 30px;
 }
-
-
+/*pruebas scroll
+.content_page {
+	height: 1000px;
+	overflow-y: scroll;
+}
+.bottom-row{
+	height: 1000px;
+}
+*/
 /*# sourceMappingURL=dashboard-free.css.map */
