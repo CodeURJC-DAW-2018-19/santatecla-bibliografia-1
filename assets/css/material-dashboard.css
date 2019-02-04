@@ -18929,11 +18929,6 @@ Copyright (c) 2015 Daniel Eden
 /* THEME PAGE */
 
 
-
-/*THEME PAGE*/
-
-
-
 .grid-container{
   display: grid;
   grid-template-columns: [col1-start] 50%  [col2-start] 50%  [col2-end];
