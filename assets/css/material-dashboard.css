@@ -18882,33 +18882,25 @@ Copyright (c) 2015 Daniel Eden
 .author-form {
   margin-left: auto;
   margin-right: auto;
-padding-bottom: 30px;
+  padding-bottom: 30px;
 }
 
-/* BOOKS PAGE*/
 
-.book-page .daw-miniatures .card-title{
+/* -- G1 CSS -- */
+.main-page .daw-miniatures .card-title{
   background: #8E8E8E;
   text-align: center;
   margin-top: 10px;
 }
-.book-card {
-	width: 100%;
-}
 
-.book .flex-direction{
-  display: flex;
-  flex-direction: column;
-}
-
-.book-page .daw-miniatures {
+.main-page .daw-miniatures {
   height: auto;
   overflow-x: hidden;
-  max-height: 25vh;
-  padding-bottom: 25px;
+  max-height: 60vh;
+  padding-bottom: 85px;
 }
 
-.book-page .daw-buttons{
+.main-page .daw-buttons{
   justify-content: space-between;
   position: absolute;
   bottom: 0;
@@ -18918,18 +18910,10 @@ padding-bottom: 30px;
   background-color: #fff;
 }
 
-.book-form {
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 30px;
+/* Main page boxes to have the same heigth*/
+.main-page .cajas{
+  height: 70vh;
 }
-/*pruebas scroll
-.content_page {
-	height: 1000px;
-	overflow-y: scroll;
-}
-.bottom-row{
-	height: 1000px;
-}
-*/
+
+
 /*# sourceMappingURL=dashboard-free.css.map */
