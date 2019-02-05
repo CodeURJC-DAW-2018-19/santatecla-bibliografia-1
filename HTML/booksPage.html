@@ -19,11 +19,12 @@
     <script src="../assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
     <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 </head>
+
 <body>
 <div class="wrapper ">
     <div class="main-panel">
 
-        <!-- NAV BAR TOP -->
+        <!-- NAV BAR TOP -->git
         <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-primary">
             <div class="our-title">
                 <a class="navbar-brand">CITAS BIBLIOGRÁFICAS</a>
@@ -40,7 +41,7 @@
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                     <span class="navbar-toggler-bar navbar-kebab"><img src="../assets/img/icons/menu.png" alt=""></span>
                     <span class="navbar-toggler-icon">
-                </span>
+						</span>
                 </button>
 
                 <!-- Navbar links -->
@@ -67,8 +68,8 @@
                             </div>
                         </li>
                         <!--<li class="nav-item">
-                          <a class="nav-link disabled" href="#">Disabled</a>
-                        </li>-->
+                      <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>-->
                     </ul>
                 </div>
 
@@ -79,13 +80,87 @@
             </div>
         </nav>
         <!-- End Navbar -->
-
         <!-- Content -->
         <div class="content">
             <div class="container-fluid">
-                <!-- MAIN PAGE -->
-                <div class="main-page">
-                    <div class="row">
+                <div class="book-page flex-container">
+                    <!-- Book FORM -->
+                    <div class="row top-row">
+                        <div class="book-form col">
+                            <div class="book-card card">
+                                <div class="container-row">
+                                    <div class="card-header card-header-text card-header-primary">
+                                        <div class="card-text">
+                                            <h4 class="card-title">Libro</h4>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <!--    <form>-->
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group row">
+                                                    <label for="colFormLabel1" class="col-md-3 col-form-label">Título
+                                                        obra</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" id="colFormLabel1"
+                                                               placeholder="Título de la obra">
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 col-form-label">URL portada</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" id="URLPortada"
+                                                               placeholder="URL de la portada">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 col-form-label"> Fecha</label>
+                                                    <div class="col-md-6">
+                                                        <input type="date" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="colFormLabel2"
+                                                           class="col-md-3 col-form-label">Editorial</label>
+                                                    <div class="col-md-6">
+                                                        <input type="name" class="form-control" id="colFormLabel2"
+                                                               placeholder="Nombre de la editorial">
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 col-form-label">URL editorial</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" id="URLEditorial"
+                                                               placeholder="URL de la editorial">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="col-md">
+                                                    <img id="imagen portada" alt="Imagen portada"
+                                                         src="../assets/img/books.png" style="width: 140px">
+                                                    <label for="imagen portada">Imagen portada</label>
+                                                </div>
+                                                <div class="col-md">
+                                                    <img id="imagen editorial" alt="Imagen portada"
+                                                         src="../assets/img/books.png" style="width: 140px">
+                                                    <label for="imagen editorial">Imagen editorial</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--   </form>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Book FORM-->
+
+                    <!-- Book Bottom-->
+                    <div class="row bottom-row">
                         <!-- TEMA -->
                         <div class="temas-box col-sm-12 col-md-6 col-lg-4">
                             <div class="card cajas">
@@ -95,15 +170,6 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="daw-search-bar">
-                                        <div class="input-group no-border">
-                                            <input type="text" value="" class="form-control" placeholder="Search...">
-                                            <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                                <i class="material-icons">search</i>
-                                                <div class="ripple-container"></div>
-                                            </button>
-                                        </div>
-                                    </div>
                                     <div class="daw-miniatures">
                                         <div class="row">
                                             <div class="card bg-dark text-white col">
@@ -154,7 +220,7 @@
 
                         <!-- OBRAS -->
                         <div class="temas-box col-sm-12 col-md-6 col-lg-4">
-                            <div class="card cajas">
+                            <div class="card">
                                 <div class="card-header card-header-text card-header-primary">
                                     <div class="card-text">
                                         <h4 class="card-title">Obras</h4>
@@ -162,13 +228,6 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="daw-search-bar">
-                                        <div class="input-group no-border">
-                                            <input type="text" value="" class="form-control" placeholder="Search...">
-                                            <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                                <i class="material-icons">search</i>
-                                                <div class="ripple-container"></div>
-                                            </button>
-                                        </div>
                                     </div>
                                     <div class="daw-miniatures">
                                         <div class="row">
@@ -220,13 +279,6 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="daw-search-bar">
-                                        <div class="input-group no-border">
-                                            <input type="text" value="" class="form-control" placeholder="Search...">
-                                            <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                                <i class="material-icons">search</i>
-                                                <div class="ripple-container"></div>
-                                            </button>
-                                        </div>
                                     </div>
                                     <div class="daw-miniatures">
                                         <div class="row">
@@ -300,26 +352,28 @@
             </div>
         </div>
         <!-- End Content -->
-
-    </div> <!-- end of main-panel -->
-
-    <!-- Begin Footer -->
-    <footer class="footer">
-        <div class="container-fluid">
-            <nav class="float-left">
-                <ul>
-                    <li>
-                        <a href="https://www.google.com">Grupo 1 - Diseño de Aplicaciones Web </a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="copyright float-right">
-                &copy; 2019 made by
-                <a href="https://urjc.es" target="_blank">GRUPO 1</a> for DAW (URJC)
-            </div>
-        </div>
-    </footer>
-    <!-- End Footer -->
+    </div>
 </div>
+<!-- End Content -->
+
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container-fluid">
+        <nav class="float-left">
+            <ul>
+                <li>
+                    <a href="https://www.google.com">Grupo 1 - Diseño de Aplicaciones Web </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="copyright float-right">
+            &copy; 2019 made by
+            <a href="https://urjc.es" target="_blank">GRUPO 1</a> for DAW (URJC)
+        </div>
+    </div>
+</footer>
+<!-- End Footer -->
 </body>
+
 </html>
