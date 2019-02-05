@@ -19945,7 +19945,21 @@ Copyright (c) 2015 Daniel Eden
   margin-top: 10px;
 }
 
+
 .bottom-part .daw-miniatures {
+  height: auto;
+  overflow-x: hidden;
+  max-height: 60vh;
+  padding-bottom: 85px;
+}
+
+.author-page .flex-direction{
+  display: flex;
+  flex-direction: column;
+}
+
+.author-page .daw-miniatures {
+
   height: auto;
   overflow-x: hidden;
   max-height: 60vh;
