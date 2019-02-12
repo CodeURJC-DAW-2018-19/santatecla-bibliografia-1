@@ -1,4 +1,4 @@
-package com.santatecla.G1;
+package com.santatecla.G1.book;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

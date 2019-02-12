@@ -1,4 +1,4 @@
-package com.santatecla.G1;
+package com.santatecla.G1.theme;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
