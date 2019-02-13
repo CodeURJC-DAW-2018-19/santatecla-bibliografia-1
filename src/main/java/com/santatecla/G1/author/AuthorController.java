@@ -1,5 +1,6 @@
 package com.santatecla.G1.author;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -19,8 +20,8 @@ public class AuthorController {
 
 	@PostConstruct
 	public void init() {
-		repository.save(new Author("Pepe"));
-		repository.save(new Author("Juan"));
+		repository.save(new Author("Pepe",new SimpleDateFormat("1964-05-12"),new SimpleDateFormat("1964-05-12")));
+		repository.save(new Author("Juan",new SimpleDateFormat("1964-05-12"),new SimpleDateFormat("1964-05-12")));
 	}
 	
 	public Collection<Author> authors(){
@@ -46,8 +47,8 @@ public class AuthorController {
 	}*/
 	
 	@RequestMapping("/author")
-	public String newAuthor(Model model) {
-		//repository.save(author);
+	public String newAuthor(Model model, Author author) {
+		repository.save(author);
 		return "authorPage";
 	}
 	
