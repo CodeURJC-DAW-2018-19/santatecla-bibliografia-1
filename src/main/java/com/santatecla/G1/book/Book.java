@@ -12,18 +12,20 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private String name;
-	private String urlBook;
+	private String title;
 	private SimpleDateFormat publishDate;
 	private String nameEdit;
 	private String urlEdit;
+	private String urlImgCoverPage;
+	private String urlImgEdit;
+
 	
 	//Constructor to Spring
 	public Book() {}
 
 	public Book(String name, String nameEdit) {
 		super();
-		this.name = name;
+		this.title = name;
 		this.nameEdit = nameEdit;
 	}
 
@@ -35,20 +37,28 @@ public class Book {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUrlImgCoverPage() {
+		return urlImgCoverPage;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUrlImgCoverPage(String urlImgCoverPage) {
+		this.urlImgCoverPage = urlImgCoverPage;
 	}
 
-	public String getUrlBook() {
-		return urlBook;
+	public String getUrlImgEdit() {
+		return urlImgEdit;
 	}
 
-	public void setUrlBook(String urlBook) {
-		this.urlBook = urlBook;
+	public void setUrlImgEdit(String urlImgEdit) {
+		this.urlImgEdit = urlImgEdit;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public SimpleDateFormat getPublishDate() {
@@ -74,6 +84,10 @@ public class Book {
 	public void setUrlEdit(String urlEdit) {
 		this.urlEdit = urlEdit;
 	}
+	
+	public String toString() {
+		return "Title: "+ this.title + "(" + this.nameEdit + ")";
+	} 
 	
 	
 }

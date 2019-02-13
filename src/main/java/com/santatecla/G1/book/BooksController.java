@@ -27,18 +27,18 @@ public class BooksController {
 	}
 	
 	@RequestMapping("/book/{id}")
-	public String Author(Model model, @PathVariable long id) {
+	public String Book(Model model, @PathVariable long id) {
 		Book book = repository.findOne(id);
 		if (book!=null) {
 			model.addAttribute("book", book);
 		}
-		return "bookPage";
+		return "booksPageView";
 	}
 	
 	@RequestMapping("/book")
-	public String newAuthor(Model model, Book book) {
+	public String newBook(Model model, Book book) {
 		repository.save(book);
-		return "bookPage";
+		return "booksPage";
 	}
 
 }
