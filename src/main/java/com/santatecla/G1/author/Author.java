@@ -1,6 +1,6 @@
 package com.santatecla.G1.author;
 
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,19 +13,19 @@ public class Author {
 	private long id;
 	private String name;
 	private String urlImage;
-	private SimpleDateFormat bornDate;
-	private SimpleDateFormat deathDate;
+	private Date bornDate;
+	private Date deathDate;
 	private String bornPlace;
 	private String urlMap;
 	
 	//Constructor to Spring
 	public Author() {}
 
-	public Author(String name,SimpleDateFormat bornDate, SimpleDateFormat deathDate) {
+	public Author(String name) {
 		super();
 		this.name = name;
-		this.bornDate = bornDate;
-		this.deathDate = deathDate;
+	//	this.bornDate = bornDate;
+	//	this.deathDate = deathDate;
 	}
 
 	public long getId() {
@@ -52,28 +52,28 @@ public class Author {
 		this.urlImage = urlImage;
 	}
 
+	public Date getBornDate() {
+		return bornDate;
+	}
+
+	public void setBornDate(Date bornDate) {
+		this.bornDate = bornDate;
+	}
+
+	public Date getDeathDate() {
+		return deathDate;
+	}
+
+	public void setDeathDate(Date deathDate) {
+		this.deathDate = deathDate;
+	}
+
 	public String getBornPlace() {
 		return bornPlace;
 	}
 
 	public void setBornPlace(String bornPlace) {
 		this.bornPlace = bornPlace;
-	}
-
-	public SimpleDateFormat getBornDate() {
-		return bornDate;
-	}
-
-	public void setBornDate(SimpleDateFormat bornDate) {
-		this.bornDate = bornDate;
-	}
-
-	public SimpleDateFormat getDeathDate() {
-		return deathDate;
-	}
-
-	public void setDeathDate(SimpleDateFormat deathDate) {
-		this.deathDate = deathDate;
 	}
 
 	public String getUrlMap() {
