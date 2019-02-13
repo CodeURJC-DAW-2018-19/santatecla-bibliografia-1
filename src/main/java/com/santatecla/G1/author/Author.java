@@ -21,11 +21,11 @@ public class Author {
 	//Constructor to Spring
 	public Author() {}
 
-	public Author(String name, Date bornDate, Date deathDate) {
+	public Author(String name) {
 		super();
 		this.name = name;
-		this.bornDate = bornDate;
-		this.deathDate = deathDate;
+	//	this.bornDate = bornDate;
+	//	this.deathDate = deathDate;
 	}
 
 	public long getId() {
