@@ -1,5 +1,6 @@
 package com.santatecla.G1.author;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +14,8 @@ public class Author {
 	private long id;
 	private String name;
 	private String urlImage;
-	private Date bornDate;
-	private Date deathDate;
+	private SimpleDateFormat bornDate;
+	private SimpleDateFormat deathDate;
 	private String bornPlace;
 	private String urlMap;
 	
@@ -52,21 +53,6 @@ public class Author {
 		this.urlImage = urlImage;
 	}
 
-	public Date getBornDate() {
-		return bornDate;
-	}
-
-	public void setBornDate(Date bornDate) {
-		this.bornDate = bornDate;
-	}
-
-	public Date getDeathDate() {
-		return deathDate;
-	}
-
-	public void setDeathDate(Date deathDate) {
-		this.deathDate = deathDate;
-	}
 
 	public String getBornPlace() {
 		return bornPlace;
@@ -78,6 +64,22 @@ public class Author {
 
 	public String getUrlMap() {
 		return urlMap;
+	}
+
+	public SimpleDateFormat getBornDate() {
+		return bornDate;
+	}
+
+	public void setBornDate(SimpleDateFormat bornDate) {
+		this.bornDate = bornDate;
+	}
+
+	public SimpleDateFormat getDeathDate() {
+		return deathDate;
+	}
+
+	public void setDeathDate(SimpleDateFormat deathDate) {
+		this.deathDate = deathDate;
 	}
 
 	public void setUrlMap(String urlMap) {
