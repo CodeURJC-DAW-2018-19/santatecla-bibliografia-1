@@ -1,7 +1,6 @@
 package com.santatecla.G1.author;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
