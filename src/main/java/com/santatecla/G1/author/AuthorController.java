@@ -1,9 +1,7 @@
 package com.santatecla.G1.author;
 
 import java.util.Collection;
-
-import javax.annotation.PostConstruct;
-
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +14,6 @@ public class AuthorController {
 	
 	@Autowired
 	private AuthorRepository repository;
-
-	@PostConstruct
-	public void init() {
-		repository.save(new Author("Pepe"));
-		repository.save(new Author("Juan"));
-	}
 	
 	public Collection<Author> authors(){
 		return repository.findAll();
@@ -29,7 +21,7 @@ public class AuthorController {
 	
 	@RequestMapping("/author/{id}")
 	public String Author(Model model, @PathVariable long id) {
-		Author author = repository.findOne(id);
+		Optional<com.santatecla.G1.author.Author> author = repository.findById(id);
 		if (author!=null) {
 			model.addAttribute("author", author);
 		}

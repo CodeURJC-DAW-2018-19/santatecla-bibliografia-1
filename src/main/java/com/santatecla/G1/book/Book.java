@@ -84,7 +84,7 @@ public class Book {
 	public void setUrlEdit(String urlEdit) {
 		this.urlEdit = urlEdit;
 	}
-	
+	@Override
 	public String toString() {
 		return "Title: "+ this.title + "(" + this.nameEdit + ")";
 	} 

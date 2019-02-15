@@ -1,6 +1,8 @@
 package com.santatecla.G1.author;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,19 +15,20 @@ public class Author {
 	private long id;
 	private String name;
 	private String urlImage;
-	private SimpleDateFormat bornDate;
-	private SimpleDateFormat deathDate;
+	private Date bornDate;
+	private Date deathDate;
 	private String bornPlace;
 	private String urlMap;
 	
 	//Constructor to Spring
 	public Author() {}
 
-	public Author(String name) {
+	//The type of the dates is Date, when we operate with date, to show we will use SimpleFormatDate
+	public Author(String name, Date bornDate, Date deathDate) {
 		super();
 		this.name = name;
-	//	this.bornDate = bornDate;
-	//	this.deathDate = deathDate;
+		this.bornDate = bornDate;
+		this.deathDate = deathDate;
 	}
 
 	public long getId() {
@@ -65,19 +68,19 @@ public class Author {
 		return urlMap;
 	}
 
-	public SimpleDateFormat getBornDate() {
+	public Date getBornDate() {
 		return bornDate;
 	}
 
-	public void setBornDate(SimpleDateFormat bornDate) {
+	public void setBornDate(Date bornDate) {
 		this.bornDate = bornDate;
 	}
 
-	public SimpleDateFormat getDeathDate() {
+	public Date getDeathDate() {
 		return deathDate;
 	}
 
-	public void setDeathDate(SimpleDateFormat deathDate) {
+	public void setDeathDate(Date deathDate) {
 		this.deathDate = deathDate;
 	}
 
@@ -87,6 +90,7 @@ public class Author {
 	
 	@Override
 	public String toString() {
-		return "Nombe: "+name + "; Fecha de nacimiento" + bornDate + "; Fecha de defunción: "+deathDate;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		return "Nombe: "+name + "; Fecha de nacimiento: " + formatter.format(bornDate) + "; Fecha de defunción: "+formatter.format(deathDate);
 	}
 }
