@@ -19716,6 +19716,14 @@ Copyright (c) 2015 Daniel Eden
 
 /* --------------------------------------------------------------- */
 
+/* TOPNAVBAR */
+
+/* login button*/
+	
+.daw-navbar .navbar-collapse {
+    flex-grow: 0 !important;
+}
+
 /* MAIN PAGE */
 .main-page .daw-miniatures .card-title {
     background: #8E8E8E;
