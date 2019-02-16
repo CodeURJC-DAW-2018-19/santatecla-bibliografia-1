@@ -1,12 +1,20 @@
 package com.santatecla.G1.author;
 
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.santatecla.G1.book.Book;
+import com.santatecla.G1.citation.Citation;
+import com.santatecla.G1.theme.Theme;
 
 @Entity
 public class Author {
@@ -19,6 +27,17 @@ public class Author {
 	private Date deathDate;
 	private String bornPlace;
 	private String urlMap;
+	
+	/********************************************
+	* RELATIONS WITH OTHER CLASES TO DDBB MODEL
+	********************************************/
+	
+	@OneToMany
+	private Collection<Book> books;
+	
+	/********************************************
+	 * METHODS OF THE CLASS
+	 ********************************************/
 	
 	//Constructor to Spring
 	public Author() {}

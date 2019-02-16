@@ -44,10 +44,31 @@ public class DataBaseInitializator implements CommandLineRunner {
 		authorRepository.save(new Author("Juan",bornDate,deathDate));
 		
 		
+		
 		//Citation initialization 
-		citationRepository.save(new Citation("El misterio de la vida no es un problema a resolver, sino una realidad a experimentar"));
-		citationRepository.save(new Citation("La Ilusión despierta el empeño y solamente la paciencia lo termina."));
-		citationRepository.save(new Citation("Nunca la persona llega a tal grado de perfección como cuando llena un impreso de solicitud de trabajo."));
+		Citation c1 = new Citation("El misterio de la vida no es un problema a resolver, sino una realidad a experimentar");
+		Citation c2 = new Citation("La Ilusión despierta el empeño y solamente la paciencia lo termina.");
+		Citation c3 = new Citation("Nunca la persona llega a tal grado de perfección como cuando llena un impreso de solicitud de trabajo.");
+		
+		citationRepository.save(c1);
+		citationRepository.save(c2);
+		citationRepository.save(c3);		
+		
+		//Books initialization
+		Book b1 = new Book("Palabras Radiantes","Brandon Sanderson");
+		Book b2 = new Book("Nacidos de la bruma","Brandon Sanderson");
+		
+		/*b1.citations.add(c1);
+		b1.citations.add(c2);
+		b2.citations.add(c3);*/
+		
+		bookRepository.save(b1);
+		bookRepository.save(b2);
+		
+		
+		
+		
+		
 		
 		//Theme initialization 
 		themeRepository.save(new Theme("Amor"));
@@ -57,13 +78,7 @@ public class DataBaseInitializator implements CommandLineRunner {
 		themeRepository.save(new Theme("Ciencia"));
 		themeRepository.save(new Theme("Informática"));
 		themeRepository.save(new Theme("Poesía"));
-		themeRepository.save(new Theme("Guerra"));
-		
-		
-		//Books initialization
-		bookRepository.save(new Book("Palabras Radiantes","Brandon Sanderson"));
-		bookRepository.save(new Book("Nacidos de la bruma","Brandon Sanderson"));
-		
+		themeRepository.save(new Theme("Guerra"));	
 		
 		//Here code to test the DDBB
 		List<Author> authors = authorRepository.findAll(); 
@@ -73,19 +88,19 @@ public class DataBaseInitializator implements CommandLineRunner {
 			System.out.println(a);
 		}
 		List<Book> books = bookRepository.findAll(); 
-		System.out.println("Authors found with findAll()");
+		System.out.println("Books found with findAll()");
 		System.out.println("----------------------------");
 		for(Book a: books) {
 			System.out.println(a);
 		}
 		List<Theme> themes = themeRepository.findAll(); 
-		System.out.println("Authors found with findAll()");
+		System.out.println("Themes found with findAll()");
 		System.out.println("----------------------------");
 		for(Theme a: themes) {
 			System.out.println(a);
 		}
 		List<Citation> citations = citationRepository.findAll(); 
-		System.out.println("Authors found with findAll()");
+		System.out.println("Citations found with findAll()");
 		System.out.println("----------------------------");
 		for(Citation a: citations) {
 			System.out.println(a);

@@ -1,11 +1,17 @@
 package com.santatecla.G1.citation;
 
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import com.santatecla.G1.book.Book;
 
 
 @Entity
@@ -15,29 +21,32 @@ public class Citation {
 	private long id;
 	@Column(length=1000)
 	private String text;
-	private String author;
-	private String book;
+	
+	/********************************************
+	 * RELATIONS WITH OTHER CLASES TO DDBB MODEL
+	 ********************************************/
+	
+	//To avoid cicles on DB model
+	@JsonView(Book.class)
+	@OneToOne
+	private Book book;
+	
+	/********************************************
+	 * METHODS OF THE CLASS
+	 ********************************************/
 	
 	//Constructor to Spring
 	public Citation() {}
 	
-	/*public Citation(String text, Author author , Book book) {
-		//super();
+	public Citation(String text , Book book) {
+		super();
 		this.text = text;
-		this.author = author;
 		this.book = book;
 	}
-	public Citation(String text, Author author ) {
-		//super();
-		this.text = text;
-		this.author = author;
-		this.book = null;
-	}*/
 	public Citation(String text) {
-		//super();
+		super();
 		this.text = text;
-		this.author = "";
-		this.book = "";
+		this.book = null;
 	}
 	public long getId() {
 		return id;
@@ -51,18 +60,13 @@ public class Citation {
 	public void setText(String text) {
 		this.text = text;
 	}
-	/*public Author getAuthor() {
-		return author;
-	}
-	public void setAuthor(Author author) {
-		this.author = author;
-	}
+	
 	public Book getBook() {
 		return book;
 	}
 	public void setBook(Book book) {
 		this.book = book;
-	}*/
+	}
 	
 	@Override
 	public String toString() {

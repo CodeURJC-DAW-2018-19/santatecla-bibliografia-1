@@ -1,11 +1,20 @@
 package com.santatecla.G1.book;
 
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import com.santatecla.G1.author.Author;
+import com.santatecla.G1.citation.Citation;
+import com.santatecla.G1.theme.Theme;
 
 @Entity
 public class Book {
@@ -18,7 +27,25 @@ public class Book {
 	private String urlEdit;
 	private String urlImgCoverPage;
 	private String urlImgEdit;
-
+	
+	
+	/********************************************
+	 * RELATIONS WITH OTHER CLASES TO DDBB MODEL
+	 ********************************************/
+	
+	@OneToOne
+	private Theme theme;
+	
+	//To avoid cicles on DB model	
+	@OneToMany (cascade=CascadeType.ALL)
+	public Collection<Citation> citations;
+	
+	@OneToOne
+	private Author author;
+	
+	/********************************************
+	 * METHODS OF THE CLASS
+	 ********************************************/	
 	
 	//Constructor to Spring
 	public Book() {}
@@ -84,6 +111,7 @@ public class Book {
 	public void setUrlEdit(String urlEdit) {
 		this.urlEdit = urlEdit;
 	}
+	
 	@Override
 	public String toString() {
 		return "Title: "+ this.title + "(" + this.nameEdit + ")";
