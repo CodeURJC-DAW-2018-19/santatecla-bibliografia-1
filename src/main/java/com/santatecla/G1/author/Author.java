@@ -1,8 +1,9 @@
 package com.santatecla.G1.author;
 
 import java.text.SimpleDateFormat;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -32,8 +33,8 @@ public class Author {
 	* RELATIONS WITH OTHER CLASES TO DDBB MODEL
 	********************************************/
 	
-	@OneToMany
-	private Collection<Book> books;
+	@OneToMany(mappedBy="author",cascade=CascadeType.ALL)
+	private List<Book> books;
 	
 	/********************************************
 	 * METHODS OF THE CLASS
@@ -48,6 +49,7 @@ public class Author {
 		this.name = name;
 		this.bornDate = bornDate;
 		this.deathDate = deathDate;
+		this.books = new ArrayList<>();
 	}
 
 	public long getId() {
@@ -105,6 +107,13 @@ public class Author {
 
 	public void setUrlMap(String urlMap) {
 		this.urlMap = urlMap;
+	}
+	
+	public void addBook(Book book) {
+		this.books.add(book);
+	}
+	public List<Book> getBooks(){
+		return this.books;
 	}
 	
 	@Override

@@ -25,8 +25,8 @@ public class Theme {
 	 ********************************************/
 	
 	//To avoid cicles on DB model
-	@JsonView(Book.class)
-	@OneToMany
+	
+	@OneToMany(mappedBy="theme")
 	private Collection<Book> books;
 	
 	

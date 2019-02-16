@@ -3,11 +3,12 @@ package com.santatecla.G1;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.author.AuthorRepository;
@@ -20,7 +21,7 @@ import com.santatecla.G1.theme.ThemeRepository;
 
 @Component
 @Order(1)
-public class DataBaseInitializator implements CommandLineRunner {
+public class DataBaseInitializator {
 	
 	@Autowired
 	AuthorRepository authorRepository;
@@ -31,48 +32,49 @@ public class DataBaseInitializator implements CommandLineRunner {
 	@Autowired 
 	CitationRepository citationRepository;
 	
-	@Override
-	public void run(String... args) throws Exception {
+	@PostConstruct
+	public void init() {
 		System.out.println("Start Database initialization");
 		// Author initialization		
 		Date deathDate = new Date(428400000);
 		Date bornDate = new Date(315961200);
-		authorRepository.save(new Author("Pepe",bornDate,deathDate));
+		Author a1 = new Author("Brandon Sanderson",bornDate,deathDate);
+		authorRepository.save(a1);
+
 		
 	    bornDate = new Date(428400000);
 		deathDate = new Date(315961200);
 		authorRepository.save(new Author("Juan",bornDate,deathDate));
-		
-		
-		
-		//Citation initialization 
+			
+		//Citation initialization  --> We dont need to save because they deppends of the books. (Cascade.)
 		Citation c1 = new Citation("El misterio de la vida no es un problema a resolver, sino una realidad a experimentar");
 		Citation c2 = new Citation("La Ilusión despierta el empeño y solamente la paciencia lo termina.");
-		Citation c3 = new Citation("Nunca la persona llega a tal grado de perfección como cuando llena un impreso de solicitud de trabajo.");
-		
-		citationRepository.save(c1);
-		citationRepository.save(c2);
-		citationRepository.save(c3);		
+		Citation c3 = new Citation("Nunca la persona llega a tal grado de perfección como cuando llena un impreso de solicitud de trabajo.");		
 		
 		//Books initialization
 		Book b1 = new Book("Palabras Radiantes","Brandon Sanderson");
 		Book b2 = new Book("Nacidos de la bruma","Brandon Sanderson");
+				
+		//Adding citation to books, We don't save it explicitly because they depend of the existence of a book
+		b1.addCitations(c1); 
+		b2.addCitations(c2);
+		b2.addCitations(c3);
 		
-		/*b1.citations.add(c1);
-		b1.citations.add(c2);
-		b2.citations.add(c3);*/
+		//Create a themes that will be relacionated with a book, the theme also depends of the existence of a book(we don't save it explicitly).
+		Theme th1  = new Theme("Amor");
+		Theme th2  = new Theme("Vida");
 		
-		bookRepository.save(b1);
+		//Add the theme to the book
+		b1.setTheme(th1);
+		b2.setTheme(th2);
+		//Add the book to the author, the existence of the book depends of the existence of the author, so we don't save the book explicitly.
+		a1.addBook(b1);
+		//Save the author who has write te b1
+		authorRepository.save(a1);
+		//Save the book wich has no author.
 		bookRepository.save(b2);
 		
-		
-		
-		
-		
-		
-		//Theme initialization 
-		themeRepository.save(new Theme("Amor"));
-		themeRepository.save(new Theme("Vida"));
+		//Theme initialization with no books relacionated
 		themeRepository.save(new Theme("Tragedia"));
 		themeRepository.save(new Theme("Economía"));
 		themeRepository.save(new Theme("Ciencia"));
@@ -87,25 +89,27 @@ public class DataBaseInitializator implements CommandLineRunner {
 		for(Author a: authors) {
 			System.out.println(a);
 		}
+		System.out.println("----------------------------");
 		List<Book> books = bookRepository.findAll(); 
 		System.out.println("Books found with findAll()");
 		System.out.println("----------------------------");
 		for(Book a: books) {
 			System.out.println(a);
 		}
+		System.out.println("----------------------------");
 		List<Theme> themes = themeRepository.findAll(); 
 		System.out.println("Themes found with findAll()");
 		System.out.println("----------------------------");
 		for(Theme a: themes) {
 			System.out.println(a);
 		}
+		System.out.println("----------------------------");
 		List<Citation> citations = citationRepository.findAll(); 
 		System.out.println("Citations found with findAll()");
 		System.out.println("----------------------------");
 		for(Citation a: citations) {
 			System.out.println(a);
 		}
-		
-		
+		System.out.println("----------------------------");
 	}
 }

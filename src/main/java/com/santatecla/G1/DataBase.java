@@ -31,7 +31,7 @@ public class DataBase implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
+		
 		
 		//Code or logic for DDBB
 	}

@@ -27,9 +27,9 @@ public class Citation {
 	 ********************************************/
 	
 	//To avoid cicles on DB model
-	@JsonView(Book.class)
-	@OneToOne
-	private Book book;
+	
+	/*@OneToOne(mappedBy="citation")
+	private Book book;*/
 	
 	/********************************************
 	 * METHODS OF THE CLASS
@@ -41,12 +41,12 @@ public class Citation {
 	public Citation(String text , Book book) {
 		super();
 		this.text = text;
-		this.book = book;
+		//this.book = book;
 	}
 	public Citation(String text) {
 		super();
 		this.text = text;
-		this.book = null;
+		//this.book = null;
 	}
 	public long getId() {
 		return id;
@@ -61,12 +61,12 @@ public class Citation {
 		this.text = text;
 	}
 	
-	public Book getBook() {
+	/*public Book getBook() {
 		return book;
 	}
 	public void setBook(Book book) {
 		this.book = book;
-	}
+	}*/
 	
 	@Override
 	public String toString() {

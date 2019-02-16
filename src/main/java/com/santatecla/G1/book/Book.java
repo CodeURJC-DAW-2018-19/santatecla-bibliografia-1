@@ -1,7 +1,10 @@
 package com.santatecla.G1.book;
 
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -33,13 +36,14 @@ public class Book {
 	 * RELATIONS WITH OTHER CLASES TO DDBB MODEL
 	 ********************************************/
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Theme theme;
 	
 	//To avoid cicles on DB model	
 	@OneToMany (cascade=CascadeType.ALL)
-	public Collection<Citation> citations;
+	public List<Citation> citation;
 	
+
 	@OneToOne
 	private Author author;
 	
@@ -54,6 +58,7 @@ public class Book {
 		super();
 		this.title = name;
 		this.nameEdit = nameEdit;
+		this.citation = new ArrayList<Citation>();
 	}
 
 	public long getId() {
@@ -112,6 +117,23 @@ public class Book {
 		this.urlEdit = urlEdit;
 	}
 	
+	
+	public List<Citation> getCitations() {
+		return (List<Citation>) this.citation;
+	}
+
+	public void addCitations(Citation citations) {
+		this.citation.add(citations);
+	}
+
+	public Theme getTheme() {
+		return theme;
+	}
+
+	public void setTheme(Theme theme) {
+		this.theme = theme;
+	}
+
 	@Override
 	public String toString() {
 		return "Title: "+ this.title + "(" + this.nameEdit + ")";
