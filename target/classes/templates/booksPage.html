@@ -24,356 +24,39 @@
 <div class="wrapper ">
     <div class="main-panel">
 
-        <!-- NAV BAR TOP -->
-        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-primary">
-            <div class="our-title">
-                <a class="navbar-brand">CITAS BIBLIOGRÁFICAS</a>
-                <img src="/img/icons/quotes.png" alt="Logo" style="width:40px;">
-            </div>
-            <div class="container">
-                <!-- Brand -->
-                <a class="navbar-brand nav-item active" href="mainPage.html">INICIO</a>
+        <!-- BEGIN TOPNAVBAR -->
+        {{>topnavbarlogout}}
+        <!-- END  TOPNAVBAR -->
 
-                <!-- Toggler/collapsibe Button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-bar navbar-kebab"></span>
-                    <span class="navbar-toggler-bar navbar-kebab"></span>
-                    <span class="navbar-toggler-bar navbar-kebab"><img src="/img/icons/menu.png" alt=""></span>
-                    <span class="navbar-toggler-icon">
-						</span>
-                </button>
-
-                <!-- Navbar links -->
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav ">
-                        <li class="nav-item">
-                            <a class="nav-link" href="authorPage.html">AUTOR</a> <!-- <span class="sr-only">(current)</span> -->
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">TEMA</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="booksPage.html">OBRA</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown link
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                        <!--<li class="nav-item">
-                      <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>-->
-                    </ul>
-                </div>
-
-                <!-- LOGIN BUTTON-->
-                <form class="form-inline ml-auto">
-                    <button type="button" class="btn btn-default">LOGIN</button>
-                </form>
-            </div>
-        </nav>
-        <!-- End Navbar -->
         <!-- Content -->
-        <div class="content">
+        <div class="content content-page">
             <div class="container-fluid">
-                <div class="book-page flex-container">
-                    <!-- Book FORM -->
-                    <div class="row top-row">
-                        <div class="book-form col">
-                            <div class="book-card card">
-                                <div class="container-row">
-                                    <div class="card-header card-header-text card-header-primary">
-                                        <div class="card-text">
-                                            <h4 class="card-title">Libro</h4>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <!--    <form>-->
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group row">
-                                                    <label for="colFormLabel1" class="col-md-3 col-form-label">Título
-                                                        obra</label>
-                                                    <div class="col-md-6">
-                                                        <input type="text" class="form-control" id="colFormLabel1"
-                                                               placeholder="Título de la obra">
-                                                    </div>
+                <div class="author-page flex-container">
 
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 col-form-label">URL portada</label>
-                                                    <div class="col-md-6">
-                                                        <input type="text" class="form-control" id="URLPortada"
-                                                               placeholder="URL de la portada">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 col-form-label"> Fecha</label>
-                                                    <div class="col-md-6">
-                                                        <input type="date" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="colFormLabel2"
-                                                           class="col-md-3 col-form-label">Editorial</label>
-                                                    <div class="col-md-6">
-                                                        <input type="name" class="form-control" id="colFormLabel2"
-                                                               placeholder="Nombre de la editorial">
-                                                    </div>
+                    <!-- BEGIN Author FORM -->
+                    {{>authorForm}}
+                    <!-- END AUTHOR FORM-->
 
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 col-form-label">URL editorial</label>
-                                                    <div class="col-md-6">
-                                                        <input type="text" class="form-control" id="URLEditorial"
-                                                               placeholder="URL de la editorial">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="col-md">
-                                                    <img id="imagen portada" alt="Imagen portada"
-                                                         src="/img/books.png" style="width: 140px">
-                                                    <label for="imagen portada">Imagen portada</label>
-                                                </div>
-                                                <div class="col-md">
-                                                    <img id="imagen editorial" alt="Imagen portada"
-                                                         src="/img/books.png" style="width: 140px">
-                                                    <label for="imagen editorial">Imagen editorial</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <!--   </form>-->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END Book FORM-->
-
-                    <!-- Book Bottom-->
+                    <!-- BEGIN AUTHOR BOTTOM-->
                     <div class="row bottom-row">
-                        <!-- TEMA -->
-                        <div class="temas-box col-sm-12 col-md-6 col-lg-4">
-                            <div class="card cajas">
-                                <div class="card-header card-header-text card-header-primary">
-                                    <div class="card-text">
-                                        <h4 class="card-title">Temas</h4>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="daw-miniatures">
-                                        <div class="row">
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/theme.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">AMOR</h4>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/theme.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">MUERTE</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="card bg-dark text-white col">
-
-                                                <img class="card-img" src="/img/theme.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">DINERO</h4>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/theme.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">VENGANZA</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/theme.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">VIAJES</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="daw-buttons d-flex justify-content-between">
-                                        <button class="btn btn-primary">Añadir</button>
-                                        <button class="btn btn-primary">Buscar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- OBRAS -->
-                        <div class="temas-box col-sm-12 col-md-6 col-lg-4">
-                            <div class="card">
-                                <div class="card-header card-header-text card-header-primary">
-                                    <div class="card-text">
-                                        <h4 class="card-title">Obras</h4>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="daw-search-bar">
-                                    </div>
-                                    <div class="daw-miniatures">
-                                        <div class="row">
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/books.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">El Quijote</h4>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/books.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">La Celestina</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="card bg-dark text-white col">
-
-                                                <img class="card-img" src="/img/books.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">Alguién voló sobre el nido del cuco</h4>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/books.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">La Regenta</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="daw-buttons d-flex justify-content-between">
-                                        <button class="btn btn-primary">Añadir</button>
-                                        <button class="btn btn-primary">Buscar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- AUTORES -->
-                        <div class="temas-box col-sm-12 col-md-6 col-lg-4">
-                            <div class="card cajas">
-                                <div class="card-header card-header-text card-header-primary">
-                                    <div class="card-text">
-                                        <h4 class="card-title">Autores</h4>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="daw-search-bar">
-                                    </div>
-                                    <div class="daw-miniatures">
-                                        <div class="row">
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/author.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">Miguel De Cervantes</h4>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/author.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">Fernando de Rojas</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="card bg-dark text-white col">
-
-                                                <img class="card-img" src="/img/author.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">L.A.Clarín</h4>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/author.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">Miloš Forman</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/author.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">Virginia Wolf</h4>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/author.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">Jane Austen</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/author.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">Lord Byron</h4>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-dark text-white col">
-                                                <img class="card-img" src="/img/author.png" alt="Card image">
-                                                <div class="card-img-overlay">
-                                                    <h4 class="card-title">Mary Shelley</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="daw-buttons d-flex justify-content-between">
-                                        <button class="btn btn-primary">Añadir</button>
-                                        <button class="btn btn-primary">Buscar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {{>themeColumn}}
+                        {{>authorColumn}}
+                        {{>quoteColumn}}
                     </div>
+                    <!-- END AUTHOR BOTTOM -->
+
                 </div>
             </div>
         </div>
         <!-- End Content -->
+
     </div>
 </div>
-<!-- End Content -->
-
 
 <!-- Footer -->
-<footer class="footer">
-    <div class="container-fluid">
-        <nav class="float-left">
-            <ul>
-                <li>
-                    <a href="https://www.google.com">Grupo 1 - Diseño de Aplicaciones Web </a>
-                </li>
-            </ul>
-        </nav>
-        <div class="copyright float-right">
-            &copy; 2019 made by
-            <a href="https://urjc.es" target="_blank">GRUPO 1</a> for DAW (URJC)
-        </div>
-    </div>
-</footer>
+{{>footer}}
 <!-- End Footer -->
+
 </body>
 
 </html>
