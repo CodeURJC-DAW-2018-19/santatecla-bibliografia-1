@@ -18,6 +18,8 @@ import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.citation.CitationRepository;
 import com.santatecla.G1.theme.Theme;
 import com.santatecla.G1.theme.ThemeRepository;
+import com.santatecla.G1.user.User;
+import com.santatecla.G1.user.UserRepository;
 
 @Component
 @Order(1)
@@ -31,6 +33,8 @@ public class DataBaseInitializator {
 	BookRepository bookRepository;
 	@Autowired 
 	CitationRepository citationRepository;
+	@Autowired
+	UserRepository userRepository;
 	
 	@PostConstruct
 	public void init() {
@@ -81,6 +85,13 @@ public class DataBaseInitializator {
 		themeRepository.save(new Theme("Informática"));
 		themeRepository.save(new Theme("Poesía"));
 		themeRepository.save(new Theme("Guerra"));	
+		
+		
+		//Initialization of the users of the application
+
+		userRepository.save(new User("pedro","1234","ROLE_USER"));
+		userRepository.save(new User("juan","4321","ROLE_STUDENT"));
+		userRepository.save(new User("admin","root","ROLE_ADMIN","ROLE_USER","ROLE_STUDENT"));
 		
 		//Here code to test the DDBB
 		List<Author> authors = authorRepository.findAll(); 

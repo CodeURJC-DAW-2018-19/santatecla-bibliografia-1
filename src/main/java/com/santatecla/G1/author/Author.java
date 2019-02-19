@@ -33,7 +33,7 @@ public class Author {
 	* RELATIONS WITH OTHER CLASES TO DDBB MODEL
 	********************************************/
 	
-	@OneToMany(mappedBy="author",cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Book> books;
 	
 	/********************************************

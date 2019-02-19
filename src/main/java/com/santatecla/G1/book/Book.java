@@ -44,7 +44,7 @@ public class Book {
 	public List<Citation> citation;
 	
 
-	@OneToOne
+	@OneToOne()
 	private Author author;
 	
 	/********************************************
