@@ -10,63 +10,17 @@
             <div class="daw-search-bar">
             </div>
             <div class="daw-miniatures cajas-bot">
-                <div class="row">
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/author.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Frank Herbert</h4>
+               {{#authors}}
+                <div class="row">	
+                	<div class="card bg-dark text-white col">
+                	<img class="card-img" src="/img/author.png"alt="Card image">
+                	<div class="card-img-overlay">
+                            <h4 class="card-title">{{name}}</h4>
                         </div>
-                    </div>
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/author.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Richard Yates</h4>
-                        </div>
-                    </div>
+                	</div>
                 </div>
-                <div class="row">
-                    <div class="card bg-dark text-white col">
-
-                        <img class="card-img" src="/img/author.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title"> Mary Shelley</h4>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/author.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Arthur Conan Doyle</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/author.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Leo Tolstoy</h4>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/author.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Jane Austen</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/author.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Lord Byron</h4>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/author.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Mary Shelley</h4>
-                        </div>
-                    </div>
-                </div>
+                {{/authors}}
+                
 
             </div>
             <div class="daw-buttons d-flex justify-content-between">

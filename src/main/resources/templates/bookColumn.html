@@ -10,35 +10,16 @@
             <div class="daw-search-bar">
             </div>
             <div class="daw-miniatures">
+				{{#books}}
                 <div class="row">
-                    <div class="card bg-dark text-white col">
+                    <div class="card bg-dark text-white col">8
                         <img class="card-img" src="/img/books.png" alt="Card image">
                         <div class="card-img-overlay">
-                            <h4 class="card-title">El Quijote</h4>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/books.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">La Celestina</h4>
+                            <h4 class="card-title">{{title}}</h4>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="card bg-dark text-white col">
-
-                        <img class="card-img" src="/img/books.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Alguién voló sobre el nido del cuco</h4>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/books.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">La Regenta</h4>
-                        </div>
-                    </div>
-                </div>
+                {{/books}}
 
             </div>
             <div class="daw-buttons d-flex justify-content-between">

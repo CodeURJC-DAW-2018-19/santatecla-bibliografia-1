@@ -8,43 +8,17 @@
         </div>
         <div class="card-body">
             <div class="daw-miniatures">
+                
+                {{#themes}} 
                 <div class="row">
                     <div class="card bg-dark text-white col">
                         <img class="card-img" src="/img/theme.png" alt="Card image">
                         <div class="card-img-overlay">
-                            <h4 class="card-title">AMOR</h4>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/theme.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">MUERTE</h4>
+                            <h4 class="card-title">{{name}}</h4>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="card bg-dark text-white col">
-
-                        <img class="card-img" src="/img/theme.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">DINERO</h4>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/theme.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">VENGANZA</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/theme.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">VIAJES</h4>
-                        </div>
-                    </div>
-                </div>
+                {{/themes}}
 
             </div>
             <div class="daw-buttons d-flex justify-content-between">
