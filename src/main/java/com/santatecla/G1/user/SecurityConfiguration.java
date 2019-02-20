@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//Public pages
 		http.authorizeRequests().antMatchers("/index").permitAll();
 		http.authorizeRequests().antMatchers("/author").permitAll();
-
 		http.authorizeRequests().antMatchers("/login").permitAll();
+		http.authorizeRequests().antMatchers("/loginmodal").permitAll();
 		http.authorizeRequests().antMatchers("/loginerror").permitAll();
 		http.authorizeRequests().antMatchers("/logout").permitAll();
 		
@@ -50,4 +51,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(authenticationProvider);
 	}
 
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+	  web.ignoring().antMatchers("/js/*");
+	  web.ignoring().antMatchers("/css/*");
+	  web.ignoring().antMatchers("/img/*");
+	}
 }
