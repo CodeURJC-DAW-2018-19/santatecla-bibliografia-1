@@ -59,6 +59,7 @@ public class Book {
 		this.title = name;
 		this.nameEdit = nameEdit;
 		this.citation = new ArrayList<Citation>();
+		this.theme = null;
 	}
 
 	public long getId() {
