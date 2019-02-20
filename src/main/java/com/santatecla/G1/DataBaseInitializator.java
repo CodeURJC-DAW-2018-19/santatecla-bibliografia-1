@@ -43,7 +43,11 @@ public class DataBaseInitializator {
 		Date deathDate = new Date(428400000);
 		Date bornDate = new Date(315961200);
 		Author a1 = new Author("Brandon Sanderson",bornDate,deathDate);
-		authorRepository.save(a1);
+		
+		Date deathDate2 = new Date(428400000);
+		Date bornDate2 = new Date(315961200);
+		Author a2 = new Author("Fernando Esteso",bornDate2,deathDate2);
+		
 
 		
 	    bornDate = new Date(428400000);
@@ -57,7 +61,8 @@ public class DataBaseInitializator {
 		
 		//Books initialization
 		Book b1 = new Book("Palabras Radiantes","Brandon Sanderson");
-		Book b2 = new Book("Nacidos de la bruma","Brandon Sanderson");
+		Book b2 = new Book("Nacidos de la bruma","Fernando Esteso");
+		Book b3 = new Book("El año de los delfines","Sarah Lark");
 				
 		//Adding citation to books, We don't save it explicitly because they depend of the existence of a book
 		b1.addCitations(c1); 
@@ -71,8 +76,22 @@ public class DataBaseInitializator {
 		//Add the theme to the book
 		b1.setTheme(th1);
 		b2.setTheme(th2);
+		b3.setTheme(th1);
+		
+		th1.addBook(b1);
+		th1.addBook(b3);
+		th2.addBook(b2);
+		
+		themeRepository.save(th1);
+		themeRepository.save(th2);
+		
 		//Add the book to the author, the existence of the book depends of the existence of the author, so we don't save the book explicitly.
 		a1.addBook(b1);
+		a2.addBook(b2);
+		
+		
+		authorRepository.save(a1);
+		authorRepository.save(a2);
 		//Save the author who has write te b1
 		authorRepository.save(a1);
 		//Save the book wich has no author.
