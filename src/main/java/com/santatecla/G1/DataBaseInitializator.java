@@ -110,7 +110,7 @@ public class DataBaseInitializator {
 
 		userRepository.save(new User("pedro","1234","ROLE_USER"));
 		userRepository.save(new User("juan","4321","ROLE_STUDENT"));
-		userRepository.save(new User("admin","root","ROLE_ADMIN","ROLE_USER","ROLE_STUDENT"));
+		userRepository.save(new User("admin","admin","ROLE_ADMIN","ROLE_USER","ROLE_STUDENT"));
 		
 		//Here code to test the DDBB
 		List<Author> authors = authorRepository.findAll(); 
