@@ -21,11 +21,12 @@ public class AuthorController {
 	
 	@RequestMapping("/author/{id}")
 	public String Author(Model model, @PathVariable long id) {
-		Optional<com.santatecla.G1.author.Author> author = repository.findById(id);
+		Optional<Author> author = repository.findById(id);
+		System.out.println(author.toString());
 		if (author!=null) {
-			model.addAttribute("author", author);
+			model.addAttribute("author", author.get());
 		}
-		return "authorPageView";
+		return "authorPageEdit";
 	}
 	
 	/*@RequestMapping("/author/{id}")

@@ -30,7 +30,7 @@ public class BooksController {
 	
 	@RequestMapping("/book")
 	public String newBook(Model model, Book book) {
-		repository.save(book);
+		//repository.save(book);
 		return "booksPage";
 	}
 

@@ -1,5 +1,6 @@
 package com.santatecla.G1;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -40,19 +41,24 @@ public class DataBaseInitializator {
 	public void init() {
 		System.out.println("Start Database initialization");
 		// Author initialization		
-		Date deathDate = new Date(428400000);
-		Date bornDate = new Date(315961200);
-		Author a1 = new Author("Brandon Sanderson",bornDate,deathDate);
+		//Date deathDate = new Date(428400000);
+		//Date bornDate = new Date(315961200);
+		Author a1 = new Author("Brandon Sanderson","1927-10-11","1927-10-11");
 		
-		Date deathDate2 = new Date(428400000);
-		Date bornDate2 = new Date(315961200);
-		Author a2 = new Author("Fernando Esteso",bornDate2,deathDate2);
-		
+		//Date deathDate2 = new Date(428400000);
+		//Date bornDate2 = new Date(315961200);
+		Author a2 = new Author("Fernando Esteso","1927-10-11","1927-10-11");
+		String nameAlan="Alan Mathison Turing";
+		String urlImageAlan="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Alan_Turing_Aged_16.jpg/440px-Alan_Turing_Aged_16.jpg";
+		String bornDateAlan="1912-06-23";
+		String deathDateAlan="1954-06-07";
+		String bornPlaceAlan="Maida Vale, Reino Unido de Gran BretaÃ±a e Irlanda";
+		String urlMapAlan= "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d75132.22175705049!2d-0.2604624272851899!3d51.53606625037453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761009a098e00b%3A0x261185c6bcdb02a2!2sMaida+Vale%2C+Londres%2C+Reino+Unido!5e0!3m2!1ses!2ses!4v1549226048515";                            
+		authorRepository.save(new Author(nameAlan,urlImageAlan,bornDateAlan,deathDateAlan,bornPlaceAlan,urlMapAlan));
 
-		
-	    bornDate = new Date(428400000);
-		deathDate = new Date(315961200);
-		authorRepository.save(new Author("Juan",bornDate,deathDate));
+	    //bornDate = new Date(428400000);
+		//deathDate = new Date(315961200);
+		authorRepository.save(new Author("Juan","1927-10-11","1927-10-11"));
 			
 		//Citation initialization  --> We dont need to save because they deppends of the books. (Cascade.)
 		Citation c1 = new Citation("El misterio de la vida no es un problema a resolver, sino una realidad a experimentar");

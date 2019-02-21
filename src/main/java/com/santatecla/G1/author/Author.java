@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,9 +25,10 @@ public class Author {
 	private long id;
 	private String name;
 	private String urlImage;
-	private Date bornDate;
-	private Date deathDate;
+	private String bornDate;
+	private String deathDate;
 	private String bornPlace;
+	@Column(length=500)
 	private String urlMap;
 	
 	/********************************************
@@ -44,12 +46,28 @@ public class Author {
 	public Author() {}
 
 	//The type of the dates is Date, when we operate with date, to show we will use SimpleFormatDate
-	public Author(String name, Date bornDate, Date deathDate) {
+	public Author(String name, String bornDate, String deathDate) {
 		super();
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		this.name = name;
+		this.urlImage= "";
+		this.urlMap="";
+		this.bornPlace="";
 		this.bornDate = bornDate;
 		this.deathDate = deathDate;
 		this.books = new ArrayList<>();
+	}
+
+	public Author(String name, String urlImage, String bornDate, String deathDate, String bornPlace,
+			String urlMap) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.urlImage = urlImage;
+		this.bornDate = bornDate;
+		this.deathDate = deathDate;
+		this.bornPlace = bornPlace;
+		this.urlMap = urlMap;
 	}
 
 	public long getId() {
@@ -89,19 +107,19 @@ public class Author {
 		return urlMap;
 	}
 
-	public Date getBornDate() {
+	public String getBornDate() {
 		return bornDate;
 	}
 
-	public void setBornDate(Date bornDate) {
+	public void setBornDate(String bornDate) {
 		this.bornDate = bornDate;
 	}
 
-	public Date getDeathDate() {
+	public String getDeathDate() {
 		return deathDate;
 	}
 
-	public void setDeathDate(Date deathDate) {
+	public void setDeathDate(String deathDate) {
 		this.deathDate = deathDate;
 	}
 
@@ -119,6 +137,6 @@ public class Author {
 	@Override
 	public String toString() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		return "Nombe: "+name + "; Fecha de nacimiento: " + formatter.format(bornDate) + "; Fecha de defunción: "+formatter.format(deathDate);
+		return "Nombe: "+name + "; Fecha de nacimiento: " +bornDate + "; Fecha de defunción: "+ deathDate;
 	}
 }
