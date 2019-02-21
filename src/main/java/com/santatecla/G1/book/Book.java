@@ -25,7 +25,7 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String title;
-	private SimpleDateFormat publishDate;
+	private String publishDate;
 	private String nameEdit;
 	private String urlEdit;
 	private String urlImgCoverPage;
@@ -59,7 +59,11 @@ public class Book {
 		this.title = name;
 		this.nameEdit = nameEdit;
 		this.citation = new ArrayList<Citation>();
+		this.urlImgCoverPage="";
+		this.urlEdit="";
+		this.urlImgEdit="";
 		this.theme = null;
+		this.publishDate="";
 	}
 
 	public long getId() {
@@ -94,11 +98,11 @@ public class Book {
 		this.title = title;
 	}
 
-	public SimpleDateFormat getPublishDate() {
+	public String getPublishDate() {
 		return publishDate;
 	}
 
-	public void setPublishDate(SimpleDateFormat publishDate) {
+	public void setPublishDate(String publishDate) {
 		this.publishDate = publishDate;
 	}
 

@@ -102,6 +102,9 @@ public class DataBaseInitializator {
 		authorRepository.save(a1);
 		//Save the book wich has no author.
 		bookRepository.save(b2);
+		bookRepository.save(b1);
+		bookRepository.save(b3);
+		
 		
 		//Theme initialization with no books relacionated
 		themeRepository.save(new Theme("Tragedia"));

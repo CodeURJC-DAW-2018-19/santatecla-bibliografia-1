@@ -39,6 +39,12 @@ public class AuthorController {
 	}*/
 	
 	@RequestMapping("/author")
+	public String author(Model model) {
+		//repository.save(author);
+		return "authorPage";
+	}
+	
+	@RequestMapping("/newAuthor")
 	public String newAuthor(Model model) {
 		//repository.save(author);
 		return "authorPage";

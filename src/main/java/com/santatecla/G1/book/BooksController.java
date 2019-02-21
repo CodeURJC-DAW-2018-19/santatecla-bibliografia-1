@@ -21,14 +21,15 @@ public class BooksController {
 	
 	@RequestMapping("/book/{id}")
 	public String Book(Model model, @PathVariable long id) {
-		Optional<com.santatecla.G1.book.Book> book = repository.findById(id);
+		Optional<Book> book = repository.findById(id);
+		System.out.println(book.toString());
 		if (book!=null) {
-			model.addAttribute("book", book);
+			model.addAttribute("book", book.get());
 		}
-		return "booksPageView";
+		return "booksPageEdit";
 	}
 	
-	@RequestMapping("/book")
+	@RequestMapping("/newBook")
 	public String newBook(Model model, Book book) {
 		//repository.save(book);
 		return "booksPage";
