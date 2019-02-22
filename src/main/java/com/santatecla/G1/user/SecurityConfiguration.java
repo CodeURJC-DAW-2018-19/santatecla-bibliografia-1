@@ -22,12 +22,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//Public pages
 		http.authorizeRequests().antMatchers("/index").permitAll();
 		http.authorizeRequests().antMatchers("/author").permitAll();
+		http.authorizeRequests().antMatchers("/newAuthor").permitAll();
 		http.authorizeRequests().antMatchers("/author/{id}").permitAll();
 		http.authorizeRequests().antMatchers("/book").permitAll();
+		http.authorizeRequests().antMatchers("/newBook").permitAll();
+		http.authorizeRequests().antMatchers("/book/{id}").permitAll();
+		http.authorizeRequests().antMatchers("/theme").permitAll();
+		http.authorizeRequests().antMatchers("/newTheme").permitAll();
+		http.authorizeRequests().antMatchers("/theme/{id}").permitAll();
 		http.authorizeRequests().antMatchers("/login").permitAll();
 		http.authorizeRequests().antMatchers("/loginmodal").permitAll();
 		http.authorizeRequests().antMatchers("/loginerror").permitAll();
 		http.authorizeRequests().antMatchers("/logout").permitAll();
+		http.authorizeRequests().antMatchers("/image/{id}").permitAll();
 		
 		
 		//Private pages 

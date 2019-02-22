@@ -25,12 +25,12 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String title;
-	private SimpleDateFormat publishDate;
+	private String publishDate;
 	private String nameEdit;
 	private String urlEdit;
 	private String urlImgCoverPage;
 	private String urlImgEdit;
-	
+	private int imgId;
 	
 	/********************************************
 	 * RELATIONS WITH OTHER CLASES TO DDBB MODEL
@@ -54,12 +54,17 @@ public class Book {
 	//Constructor to Spring
 	public Book() {}
 
-	public Book(String name, String nameEdit) {
+	public Book(String name, String nameEdit, int imgId) {
 		super();
 		this.title = name;
 		this.nameEdit = nameEdit;
 		this.citation = new ArrayList<Citation>();
+		this.urlImgCoverPage="";
+		this.urlEdit="";
+		this.urlImgEdit="";
 		this.theme = null;
+		this.publishDate="";
+		this.imgId = imgId;
 	}
 
 	public long getId() {
@@ -94,11 +99,11 @@ public class Book {
 		this.title = title;
 	}
 
-	public SimpleDateFormat getPublishDate() {
+	public String getPublishDate() {
 		return publishDate;
 	}
 
-	public void setPublishDate(SimpleDateFormat publishDate) {
+	public void setPublishDate(String publishDate) {
 		this.publishDate = publishDate;
 	}
 
@@ -133,6 +138,12 @@ public class Book {
 
 	public void setTheme(Theme theme) {
 		this.theme = theme;
+	}
+	public void setImgId(int imgId) {
+		this.imgId = imgId;
+	}
+	public int getImgId() {
+		return imgId;
 	}
 
 	@Override

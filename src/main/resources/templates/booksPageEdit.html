@@ -23,26 +23,26 @@
 <body>
     <div class="main-panel">
 
-        <!-- NAV BAR TOP -->
+        <!-- BEGIN TOPNAVBAR -->
         {{>topnavbarlogout}}
-        <!-- End Navbar -->
+        <!-- END  TOPNAVBAR -->
 
         <!-- Content -->
         <div class="content content-page">
             <div class="container-fluid">
                 <div class="author-page flex-container">
 
-                    <!-- BEGIN Author FORM -->
-                    {{>authorFormEdit}}
-                    <!-- END AUTHOR FORM-->
+                    <!-- BEGIN BOOK FORM -->
+                    {{>bookFormEdit}}
+                    <!-- END BOOK FORM-->
 
-                    <!-- BEGIN AUTHOR BOTTOM-->
+                    <!-- BEGIN BOOK BOTTOM-->
                     <div class="row bottom-row">
                         {{>themeColumn}}
-                        {{>bookColumn}}
+                        {{>authorColumn}}
                         {{>quoteColumn}}
                     </div>
-                    <!-- END AUTHOR BOTTOM -->
+                    <!-- END BOOK BOTTOM -->
 
                 </div>
             </div>
@@ -51,9 +51,11 @@
 
     </div>
 
+
 <!-- Footer -->
 {{>footer}}
 <!-- End Footer -->
+
 </body>
 
 </html>

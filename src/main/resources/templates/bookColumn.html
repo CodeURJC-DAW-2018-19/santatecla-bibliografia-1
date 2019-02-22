@@ -11,19 +11,23 @@
             </div>
             <div class="daw-miniatures">
 				{{#books}}
-                <div class="row">
-                    <div class="card bg-dark text-white col">8
-                        <img class="card-img" src="/img/books.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">{{title}}</h4>
-                        </div>
-                    </div>
-                </div>
+				<a href="/book/{{id}}">
+	                <div class="row">
+	                    <div class="card bg-dark text-white col">
+	                        <img class="card-img" src="/image/{{imgId}}" alt="Card image">
+	                        <div class="card-img-overlay">
+	                            <h4 class="card-title">{{title}}</h4>
+	                        </div>
+	                    </div>
+	                </div>
+	            </a>
                 {{/books}}
 
             </div>
             <div class="daw-buttons d-flex justify-content-between">
-                <button class="btn btn-primary">Añadir</button>
+            	<a href="/newBook">
+                	<button class="btn btn-primary">Añadir</button>
+                </a>
                 <button class="btn btn-primary">Buscar</button>
             </div>
         </div>

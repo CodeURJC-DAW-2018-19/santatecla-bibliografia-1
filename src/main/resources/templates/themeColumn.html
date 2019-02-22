@@ -10,6 +10,7 @@
             <div class="daw-miniatures">
                 
                 {{#themes}} 
+                <a href="/theme/{{id}}">
                 <div class="row">
                     <div class="card bg-dark text-white col">
                         <img class="card-img" src="/img/theme.png" alt="Card image">
@@ -18,11 +19,14 @@
                         </div>
                     </div>
                 </div>
+                </a>
                 {{/themes}}
 
             </div>
             <div class="daw-buttons d-flex justify-content-between">
-                <button class="btn btn-primary">Añadir</button>
+            	<a href="/newTheme">
+                	<button class="btn btn-primary">Añadir</button>
+                </a>
                 <button class="btn btn-primary">Buscar</button>
             </div>
         </div>

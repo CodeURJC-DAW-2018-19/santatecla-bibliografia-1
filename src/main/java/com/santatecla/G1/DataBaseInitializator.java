@@ -43,22 +43,22 @@ public class DataBaseInitializator {
 		// Author initialization		
 		//Date deathDate = new Date(428400000);
 		//Date bornDate = new Date(315961200);
-		Author a1 = new Author("Brandon Sanderson","1927-10-11","1927-10-11");
+		Author a1 = new Author("Brandon Sanderson","1927-10-11","1927-10-11",0);
 		
 		//Date deathDate2 = new Date(428400000);
 		//Date bornDate2 = new Date(315961200);
-		Author a2 = new Author("Fernando Esteso","1927-10-11","1927-10-11");
+		Author a2 = new Author("Fernando Esteso","1927-10-11","1927-10-11",1);
 		String nameAlan="Alan Mathison Turing";
 		String urlImageAlan="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Alan_Turing_Aged_16.jpg/440px-Alan_Turing_Aged_16.jpg";
 		String bornDateAlan="1912-06-23";
 		String deathDateAlan="1954-06-07";
 		String bornPlaceAlan="Maida Vale, Reino Unido de Gran BretaÃ±a e Irlanda";
 		String urlMapAlan= "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d75132.22175705049!2d-0.2604624272851899!3d51.53606625037453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761009a098e00b%3A0x261185c6bcdb02a2!2sMaida+Vale%2C+Londres%2C+Reino+Unido!5e0!3m2!1ses!2ses!4v1549226048515";                            
-		authorRepository.save(new Author(nameAlan,urlImageAlan,bornDateAlan,deathDateAlan,bornPlaceAlan,urlMapAlan));
+		authorRepository.save(new Author(nameAlan,urlImageAlan,bornDateAlan,deathDateAlan,bornPlaceAlan,urlMapAlan,2));
 
 	    //bornDate = new Date(428400000);
 		//deathDate = new Date(315961200);
-		authorRepository.save(new Author("Juan","1927-10-11","1927-10-11"));
+		authorRepository.save(new Author("Juan","1927-10-11","1927-10-11",-1));
 			
 		//Citation initialization  --> We dont need to save because they deppends of the books. (Cascade.)
 		Citation c1 = new Citation("El misterio de la vida no es un problema a resolver, sino una realidad a experimentar");
@@ -66,9 +66,9 @@ public class DataBaseInitializator {
 		Citation c3 = new Citation("Nunca la persona llega a tal grado de perfección como cuando llena un impreso de solicitud de trabajo.");		
 		
 		//Books initialization
-		Book b1 = new Book("Palabras Radiantes","Brandon Sanderson");
-		Book b2 = new Book("Nacidos de la bruma","Fernando Esteso");
-		Book b3 = new Book("El año de los delfines","Sarah Lark");
+		Book b1 = new Book("Palabras Radiantes","Brandon Sanderson",3);
+		Book b2 = new Book("Nacidos de la bruma","Fernando Esteso",4);
+		Book b3 = new Book("El año de los delfines","Sarah Lark",5);
 				
 		//Adding citation to books, We don't save it explicitly because they depend of the existence of a book
 		b1.addCitations(c1); 
@@ -102,6 +102,9 @@ public class DataBaseInitializator {
 		authorRepository.save(a1);
 		//Save the book wich has no author.
 		bookRepository.save(b2);
+		bookRepository.save(b1);
+		bookRepository.save(b3);
+		
 		
 		//Theme initialization with no books relacionated
 		themeRepository.save(new Theme("Tragedia"));

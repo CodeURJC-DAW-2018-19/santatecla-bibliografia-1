@@ -21,6 +21,7 @@
 </head>
 
 <body>
+<div class="wrapper ">
     <div class="main-panel">
 
         <!-- NAV BAR TOP -->
@@ -32,17 +33,17 @@
             <div class="container-fluid">
                 <div class="author-page flex-container">
 
-                    <!-- BEGIN Author FORM -->
-                    {{>authorFormEdit}}
-                    <!-- END AUTHOR FORM-->
+                    <!-- BEGIN THEME FORM -->
+                    {{>themeFormEdit}}
+                    <!-- END THEME FORM-->
 
-                    <!-- BEGIN AUTHOR BOTTOM-->
+                    <!-- BEGIN THEME BOTTOM-->
                     <div class="row bottom-row">
-                        {{>themeColumn}}
                         {{>bookColumn}}
+                        {{>authorColumn}}
                         {{>quoteColumn}}
                     </div>
-                    <!-- END AUTHOR BOTTOM -->
+                    <!-- END THEME BOTTOM -->
 
                 </div>
             </div>
@@ -50,6 +51,7 @@
         <!-- End Content -->
 
     </div>
+</div>
 
 <!-- Footer -->
 {{>footer}}
