@@ -30,6 +30,7 @@ public class Author {
 	private String bornPlace;
 	@Column(length=500)
 	private String urlMap;
+	private int imgId;
 	
 	/********************************************
 	* RELATIONS WITH OTHER CLASES TO DDBB MODEL
@@ -46,7 +47,7 @@ public class Author {
 	public Author() {}
 
 	//The type of the dates is Date, when we operate with date, to show we will use SimpleFormatDate
-	public Author(String name, String bornDate, String deathDate) {
+	public Author(String name, String bornDate, String deathDate, int imgId) {
 		super();
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		this.name = name;
@@ -56,10 +57,11 @@ public class Author {
 		this.bornDate = bornDate;
 		this.deathDate = deathDate;
 		this.books = new ArrayList<>();
+		this.imgId = imgId;
 	}
 
 	public Author(String name, String urlImage, String bornDate, String deathDate, String bornPlace,
-			String urlMap) {
+			String urlMap, int imgId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -68,6 +70,7 @@ public class Author {
 		this.deathDate = deathDate;
 		this.bornPlace = bornPlace;
 		this.urlMap = urlMap;
+		this.imgId = imgId;
 	}
 
 	public long getId() {
@@ -133,7 +136,12 @@ public class Author {
 	public List<Book> getBooks(){
 		return this.books;
 	}
-	
+	public int getImgId() {
+		return imgId;
+	}
+	public void setImgId(int imgId) {
+		this.imgId = imgId;
+	}
 	@Override
 	public String toString() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

@@ -30,7 +30,7 @@ public class Book {
 	private String urlEdit;
 	private String urlImgCoverPage;
 	private String urlImgEdit;
-	
+	private int imgId;
 	
 	/********************************************
 	 * RELATIONS WITH OTHER CLASES TO DDBB MODEL
@@ -54,7 +54,7 @@ public class Book {
 	//Constructor to Spring
 	public Book() {}
 
-	public Book(String name, String nameEdit) {
+	public Book(String name, String nameEdit, int imgId) {
 		super();
 		this.title = name;
 		this.nameEdit = nameEdit;
@@ -64,6 +64,7 @@ public class Book {
 		this.urlImgEdit="";
 		this.theme = null;
 		this.publishDate="";
+		this.imgId = imgId;
 	}
 
 	public long getId() {
@@ -137,6 +138,12 @@ public class Book {
 
 	public void setTheme(Theme theme) {
 		this.theme = theme;
+	}
+	public void setImgId(int imgId) {
+		this.imgId = imgId;
+	}
+	public int getImgId() {
+		return imgId;
 	}
 
 	@Override
