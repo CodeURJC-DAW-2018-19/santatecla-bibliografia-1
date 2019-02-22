@@ -34,14 +34,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().anyRequest().authenticated();
 		
 		//Login form
-		http.formLogin().loginPage("/login");
-		http.formLogin().defaultSuccessUrl("/");
+		//http.formLogin().loginPage("/login");
+		http.formLogin().defaultSuccessUrl("/index");
 		http.formLogin().usernameParameter("username");
 		http.formLogin().passwordParameter("password");
 		http.formLogin().failureUrl("/loginerror");
 		
 		//Logout
-		http.logout().logoutSuccessUrl("/");
 		http.logout().logoutSuccessUrl("/");
 		
 		//CSRF
