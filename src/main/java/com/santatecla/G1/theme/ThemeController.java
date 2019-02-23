@@ -27,12 +27,12 @@ public class ThemeController {
 		if (theme!=null) {
 			model.addAttribute("theme", theme.get());
 		}
-		return "themePageEdit";
+		return "themePage";
 	}
 	
 	@RequestMapping("/newTheme")
 	public String newTheme(Model model) {
-		return "themePage";
+		return "themePageEdit";
 	}
 	
 	public Collection<Theme> themes(){

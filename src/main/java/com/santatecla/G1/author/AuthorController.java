@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -26,7 +28,7 @@ public class AuthorController {
 		if (author!=null) {
 			model.addAttribute("author", author.get());
 		}
-		return "authorPageEdit";
+		return "authorPage";
 	}
 	
 	/*@RequestMapping("/author/{id}")
@@ -47,7 +49,7 @@ public class AuthorController {
 	@RequestMapping("/newAuthor")
 	public String newAuthor(Model model) {
 		//repository.save(author);
-		return "authorPage";
+		return "authorPageEdit";
 	}
 	
 	/*@RequestMapping("/author/{id}")
@@ -59,5 +61,15 @@ public class AuthorController {
 		repository.delete(id);
 		
 		return "deletePage";
+	}*/
+	
+	/*@RequestMapping("/newAuthor/uploaded")
+	public String newAuthorUploaded(Model model,@RequestParam("nameAuthor") String name,@RequestParam("birthDate") String bornDate,@RequestParam("defuncDate") String deathDate, @RequestParam("bornPlace") String bornPlace, @RequestParam("urlMap") String urlMap, @RequestParam("file") MultipartFile file) {
+		int imageId = com.santatecla.G1.ImageManagerController.getNewId();
+		com.santatecla.G1.ImageManagerController.handleFileUpload(model, file, imageId);
+		Author a = new Author(name, bornDate, deathDate, imageId);
+		repository.save(a);
+		model.addAttribute(a);
+		return "/author/{id}";
 	}*/
 }
