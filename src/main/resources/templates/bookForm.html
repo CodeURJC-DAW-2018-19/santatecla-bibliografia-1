@@ -8,59 +8,57 @@
                     </div>
                 </div>
                 <div class="card-body">
+                {{#book}}
                     <div class="row">
                         <div class="col">
                             <div class="form-group row">
                                 <label for="colFormLabel1" class="col-md-3 col-form-label">Título
                                     obra</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="colFormLabel1"
-                                           placeholder="Título de la obra">
+                                    <label class="form-control text-truncate" id="colFormLabel1">{{book.title}}</label>
                                 </div>
 
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">URL portada</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="URLPortada"
-                                           placeholder="URL de la portada">
+                                    <label  class="form-control" id="URLPortada">{{urlImgCoverPage}}</label>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label"> Fecha</label>
                                 <div class="col-md-6">
-                                    <input type="date" class="form-control">
+                                    <label type="date" class="form-control">{{publishDate}}</label>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="colFormLabel2"
                                        class="col-md-3 col-form-label">Editorial</label>
                                 <div class="col-md-6">
-                                    <input type="name" class="form-control" id="colFormLabel2"
-                                           placeholder="Nombre de la editorial">
+                                    <label type="name" class="form-control" id="colFormLabel2">{{nameEdit}}</label>
                                 </div>
 
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">URL editorial</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="URLEditorial"
-                                           placeholder="URL de la editorial">
+                                    <label type="text" class="form-control" id="URLEditorial">{{urlEdit}}</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="col-md">
                                 <img id="imagen portada" alt="Imagen portada"
-                                     src="/img/books.png" style="width: 140px">
+                                     src="/image/{{imgId}}" style="width: 140px">
                                 <label for="imagen portada">Imagen portada</label>
                             </div>
                             <div class="col-md">
                                 <img id="imagen editorial" alt="Imagen portada"
-                                     src="/img/books.png" style="width: 140px">
+                                     src="" style="width: 140px">
                                 <label for="imagen editorial">Imagen editorial</label>
                             </div>
                         </div>
+                        {{/book}}
                     </div>
                 </div>
             </div>

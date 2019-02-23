@@ -2,6 +2,7 @@
     <div class="author-form">
         <div class="card">
             <div class="container row">
+            {{#author}}
                 <form class="form-horizontal col-sm-8">
                     <div class="form-group">
                         <div class="row">
@@ -9,7 +10,8 @@
                                 <label>Nombre</label>
                             </div>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" value="">
+                                <!--<input type="text" class="form-control" value="{{name}}">-->
+                                <label class="form-control text-truncate">{{name}}</label>
                             </div>
                         </div>
                     </div>
@@ -19,8 +21,10 @@
                                 <label>URL Imagen</label>
                             </div>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control text-truncate"
-                                       value="">
+<!--                                 <input type="text" class="form-control text-truncate" -->
+<!--                                        value="{{urlImage}}"> -->
+                                       
+                                <label class="form-control text-truncate">{{urlImage}}</label>
                             </div>
                         </div>
                     </div>
@@ -31,13 +35,15 @@
                                 <label>Fecha de nacimiento</label>
                             </div>
                             <div class="col-sm-3">
-                                <input type="date" class="form-control text-truncate" value="">
+<!--                                 <input type="date" class="form-control text-truncate" value="{{bornDate}}"> -->
+                                <label class="form-control text-truncate">{{deathDate}}</label>
                             </div>
                             <div class="form-inline col-sm-0">
                                 <label>Fecha de defunción</label>
                             </div>
                             <div class="col-sm-3">
-                                <input type="date" class="form-control text-truncate" value="">
+<!--                                 <input type="date" class="form-control text-truncate" value="{{deathDate}}"> -->
+                                <label class="form-control text-truncate">{{deathDate}}</label>
                             </div>
 
                         </div>
@@ -49,8 +55,9 @@
                                 <label>Lugar de nacimiento</label>
                             </div>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control text-truncate"
-                                       value="">
+<!--                                 <input type="text" class="form-control text-truncate" -->
+<!--                                        value="{{bornPlace}}"> -->
+                                <label class="form-control text-truncate">{{bornPlace}}</label>
                             </div>
                         </div>
                     </div>
@@ -60,8 +67,9 @@
                                 <label>URL del mapa</label>
                             </div>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control text-truncate"
-                                       value="">
+                                <!--<input type="text" class="form-control text-truncate"
+                                       value="{{urlMap}}">-->
+                                       <label class="form-control text-truncate">{{urlMap}}</label>
                             </div>
                         </div>
                     </div>
@@ -71,7 +79,7 @@
                 <form class="form-vertical col">
                     <div class="row">
                         <div class="text-center col-sm-10">
-                            <img src="/img/noImage.jpg"
+                            <img src="{{urlImage}}"
                                  class="float-right rounded" alt="..." style="max-width: 100px;padding: 5px;">
                         </div>
                     </div>
@@ -80,11 +88,12 @@
                         <div class="text-center col-sm-10">
                             <div id="map-container-google-1" class="z-depth-1-half map-container"
                                  style=" height: 200px;width:200px;float: right;padding: 5px">
-                                <iframe src="/img/noMap.png"></iframe>
+                                <iframe src="{{urlMap}}" frameborder="0" style="border:0"></iframe>
                             </div>
                         </div>
                     </div>
                 </form>
+            {{/author}}                
             </div>
         </div>
     </div>
