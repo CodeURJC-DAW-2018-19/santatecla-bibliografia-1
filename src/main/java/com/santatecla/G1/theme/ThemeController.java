@@ -29,25 +29,34 @@ public class ThemeController {
 	private UserComponent userComponent;
 
 	@Autowired
-	private BookRepository repositoryB;
+	private BookRepository bookRepository;
 
 	
 	
 	@RequestMapping("/theme/{id}")
 	public String theme(Model model, @PathVariable long id) {
 		Theme theme = repository.findById(id);
-		List<Citation> citations = repository.findCitationByName(theme.getName());
-		System.out.println(theme.toString());
-		Collection<Book> books= repositoryB.findByTheme_id(id);
-		for(Book b:books) {
-			System.out.println(b.toString());
+		List<Book> books = bookRepository.findByTheme(theme);
+		List<Author> authors = new ArrayList<>();
+		List<Citation> citation = new ArrayList<>();
+		for(Book b: books) {
+			authors.add(b.getAuthor());
+			System.out.println(b.getTitle());
+			List<Citation> aux = b.getCitations();
+			for(Citation c: aux) {
+				citation.add(c);
+			}
 		}
+		
 		if (theme!=null) {
+			model.addAttribute("authors",authors);
+			model.addAttribute("books",books);
 			model.addAttribute("theme", theme);
-			model.addAttribute("citations",citations);
+			model.addAttribute("citations",citation);
 		}
 		return "themePage";
 	}
+	
 	
 	@RequestMapping("/newTheme")
 	public String newTheme(Model model) {
@@ -71,7 +80,6 @@ public class ThemeController {
 		model.addAttribute("logged", logged);
 		if(logged) {
 			model.addAttribute("admin", userComponent.getLoggedUser().getRoles().contains("ROLE_ADMIN"));
-			//model.addAttribute("userName",userComponent.getLoggedUser().getName());
 		}
 	}
 	
