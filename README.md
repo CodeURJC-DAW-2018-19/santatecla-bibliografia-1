@@ -7,14 +7,17 @@ This is a project based learning made by students at the URJC, the  objective of
 * [Spring](https://spring.io/tools) - Project Management
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [MySql](https://www.mysql.com/products/workbench/) - Backend technology
+* [JAVA 8] (https://www.java.com/es/) - Backend programmign lenguage
 
 ## Setting up
 
 1. The first step, is cloning this repository in your Documents/GitHub folder.
 2. The next step is to import this project in SpringSTS4 as an existing maven project. ![Image of Spring](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/Spring1.PNG)
-3. Now you need to connect to a database using MySql taking care of using the same user and password that is in the application.properties file. ![Image of MySql1](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/MySql1.PNG) 
+3. Install MySQL server, remind the password that you use in the installation(we will need).
+4. Intall MySQLWorkbench and create a schema named "test".
+5. Edit the application.properties file to set the same pasword that you use to install MySQL Server. ![Image of MySql1](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/MySql1.PNG) 
 ![Image of MySql2](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/MySql2.PNG)
-4. Then you can visit https://localhost/8443/index in your favourite browser and see the website.
+6. Run the project as Spring Application and then you can visit https://localhost/8443/index in your favourite browser and see the website.
 
 
 ## Navigation Scheme
@@ -39,13 +42,13 @@ Here you can see an example of the theme.
 
 ![Image of UML1](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/UML1.png)
 
-This diagram show the relations betwen entities in the DB and their cardinalities.
+This diagram show the relations betwen entities in the DB and their cardinalities. We change the original diagram, because it was wrong (the cardinalities) in the relation between the book and the author. So we have a schema in wich one author has many books, but a book only has an author.
 
 ## Class diagram
 
 ![Image of Diagram1](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/ClassDiagram.jpg)
 
-In this big diagram are showed the realtions in every class.
+In this big diagram are showed the realtions in every class. We can se a pattern, wich is that all the controller are in the lower part of the diagram, and they contribute with methods (services) to the application by implementing the way that the objects are created, updated and  destroyed. In de middle section we see the reopsitories classes wich make the querys to the data base using JPA standar. And on the top of the diagram, there are the entities that model the tables that are stored on the data base (Depending on the relationship between these entites could more tables in the DDBB - relational tables).
 
 ![Image of Spring](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/CapturaClasesSpringBuena.png)
 
@@ -53,7 +56,12 @@ In this image is explained the folder structure of the Maven project.
 
 ![Image of book](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/DiagramaLibros.png)
 
-This diagram shows an example of the MVC implemented in the book class.
+This diagram shows an example of the MVC implemented in the book class. All the packages in this project have the same structure, there are an entity which models the data base table, also we have a bookRepository that simplify so much the queries to the DDBB. Also we have a controller wich defines the logic of the entity. And the user that use the controller.
+
+
+## Security
+
+The security has been implemented using Spring Security, all the configuration relative to the security is in the package user, in the SercutiryConfiguration.java . In this file we can define the public and privates URL's. Also you can define the default login and logout page. In adittion to this, we also configure some paths that the application have to ignore, so we can use css, js, and img.
 
 ## Authors
 
