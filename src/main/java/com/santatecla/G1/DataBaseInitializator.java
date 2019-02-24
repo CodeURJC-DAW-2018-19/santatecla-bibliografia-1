@@ -67,9 +67,9 @@ public class DataBaseInitializator {
 		Citation c3 = new Citation("Nunca la persona llega a tal grado de perfección como cuando llena un impreso de solicitud de trabajo.");		
 		
 		//Books initialization
-		Book b1 = new Book("Palabras Radiantes","Brandon Sanderson",3);
-		Book b2 = new Book("Nacidos de la bruma","Brandon Sanderson",4);
-		Book b3 = new Book("El año de los delfines","Sarah Lark",5);
+		Book b1 = new Book("Palabras Radiantes",3);
+		Book b2 = new Book("Nacidos de la bruma",4);
+		Book b3 = new Book("El año de los delfines",5);
 		
 		Citation c1 = new Citation("El misterio de la vida no es un problema a resolver, sino una realidad a experimentar",b1);
 			
@@ -81,6 +81,8 @@ public class DataBaseInitializator {
 		
 		//Adding citation to books, We don't save it explicitly because they depend of the existence of a book
 		//b1.addCitations(c1); 
+		
+		
 		
 		b2.addCitations(c2);
 		b2.addCitations(c3);
@@ -125,6 +127,7 @@ public class DataBaseInitializator {
 		b2.setAuthor(a1);
 		b3.setAuthor(a4);
 		
+	
 		
 		b1.setAuthor(a1);
 		b1.addCitations(c1);

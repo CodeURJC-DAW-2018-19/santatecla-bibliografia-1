@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.santatecla.G1.author.AuthorRepository;
 import com.santatecla.G1.book.BookRepository;
+import com.santatecla.G1.image.ImageManagerController;
 import com.santatecla.G1.theme.ThemeRepository;
 import com.santatecla.G1.user.UserComponent;
 
@@ -27,15 +28,18 @@ public class IndexController {
 	private ThemeRepository themesRepository;
 	@Autowired
 	private UserComponent userComponent;
+	@Autowired
+	private ImageManagerController imageController;
 	
 	
 	
-	@RequestMapping("/index")
+	@RequestMapping("/")
 	public String author(Model model) {
 		
 		model.addAttribute("authors",authorRepository.findAll());
 		model.addAttribute("books",booksRepository.findAll());
 		model.addAttribute("themes",themesRepository.findAll());
+		model.addAttribute("images",imageController.getImages().values());
 		
 		return "indexPage";
 	}
@@ -46,7 +50,6 @@ public class IndexController {
 		model.addAttribute("logged", logged);
 		if(logged) {
 			model.addAttribute("admin", userComponent.getLoggedUser().getRoles().contains("ROLE_ADMIN"));
-			//model.addAttribute("userName",userComponent.getLoggedUser().getName());
 		}
 	}
 	
