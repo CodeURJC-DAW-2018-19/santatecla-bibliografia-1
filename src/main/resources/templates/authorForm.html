@@ -61,9 +61,12 @@
                                 </div>
                             </div>
                         </div>
-                        {{#admin}}<button type="submit" class="btn btn-primary">Update</button>{{/admin}}
+                        {{#admin}}<button type="submit" class="btn btn-primary">Actualizar</button>{{/admin}}
+                        
                     </form>
-
+					<form class="form-horizontal col-sm-8" action="/author/{{id}}/deleteAuthor" method="post">
+                    	{{#admin}}<button type="submit" class="btn btn-sencondary">Eliminar</button>{{/admin}}  
+					</form>
                     <form class="form-vertical col">
                         <div class="row">
                             <div class="text-center col-sm-10">
