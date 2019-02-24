@@ -55,9 +55,14 @@
                                         <label for="imagen editorial">Imagen editorial</label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
+                            {{#admin}}<button type="submit" class="btn btn-primary">Update</button>{{/admin}}
                         </form>
+                        {{#admin}}
+                        <form class="form-horizontal col-sm-8" action="/book/{{id}}/deleteBook" method="post">
+                    		<button type="submit" class="btn btn-sencondary">Eliminar</button> 
+						</form>
+						{{/admin}} 
                     {{/book}}
 
                 </div>
