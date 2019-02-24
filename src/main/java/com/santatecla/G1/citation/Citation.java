@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
+import com.santatecla.G1.theme.Theme;
 
 
 @Entity
@@ -28,9 +29,13 @@ public class Citation {
 	
 	//To avoid cicles on DB model
 	
-	/*@OneToOne(mappedBy="citation")
-	private Book book;*/
+	@OneToOne()
+	private Book book;
+	@OneToOne
+	private Theme theme;
 	
+	
+
 	/********************************************
 	 * METHODS OF THE CLASS
 	 ********************************************/
@@ -61,13 +66,22 @@ public class Citation {
 		this.text = text;
 	}
 	
-	/*public Book getBook() {
+	public Book getBook() {
 		return book;
 	}
 	public void setBook(Book book) {
 		this.book = book;
-	}*/
+	}
 	
+
+	public Theme getTheme() {
+		return theme;
+	}
+
+	public void setTheme(Theme theme) {
+		this.theme = theme;
+	}
+
 	@Override
 	public String toString() {
 		return "Cita: "+this.text;

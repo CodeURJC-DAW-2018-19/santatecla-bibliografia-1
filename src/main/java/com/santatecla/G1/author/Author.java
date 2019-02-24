@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
@@ -23,20 +24,27 @@ public class Author {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	@JsonView(BasicAtt.class)
 	private String name;
+	@JsonView(BasicAtt.class)
 	private String urlImage;
+	@JsonView(BasicAtt.class)
 	private String bornDate;
+	@JsonView(BasicAtt.class)
 	private String deathDate;
+	@JsonView(BasicAtt.class)
 	private String bornPlace;
 	@Column(length=500)
+	@JsonView(BasicAtt.class)
 	private String urlMap;
+	@JsonView(BasicAtt.class)
 	private int imgId;
 	
 	/********************************************
 	* RELATIONS WITH OTHER CLASES TO DDBB MODEL
 	********************************************/
 	
-	@OneToMany()
+	@OneToMany
 	private List<Book> books;
 	
 	/********************************************
@@ -71,6 +79,8 @@ public class Author {
 		this.bornPlace = bornPlace;
 		this.urlMap = urlMap;
 		this.imgId = imgId;
+		this.books = new ArrayList<>();
+
 	}
 
 	public long getId() {

@@ -24,11 +24,16 @@
 <body>
 <div class="wrapper ">
     <div class="main-panel">
-
-        <!-- NAV BAR TOP -->
-        {{>topnavbarlogin}}
-        <!-- End Navbar -->
-
+    
+    	{{^logged}}
+       		{{>topnavbarlogin}}
+       	{{/logged}}
+   		{{#logged}}
+       		{{>topnavbarlogout}}
+       	{{/logged}}
+       	
+       	
+        
         <!-- Content -->
         <div class="content">
             <div class="container-fluid">
@@ -52,7 +57,7 @@
     </div> <!-- end of main-panel -->
 
 <!-- Footer -->
-{{>footer}}
+
 <!-- End Footer -->
 </div>
 </body>

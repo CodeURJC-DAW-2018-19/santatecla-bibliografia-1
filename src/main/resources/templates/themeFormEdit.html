@@ -2,24 +2,24 @@
     <div class="col">
         <div class="card card-custom ">
             <div class="card-body table-responsive grid-container">
+            {{#theme}}
                 <div class="title-and-references ">
-                	{{#theme}}
+                	
                     <div class="title-theme">
                         {{name}}
                     </div>
-                    {{/theme}}
-					<!--  {{#citation}}-->
+                    
+					{{#citations}}
                     <div class="reference-1 caja-referencia">
                         <div class="card-custo card">
                             <div class="card-header card-header-warning">
-                                <p class="card-title">Cita 1</p>
+                                <p class="card-title">Cita</p>
 
                             </div>
                             <div class="card-body table-responsive">
                                 <div class="contenido-referencia">
                                     <div class="texto-referencia">
-                                        El misterio de la vida no es un problema a resolver, sino
-                                        una realidad a experimentar
+                                        {{text}}
                                     </div>
                                     <div class="autor-referencia">
                                         Frank Herbert
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--  {{/citation}}-->
+                    {{/citations}}
                 </div>
                 <div class="html-generator " id="right-box">
                     <div id="html-box">
@@ -46,6 +46,7 @@
                     </div>
                 </div>
             </div>
+            {{/theme}}
         </div>
     </div>
 </div>
