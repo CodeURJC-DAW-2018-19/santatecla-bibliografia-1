@@ -1,5 +1,6 @@
 package com.santatecla.G1.author;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookRepository;
+import com.santatecla.G1.theme.Theme;
 import com.santatecla.G1.user.UserComponent;
 
 
@@ -39,11 +41,16 @@ public class AuthorController {
 	public String Author(Model model, @PathVariable long id, HttpServletRequest request) {
 		Author author = repository.findById(id);
 		List<Book> books = booksRepository.findByNameEdit(author.getName());
+		List<Theme> themes = new ArrayList<>();
+		for(Book b: books) {
+			themes.add(b.getTheme());
+		}	
 		if (author!=null) {
 			model.addAttribute("author", author);
 			model.addAttribute("books", books);
+			model.addAttribute("themes",themes);
 		}
-		return "authorPageEdit";
+		return "authorPage";
 	}
 	
 	@ModelAttribute
