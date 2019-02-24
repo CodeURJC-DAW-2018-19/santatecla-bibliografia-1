@@ -11,5 +11,6 @@ public interface CitationRepository extends JpaRepository<Citation,Long>{
 	
 	List<Citation> findByText(String text);
 	List<Citation> findCitationByBook(Book book);
+	Citation findById(long id);
 
 }
