@@ -24,20 +24,14 @@ public class Author {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	@JsonView(BasicAtt.class)
 	private String name;
-	@JsonView(BasicAtt.class)
+	
 	private String urlImage;
-	@JsonView(BasicAtt.class)
 	private String bornDate;
-	@JsonView(BasicAtt.class)
 	private String deathDate;
-	@JsonView(BasicAtt.class)
 	private String bornPlace;
 	@Column(length=500)
-	@JsonView(BasicAtt.class)
 	private String urlMap;
-	@JsonView(BasicAtt.class)
 	private int imgId;
 	
 	/********************************************
