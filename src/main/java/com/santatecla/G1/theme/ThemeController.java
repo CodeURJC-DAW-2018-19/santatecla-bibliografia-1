@@ -49,6 +49,7 @@ public class ThemeController {
 		}
 		
 		if (theme!=null) {
+			model.addAttribute("idTheme",id);
 			model.addAttribute("authors",authors);
 			model.addAttribute("books",books);
 			model.addAttribute("theme", theme);
@@ -81,6 +82,28 @@ public class ThemeController {
 		if(logged) {
 			model.addAttribute("admin", userComponent.getLoggedUser().getRoles().contains("ROLE_ADMIN"));
 		}
+	}
+	
+	@RequestMapping("/theme/{id}/updateAuthor")
+	public String updateAuthor(Model model, Theme theme, @PathVariable long id) {
+		
+		theme.setId(id);
+		repository.save(theme);		
+		model.addAttribute("text","Tema editado de forma correcta");
+		return "Message";
+	}
+	
+	
+	@RequestMapping("/theme/{id}/deleteTheme")
+	public String deleteAuthor(Model model, @PathVariable long id) {
+		Theme theme = repository.findById(id);
+		if (theme!=null) {
+			model.addAttribute("theme", theme);
+			model.addAttribute("text","Tema eliminado de forma correcta");
+		}
+		repository.deleteById(id);
+		
+		return "Message";
 	}
 	
 	
