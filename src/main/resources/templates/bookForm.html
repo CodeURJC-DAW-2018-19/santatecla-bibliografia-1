@@ -9,39 +9,39 @@
                 </div>
                 <div class="card-body">
                     {{#book}}
-                        <form action="/updateBook" method="post">
+                        <form action="/book/{{id}}/updateBook" method="post">
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group row">
                                         <label for="colFormLabel1" class="col-md-3 col-form-label">Título
                                             obra</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control text-truncate" id="colFormLabel1" {{^admin}} disabled {{/admin}} value="{{book.title}}">
+                                            <input type="text" class="form-control text-truncate" id="colFormLabel1" name="title"{{^admin}} disabled {{/admin}} value="{{book.title}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">URL portada</label>
                                         <div class="col-md-6">
-                                            <input tpye="text" class="form-control" id="URLPortada" {{^admin}} disabled {{/admin}} value="{{urlImgCoverPage}}">
+                                            <input tpye="text" class="form-control" id="URLPortada" name="urlImgCoverPage"{{^admin}} disabled {{/admin}} value="{{urlImgCoverPage}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label"> Fecha</label>
                                         <div class="col-md-6">
-                                            <input type="date" class="form-control" {{^admin}} disabled {{/admin}} value="{{publishDate}}">
+                                            <input type="date" class="form-control" name="publishDate"{{^admin}} disabled {{/admin}} value="{{publishDate}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="colFormLabel2" class="col-md-3 col-form-label">Editorial</label>
                                         <div class="col-md-6">
-                                            <input type="name" class="form-control" id="colFormLabel2" {{^admin}} disabled {{/admin}} value="{{nameEdit}}">
+                                            <input type="name" class="form-control" id="colFormLabel2" name="nameEdit"{{^admin}} disabled {{/admin}} value="{{nameEdit}}">
                                         </div>
 
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">URL editorial</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="URLEditorial" {{^admin}} disabled {{/admin}} value="{{urlEdit}}">
+                                            <input type="text" class="form-control" id="URLEditorial" name="urlEdit"{{^admin}} disabled {{/admin}} value="{{urlEdit}}">
                                         </div>
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                                         <label for="imagen editorial">Imagen editorial</label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </form>
                     {{/book}}

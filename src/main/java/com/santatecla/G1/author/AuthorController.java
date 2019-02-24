@@ -101,7 +101,14 @@ public class AuthorController {
 		return "authorPageEdit";
 	}
 	
-	
+	@RequestMapping("/author/{id}/updateAuthor")
+	public String updateAuthor(Model model, Author author, @PathVariable long id) {
+		
+		author.setId(id);
+		repository.save(author);		
+		model.addAttribute("text","Author Edit correctly");
+		return "Message";
+	}
 	/*@RequestMapping("/author/{id}")
 	public String deleteAuthor(Model model, @PathVariable long id) {
 		Author author = repository.findOne(id);

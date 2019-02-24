@@ -20,7 +20,7 @@ public class BooksController {
 	private UserComponent userComponent;
 	
 	@Autowired
-	private BookRepository repository;
+	private BookService repository;
 	
 	public Collection<Book> books(){
 		return repository.findAll();
@@ -28,7 +28,7 @@ public class BooksController {
 	
 	@RequestMapping("/book/{id}")
 	public String Book(Model model, @PathVariable long id) {
-		Optional<Book> book = repository.findById(id);
+		Optional<Book> book = repository.findOne(id);
 		System.out.println(book.toString());
 		if (book!=null) {
 			model.addAttribute("book", book.get());
@@ -49,9 +49,10 @@ public class BooksController {
 		return "Message";
 	}
 	
-	@RequestMapping("book/{{id}}/updateBook")
-	public String updateBook(Model model, @PathVariable long id, Book book) {
-		repository.deleteById(id);
+	@RequestMapping("book/{id}/updateBook")
+	public String updateBook(Model model, Book book, @PathVariable long id) {
+		
+		book.setId(id);
 		repository.save(book);		
 		model.addAttribute("text","Book Edit correctly");
 		return "Message";
