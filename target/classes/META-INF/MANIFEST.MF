@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Implementation-Title: G1
 Implementation-Version: 0.0.1-SNAPSHOT
-Implementation-Vendor-Id: com.santatecla
 Built-By: berna
+Implementation-Vendor-Id: com.santatecla
 Build-Jdk: 1.8.0_161
 Implementation-URL: http://maven.apache.org
 Created-By: Maven Integration for Eclipse

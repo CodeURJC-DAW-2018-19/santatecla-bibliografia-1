@@ -37,9 +37,15 @@ public class BooksController {
 	}
 	
 	@RequestMapping("/newBook")
-	public String newBook(Model model, Book book) {
-		//repository.save(book);
+	public String newBook(Model model) {
+		
 		return "booksPageEdit";
+	}
+	
+	@RequestMapping("/saveBook")
+	public String saveBook(Model model, Book book) {
+		repository.save(book);
+		return "BookCreated";
 	}
 	
 	@ModelAttribute

@@ -1,64 +1,79 @@
 <div class="row top-row">
     <div class="author-form">
         <div class="card">
-        	<div class="card-header card-header-text card-header-primary">
-            	<div class="card-text">
-                	<h4 class="card-title">Nuevo Libro</h4>
+            <div class="card-header card-header-text card-header-primary">
+                <div class="card-text">
+                    <h4 class="card-title">Nuevo Libro</h4>
                 </div>
             </div>
             <div class="container row">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <div class="form-group row">
-                                <label for="colFormLabel1" class="col-md-3 col-form-label">Título
-                                    obra</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" id="colFormLabel1" placeholder="Título de la obra" name="title">
+                    <form action="/saveBook" method="post">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group row">
+                                    <label for="colFormLabel1" class="col-md-3 col-form-label">Título
+                                        obra</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="colFormLabel1" placeholder="Título de la obra" name="title">
+                                    </div>
+
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label"> Fecha</label>
+                                    <div class="col-md-6">
+                                        <input type="date" class="form-control" name="publishDAte">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="colFormLabel2" class="col-md-3 col-form-label">Editorial</label>
+                                    <div class="col-md-6">
+                                        <input type="name" class="form-control" id="colFormLabel2" placeholder="Nombre de la editorial" name="nameEdit">
+                                    </div>
+
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">URL editorial</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="URLEditorial" placeholder="URL de la editorial" name="urlEdit">
+                                    </div>
                                 </div>
 
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label"> Fecha</label>
-                                <div class="col-md-6">
-                                    <input type="date" class="form-control" name="date">
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">URL editorial</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="URLEditorial" placeholder="URL imagen Portada" name="urlImgCoverPage">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">URL editorial</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="URLEditorial" placeholder="URL imagen editorial" name="urlImgEdit">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="colFormLabel2"
-                                       class="col-md-3 col-form-label">Editorial</label>
-                                <div class="col-md-6">
-                                    <input type="name" class="form-control" id="colFormLabel2" placeholder="Nombre de la editorial" name="editorial">
+                            <div class="col-sm-4">
+                                <div col-md>
+                                    <div class="fileinput fileinput-new text-center col-sm-10" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail img-raised">
+                                            <img src="https://previews.123rf.com/images/grgroup/grgroup1611/grgroup161111707/65888786-libro-abierto-silueta-gris-con-hojas-limpias-ilustraci%C3%B3n-vectorial.jpg" alt="...">
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
+                                        <div>
+                                            <span class="btn btn-raised btn-round btn-default btn-file">
+                                                <input type="file" name="file" style="width:200px" />
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">URL editorial</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" id="URLEditorial" placeholder="URL de la editorial" name="urlEditorial">
+                                <div class="col-md">
+                                    <img id="imagen editorial" alt="Imagen portada" src="/img/books.png">
+                                    <label for="imagen editorial">Imagen editorial</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                        	<div col-md>
-								<div class="fileinput fileinput-new text-center col-sm-10" data-provides="fileinput">
-    								<div class="fileinput-new thumbnail img-raised">
-        								<img src="https://previews.123rf.com/images/grgroup/grgroup1611/grgroup161111707/65888786-libro-abierto-silueta-gris-con-hojas-limpias-ilustraci%C3%B3n-vectorial.jpg" alt="...">
-    								</div>
-		    						<div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
-    								<div>
-        								<span class="btn btn-raised btn-round btn-default btn-file">
-            								<input type="file" name="file" style="width:200px"/>
-        								</span>
-	    							</div>
-								</div>
-							</div>
-                        	<div class="col-md">
-                        		<img id="imagen editorial" alt="Imagen portada" src="/img/books.png">
-                            	<label for="imagen editorial">Imagen editorial</label>
-                        	</div>
-                        </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
                 </div>
             </div>
         </div>
