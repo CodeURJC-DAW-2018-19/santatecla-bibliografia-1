@@ -51,7 +51,6 @@ public class Author {
 	//The type of the dates is Date, when we operate with date, to show we will use SimpleFormatDate
 	public Author(String name, String bornDate, String deathDate, int imgId) {
 		super();
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		this.name = name;
 		this.urlImage= "";
 		this.urlMap="";
@@ -141,12 +140,12 @@ public class Author {
 		return birthDate;
 	}
 
-	public void setBornDate(String bornDate) {
-		this.birthDate = bornDate;
+	public String getBirthDate() {
+		return birthDate;
 	}
 
-	public String getDeathDate() {
-		return deathDate;
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public void setDeathDate(String deathDate) {
