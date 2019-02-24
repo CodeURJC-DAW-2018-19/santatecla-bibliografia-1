@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
@@ -54,7 +56,14 @@ public class BooksController {
 	}
 	
 	@RequestMapping("/saveBook")
-	public String saveBook(Model model, Book book) {
+	public String saveBook(Model model, Book book, MultipartFile file) {
+		if(file!=null) {
+			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
+			book.setImgId(imgId);
+			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
+		}
+		else
+			book.setImgId(-2);
 		repository.save(book);
 		model.addAttribute("text","Book Created");
 		return "Message";

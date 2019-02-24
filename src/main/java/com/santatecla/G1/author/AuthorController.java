@@ -87,7 +87,7 @@ public class AuthorController {
 		return "authorPage";
 	}*/
 	
-	@RequestMapping(value="/saveAuthor", method = RequestMethod.POST)
+	@RequestMapping(value="/saveAuthor")
 	public String author(Model model, Author author, MultipartFile file) {
 		if(file!=null) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
