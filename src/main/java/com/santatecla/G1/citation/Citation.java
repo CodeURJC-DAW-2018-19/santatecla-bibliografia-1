@@ -21,14 +21,12 @@ import com.santatecla.G1.theme.Theme;
 @Entity
 public class Citation {
 	
-
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column(length=1000)
 	private String text;
-	private String bookTitle;
 	
 	/********************************************
 	 * RELATIONS WITH OTHER CLASES TO DDBB MODEL
@@ -63,6 +61,7 @@ public class Citation {
 		this.text = text;
 		//this.book = null;
 	}
+
 	public long getId() {
 		return id;
 	}

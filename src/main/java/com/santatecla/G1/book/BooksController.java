@@ -37,7 +37,6 @@ public class BooksController {
 		System.out.println(book.toString());
 		List <Citation> citations = book.getCitations();
 		Author author = book.getAuthor();
-		System.out.println(author.getName());
 		Theme theme = book.getTheme();
 		if (book!=null) {
 			model.addAttribute("book", book);
@@ -66,7 +65,7 @@ public class BooksController {
 		
 		book.setId(id);
 		repository.save(book);		
-		model.addAttribute("text","Book Edit correctly");
+		model.addAttribute("text","Libro actualizado correctamente");
 		return "Message";
 	}
 	@RequestMapping("/book/{id}/deleteBook")

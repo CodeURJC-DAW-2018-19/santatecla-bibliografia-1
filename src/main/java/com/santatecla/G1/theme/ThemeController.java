@@ -49,7 +49,6 @@ public class ThemeController {
 		}
 		
 		if (theme!=null) {
-			model.addAttribute("idTheme",id);
 			model.addAttribute("authors",authors);
 			model.addAttribute("books",books);
 			model.addAttribute("theme", theme);
@@ -84,7 +83,7 @@ public class ThemeController {
 		}
 	}
 	
-	@RequestMapping("/theme/{id}/updateAuthor")
+	@RequestMapping("/theme/{id}/updateTheme")
 	public String updateAuthor(Model model, Theme theme, @PathVariable long id) {
 		
 		theme.setId(id);
