@@ -88,10 +88,11 @@ public class AuthorController {
 	}*/
 	
 	@RequestMapping(value="/saveAuthor")
-	public String author(Model model, Author author, MultipartFile file) {
-		if(file!=null) {
+	public String author(Model model, Author author,@RequestParam("file")MultipartFile file) {
+		if((file!=null)&&(!file.isEmpty())) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
-			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);		
+			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);	
+			author.setImgId(imgId);
 		}			
 		else
 			author.setImgId(-1);

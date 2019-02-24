@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.santatecla.G1.author.Author;
@@ -56,11 +57,12 @@ public class BooksController {
 	}
 	
 	@RequestMapping("/saveBook")
-	public String saveBook(Model model, Book book, MultipartFile file) {
-		if(file!=null) {
+	public String saveBook(Model model, Book book, @RequestParam("file")MultipartFile file) {
+		if((file!=null)&&(!file.isEmpty())) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
 			book.setImgId(imgId);
 			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
+			book.setImgId(imgId);
 		}
 		else
 			book.setImgId(-2);

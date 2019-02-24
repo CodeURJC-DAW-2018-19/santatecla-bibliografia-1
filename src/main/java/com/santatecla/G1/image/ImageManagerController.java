@@ -43,23 +43,16 @@ public class ImageManagerController {
 		return id;
 	}
 
-	@RequestMapping(value = "??", method = RequestMethod.POST)
 	public static void handleFileUpload(Model model, MultipartFile file, int id) {
 		String fileName = "image-" + id + ".jpg";
-		if (!file.isEmpty()) {
-			try {
-
-				File uploadedFile = new File(FILES_FOLDER.toFile(), fileName);
-				file.transferTo(uploadedFile);
-
-				images.put(id, new Image(id));
-				
+		try {
+			File uploadedFile = new File(FILES_FOLDER.toFile(), fileName);
+			file.transferTo(uploadedFile);
+			images.put(id, new Image(id));
+			
 			} catch (Exception e) {
 				model.addAttribute("error", e.getClass().getName() + ":" + e.getMessage());
 			}
-		} else {
-			model.addAttribute("error", "The file is empty");
-		}
 	}
 
 	@RequestMapping("/image/{id}")
