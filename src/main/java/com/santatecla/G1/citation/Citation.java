@@ -10,18 +10,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
+import com.santatecla.G1.book.BookRepository;
 import com.santatecla.G1.theme.Theme;
 
 
 @Entity
 public class Citation {
+	
+
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column(length=1000)
 	private String text;
+	private String bookTitle;
 	
 	/********************************************
 	 * RELATIONS WITH OTHER CLASES TO DDBB MODEL
@@ -43,11 +50,14 @@ public class Citation {
 	//Constructor to Spring
 	public Citation() {}
 	
+
 	public Citation(String text , Book book) {
 		super();
 		this.text = text;
-		//this.book = book;
+		this.book = book;
+		this.theme = book.getTheme();
 	}
+	
 	public Citation(String text) {
 		super();
 		this.text = text;
