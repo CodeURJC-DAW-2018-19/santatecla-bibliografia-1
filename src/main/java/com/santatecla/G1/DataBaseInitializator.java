@@ -55,13 +55,14 @@ public class DataBaseInitializator {
 		String bornPlaceAlan="Maida Vale, Reino Unido de Gran BretaÃ±a e Irlanda";
 		String urlMapAlan= "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d75132.22175705049!2d-0.2604624272851899!3d51.53606625037453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761009a098e00b%3A0x261185c6bcdb02a2!2sMaida+Vale%2C+Londres%2C+Reino+Unido!5e0!3m2!1ses!2ses!4v1549226048515";                            
 		Author a3 = new Author(nameAlan,urlImageAlan,bornDateAlan,deathDateAlan,bornPlaceAlan,urlMapAlan,2);
-
+		
+		Author a4 = new Author("Sarah Lark","1964-5-15");
 	    //bornDate = new Date(428400000);
 		//deathDate = new Date(315961200);
 		authorRepository.save(new Author("Juan","1927-10-11","1927-10-11",-1));
 			
 		//Citation initialization  --> We dont need to save because they deppends of the books. (Cascade.)
-		Citation c1 = new Citation("El misterio de la vida no es un problema a resolver, sino una realidad a experimentar");
+		
 		Citation c2 = new Citation("La Ilusión despierta el empeño y solamente la paciencia lo termina.");
 		Citation c3 = new Citation("Nunca la persona llega a tal grado de perfección como cuando llena un impreso de solicitud de trabajo.");		
 		
@@ -69,14 +70,27 @@ public class DataBaseInitializator {
 		Book b1 = new Book("Palabras Radiantes","Brandon Sanderson",3);
 		Book b2 = new Book("Nacidos de la bruma","Brandon Sanderson",4);
 		Book b3 = new Book("El año de los delfines","Sarah Lark",5);
-				
+		
+		Citation c1 = new Citation("El misterio de la vida no es un problema a resolver, sino una realidad a experimentar",b1);
+			
+		Citation c4 = new Citation("Con buena picha bien se jode",b1);
+		Citation c5 = new Citation("Si quieres llegar rapido ve solo, si quieres llegar lejos ve acompañado",b3);
+
+		
+		
+		
 		//Adding citation to books, We don't save it explicitly because they depend of the existence of a book
-		b1.addCitations(c1); 
+		//b1.addCitations(c1); 
+		
 		b2.addCitations(c2);
 		b2.addCitations(c3);
+		b1.addCitations(c4);
+		
 		c1.setBook(b1);
+		c4.setBook(b3);
 		c2.setBook(b2);
 		c3.setBook(b2);
+		c4.setBook(b1);
 		
 		
 		
@@ -88,7 +102,8 @@ public class DataBaseInitializator {
 		//Add the theme to the book
 		c1.setTheme(th1);
 		c2.setTheme(th2);
-
+		c5.setTheme(th1);
+		c4.setTheme(th1);
 		
 		
 		b1.setTheme(th1);
@@ -104,7 +119,16 @@ public class DataBaseInitializator {
 		
 		//Add the book to the author, the existence of the book depends of the existence of the author, so we don't save the book explicitly.
 		a1.addBook(b1);
-		a3.addBook(b2);
+		a1.addBook(b2);
+		a4.addBook(b3);
+		
+		b2.setAuthor(a1);
+		b3.setAuthor(a4);
+		
+		
+		b1.setAuthor(a1);
+		b1.addCitations(c1);
+		b3.addCitations(c5);
 		
 		
 		authorRepository.save(a1);
@@ -112,6 +136,7 @@ public class DataBaseInitializator {
 		authorRepository.save(a3);
 		//Save the author who has write te b1
 		authorRepository.save(a1);
+		authorRepository.save(a4);
 		//Save the book wich has no author.
 		bookRepository.save(b2);
 		bookRepository.save(b1);
@@ -119,6 +144,7 @@ public class DataBaseInitializator {
 		
 		citationRepository.save(c1);
 		citationRepository.save(c2);
+		citationRepository.save(c5);
 		
 		//Theme initialization with no books relacionated
 		/*themeRepository.save(new Theme("Tragedia"));
