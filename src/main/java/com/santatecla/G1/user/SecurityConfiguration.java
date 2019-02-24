@@ -22,17 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		//Public pages
 		http.authorizeRequests().antMatchers("/").permitAll();
-		//http.authorizeRequests().antMatchers("/author").permitAll();
-		//http.authorizeRequests().antMatchers("/newAuthor").permitAll();
-		//http.authorizeRequests().antMatchers("/author/{id}").permitAll();
-		//http.authorizeRequests().antMatchers("/book").permitAll();
-		//http.authorizeRequests().antMatchers("/newBook").permitAll();
-		//http.authorizeRequests().antMatchers("/book/{id}").permitAll();
-		//http.authorizeRequests().antMatchers("/theme").permitAll();
-		//http.authorizeRequests().antMatchers("/newTheme").permitAll();
-		//http.authorizeRequests().antMatchers("/theme/{id}").permitAll();
 		http.authorizeRequests().antMatchers("/login").permitAll();
-		//http.authorizeRequests().antMatchers("/loginmodal").permitAll();
 		http.authorizeRequests().antMatchers("/loginerror").permitAll();
 		http.authorizeRequests().antMatchers("/logout").permitAll();
 		http.authorizeRequests().antMatchers("/image/{id}").permitAll();
@@ -40,10 +30,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		//Private pages 
 		http.authorizeRequests().anyRequest().authenticated();
-		//http.authorizeRequests().antMatchers("/author/{id}").authenticated();
-		//Login form
 
-		//http.formLogin().loginPage("/login");
+		//Login form
 		http.formLogin().defaultSuccessUrl("/");
 		http.formLogin().usernameParameter("username");
 		http.formLogin().passwordParameter("password");
