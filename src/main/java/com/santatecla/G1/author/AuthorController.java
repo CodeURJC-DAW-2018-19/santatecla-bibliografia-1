@@ -44,7 +44,7 @@ public class AuthorController {
 	@RequestMapping("/author/{id}")
 	public String Author(Model model, @PathVariable long id, HttpServletRequest request) {
 		Author author = repository.findById(id);
-		List<Book> books = booksRepository.findByNameEdit(author.getName());
+		List<Book> books = booksRepository.findByAuthor(author);
 		List<Theme> themes = new ArrayList<>();
 		List<Citation> citations = new ArrayList<>();
 		for(Book b: books) {
@@ -73,7 +73,6 @@ public class AuthorController {
 		model.addAttribute("logged", logged);
 		if(logged) {
 			model.addAttribute("admin", userComponent.getLoggedUser().getRoles().contains("ROLE_ADMIN"));
-			//model.addAttribute("userName",userComponent.getLoggedUser().getName());
 		}
 	}
 	
@@ -90,7 +89,7 @@ public class AuthorController {
 	@RequestMapping("/saveAuthor")
 	public String author(Model model, Author author) {
 		repository.save(author);
-		model.addAttribute("text","Author Created");
+		model.addAttribute("text","Autor creado correctamente");
 		System.out.println(author.toString());
 		return "Message";
 	}
@@ -106,19 +105,23 @@ public class AuthorController {
 		
 		author.setId(id);
 		repository.save(author);		
-		model.addAttribute("text","Author Edit correctly");
+		model.addAttribute("text","Autor editado de forma correcta");
 		return "Message";
-	}
-	/*@RequestMapping("/author/{id}")
+	}	
+	
+	@RequestMapping("/author/{id}/deleteAuthor")
 	public String deleteAuthor(Model model, @PathVariable long id) {
-		Author author = repository.findOne(id);
+		Author author = repository.findById(id);
 		if (author!=null) {
 			model.addAttribute("author", author);
+			model.addAttribute("text","Autor eliminado de forma correcta");
 		}
-		repository.delete(id);
+		repository.deleteById(id);
 		
-		return "deletePage";
-	}*/
+		return "Message";
+	}
+	
+	
 	
 	/*@RequestMapping("/newAuthor/uploaded")
 	public String newAuthorUploaded(Model model,@RequestParam("nameAuthor") String name,@RequestParam("birthDate") String bornDate,@RequestParam("defuncDate") String deathDate, @RequestParam("bornPlace") String bornPlace, @RequestParam("urlMap") String urlMap, @RequestParam("file") MultipartFile file) {

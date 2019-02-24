@@ -27,7 +27,7 @@ public class Author {
 	private String name;
 	
 	private String urlImage;
-	private String bornDate;
+	private String birthDate;
 	private String deathDate;
 	private String bornPlace;
 	@Column(length=500)
@@ -56,8 +56,32 @@ public class Author {
 		this.urlImage= "";
 		this.urlMap="";
 		this.bornPlace="";
-		this.bornDate = bornDate;
+		this.birthDate = bornDate;
 		this.deathDate = deathDate;
+		this.books = new ArrayList<>();
+		this.imgId = imgId;
+	}
+	public Author(String name, String bornDate, int imgId) {
+		super();
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		this.name = name;
+		this.urlImage= "";
+		this.urlMap="";
+		this.bornPlace="";
+		this.birthDate = bornDate;
+		this.deathDate = "";
+		this.books = new ArrayList<>();
+		this.imgId = imgId;
+	}
+	public Author(String name, String bornDate) {
+		super();
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		this.name = name;
+		this.urlImage= "";
+		this.urlMap="";
+		this.bornPlace="";
+		this.birthDate = bornDate;
+		this.deathDate = "";
 		this.books = new ArrayList<>();
 		this.imgId = imgId;
 	}
@@ -65,10 +89,9 @@ public class Author {
 	public Author(String name, String urlImage, String bornDate, String deathDate, String bornPlace,
 			String urlMap, int imgId) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.urlImage = urlImage;
-		this.bornDate = bornDate;
+		this.birthDate = bornDate;
 		this.deathDate = deathDate;
 		this.bornPlace = bornPlace;
 		this.urlMap = urlMap;
@@ -115,11 +138,11 @@ public class Author {
 	}
 
 	public String getBornDate() {
-		return bornDate;
+		return birthDate;
 	}
 
 	public void setBornDate(String bornDate) {
-		this.bornDate = bornDate;
+		this.birthDate = bornDate;
 	}
 
 	public String getDeathDate() {
@@ -149,6 +172,6 @@ public class Author {
 	@Override
 	public String toString() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		return "Nombe: "+name + "; Fecha de nacimiento: " +bornDate + "; Fecha de defunción: "+ deathDate;
+		return "Nombe: "+name + "; Fecha de nacimiento: " +birthDate + "; Fecha de defunción: "+ deathDate;
 	}
 }
