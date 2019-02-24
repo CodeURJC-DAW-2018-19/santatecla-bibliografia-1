@@ -14,4 +14,5 @@ public interface ThemeRepository extends JpaRepository<Theme,Long>{
 	List<Theme> findThemesByName(String text);
 	List<Citation> findCitationByName(String theme);
 	Book findBookById(long id);
+
 }

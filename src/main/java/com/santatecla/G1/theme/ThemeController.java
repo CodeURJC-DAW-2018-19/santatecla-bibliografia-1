@@ -1,5 +1,6 @@
 package com.santatecla.G1.theme;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.user.UserComponent;
+import com.santatecla.G1.book.BookRepository;
+
 
 
 @Controller
@@ -23,6 +26,10 @@ public class ThemeController {
 	private ThemeRepository repository;
 	@Autowired
 	private UserComponent userComponent;
+
+	@Autowired
+	private BookRepository repositoryB;
+
 	
 	
 	@RequestMapping("/theme/{id}")
@@ -30,16 +37,20 @@ public class ThemeController {
 		Theme theme = repository.findById(id);
 		List<Citation> citations = repository.findCitationByName(theme.getName());
 		System.out.println(theme.toString());
+		Collection<Book> books= repositoryB.findByTheme_id(id);
+		for(Book b:books) {
+			System.out.println(b.toString());
+		}
 		if (theme!=null) {
 			model.addAttribute("theme", theme);
 			model.addAttribute("citations",citations);
 		}
-		return "themePageEdit";
+		return "themePage";
 	}
 	
 	@RequestMapping("/newTheme")
 	public String newTheme(Model model) {
-		return "themePage";
+		return "themePageEdit";
 	}
 	
 	public Collection<Theme> themes(){

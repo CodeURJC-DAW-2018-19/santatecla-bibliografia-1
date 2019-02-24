@@ -33,13 +33,13 @@ public class BooksController {
 		if (book!=null) {
 			model.addAttribute("book", book.get());
 		}
-		return "booksPageEdit";
+		return "booksPage";
 	}
 	
 	@RequestMapping("/newBook")
 	public String newBook(Model model, Book book) {
 		//repository.save(book);
-		return "booksPage";
+		return "booksPageEdit";
 	}
 	
 	@ModelAttribute
@@ -52,4 +52,15 @@ public class BooksController {
 	}
 	
 
+	//@RequestMapping("/newBook/uploaded")
+	//public String newBookUploaded(Model model,@RequestParam("title") String title,@RequestParam("date") String date,@RequestParam("editorial") String editorial, @RequestParam("urlEditorial") String urlEdit, @RequestParam("file") MultipartFile file) {
+		//int imageId = com.santatecla.G1.ImageManagerController.getNewId();
+		//Guardar imagen
+		//com.santatecla.G1.ImageManagerController.handleFileUpload(model, file, imageId);
+		//Crear y guardar book
+		//Author a = new Author(name, bornDate, deathDate, imageId);
+		//repository.save(a);
+		//model.addAttribute(a);
+		//return "/author/{id}";
+	//}
 }

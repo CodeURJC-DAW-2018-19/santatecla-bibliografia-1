@@ -2,12 +2,13 @@ package com.santatecla.G1.error;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ErrorControler {
+public class MyErrorControler implements ErrorController{
 	
 	@RequestMapping("/errorNotFound")
 	public String handleError(Model model, HttpServletRequest request) {
@@ -17,6 +18,12 @@ public class ErrorControler {
 	      if (error!=null) {
 				model.addAttribute("error", error);
 			}
-	      return "authorPage";
+	      return "errorPage";
 	  }
+
+	@Override
+	public String getErrorPath() {
+		// TODO Auto-generated method stub
+		return "/error";
+	}
 }
