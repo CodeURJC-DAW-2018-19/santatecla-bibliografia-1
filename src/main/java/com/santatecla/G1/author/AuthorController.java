@@ -48,17 +48,17 @@ public class AuthorController {
 		List<Theme> themes = new ArrayList<>();
 		List<Citation> citations = new ArrayList<>();
 		for(Book b: books) {
+			//Get the themes of the books of the author
 			themes.add(b.getTheme());
 			//We need an aux array because a book can return a list of citation
-			List<Citation> aux = new ArrayList<>();
-			aux = citationRepository.findCitationByBook(b);
-			for(Citation c :aux) {
-				System.out.println("Cita : "+c.getText());
-				citations.add(c);
+			citations.addAll(b.getCitations());
+			System.out.println("LAS CITAS ESTÁN VACIAS? " + citations.isEmpty());
+			for(Citation c : citations) {
+				System.out.println(c.getText());
 			}
+			
 		}	
-		
-		if (author!=null) {
+		if (author!=null) { 
 			model.addAttribute("author", author);
 			model.addAttribute("books", books);
 			model.addAttribute("themes",themes);
@@ -97,14 +97,14 @@ public class AuthorController {
 	@RequestMapping("/newAuthor")
 	public String newAuthor(Model model) {
 
-		return "authorPageEdit";
+		return "authorPageEdit"; 
 	}
 	
 	@RequestMapping("/author/{id}/updateAuthor")
 	public String updateAuthor(Model model, Author author, @PathVariable long id) {
 		
 		author.setId(id);
-		repository.save(author);		
+		repository.save(author);
 		model.addAttribute("text","Autor editado de forma correcta");
 		return "Message";
 	}	
