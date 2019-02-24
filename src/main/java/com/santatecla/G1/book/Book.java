@@ -54,10 +54,10 @@ public class Book {
 	//Constructor to Spring
 	public Book() {}
 
-	public Book(String name, String nameEdit, int imgId) {
+	public Book(String name, int imgId) {
 		super();
 		this.title = name;
-		this.nameEdit = nameEdit;
+		this.nameEdit = "";
 		this.citation = new ArrayList<Citation>();
 		this.urlImgCoverPage="";
 		this.urlEdit="";
@@ -128,8 +128,8 @@ public class Book {
 		return (List<Citation>) this.citation;
 	}
 
-	public void addCitations(Citation citations) {
-		this.citation.add(citations);
+	public void addCitations(Citation citation) {
+		this.citation.add(citation);
 	}
 
 	public Theme getTheme() {
@@ -144,6 +144,14 @@ public class Book {
 	}
 	public int getImgId() {
 		return imgId;
+	}
+
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 
 	@Override
