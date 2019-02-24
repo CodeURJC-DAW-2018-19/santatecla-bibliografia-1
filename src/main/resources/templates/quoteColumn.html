@@ -7,49 +7,18 @@
             </div>
         </div>
         <div class="card-body cajas-bot">
-            <div class="daw-miniatures cajas-bot">
+            <div class="daw-miniatures cajas-bot"> 
+                {{#citations}} 
+                <a href="/citation/{{id}}">
                 <div class="row">
                     <div class="card bg-dark text-white col">
                         <img class="card-img" src="/img/theme.png" alt="Card image">
                         <div class="card-img-overlay">
-                            <h4 class="card-title">El misterio de la vida no es un problema a resolver, sino una
-                                realidad a experimentar.</h4>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/theme.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Estar solo no tiene nada que ver con cuantas personas hay
-                                alrededor.</h4>
+                            <h4 class="card-title">{{text}}</h4>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="card bg-dark text-white col">
-
-                        <img class="card-img" src="/img/theme.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Sea un hombre o sea más que un hombre. Sea firme con su propósito y
-                                firme como una piedra.</h4>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/theme.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">El hombre débil se vuelve fuerte cuando no tiene nada, porque sólo
-                                entonces puede sentir la locura de la desesperación.</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/theme.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Y de veras que nunca sabes lo pomposo que va a resultar algo hasta
-                                que lo ves impreso.</h4>
-                        </div>
-                    </div>
-                </div>
+                {{/citations}}
             </div>
 
             <div class="daw-buttons d-flex justify-content-between">

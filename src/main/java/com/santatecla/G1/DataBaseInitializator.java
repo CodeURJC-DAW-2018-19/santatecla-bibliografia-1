@@ -74,6 +74,10 @@ public class DataBaseInitializator {
 		b1.addCitations(c1); 
 		b2.addCitations(c2);
 		b2.addCitations(c3);
+		c1.setBook(b1);
+		c2.setBook(b2);
+		c3.setBook(b2);
+		
 		
 		
 		

@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookRepository;
+import com.santatecla.G1.citation.Citation;
+import com.santatecla.G1.citation.CitationRepository;
 import com.santatecla.G1.theme.Theme;
 import com.santatecla.G1.user.UserComponent;
 
@@ -29,6 +31,8 @@ public class AuthorController {
 	private AuthorRepository repository;
 	@Autowired
 	private BookRepository booksRepository;
+	@Autowired
+	private CitationRepository citationRepository;
 	
 	@Autowired
 	private UserComponent userComponent;
@@ -42,13 +46,23 @@ public class AuthorController {
 		Author author = repository.findById(id);
 		List<Book> books = booksRepository.findByNameEdit(author.getName());
 		List<Theme> themes = new ArrayList<>();
+		List<Citation> citations = new ArrayList<>();
 		for(Book b: books) {
 			themes.add(b.getTheme());
+			//We need an aux array because a book can return a list of citation
+			List<Citation> aux = new ArrayList<>();
+			aux = citationRepository.findCitationByBook(b);
+			for(Citation c :aux) {
+				System.out.println("Cita : "+c.getText());
+				citations.add(c);
+			}
 		}	
+		
 		if (author!=null) {
 			model.addAttribute("author", author);
 			model.addAttribute("books", books);
 			model.addAttribute("themes",themes);
+			model.addAttribute("citations",citations);
 		}
 		return "authorPage";
 	}
