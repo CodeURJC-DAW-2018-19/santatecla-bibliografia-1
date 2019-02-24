@@ -1,4 +1,4 @@
-package com.santatecla.G1;
+package com.santatecla.G1.image;
 
 public class Image {
 
@@ -10,6 +10,10 @@ public class Image {
 		this.title = title;
 	}
 
+	public Image(int id) {
+		this.id = id;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
