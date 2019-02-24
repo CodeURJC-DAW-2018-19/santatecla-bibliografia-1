@@ -1,4 +1,4 @@
-package com.santatecla.G1;
+package com.santatecla.G1.image;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,8 +27,8 @@ public class ImageManagerController {
 
 	private static final Path FILES_FOLDER = Paths.get(System.getProperty("user.dir"), "assets/img");
 
-	private AtomicInteger imageId = new AtomicInteger();
-	private Map<Integer, Image> images = new ConcurrentHashMap<>();
+	private static AtomicInteger imageId = new AtomicInteger(6);
+	private static Map<Integer, Image> images = new ConcurrentHashMap<>();
 
 	@PostConstruct
 	public void init() throws IOException {
@@ -38,48 +38,29 @@ public class ImageManagerController {
 		}
 	}
 
-	@RequestMapping("/")
-	public String index(Model model) {
-		
-		model.addAttribute("images", images.values());
-		
-		return "index";
+	public static int getNextId() {
+		int id = imageId.getAndIncrement();
+		return id;
 	}
 
-	@RequestMapping(value = "/image/upload", method = RequestMethod.POST)
-	public String handleFileUpload(Model model, @RequestParam("imageTitle") String imageTitle,
-			@RequestParam("file") MultipartFile file) {
-
-		int id = imageId.getAndIncrement();
-		
+	@RequestMapping(value = "??", method = RequestMethod.POST)
+	public static void handleFileUpload(Model model, MultipartFile file, int id) {
 		String fileName = "image-" + id + ".jpg";
-
 		if (!file.isEmpty()) {
 			try {
 
 				File uploadedFile = new File(FILES_FOLDER.toFile(), fileName);
 				file.transferTo(uploadedFile);
 
-				images.put(id, new Image(id, imageTitle));
-
-				return "uploaded";
-
+				images.put(id, new Image(id));
+				
 			} catch (Exception e) {
-
 				model.addAttribute("error", e.getClass().getName() + ":" + e.getMessage());
-
-				return "uploaded";
 			}
 		} else {
-			
 			model.addAttribute("error", "The file is empty");
-
-			return "uploaded";
 		}
 	}
-
-	// NOTE: The url format "/image/{fileName:.+}" avoid Spring MVC remove file
-	// extension.
 
 	@RequestMapping("/image/{id}")
 	public void handleFileDownload(@PathVariable String id, HttpServletResponse res)
@@ -98,6 +79,12 @@ public class ImageManagerController {
 			res.sendError(404, "File" + fileName + "(" + image.toAbsolutePath() + ") does not exist");
 		}
 	}
+		
+		
+	public static Map<Integer, Image> getImages() {
+		return images;
+	}
+	
 }
 
 
