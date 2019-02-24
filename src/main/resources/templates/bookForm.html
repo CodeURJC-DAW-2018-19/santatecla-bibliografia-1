@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body">
                     {{#book}}
-                        <form action="/saveBook" method="post">
+                        <form action="/updateBook" method="post">
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group row">
@@ -56,11 +56,12 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
                         </form>
                     {{/book}}
+
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
