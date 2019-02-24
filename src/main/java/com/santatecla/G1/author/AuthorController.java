@@ -90,8 +90,9 @@ public class AuthorController {
 	@RequestMapping("/saveAuthor")
 	public String author(Model model, Author author) {
 		repository.save(author);
+		model.addAttribute("text","Author Created");
 		System.out.println(author.toString());
-		return "AuthorCreated";
+		return "Message";
 	}
 	
 	@RequestMapping("/newAuthor")

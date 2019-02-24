@@ -45,7 +45,16 @@ public class BooksController {
 	@RequestMapping("/saveBook")
 	public String saveBook(Model model, Book book) {
 		repository.save(book);
-		return "BookCreated";
+		model.addAttribute("text","Book Created");
+		return "Message";
+	}
+	
+	@RequestMapping("book/{{id}}/updateBook")
+	public String updateBook(Model model, @PathVariable long id, Book book) {
+		repository.deleteById(id);
+		repository.save(book);		
+		model.addAttribute("text","Book Edit correctly");
+		return "Message";
 	}
 	
 	@ModelAttribute

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.santatecla.G1.author.Author;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.user.UserComponent;
@@ -50,7 +51,15 @@ public class ThemeController {
 	
 	@RequestMapping("/newTheme")
 	public String newTheme(Model model) {
-		return "themePageEdit";
+		return "themeFormEdit";
+	}
+	
+	@RequestMapping("/saveTheme")
+	public String author(Model model, Theme theme) {
+		repository.save(theme);
+		System.out.println(theme.toString());
+		model.addAttribute("text","Theme Created");
+		return "Message";
 	}
 	
 	public Collection<Theme> themes(){

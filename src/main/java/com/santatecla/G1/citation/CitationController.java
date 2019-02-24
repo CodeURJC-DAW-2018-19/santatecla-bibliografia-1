@@ -26,6 +26,7 @@ public class CitationController {
 	@RequestMapping("/saveCitation")
 	public String saveBook(Model model, Citation citation) {
 		repository.save(citation);
-		return "CitationCreated";
+		model.addAttribute("text","Citation Created");
+		return "Message";
 	}
 }
