@@ -19,36 +19,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception{
 		
 		
+		
 		//Public pages
 		http.authorizeRequests().antMatchers("/index").permitAll();
-		http.authorizeRequests().antMatchers("/author").permitAll();
-		http.authorizeRequests().antMatchers("/newAuthor").permitAll();
-		http.authorizeRequests().antMatchers("/author/{id}").permitAll();
-		http.authorizeRequests().antMatchers("/book").permitAll();
-		http.authorizeRequests().antMatchers("/newBook").permitAll();
-		http.authorizeRequests().antMatchers("/book/{id}").permitAll();
-		http.authorizeRequests().antMatchers("/theme").permitAll();
-		http.authorizeRequests().antMatchers("/newTheme").permitAll();
-		http.authorizeRequests().antMatchers("/theme/{id}").permitAll();
+		//http.authorizeRequests().antMatchers("/author").permitAll();
+		//http.authorizeRequests().antMatchers("/newAuthor").permitAll();
+		//http.authorizeRequests().antMatchers("/author/{id}").permitAll();
+		//http.authorizeRequests().antMatchers("/book").permitAll();
+		//http.authorizeRequests().antMatchers("/newBook").permitAll();
+		//http.authorizeRequests().antMatchers("/book/{id}").permitAll();
+		//http.authorizeRequests().antMatchers("/theme").permitAll();
+		//http.authorizeRequests().antMatchers("/newTheme").permitAll();
+		//http.authorizeRequests().antMatchers("/theme/{id}").permitAll();
 		http.authorizeRequests().antMatchers("/login").permitAll();
-		http.authorizeRequests().antMatchers("/loginmodal").permitAll();
+		//http.authorizeRequests().antMatchers("/loginmodal").permitAll();
 		http.authorizeRequests().antMatchers("/loginerror").permitAll();
 		http.authorizeRequests().antMatchers("/logout").permitAll();
 		http.authorizeRequests().antMatchers("/image/{id}").permitAll();
-		
+
+
 		
 		//Private pages 
 		http.authorizeRequests().anyRequest().authenticated();
-		
+		//http.authorizeRequests().antMatchers("/author/{id}").authenticated();
 		//Login form
-		//http.formLogin().loginPage("/login");
 		http.formLogin().defaultSuccessUrl("/index");
 		http.formLogin().usernameParameter("username");
 		http.formLogin().passwordParameter("password");
 		http.formLogin().failureUrl("/loginerror");
 		
 		//Logout
-		http.logout().logoutSuccessUrl("/");
+		http.logout().logoutUrl("/logout");
+		http.logout().logoutSuccessUrl("/index");
 		
 		//CSRF
 		http.csrf().disable();
