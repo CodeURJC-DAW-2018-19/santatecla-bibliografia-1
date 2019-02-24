@@ -7,10 +7,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.santatecla.G1.author.Author;
+import com.santatecla.G1.citation.Citation;
+import com.santatecla.G1.theme.Theme;
 import com.santatecla.G1.user.UserComponent;
 
 @Controller
@@ -21,6 +24,8 @@ public class BooksController {
 	
 	@Autowired
 	private BookService repository;
+	@Autowired
+	private BookRepository bookRepository;
 	
 	public Collection<Book> books(){
 		return repository.findAll();
@@ -28,10 +33,17 @@ public class BooksController {
 	
 	@RequestMapping("/book/{id}")
 	public String Book(Model model, @PathVariable long id) {
-		Optional<Book> book = repository.findOne(id);
+		Book book = bookRepository.findById(id);
 		System.out.println(book.toString());
+		List <Citation> citations = book.getCitations();
+		Author author = book.getAuthor();
+		System.out.println(author.getName());
+		Theme theme = book.getTheme();
 		if (book!=null) {
-			model.addAttribute("book", book.get());
+			model.addAttribute("book", book);
+			model.addAttribute("authors", author);
+			model.addAttribute("themes", theme);
+			model.addAttribute("citations",citations);
 		}
 		return "booksPage";
 	}
@@ -57,13 +69,23 @@ public class BooksController {
 		model.addAttribute("text","Book Edit correctly");
 		return "Message";
 	}
+	@RequestMapping("/book/{id}/deleteBook")
+	public String deleteAuthor(Model model, @PathVariable long id) {
+		Book book = bookRepository.findById(id);
+		if (book!=null) {
+			model.addAttribute("book", book);
+			model.addAttribute("text","Libro eliminado de forma correcta");
+		}
+		repository.deleteById(id);
+		return "Message";
+	}
 	
 	@ModelAttribute
 	public void addUserToModel(Model model) {
 		boolean logged = userComponent.getLoggedUser() != null;
 		if(logged) {
 			model.addAttribute("admin", userComponent.getLoggedUser().getRoles().contains("ROLE_ADMIN"));
-			//model.addAttribute("userName",userComponent.getLoggedUser().getName());
+			model.addAttribute("userName",userComponent.getLoggedUser().getName());
 		}
 	}
 	

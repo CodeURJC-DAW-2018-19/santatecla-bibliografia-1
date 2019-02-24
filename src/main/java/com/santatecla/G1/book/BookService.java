@@ -12,10 +12,10 @@ public class BookService {
 	@Autowired
 	private BookRepository repository;
 
-	public Optional<Book> findOne(long id) {
+	public Book findOne(long id) {
 		return repository.findById(id);
 	}
-
+	
 	public List<Book> findAll() {
 		return repository.findAll();
 	}
@@ -24,7 +24,7 @@ public class BookService {
 		repository.save(book);
 	}
 
-	public void delete(long id) {
+	public void deleteById(long id) {
 		repository.deleteById(id);
 	}
 }
