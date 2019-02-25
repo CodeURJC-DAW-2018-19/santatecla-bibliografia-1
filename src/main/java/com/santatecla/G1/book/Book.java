@@ -67,6 +67,15 @@ public class Book {
 		this.imgId = imgId;
 	}
 
+	public void update(Book newBook) {
+		this.title=newBook.title;
+		this.nameEdit=newBook.nameEdit;
+		this.publishDate=newBook.publishDate;
+		this.urlEdit=newBook.urlEdit;
+		this.urlImgCoverPage=newBook.urlImgCoverPage;
+		this.urlImgEdit=newBook.urlImgEdit;
+	}
+	
 	public long getId() {
 		return id;
 	}

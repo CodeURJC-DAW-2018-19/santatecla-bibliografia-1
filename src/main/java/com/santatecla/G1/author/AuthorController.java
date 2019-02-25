@@ -109,10 +109,10 @@ public class AuthorController {
 	}
 	
 	@RequestMapping("/author/{id}/updateAuthor")
-	public String updateAuthor(Model model, Author author, @PathVariable long id) {
-		
-		author.setId(id);
-		repository.save(author);
+	public String updateAuthor(Model model, Author newAuthor, @PathVariable long id) {
+		Author oldAuthor = repository.findById(id);
+		oldAuthor.update(newAuthor);
+		repository.save(oldAuthor);
 		model.addAttribute("text","Autor editado de forma correcta");
 		return "Message";
 	}	

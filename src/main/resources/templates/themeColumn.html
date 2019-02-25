@@ -8,28 +8,35 @@
         </div>
         <div class="card-body">
             <div class="daw-miniatures">
-                
-                {{#themes}} 
-                <a href="/theme/{{id}}">
-                <div class="row">
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/theme.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">{{name}}</h4>
+
+                {{#themes}}
+                    <a href="/theme/{{id}}">
+                        <div class="row">
+                            <div class="card bg-dark text-white col">
+                                <img class="card-img" src="/img/theme.png" alt="Card image">
+                                <div class="card-img-overlay">
+                                    <h4 class="card-title">{{name}}</h4>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                </a>
+                    </a>
                 {{/themes}}
 
             </div>
             <div class="daw-buttons d-flex justify-content-between">
-            {{#admin}}
-            	<a href="/newTheme">
-                	<button class="btn btn-primary">Añadir</button>
-                </a>
-            {{/admin}}
-                <button class="btn btn-primary">Buscar</button>
+                {{#admin}}
+                    <a href="/newTheme">
+                        <button class="btn btn-primary">Añadir</button>
+                    </a>
+                {{/admin}}
+                <form action="/findByTheme" method="get">
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control text-truncate" placeholder="Nombre Tema" name="name">
+                    </div>
+                    <div class="col-sm-0">
+                        <button class="btn btn-primary">Buscar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

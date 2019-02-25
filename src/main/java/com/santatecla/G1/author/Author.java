@@ -98,6 +98,15 @@ public class Author {
 		this.books = new ArrayList<>();
 
 	}
+	
+	public void update(Author oldAuthor) {
+		this.name=oldAuthor.name;
+		this.birthDate=oldAuthor.birthDate;
+		this.deathDate=oldAuthor.deathDate;
+		this.bornPlace=oldAuthor.bornPlace;
+		this.urlImage=oldAuthor.urlImage;
+		this.urlMap=oldAuthor.urlMap;
+	}
 
 	public long getId() {
 		return id;
