@@ -1,9 +1,7 @@
 package com.santatecla.G1.author;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,14 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookRepository;
 import com.santatecla.G1.citation.Citation;
-import com.santatecla.G1.citation.CitationRepository;
 import com.santatecla.G1.theme.Theme;
 import com.santatecla.G1.user.UserComponent;
 
@@ -32,8 +28,7 @@ public class AuthorController {
 	private AuthorRepository repository;
 	@Autowired
 	private BookRepository booksRepository;
-	@Autowired
-	private CitationRepository citationRepository;
+
 	
 	@Autowired
 	private UserComponent userComponent;

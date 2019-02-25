@@ -30,7 +30,6 @@ public class User {
 	public User() {}
 
 	public User( String name, String password, String... roles) {
-		this.id = id;
 		this.name = name;
 		this.passwordHash = new BCryptPasswordEncoder().encode(password);
 		this.roles = new ArrayList<>(Arrays.asList(roles));

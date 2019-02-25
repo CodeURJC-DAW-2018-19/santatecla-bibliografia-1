@@ -1,13 +1,9 @@
 package com.santatecla.G1;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.List;
-
 import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 

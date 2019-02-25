@@ -7,10 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.santatecla.G1.book.Book;
-import com.santatecla.G1.book.BookRepository;
-import com.santatecla.G1.theme.Theme;
 import com.santatecla.G1.user.UserComponent;
 
 @Controller
@@ -18,8 +14,6 @@ public class CitationController {
 	
 	@Autowired
 	private CitationRepository repository;
-	@Autowired
-	private BookRepository bookRepository;
 	@Autowired
 	private UserComponent userComponent;
 		

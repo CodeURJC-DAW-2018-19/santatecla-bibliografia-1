@@ -2,22 +2,17 @@ package com.santatecla.G1.author;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
-import com.santatecla.G1.citation.Citation;
-import com.santatecla.G1.theme.Theme;
+
 
 @Entity
 public class Author {

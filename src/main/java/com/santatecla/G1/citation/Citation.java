@@ -1,8 +1,6 @@
 package com.santatecla.G1.citation;
 
 
-import java.util.Collection;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,11 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
-import com.santatecla.G1.book.BookRepository;
 import com.santatecla.G1.theme.Theme;
 
 
