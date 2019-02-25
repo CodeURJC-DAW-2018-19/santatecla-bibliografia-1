@@ -72,13 +72,14 @@ public class BooksController {
 	}
 	
 	@RequestMapping("book/{id}/updateBook")
-	public String updateBook(Model model, Book book, @PathVariable long id) {
-		
-		book.setId(id);
-		repository.save(book);		
+	public String updateBook(Model model,Book newBook , @PathVariable long id) {
+		Book oldBook = repository.findOne(id);
+		oldBook.update(newBook);
+		repository.save(oldBook);		
 		model.addAttribute("text","Libro actualizado correctamente");
 		return "Message";
 	}
+	
 	@RequestMapping("/book/{id}/deleteBook")
 	public String deleteAuthor(Model model, @PathVariable long id) {
 		Book book = bookRepository.findById(id);
