@@ -3,9 +3,14 @@ package com.santatecla.G1.author;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.santatecla.G1.book.Book;
 
 public interface AuthorRepository extends JpaRepository<Author,Long>{
 
-	List<Author> findByName(String name);
+	Author findByName(String name);
+	Author findById(long id);
+
 	
 }

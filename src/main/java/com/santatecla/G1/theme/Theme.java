@@ -1,15 +1,15 @@
 package com.santatecla.G1.theme;
 
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
 
 @Entity
@@ -26,8 +26,8 @@ public class Theme {
 	
 	//To avoid cicles on DB model
 	
-	@OneToMany(mappedBy="theme")
-	private Collection<Book> books;
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Book> books;
 	
 	
 	/********************************************
@@ -38,7 +38,15 @@ public class Theme {
 	
 	public Theme(String name) {
 		this.setName(name);
-		//this.books = null;
+		this.books = new ArrayList<Book>();
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -47,6 +55,13 @@ public class Theme {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void addBook(Book book) {
+		this.books.add(book);
+	}
+	public List<Book> getBook(){
+		return this.books;
 	}
 	
 	@Override

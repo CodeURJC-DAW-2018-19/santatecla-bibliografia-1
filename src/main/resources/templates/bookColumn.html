@@ -10,40 +10,34 @@
             <div class="daw-search-bar">
             </div>
             <div class="daw-miniatures">
-                <div class="row">
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/books.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">El Quijote</h4>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/books.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">La Celestina</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="card bg-dark text-white col">
-
-                        <img class="card-img" src="/img/books.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Alguién voló sobre el nido del cuco</h4>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/books.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">La Regenta</h4>
-                        </div>
-                    </div>
-                </div>
+				{{#books}}
+				<a href="/book/{{id}}">
+	                <div class="row">
+	                    <div class="card bg-dark text-white col">
+	                        <img class="card-img" src="/image/{{imgId}}" alt="Card image">
+	                        <div class="card-img-overlay">
+	                            <h4 class="card-title">{{title}}</h4>
+	                        </div>
+	                    </div>
+	                </div>
+	            </a>
+                {{/books}}
 
             </div>
-            <div class="daw-buttons d-flex justify-content-between">
-                <button class="btn btn-primary">Añadir</button>
-                <button class="btn btn-primary">Buscar</button>
+            <div class="daw-buttons d-flex justify-content-between ">
+            	{{#admin}}
+            	<a href="/newBook">
+                	<button class="btn btn-primary">Añadir</button>
+                </a>
+                {{/admin}}
+                <form action="/findByBook" method="get">
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control text-truncate" placeholder="Titulo" name="title">
+                        </div>
+                        <div class="col-sm-0">
+                        <button class="btn btn-primary">Buscar</button>
+                    	</div>
+                </form>
             </div>
         </div>
     </div>

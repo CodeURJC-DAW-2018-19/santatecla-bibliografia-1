@@ -25,12 +25,12 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String title;
-	private SimpleDateFormat publishDate;
+	private String publishDate;
 	private String nameEdit;
 	private String urlEdit;
 	private String urlImgCoverPage;
 	private String urlImgEdit;
-	
+	private int imgId;
 	
 	/********************************************
 	 * RELATIONS WITH OTHER CLASES TO DDBB MODEL
@@ -44,7 +44,7 @@ public class Book {
 	public List<Citation> citation;
 	
 
-	@OneToOne
+	@OneToOne()
 	private Author author;
 	
 	/********************************************
@@ -54,13 +54,28 @@ public class Book {
 	//Constructor to Spring
 	public Book() {}
 
-	public Book(String name, String nameEdit) {
+	public Book(String name, int imgId) {
 		super();
 		this.title = name;
-		this.nameEdit = nameEdit;
+		this.nameEdit = "";
 		this.citation = new ArrayList<Citation>();
+		this.urlImgCoverPage="";
+		this.urlEdit="";
+		this.urlImgEdit="";
+		this.theme = null;
+		this.publishDate="";
+		this.imgId = imgId;
 	}
 
+	public void update(Book newBook) {
+		this.title=newBook.title;
+		this.nameEdit=newBook.nameEdit;
+		this.publishDate=newBook.publishDate;
+		this.urlEdit=newBook.urlEdit;
+		this.urlImgCoverPage=newBook.urlImgCoverPage;
+		this.urlImgEdit=newBook.urlImgEdit;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -93,11 +108,11 @@ public class Book {
 		this.title = title;
 	}
 
-	public SimpleDateFormat getPublishDate() {
+	public String getPublishDate() {
 		return publishDate;
 	}
 
-	public void setPublishDate(SimpleDateFormat publishDate) {
+	public void setPublishDate(String publishDate) {
 		this.publishDate = publishDate;
 	}
 
@@ -122,8 +137,8 @@ public class Book {
 		return (List<Citation>) this.citation;
 	}
 
-	public void addCitations(Citation citations) {
-		this.citation.add(citations);
+	public void addCitations(Citation citation) {
+		this.citation.add(citation);
 	}
 
 	public Theme getTheme() {
@@ -132,6 +147,20 @@ public class Book {
 
 	public void setTheme(Theme theme) {
 		this.theme = theme;
+	}
+	public void setImgId(int imgId) {
+		this.imgId = imgId;
+	}
+	public int getImgId() {
+		return imgId;
+	}
+
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 
 	@Override

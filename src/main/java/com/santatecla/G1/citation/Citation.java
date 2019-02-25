@@ -10,12 +10,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
+import com.santatecla.G1.book.BookRepository;
+import com.santatecla.G1.theme.Theme;
 
 
 @Entity
 public class Citation {
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -28,9 +34,13 @@ public class Citation {
 	
 	//To avoid cicles on DB model
 	
-	/*@OneToOne(mappedBy="citation")
-	private Book book;*/
+	@OneToOne()
+	private Book book;
+	@OneToOne
+	private Theme theme;
 	
+	
+
 	/********************************************
 	 * METHODS OF THE CLASS
 	 ********************************************/
@@ -38,16 +48,20 @@ public class Citation {
 	//Constructor to Spring
 	public Citation() {}
 	
+
 	public Citation(String text , Book book) {
 		super();
 		this.text = text;
-		//this.book = book;
+		this.book = book;
+		this.theme = book.getTheme();
 	}
+	
 	public Citation(String text) {
 		super();
 		this.text = text;
 		//this.book = null;
 	}
+
 	public long getId() {
 		return id;
 	}
@@ -61,13 +75,22 @@ public class Citation {
 		this.text = text;
 	}
 	
-	/*public Book getBook() {
+	public Book getBook() {
 		return book;
 	}
 	public void setBook(Book book) {
 		this.book = book;
-	}*/
+	}
 	
+
+	public Theme getTheme() {
+		return theme;
+	}
+
+	public void setTheme(Theme theme) {
+		this.theme = theme;
+	}
+
 	@Override
 	public String toString() {
 		return "Cita: "+this.text;

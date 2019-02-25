@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
@@ -23,17 +25,20 @@ public class Author {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String name;
+	
 	private String urlImage;
-	private Date bornDate;
-	private Date deathDate;
+	private String birthDate;
+	private String deathDate;
 	private String bornPlace;
+	@Column(length=500)
 	private String urlMap;
+	private int imgId;
 	
 	/********************************************
 	* RELATIONS WITH OTHER CLASES TO DDBB MODEL
 	********************************************/
 	
-	@OneToMany(mappedBy="author",cascade=CascadeType.ALL)
+	@OneToMany
 	private List<Book> books;
 	
 	/********************************************
@@ -44,12 +49,63 @@ public class Author {
 	public Author() {}
 
 	//The type of the dates is Date, when we operate with date, to show we will use SimpleFormatDate
-	public Author(String name, Date bornDate, Date deathDate) {
+	public Author(String name, String bornDate, String deathDate, int imgId) {
 		super();
 		this.name = name;
-		this.bornDate = bornDate;
+		this.urlImage= "";
+		this.urlMap="";
+		this.bornPlace="";
+		this.birthDate = bornDate;
 		this.deathDate = deathDate;
 		this.books = new ArrayList<>();
+		this.imgId = imgId;
+	}
+	public Author(String name, String bornDate, int imgId) {
+		super();
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		this.name = name;
+		this.urlImage= "";
+		this.urlMap="";
+		this.bornPlace="";
+		this.birthDate = bornDate;
+		this.deathDate = "";
+		this.books = new ArrayList<>();
+		this.imgId = imgId;
+	}
+	public Author(String name, String bornDate) {
+		super();
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		this.name = name;
+		this.urlImage= "";
+		this.urlMap="";
+		this.bornPlace="";
+		this.birthDate = bornDate;
+		this.deathDate = "";
+		this.books = new ArrayList<>();
+		this.imgId = imgId;
+	}
+
+	public Author(String name, String urlImage, String bornDate, String deathDate, String bornPlace,
+			String urlMap, int imgId) {
+		super();
+		this.name = name;
+		this.urlImage = urlImage;
+		this.birthDate = bornDate;
+		this.deathDate = deathDate;
+		this.bornPlace = bornPlace;
+		this.urlMap = urlMap;
+		this.imgId = imgId;
+		this.books = new ArrayList<>();
+
+	}
+	
+	public void update(Author oldAuthor) {
+		this.name=oldAuthor.name;
+		this.birthDate=oldAuthor.birthDate;
+		this.deathDate=oldAuthor.deathDate;
+		this.bornPlace=oldAuthor.bornPlace;
+		this.urlImage=oldAuthor.urlImage;
+		this.urlMap=oldAuthor.urlMap;
 	}
 
 	public long getId() {
@@ -89,19 +145,19 @@ public class Author {
 		return urlMap;
 	}
 
-	public Date getBornDate() {
-		return bornDate;
+	public String getBornDate() {
+		return birthDate;
 	}
 
-	public void setBornDate(Date bornDate) {
-		this.bornDate = bornDate;
+	public String getBirthDate() {
+		return birthDate;
 	}
 
-	public Date getDeathDate() {
-		return deathDate;
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
 	}
 
-	public void setDeathDate(Date deathDate) {
+	public void setDeathDate(String deathDate) {
 		this.deathDate = deathDate;
 	}
 
@@ -115,10 +171,15 @@ public class Author {
 	public List<Book> getBooks(){
 		return this.books;
 	}
-	
+	public int getImgId() {
+		return imgId;
+	}
+	public void setImgId(int imgId) {
+		this.imgId = imgId;
+	}
 	@Override
 	public String toString() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		return "Nombe: "+name + "; Fecha de nacimiento: " + formatter.format(bornDate) + "; Fecha de defunción: "+formatter.format(deathDate);
+		return "Nombe: "+name + "; Fecha de nacimiento: " +birthDate + "; Fecha de defunción: "+ deathDate;
 	}
 }

@@ -7,11 +7,12 @@
     <div class="container daw-navbar">
         <!-- Brand -->
         <div class="navbar-header">
-            <a class="navbar-brand nav-item active" href="loginmodal.html">INICIO</a>
+            <a class="navbar-brand nav-item active" href="/">INICIO</a>
         </div>
-
-        <button type="button" class="btn btn-round" data-toggle="modal" data-target="#logoutModal">Logout</button>
-
+        <a type="button" class="btn btn-round" href="/logout" method="post" >Logout</a>
+		<!--<form type="button" class="btn btn-round" action="/logout" method="post" >
+			<input type="submit" value="Sign Out" />
+		</form>-->
     </div>
 </nav>
 <!-- END topNavBar -->
