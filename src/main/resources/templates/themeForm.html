@@ -2,12 +2,11 @@
 	<div class="col">
 		<div class="card card-custom ">
 			{{#theme}}
-			<div class="card-body table-responsive grid-container">
-				<div class="title-and-references ">
+			<div class="card-body table-responsive grid-container" >
+				<div class="title-and-references" id="source-html">
 					<div class="title-theme">
-						<form class="form-horizontal col-sm-8"
+						<form class="form-horizontal col-sm-8 hole-container"
 							action="/theme/{{id}}/updateTheme" method="post">
-						
 							{{#admin}} <input type="text" class="form-control text-truncate"
 								name="name" value="{{name}}"> {{/admin}} {{^admin}}
 							<h4>{{name}}</h4>
@@ -57,22 +56,17 @@
 						</form>
 					</div>
 					{{/citations}}
-
 				</div>
 				<div class="html-generator " id="right-box">
 					<div id="html-box">
-						<p id="text-html">Lorem ipsum dolor sit amet consectetur
-							adipiscing, elit porta vehicula quis nullam fames cras, felis
-							erat lacinia id commodo. Per ut himenaeos ante dictumst fringilla
-							montes tristique, viverra cras non nibh integer leo, eget
-							torquent natoque tellus semper phasellus. Habitasse magnis nulla
-							netus risus fermentum orci cras, viverra suspendisse at praesent
-							ac convallis, dapibus cubilia luctus quis vehicula scelerisque.
-						<p>
+						<span id="salida"></span>
+						<script type="text/javascript">	
+								var MyDiv1 = document.getElementById("source-html");
+								$("#salida").text(MyDiv1.innerHTML);								
+						</script>
 					</div>
 				</div>
 			</div>
-			</form>
 			{{/theme}}
 		</div>
 		<form class="form-horizontal col-sm-8"
@@ -82,5 +76,6 @@
 				tema</button>
 			{{/admin}}
 		</form>
+		
 	</div>
 </div>
