@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.santatecla.G1.book.Book;
+import com.santatecla.G1.book.BookRepository;
 import com.santatecla.G1.user.UserComponent;
 
 @Controller
@@ -14,6 +17,8 @@ public class CitationController {
 	
 	@Autowired
 	private CitationRepository repository;
+	@Autowired
+	private BookRepository bookRepository;
 	@Autowired
 	private UserComponent userComponent;
 		
@@ -27,10 +32,10 @@ public class CitationController {
 	
 	@RequestMapping("/saveCitation")
 	public String saveCitation(Model model, Citation citation) {
-		//System.out.println("Entro a guardar la cita con el texto "+ text +" del libro "+bookTitle);
-		//Book book = bookRepository.findByTitle(bookTitle);
-		//Citation citation = new Citation(text, book);
-		repository.save(citation);
+		Book book = bookRepository.findByTitle(citation.getTextAux());
+		Citation quote = new Citation(citation.getText(),book); 
+		book.addCitations(quote);
+		repository.save(quote);
 		model.addAttribute("text","Citation Created");
 		return "Message";
 	}
