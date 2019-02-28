@@ -102,7 +102,7 @@
                                                     <label for="colFormLabel1" class="col-md-3 col-form-label">Título
                                                         obra</label>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control" id="colFormLabel1"
+                                                        <input type="text" class="form-control" id="colFormLabel1" name="title" value="{{book.title}}"
                                                                placeholder="Título de la obra">
                                                     </div>
 
@@ -110,7 +110,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-md-3 col-form-label">URL portada</label>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control" id="URLPortada"
+                                                        <input type="text" class="form-control" id="URLPortada" name="urlBook" value="{{book.urlBook}}"
                                                                placeholder="URL de la portada">
                                                     </div>
                                                 </div>
@@ -124,7 +124,7 @@
                                                     <label for="colFormLabel2"
                                                            class="col-md-3 col-form-label">Editorial</label>
                                                     <div class="col-md-6">
-                                                        <input type="name" class="form-control" id="colFormLabel2"
+                                                        <input type="text" class="form-control" id="colFormLabel2" name="nameEdit" value="{{book.nameEdit}}"
                                                                placeholder="Nombre de la editorial">
                                                     </div>
 
@@ -132,7 +132,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-md-3 col-form-label">URL editorial</label>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control" id="URLEditorial"
+                                                        <input type="text" class="form-control" id="URLEditorial" name="urlEdit" value="{{book.urlEdit}}"
                                                                placeholder="URL de la editorial">
                                                     </div>
                                                 </div>
@@ -140,12 +140,12 @@
                                             <div class="col">
                                                 <div class="col-md">
                                                     <img id="imagen portada" alt="Imagen portada"
-                                                         src="../assets/img/books.png" style="width: 140px">
+                                                         src="{{book.urlImgCoverPage}}" style="width: 140px">
                                                     <label for="imagen portada">Imagen portada</label>
                                                 </div>
                                                 <div class="col-md">
                                                     <img id="imagen editorial" alt="Imagen portada"
-                                                         src="../assets/img/books.png" style="width: 140px">
+                                                         src="{{book.urlImgEdit}}" style="width: 140px">
                                                     <label for="imagen editorial">Imagen editorial</label>
                                                 </div>
                                             </div>
