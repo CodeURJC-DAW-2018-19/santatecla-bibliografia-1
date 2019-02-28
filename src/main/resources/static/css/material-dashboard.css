@@ -19838,14 +19838,17 @@ Copyright (c) 2015 Daniel Eden
   height:600px;
 }
 
-
+.title-container{
+	padding-left:35%
+}
+	
 .title-theme{
   border: 1px solid darkgray ;
   border-radius: 10px;
   text-align: center;
   padding: 5px;
   margin: 0px 15px 20px 15px;
-  background: linear-gradient(80deg, #7cfba7, #b0fcff)!important;
+  background: linear-gradient(80deg, #9c27b0, #9c27b0)!important;
 }
 
 .html-generator{
@@ -19895,9 +19898,11 @@ Copyright (c) 2015 Daniel Eden
   padding: 2%;
 }
 
-
+.hole-container{
+	padding-left:35%;
+}
 .card-header-warning{
-  background: linear-gradient(80deg, #3cecfb, #3e70ff)!important;
+  background: linear-gradient(80deg, #d582e3, #e2acec)!important;
   padding: 15px;
 }
 
