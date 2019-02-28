@@ -22,6 +22,7 @@ public class Citation {
 	private long id;
 	@Column(length=1000)
 	private String text;
+	private String textAux;
 	
 	/********************************************
 	 * RELATIONS WITH OTHER CLASES TO DDBB MODEL
@@ -51,10 +52,10 @@ public class Citation {
 		this.theme = book.getTheme();
 	}
 	
-	public Citation(String text) {
+	public Citation(String text, String book) {
 		super();
 		this.text = text;
-		//this.book = null;
+		this.textAux = book;
 	}
 
 	public long getId() {
@@ -85,6 +86,17 @@ public class Citation {
 	public void setTheme(Theme theme) {
 		this.theme = theme;
 	}
+
+	
+	public String getTextAux() {
+		return textAux;
+	}
+
+
+	public void setTextAux(String textAux) {
+		this.textAux = textAux;
+	}
+
 
 	@Override
 	public String toString() {
