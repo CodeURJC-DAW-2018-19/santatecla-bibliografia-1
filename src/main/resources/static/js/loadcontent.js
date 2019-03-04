@@ -10,7 +10,7 @@ function loadMoreThemes() {
     $.ajax({
         url: urlPage
     }).done(function (data) {
-        $("#moreTheme").append(data);
+        $("#moreThemes").append(data);
         themePage++;
         
         if (indexTheme == themePage){
