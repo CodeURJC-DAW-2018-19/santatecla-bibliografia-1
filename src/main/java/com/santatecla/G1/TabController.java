@@ -13,7 +13,7 @@ public class TabController {
 	@Autowired
 	private UserComponent userComponent;
 
-	private void userTabs(Model model, String url, String name, boolean active) {
+	public void userTabs(Model model, String url, String name, boolean active) {
 		Tabs tab = new Tabs(url, name, active);
 
 		if (!sameTab(tab)) {

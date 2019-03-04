@@ -63,7 +63,9 @@ public class AuthorController {
 			model.addAttribute("themes",themes);
 			model.addAttribute("citations",citations);
 		}
-	
+		
+		System.out.println("Add tab");
+		tabs.userTabs(model, "/author/"+ id, author.getName(), true);
 		return "authorPage";
 	}
 	

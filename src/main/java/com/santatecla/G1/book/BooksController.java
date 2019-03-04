@@ -49,6 +49,8 @@ public class BooksController {
 			model.addAttribute("themes", theme);
 			model.addAttribute("citations",citations);
 		}
+		System.out.println("Add tab");
+		tabs.userTabs(model, "/book/"+ id, book.getTitle(), true);
 		return "booksPage";
 	}
 	

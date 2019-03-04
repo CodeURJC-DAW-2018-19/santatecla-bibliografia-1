@@ -40,6 +40,10 @@ public class User {
 	}
 	
 	public void addTab(Tabs tab) {
+		
+		for (int i=0; i<tabs.size(); i++) {
+			System.out.println("TABS ANTERIORES " + tabs.get(i).getName());
+		}
 		this.tabs.add(tab);
 	}
 

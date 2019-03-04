@@ -57,7 +57,7 @@ public class ThemeController {
 			model.addAttribute("citations",citation);
 		}
 		
-		
+		tabs.userTabs(model, "/theme/"+ id, theme.getName(), true);
 		return "themePage";
 	}
 	
