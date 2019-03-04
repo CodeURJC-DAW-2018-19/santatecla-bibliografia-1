@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="daw-miniatures">
+            <div class="daw-miniatures" id="moreThemes">
 
                 {{#themes}}
                     <a href="/theme/{{id}}">
@@ -21,6 +21,8 @@
                         </div>
                     </a>
                 {{/themes}}
+                
+                <button type="button" class="btn btn-primary" id="buttonMoreThemes" onClick="loadMoreThemes()">Mas</button>
 
             </div>
             <div class="daw-buttons d-flex justify-content-between">

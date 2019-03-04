@@ -9,7 +9,7 @@
         <div class="card-body">
             <div class="daw-search-bar">
             </div>
-            <div class="daw-miniatures">
+            <div class="daw-miniatures" id="moreWorks">
 				{{#books}}
 				<a href="/book/{{id}}">
 	                <div class="row">
@@ -22,6 +22,8 @@
 	                </div>
 	            </a>
                 {{/books}}
+                
+                <button type="button" class="btn btn-primary" id="buttonMoreWorks" onClick="loadMoreWorks()">Mas</button>
 
             </div>
             <div class="daw-buttons d-flex justify-content-between ">
