@@ -1,13 +1,17 @@
 package com.santatecla.G1.author;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +23,7 @@ import com.santatecla.G1.book.BookRepository;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
 import com.santatecla.G1.user.UserComponent;
+
 
 
 @Controller
@@ -70,6 +75,17 @@ public class AuthorController {
 		if(logged) {
 			model.addAttribute("admin", userComponent.getLoggedUser().getRoles().contains("ROLE_ADMIN"));
 		}
+	}
+	
+	@GetMapping("/table-author")
+	public String showMoreAuthor(Model model, Pageable page) {
+		Page<Author> author = repository.findAll(page);
+
+		model.addAttribute("author", author);
+		model.addAttribute("nAuthor", page.getPageNumber());
+		model.addAttribute("indexAuthors", author.getTotalPages());
+
+		return "pageableAutor";
 	}
 	
 	

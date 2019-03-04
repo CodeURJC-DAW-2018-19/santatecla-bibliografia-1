@@ -1,12 +1,15 @@
 package com.santatecla.G1.book;
 
 import java.util.Collection;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import com.santatecla.G1.author.Author;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
 import com.santatecla.G1.user.UserComponent;
+
 
 @Controller
 public class BooksController {
@@ -53,6 +57,17 @@ public class BooksController {
 	public String newBook(Model model) {
 		
 		return "booksPageEdit";
+	}
+	
+	@GetMapping("/table-works")
+	public String showMoreWorks(Model model, Pageable page) {
+		Page<Book> works = bookRepository.findAll(page);
+
+		model.addAttribute("works", works);
+		model.addAttribute("nWorks", page.getPageNumber());
+		model.addAttribute("indexWorks", works.getTotalPages());
+
+		return "pageableObra";
 	}
 	
 	@RequestMapping("/saveBook")
