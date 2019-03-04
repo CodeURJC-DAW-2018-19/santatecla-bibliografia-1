@@ -1,12 +1,13 @@
 package com.santatecla.G1;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import com.santatecla.G1.user.Tabs;
 import com.santatecla.G1.user.UserComponent;
 
-
+@Controller
 public class TabController {
 	
 	@Autowired

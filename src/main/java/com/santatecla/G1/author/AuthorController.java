@@ -63,6 +63,7 @@ public class AuthorController {
 			model.addAttribute("themes",themes);
 			model.addAttribute("citations",citations);
 		}
+	
 		return "authorPage";
 	}
 	
