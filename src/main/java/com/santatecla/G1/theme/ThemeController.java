@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.santatecla.G1.TabController;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.citation.Citation;
@@ -26,6 +27,8 @@ public class ThemeController {
 	private ThemeRepository repository;
 	@Autowired
 	private UserComponent userComponent;
+	@Autowired
+	private TabController tabs;
 
 	@Autowired
 	private BookRepository bookRepository;
@@ -53,6 +56,8 @@ public class ThemeController {
 			model.addAttribute("theme", theme);
 			model.addAttribute("citations",citation);
 		}
+		
+		
 		return "themePage";
 	}
 	

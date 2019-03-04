@@ -30,6 +30,8 @@ public class IndexController {
 	private UserComponent userComponent;
 	@Autowired
 	private ImageManagerController imageController;
+	@Autowired
+	private TabController tabs;
 	
 	
 	

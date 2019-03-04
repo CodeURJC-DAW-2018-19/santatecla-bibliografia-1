@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.santatecla.G1.TabController;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
@@ -28,6 +29,8 @@ public class BooksController {
 	private BookService repository;
 	@Autowired
 	private BookRepository bookRepository;
+	@Autowired
+	private TabController tabs;
 	
 	public Collection<Book> books(){
 		return repository.findAll();

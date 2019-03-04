@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.santatecla.G1.TabController;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookRepository;
 import com.santatecla.G1.citation.Citation;
@@ -28,6 +29,8 @@ public class AuthorController {
 	private AuthorRepository repository;
 	@Autowired
 	private BookRepository booksRepository;
+	@Autowired
+	private TabController tabs;
 
 	
 	@Autowired
