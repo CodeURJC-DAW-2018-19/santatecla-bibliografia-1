@@ -63,11 +63,11 @@ public class BooksController {
 	public String showMoreWorks(Model model, Pageable page) {
 		Page<Book> works = bookRepository.findAll(page);
 
-		model.addAttribute("works", works);
+		model.addAttribute("books", works);
 		model.addAttribute("nWorks", page.getPageNumber());
 		model.addAttribute("indexWorks", works.getTotalPages());
 
-		return "pageableObra";
+		return "pageableBook";
 	}
 	
 	@RequestMapping("/saveBook")

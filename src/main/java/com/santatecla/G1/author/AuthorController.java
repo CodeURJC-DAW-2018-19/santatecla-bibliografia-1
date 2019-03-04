@@ -81,11 +81,11 @@ public class AuthorController {
 	public String showMoreAuthor(Model model, Pageable page) {
 		Page<Author> author = repository.findAll(page);
 
-		model.addAttribute("author", author);
+		model.addAttribute("authors", author);
 		model.addAttribute("nAuthor", page.getPageNumber());
 		model.addAttribute("indexAuthors", author.getTotalPages());
 
-		return "pageableAutor";
+		return "pageableAuthor";
 	}
 	
 	

@@ -65,11 +65,11 @@ public class ThemeController {
 	public String showMoreTheme(Model model, Pageable page) {
 		Page<Theme> themes = repository.findAll(page);
 
-		model.addAttribute("temas", themes);
+		model.addAttribute("themes", themes);
 		model.addAttribute("nTheme", page.getPageNumber());
 		model.addAttribute("indexTheme", themes.getTotalPages());
 
-		return "pageableTema";
+		return "pageableTheme";
 	}
 	
 	@RequestMapping("/newTheme")
