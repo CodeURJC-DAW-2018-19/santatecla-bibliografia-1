@@ -11,7 +11,7 @@
         <div class="card-body ">
             <div class="daw-search-bar">
             </div>
-            <div class="daw-miniatures cajas-bot">
+            <div class="daw-miniatures cajas-bot"  id="moreAuthor">
                 {{#authors}}
                     <a href="/author/{{id}}">
                         <div class="row">
@@ -23,18 +23,20 @@
                             </div>
                         </div>
                     </a>
+                    
+                
                 {{/authors}}
+                <button type="button" class="btn btn-primary" id="buttonMoreAuthor" onClick="loadMoreAuthor()">Mas</button>
 
 
             </div>
-            <div class="daw-buttons d-flex justify-content-between row" id="moreAuthor">
+            <div class="daw-buttons d-flex justify-content-between row">
                 {{#admin}}
                     <a href="/newAuthor">
                         <button class="btn btn-primary">Añadir</button>
                     </a>
                 {{/admin}}
                 
-                <button type="button" class="btn btn-primary" onClick="loadMoreAuthor()">Mas</button>
                 
                 <form action="/findByAuthor" method="get">
                         <div class="col-sm-10">

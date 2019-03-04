@@ -4,7 +4,7 @@
 		<div class="card-header  card-header-text card-header-primary">
 			{{#logged}}<a href="/tema/{{contenido}}">{{/logged}}
 				<div class="card-text">
-					<h5 class="card-title ">Tema {{-index}}</h5>
+					<h5 class="card-title "> {{-index}}</h5>
 				</div> {{#logged}}
 			</a>{{/logged}}
 		</div>
@@ -26,8 +26,6 @@
 			</div>
 		</div>
 	</div>
+	<script> var indexAuthors={{indexAuthors}}</script>
 </div>
-<script>
-	var indexAuthors={{indexAuthors}};
-</script>
 {{/authors}}

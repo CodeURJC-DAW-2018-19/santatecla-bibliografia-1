@@ -84,6 +84,8 @@ public class AuthorController {
 		model.addAttribute("authors", author);
 		model.addAttribute("nAuthor", page.getPageNumber());
 		model.addAttribute("indexAuthors", author.getTotalPages());
+		System.out.println("Show more author");
+		System.out.println(author.getTotalPages());
 
 		return "pageableAuthor";
 	}
