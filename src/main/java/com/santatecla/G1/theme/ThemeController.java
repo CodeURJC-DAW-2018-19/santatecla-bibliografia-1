@@ -15,7 +15,7 @@ import com.santatecla.G1.author.Author;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.user.UserComponent;
-import com.santatecla.G1.book.BookRepository;
+import com.santatecla.G1.book.BookService;
 
 
 
@@ -23,19 +23,19 @@ import com.santatecla.G1.book.BookRepository;
 public class ThemeController {
 	
 	@Autowired
-	private ThemeRepository repository;
+	private ThemeService themeService;
 	@Autowired
 	private UserComponent userComponent;
 
 	@Autowired
-	private BookRepository bookRepository;
+	private BookService bookService;
 
 	
 	
 	@RequestMapping("/theme/{id}")
 	public String theme(Model model, @PathVariable long id) {
-		Theme theme = repository.findById(id);
-		List<Book> books = bookRepository.findByTheme(theme);
+		Theme theme = themeService.findById(id);
+		List<Book> books = bookService.findByTheme(theme);
 		List<Author> authors = new ArrayList<>();
 		List<Citation> citation = new ArrayList<>();
 		for(Book b: books) {
@@ -64,14 +64,14 @@ public class ThemeController {
 	
 	@RequestMapping("/saveTheme")
 	public String author(Model model, Theme theme) {
-		repository.save(theme);
+		themeService.save(theme);
 		System.out.println(theme.toString());
 		model.addAttribute("text","Theme Created");
 		return "Message";
 	}
 	
 	public Collection<Theme> themes(){
-		return repository.findAll();
+		return themeService.findAll();
 	}
 	@ModelAttribute
 	public void addUserToModel(Model model) {
@@ -86,7 +86,7 @@ public class ThemeController {
 	public String updateAuthor(Model model, Theme theme, @PathVariable long id) {
 		
 		theme.setId(id);
-		repository.save(theme);		
+		themeService.save(theme);		
 		model.addAttribute("text","Tema editado de forma correcta");
 		return "Message";
 	}
@@ -94,12 +94,12 @@ public class ThemeController {
 	
 	@RequestMapping("/theme/{id}/deleteTheme")
 	public String deleteAuthor(Model model, @PathVariable long id) {
-		Theme theme = repository.findById(id);
+		Theme theme = themeService.findById(id);
 		if (theme!=null) {
 			model.addAttribute("theme", theme);
 			model.addAttribute("text","Tema eliminado de forma correcta");
 		}
-		repository.deleteById(id);
+		themeService.deleteById(id);
 		
 		return "Message";
 	}

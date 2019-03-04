@@ -8,13 +8,13 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.santatecla.G1.author.Author;
-import com.santatecla.G1.author.AuthorRepository;
+import com.santatecla.G1.author.AuthorService;
 import com.santatecla.G1.book.Book;
-import com.santatecla.G1.book.BookRepository;
+import com.santatecla.G1.book.BookService;
 import com.santatecla.G1.citation.Citation;
-import com.santatecla.G1.citation.CitationRepository;
+import com.santatecla.G1.citation.CitationService;
 import com.santatecla.G1.theme.Theme;
-import com.santatecla.G1.theme.ThemeRepository;
+import com.santatecla.G1.theme.ThemeService;
 import com.santatecla.G1.user.User;
 import com.santatecla.G1.user.UserRepository;
 
@@ -23,13 +23,13 @@ import com.santatecla.G1.user.UserRepository;
 public class DataBaseInitializator {
 	
 	@Autowired
-	AuthorRepository authorRepository;
+	AuthorService authorService;
 	@Autowired
-	ThemeRepository themeRepository;
+	ThemeService themeService;
 	@Autowired
-	BookRepository bookRepository;
+	BookService bookService;
 	@Autowired 
-	CitationRepository citationRepository;
+	CitationService citationService;
 	@Autowired
 	UserRepository userRepository;
 	
@@ -144,9 +144,9 @@ public class DataBaseInitializator {
 		th3.addBook(b3);
 		th3.addBook(b4);
 		
-		themeRepository.save(th1);
-		themeRepository.save(th2);
-		themeRepository.save(th3);
+		themeService.save(th1);
+		themeService.save(th2);
+		themeService.save(th3);
 		
 		//Add the book to the author, the existence of the book depends of the existence of the author, so we don't save the book explicitly.
 		a1.addBook(b1);
@@ -161,14 +161,14 @@ public class DataBaseInitializator {
 			
 		
 		
-		authorRepository.save(a1);
-		authorRepository.save(a2);
-		authorRepository.save(a3);
+		authorService.save(a1);
+		authorService.save(a2);
+		authorService.save(a3);
 		//Save the book wich has no author.
-		bookRepository.save(b2);
-		bookRepository.save(b1);
-		bookRepository.save(b4);
-		bookRepository.save(b3);
+		bookService.save(b2);
+		bookService.save(b1);
+		bookService.save(b4);
+		bookService.save(b3);
 		
 		//Save the author who has write the b1
 		/*citationRepository.save(c1);
@@ -195,28 +195,28 @@ public class DataBaseInitializator {
 		userRepository.save(new User("admin","admin","ROLE_ADMIN","ROLE_USER","ROLE_STUDENT"));
 		
 		//Here code to test the DDBB
-		List<Author> authors = authorRepository.findAll(); 
+		List<Author> authors = authorService.findAll(); 
 		System.out.println("Authors found with findAll()");
 		System.out.println("----------------------------");
 		for(Author a: authors) {
 			System.out.println(a);
 		}
 		System.out.println("----------------------------");
-		List<Book> books = bookRepository.findAll(); 
+		List<Book> books = bookService.findAll(); 
 		System.out.println("Books found with findAll()");
 		System.out.println("----------------------------");
 		for(Book a: books) {
 			System.out.println(a);
 		}
 		System.out.println("----------------------------");
-		List<Theme> themes = themeRepository.findAll(); 
+		List<Theme> themes = themeService.findAll(); 
 		System.out.println("Themes found with findAll()");
 		System.out.println("----------------------------");
 		for(Theme a: themes) {
 			System.out.println(a);
 		}
 		System.out.println("----------------------------");
-		List<Citation> citations = citationRepository.findAll(); 
+		List<Citation> citations = citationService.findAll(); 
 		System.out.println("Citations found with findAll()");
 		System.out.println("----------------------------");
 		for(Citation a: citations) {

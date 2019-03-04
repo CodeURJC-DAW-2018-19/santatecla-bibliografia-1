@@ -26,8 +26,7 @@ public class BooksController {
 	
 	@Autowired
 	private BookService repository;
-	@Autowired
-	private BookRepository bookRepository;
+
 	
 	public Collection<Book> books(){
 		return repository.findAll();
@@ -35,7 +34,7 @@ public class BooksController {
 	
 	@RequestMapping("/book/{id}")
 	public String Book(Model model, @PathVariable long id) {
-		Book book = bookRepository.findById(id);
+		Book book = repository.findOne(id);
 		System.out.println(book.toString());
 		List <Citation> citations = book.getCitations();
 		Author author = book.getAuthor();
@@ -81,7 +80,7 @@ public class BooksController {
 	
 	@RequestMapping("/book/{id}/deleteBook")
 	public String deleteAuthor(Model model, @PathVariable long id) {
-		Book book = bookRepository.findById(id);
+		Book book = repository.findOne(id);
 		if (book!=null) {
 			model.addAttribute("book", book);
 			model.addAttribute("text","Libro eliminado de forma correcta");
