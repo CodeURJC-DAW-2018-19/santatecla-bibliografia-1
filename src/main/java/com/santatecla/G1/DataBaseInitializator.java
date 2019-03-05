@@ -63,14 +63,14 @@ public class DataBaseInitializator {
 		Author a3 = new Author(nameAlan,urlImageAlan,bornDateAlan,deathDateAlan,bornPlaceAlan,urlMapAlan,2);
 		
 
-		for(int i=0; i<25; i++) {
+		/*for(int i=0; i<25; i++) {
 			Author a = new Author(""+i,""+i,""+i,""+i,""+i,""+i,-1);
 			Book b = new Book(""+i, -2);
 			Theme t = new Theme(""+i);
 			authorRepository.save(a);
 			bookRepository.save(b);
 			themeRepository.save(t);
-		}
+		}*/
 
 		//Books initialization
 		Book b1 = new Book("Palabras Radiantes",3);
