@@ -8,21 +8,21 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="daw-search-bar">
-            </div>
-            <div class="daw-miniatures" id="moreWorks">
-				{{#books}}
-				<a href="/book/{{id}}">
-	                <div class="row">
-	                    <div class="card bg-dark text-white col">
-	                        <img class="card-img" src="/image/{{imgId}}" alt="Card image">
-	                        <div class="card-img-overlay">
-	                            <h4 class="card-title">{{title}}</h4>
-	                        </div>
-	                    </div>
-	                </div>
-	            </a>
-                {{/books}}
+            <div class="daw-miniatures" id="moreThemes">
+				<div class="row">
+					{{#books}}
+					<div class="col-md-6">
+						<a href="/book/{{id}}">
+							<div class="card bg-dark text-white col">
+								<img class="card-img" src="/image/{{imgId}}" alt="Card image">
+								<div class="card-img-overlay">
+									<h4 class="card-title">{{title}}</h4>
+								</div>
+							</div>
+						</a>
+					</div>
+					{{/books}}
+				</div>
                 
 
             </div>
