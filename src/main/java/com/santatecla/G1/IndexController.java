@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.author.AuthorRepository;
+import com.santatecla.G1.author.AuthorService;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookRepository;
+import com.santatecla.G1.book.BookService;
 import com.santatecla.G1.image.ImageManagerController;
 import com.santatecla.G1.theme.Theme;
 import com.santatecla.G1.theme.ThemeRepository;
+import com.santatecla.G1.theme.ThemeService;
 import com.santatecla.G1.user.UserComponent;
 
 
@@ -26,11 +29,11 @@ import com.santatecla.G1.user.UserComponent;
 public class IndexController {
 	
 	@Autowired
-	private AuthorRepository authorRepository;
+	private AuthorService authorService;
 	@Autowired
-	private BookRepository booksRepository;
+	private BookService booksService;
 	@Autowired
-	private ThemeRepository themesRepository;
+	private ThemeService themesService;
 	@Autowired
 	private UserComponent userComponent;
 	@Autowired
@@ -41,9 +44,9 @@ public class IndexController {
 	@RequestMapping("/")
 	public String author(Model model) {
 		
-		model.addAttribute("authors",authorRepository.findAll(new PageRequest(0, 10)));
-		model.addAttribute("books",booksRepository.findAll(new PageRequest(0, 10)));
-		model.addAttribute("themes",themesRepository.findAll(new PageRequest(0, 10)));
+		model.addAttribute("authors",authorService.findAll(new PageRequest(0, 10)));
+		model.addAttribute("books",booksService.findAll(new PageRequest(0, 10)));
+		model.addAttribute("themes",themesService.findAll(new PageRequest(0, 10)));
 		model.addAttribute("images",imageController.getImages().values());
 		
 		return "indexPage";
@@ -52,9 +55,9 @@ public class IndexController {
 	@RequestMapping("/findByAuthor")
 	public String findAuthor(Model model,Author author) {
 		
-		model.addAttribute("authors",authorRepository.findByName(author.getName()));
-		model.addAttribute("books",booksRepository.findAll());
-		model.addAttribute("themes",themesRepository.findAll());
+		model.addAttribute("authors",authorService.findByName(author.getName()));
+		model.addAttribute("books",booksService.findAll());
+		model.addAttribute("themes",themesService.findAll());
 		model.addAttribute("images",imageController.getImages().values());
 		
 		return "indexPage";
@@ -62,9 +65,9 @@ public class IndexController {
 	@RequestMapping("/findByBook")
 	public String findBook(Model model,Book book) {
 		
-		model.addAttribute("authors",authorRepository.findAll());
-		model.addAttribute("books",booksRepository.findByTitle(book.getTitle()));
-		model.addAttribute("themes",themesRepository.findAll());
+		model.addAttribute("authors",authorService.findAll());
+		model.addAttribute("books",booksService.findByTitle(book.getTitle()));
+		model.addAttribute("themes",themesService.findAll());
 		model.addAttribute("images",imageController.getImages().values());
 		
 		return "indexPage";
@@ -73,9 +76,9 @@ public class IndexController {
 	@RequestMapping("/findByTheme")
 	public String findTheme(Model model,Theme theme) {
 		
-		model.addAttribute("authors",authorRepository.findAll());
-		model.addAttribute("books",booksRepository.findAll());
-		model.addAttribute("themes",themesRepository.findThemesByName(theme.getName()));
+		model.addAttribute("authors",authorService.findAll());
+		model.addAttribute("books",booksService.findAll());
+		model.addAttribute("themes",themesService.findThemesByName(theme.getName()));
 		model.addAttribute("images",imageController.getImages().values());
 		
 		return "indexPage";

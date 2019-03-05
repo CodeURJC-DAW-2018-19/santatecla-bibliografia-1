@@ -31,4 +31,8 @@ public class ThemeService {
 	public Page<Theme> findAll(Pageable page){
 		return themeRepository.findAll(page);
 	}
+	public List<Theme> findThemesByName(String text){
+		return 	themeRepository.findThemesByName(text);
+	}
+ 
 }
