@@ -1,3 +1,4 @@
+<script src="../js/loadcontent.js"></script>
 <!-- OBRAS -->
 <div class="temas-box col-sm-12 col-md-6 col-lg-4">
     <div class="card cajas">
@@ -9,7 +10,7 @@
         <div class="card-body">
             <div class="daw-search-bar">
             </div>
-            <div class="daw-miniatures">
+            <div class="daw-miniatures" id="moreWorks">
 				{{#books}}
 				<a href="/book/{{id}}">
 	                <div class="row">
@@ -22,9 +23,12 @@
 	                </div>
 	            </a>
                 {{/books}}
+                
 
             </div>
             <div class="daw-buttons d-flex justify-content-between ">
+				<button type="button" class="btn btn-primary" id="buttonMoreWorks" onClick="loadMoreWorks()">Mas</button>
+            
             	{{#admin}}
             	<a href="/newBook">
                 	<button class="btn btn-primary">Añadir</button>
