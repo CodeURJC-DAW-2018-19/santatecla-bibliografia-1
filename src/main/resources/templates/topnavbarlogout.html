@@ -9,6 +9,12 @@
         <div class="navbar-header">
             <a class="navbar-brand nav-item active" href="/">INICIO</a>
         </div>
+           {{#tabs}}
+         <div class="navbar-header">
+            <a class="navbar-brand nav-item active" href="{{url}}">{{name}}</a>
+        </div>
+         {{/tabs}}
+
         <a type="button" class="btn btn-round" href="/logout" method="post" >Logout</a>
 		<!--<form type="button" class="btn btn-round" action="/logout" method="post" >
 			<input type="submit" value="Sign Out" />

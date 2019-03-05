@@ -43,6 +43,7 @@ public class IndexController {
 		model.addAttribute("themes",themesRepository.findAll());
 		model.addAttribute("images",imageController.getImages().values());
 		
+		tabs.modelTabs(model);	
 		return "indexPage";
 	}
 	
