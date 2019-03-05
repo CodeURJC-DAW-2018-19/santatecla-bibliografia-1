@@ -4,26 +4,40 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.santatecla.G1.author.Author;
+import com.santatecla.G1.theme.Theme;
+
 @Service
 public class BookService {
 
 	@Autowired
-	private BookRepository repository;
+	private BookRepository booksRepository;
 
 	public Book findOne(long id) {
-		return repository.findById(id);
+		return booksRepository.findById(id);
 	}
 	
 	public List<Book> findAll() {
-		return repository.findAll();
+		return booksRepository.findAll();
 	}
 
 	public void save(Book book) {
-		repository.save(book);
+		booksRepository.save(book);
 	}
 
 	public void deleteById(long id) {
-		repository.deleteById(id);
+		booksRepository.deleteById(id);
+	}
+	
+	public List<Book> findByAuthor(Author author) {
+		return booksRepository.findByAuthor(author);
+	}
+	
+	public Book findByTitle(String title) {
+		return booksRepository.findByTitle(title);
+	}
+	public List<Book> findByTheme(Theme theme){
+		return booksRepository.findByTheme(theme);
 	}
 }
 
