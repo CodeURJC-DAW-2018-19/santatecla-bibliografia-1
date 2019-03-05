@@ -3,6 +3,8 @@ package com.santatecla.G1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.santatecla.G1.user.Tabs;
 import com.santatecla.G1.user.UserComponent;
@@ -13,8 +15,8 @@ public class TabController {
 	@Autowired
 	private UserComponent userComponent;
 
-	public void userTabs(Model model, String url, String name, boolean active) {
-		Tabs tab = new Tabs(url, name, active);
+	public void userTabs(Model model, String url, String name, boolean active, long id) {
+		Tabs tab = new Tabs(url, name, active, id);
 
 		if (!sameTab(tab)) {
 			updateActiveTabs(active);
@@ -34,8 +36,8 @@ public class TabController {
 		}
 	}
 
-	public void deleteTab(String name) {
-		this.userComponent.getLoggedUser().deleteTabByName(name);
+	public void deleteTab(long id) {
+		this.userComponent.getLoggedUser().deleteTabById(id);
 		for (int i = 0; i < this.userComponent.getLoggedUser().getTabs().size(); i++) {
 			System.out.println(this.userComponent.getLoggedUser().getTabs().get(i).getName());
 		}
@@ -56,6 +58,13 @@ public class TabController {
 			}
 		}
 		return false;
+	}
+	
+	@GetMapping("/delete/{id}")
+	private String closeTabs(Model model, @PathVariable long id) {
+		
+		deleteTab(id);
+		return "redirect:/";
 	}
 	
 }

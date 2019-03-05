@@ -4,11 +4,13 @@ public class Tabs {
 	private String url;
 	private boolean active;
 	private String name;
+	private long id;
 
-	public Tabs(String url, String name, boolean active) {
+	public Tabs(String url, String name, boolean active, long id) {
 		this.url = url;
 		this.active = active;
 		this.name = name;
+		this.id = id;
 	}
 
 	public boolean isActive() {
@@ -29,6 +31,10 @@ public class Tabs {
 
 	public String getUrl() {
 		return this.url;
+	}
+	
+	public long getId() {
+		return this.id;
 	}
 
 

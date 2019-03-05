@@ -65,7 +65,7 @@ public class AuthorController {
 		}
 		
 		System.out.println("Add tab");
-		tabs.userTabs(model, "/author/"+ id, author.getName(), true);
+		tabs.userTabs(model, "/author/"+ id, author.getName(), true, id);
 		return "authorPage";
 	}
 	

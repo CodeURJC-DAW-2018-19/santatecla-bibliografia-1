@@ -50,7 +50,7 @@ public class BooksController {
 			model.addAttribute("citations",citations);
 		}
 		System.out.println("Add tab");
-		tabs.userTabs(model, "/book/"+ id, book.getTitle(), true);
+		tabs.userTabs(model, "/book/"+ id, book.getTitle(), true, id);
 		return "booksPage";
 	}
 	

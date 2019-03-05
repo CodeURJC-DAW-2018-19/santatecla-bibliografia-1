@@ -51,8 +51,8 @@ public class User {
 		this.tabs.remove(tab);
 	}
 
-	public void deleteTabByName(String name) {
-		tabs.removeIf(t -> t.getName().equalsIgnoreCase(name));
+	public void deleteTabById(long id) {
+		tabs.removeIf(t -> (t.getId() == id));
 	}
 
 	public void inactiveAllTabs() {
