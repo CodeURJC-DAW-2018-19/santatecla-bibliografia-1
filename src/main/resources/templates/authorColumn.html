@@ -1,3 +1,5 @@
+<script src="../js/loadcontent.js"></script>
+
 <!-- AUTORES -->
 <div class="temas-box col-sm-12 col-md-6 col-lg-4">
     <div class="card cajas ">
@@ -9,7 +11,7 @@
         <div class="card-body ">
             <div class="daw-search-bar">
             </div>
-            <div class="daw-miniatures cajas-bot">
+            <div class="daw-miniatures cajas-bot"  id="moreAuthor">
                 {{#authors}}
                     <a href="/author/{{id}}">
                         <div class="row">
@@ -21,16 +23,19 @@
                             </div>
                         </div>
                     </a>
+                    
+                
                 {{/authors}}
-
 
             </div>
             <div class="daw-buttons d-flex justify-content-between row">
+                <button type="button" class="btn btn-primary" id="buttonMoreAuthor" onClick="loadMoreAuthor()">Mas</button>
                 {{#admin}}
                     <a href="/newAuthor">
                         <button class="btn btn-primary">Añadir</button>
                     </a>
                 {{/admin}}
+                
                 
                 <form action="/findByAuthor" method="get">
                         <div class="col-sm-10">
