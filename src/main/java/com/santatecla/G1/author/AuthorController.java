@@ -48,7 +48,6 @@ public class AuthorController {
 			themes.add(b.getTheme());
 			//We need an aux array because a book can return a list of citation
 			citations.addAll(b.getCitations());
-			System.out.println("LAS CITAS ESTÁN VACIAS? " + citations.isEmpty());
 			for(Citation c : citations) {
 				System.out.println(c.getText());
 			}
