@@ -63,7 +63,7 @@ public class ThemeController {
 	
 	@GetMapping("/table-theme")
 	public String showMoreThemes(Model model, Pageable page) {
-		Page<Theme> themes = repository.findAll(page);
+		Page<Theme> themes = themeService.findAll(page);
 
 		model.addAttribute("themes", themes);
 		model.addAttribute("nTheme", page.getPageNumber());

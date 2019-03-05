@@ -78,7 +78,7 @@ public class AuthorController {
 	
 	@GetMapping("/table-author")
 	public String showMoreAuthor(Model model, Pageable page) {
-		Page<Author> author = repository.findAll(page);
+		Page<Author> author = authorService.findAll(page);
 
 		model.addAttribute("authors", author);
 		model.addAttribute("nAuthor", page.getPageNumber());

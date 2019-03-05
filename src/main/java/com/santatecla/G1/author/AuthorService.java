@@ -3,6 +3,8 @@ package com.santatecla.G1.author;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,6 +31,10 @@ public class AuthorService {
 	
 	public void deleteById(long id) {
 		authorRepository.deleteById(id);
+	}
+	
+	public Page<Author> findAll(Pageable page){
+		return authorRepository.findAll(page);
 	}
 	
 }

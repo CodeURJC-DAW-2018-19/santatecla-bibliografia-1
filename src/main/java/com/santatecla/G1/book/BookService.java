@@ -2,6 +2,8 @@ package com.santatecla.G1.book;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.santatecla.G1.author.Author;
@@ -38,6 +40,9 @@ public class BookService {
 	}
 	public List<Book> findByTheme(Theme theme){
 		return booksRepository.findByTheme(theme);
+	}
+	public Page<Book> findAll(Pageable page){
+		return booksRepository.findAll(page);
 	}
 }
 

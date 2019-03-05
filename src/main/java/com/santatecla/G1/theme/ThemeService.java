@@ -3,6 +3,8 @@ package com.santatecla.G1.theme;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,5 +27,8 @@ public class ThemeService {
 	
 	public void deleteById(long id) {
 		themeRepository.deleteById(id);
+	}
+	public Page<Theme> findAll(Pageable page){
+		return themeRepository.findAll(page);
 	}
 }

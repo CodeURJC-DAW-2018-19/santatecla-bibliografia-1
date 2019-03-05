@@ -29,16 +29,16 @@ public class BooksController {
 	private UserComponent userComponent;
 	
 	@Autowired
-	private BookService repository;
+	private BookService bookService;
 
 	
 	public Collection<Book> books(){
-		return repository.findAll();
+		return bookService.findAll();
 	}
 	
 	@RequestMapping("/book/{id}")
 	public String Book(Model model, @PathVariable long id) {
-		Book book = repository.findOne(id);
+		Book book = bookService.findOne(id);
 		System.out.println(book.toString());
 		List <Citation> citations = book.getCitations();
 		Author author = book.getAuthor();
@@ -60,7 +60,7 @@ public class BooksController {
 	
 	@GetMapping("/table-works")
 	public String showMoreWorks(Model model, Pageable page) {
-		Page<Book> works = bookRepository.findAll(page);
+		Page<Book> works = bookService.findAll(page);
 
 		model.addAttribute("books", works);
 		model.addAttribute("nWorks", page.getPageNumber());
@@ -79,28 +79,28 @@ public class BooksController {
 		}
 		else
 			book.setImgId(-2);
-		repository.save(book);
+		bookService.save(book);
 		model.addAttribute("text","Book Created");
 		return "Message";
 	}
 	
 	@RequestMapping("book/{id}/updateBook")
 	public String updateBook(Model model,Book newBook , @PathVariable long id) {
-		Book oldBook = repository.findOne(id);
+		Book oldBook = bookService.findOne(id);
 		oldBook.update(newBook);
-		repository.save(oldBook);		
+		bookService.save(oldBook);		
 		model.addAttribute("text","Libro actualizado correctamente");
 		return "Message";
 	}
 	
 	@RequestMapping("/book/{id}/deleteBook")
 	public String deleteAuthor(Model model, @PathVariable long id) {
-		Book book = repository.findOne(id);
+		Book book = bookService.findOne(id);
 		if (book!=null) {
 			model.addAttribute("book", book);
 			model.addAttribute("text","Libro eliminado de forma correcta");
 		}
-		repository.deleteById(id);
+		bookService.deleteById(id);
 		return "Message";
 	}
 	
