@@ -1,15 +1,19 @@
- {{#themes}}
-<a href="/theme/{{id}}">
-	<div class="row">
-    	<div class="card bg-dark text-white col">
-        	<img class="card-img" src="/img/theme.png" alt="Card image">
-           	<div class="card-img-overlay">
-              	<h4 class="card-title">{{name}}</h4>
-            </div>
-       </div>
-    </div>
-</a>
+<div class="row">
+	{{#themes}}
+	<div class="col-md-6">
+		<a href="/theme/{{id}}">
+			<div class="card bg-dark text-white col">
+				<img class="card-img" src="/img/theme.png" alt="Card image"
+					style="height: 10em; width: 10em">
+				<div class="card-img-overlay">
+					<h4 class="card-title">{{name}}</h4>
+				</div>
+			</div>
+		</a>
+	</div>
+	{{/themes}}
+</div>
+
 <script>
 	var indexTheme={{indexTheme}};
 </script>
-{{/themes}}
