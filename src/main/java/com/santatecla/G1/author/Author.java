@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.santatecla.G1.book.Book;
 
 
@@ -34,6 +35,7 @@ public class Author {
 	********************************************/
 	
 	@OneToMany
+	@JsonIgnore
 	private List<Book> books;
 	
 	/********************************************

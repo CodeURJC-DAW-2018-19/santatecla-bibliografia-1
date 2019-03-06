@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,8 +43,18 @@ public class AuthorRestController {
 		return authorService.findAll();
 	}
 	
+	
+	@RequestMapping(value="/getAuthor/{id}", method = GET)
+	public ResponseEntity<Author> getAuthor(Model model, @PathVariable long id) {
+		Author a=authorService.findById(id);
+		if(a!=null)
+			return new ResponseEntity<>(a, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
 	@RequestMapping(value="/postAuthor", method = POST)
-	public Author author(Model model, Author author,@RequestParam("file")MultipartFile file) {
+	public Author author(Model model, Author author,MultipartFile file) {
 		if((file!=null)&&(!file.isEmpty())) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
 			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);	
@@ -57,22 +69,29 @@ public class AuthorRestController {
 	}
 	
 	@RequestMapping(value = "/author/{id}/updateAuthor", method = PATCH)
-	public Author updateAuthor(Model model, Author newAuthor, @PathVariable long id) {
+	public ResponseEntity<Author> updateAuthor(Model model, Author newAuthor, @PathVariable long id) {
 		Author oldAuthor = authorService.findById(id);
-		oldAuthor.update(newAuthor);
-		authorService.save(oldAuthor);
-		model.addAttribute("text","Autor editado de forma correcta");
-		return oldAuthor;
+		if(oldAuthor!=null) {
+			oldAuthor.update(newAuthor);
+			authorService.save(oldAuthor);
+			model.addAttribute("text","Autor editado de forma correcta");
+			return new ResponseEntity<>(oldAuthor, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}	
 	
-	@RequestMapping("/author/{id}/deleteAuthor")
-	public Author deleteAuthor(Model model, @PathVariable long id) {
+	@RequestMapping(value = "/author/{id}/deleteAuthor", method = DELETE)
+	public ResponseEntity<Author> deleteAuthor(Model model, @PathVariable long id) {
 		Author author = authorService.findById(id);
 		if (author!=null) {
 			model.addAttribute("author", author);
 			model.addAttribute("text","Autor eliminado de forma correcta");
+			authorService.deleteById(id);
+			return new ResponseEntity<>(author, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		authorService.deleteById(id);
-		return author;
+
 	}
 }
