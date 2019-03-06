@@ -70,4 +70,9 @@ public class Theme {
 		return "Nombe: "+name ;
 	}
 	
+	public void update(Theme t) {
+		this.name=t.name;
+		this.books=t.books;
+	}
+	
 }
