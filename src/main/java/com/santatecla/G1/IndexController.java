@@ -44,6 +44,11 @@ public class IndexController {
 		model.addAttribute("images",imageController.getImages().values());
 		
 		tabs.modelTabs(model);	
+		try {
+			 tabs.updateActiveTabs(true);
+		}catch (Exception e) {
+			
+		}
 		return "indexPage";
 	}
 	
