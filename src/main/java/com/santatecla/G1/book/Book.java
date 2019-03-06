@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
@@ -34,14 +35,17 @@ public class Book {
 	 ********************************************/
 	
 	@OneToOne(cascade=CascadeType.ALL)
+	@JsonIgnore
 	private Theme theme;
 	
 	//To avoid cicles on DB model	
 	@OneToMany (cascade=CascadeType.ALL)
+	@JsonIgnore
 	public List<Citation> citation;
 	
 
 	@OneToOne()
+	@JsonIgnore
 	private Author author;
 	
 	/********************************************

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.santatecla.G1.book.Book;
 
 @Entity
@@ -26,6 +27,7 @@ public class Theme {
 	//To avoid cicles on DB model
 	
 	@OneToMany(cascade=CascadeType.ALL)
+	@JsonIgnore
 	private List<Book> books;
 	
 	

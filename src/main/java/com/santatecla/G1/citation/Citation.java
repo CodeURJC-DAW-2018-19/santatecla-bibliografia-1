@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.theme.Theme;
 
@@ -31,8 +31,10 @@ public class Citation {
 	//To avoid cicles on DB model
 	
 	@OneToOne()
+	@JsonIgnore
 	private Book book;
 	@OneToOne
+	@JsonIgnore
 	private Theme theme;
 	
 	
