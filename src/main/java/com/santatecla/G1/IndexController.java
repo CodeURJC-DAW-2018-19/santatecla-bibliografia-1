@@ -41,6 +41,8 @@ public class IndexController {
 	private UserComponent userComponent;
 	@Autowired
 	private ImageManagerController imageController;
+	@Autowired
+	private TabController tabs;
 	
 	
 	
@@ -52,6 +54,12 @@ public class IndexController {
 		model.addAttribute("themes",themesService.findAll(new PageRequest(0, 10)));
 		model.addAttribute("images",imageController.getImages().values());
 		
+		tabs.modelTabs(model);	
+		try {
+			 tabs.updateActiveTabs(true);
+		}catch (Exception e) {
+			
+		}
 		return "indexPage";
 	}
 	
