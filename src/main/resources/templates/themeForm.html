@@ -1,71 +1,81 @@
 <div class="row top-row">
+	<script src="/js/jspdf.js"></script>
+	<script src="/js/pdfFromHTML.js"></script>
 	<div class="col">
-		<div class="card card-custom ">
+		<div class="card card-custom">
 			{{#theme}}
-			<div class="card-body table-responsive grid-container" >
-				<div class="title-and-references" id="source-html">
-					<div class="title-theme">
-						<form class="form-horizontal col-sm-8 hole-container"
-							action="/theme/{{id}}/updateTheme" method="post">
-							{{#admin}} <input type="text" class="form-control text-truncate"
-								name="name" value="{{name}}"> {{/admin}} {{^admin}}
-							<h4>{{name}}</h4>
-							{{/admin}} {{#admin}}
-							<button type="submit" class="btn btn-primary">Actualizar</button>
-							{{/admin}}
-						</form>
-					</div>
-					{{#citations}}
-					<div class="reference-1 caja-referencia">
-						<div class="card-custo card">
-							<div class="card-header card-header-warning">
-								<p class="card-title">Cita</p>
+			<div class="card-body table-responsive grid-container">
+				
+					<div class="title-and-references" id="source-html">
+					<div id="HTMLtoPDF">
+						<div class="title-theme">
+							<form class="form-horizontal col-sm-8 hole-container"
+								action="/theme/{{id}}/updateTheme" method="post">
+								{{#admin}} <input type="text" class="form-control text-truncate"
+									name="name" value="{{name}}"> {{/admin}} {{^admin}}
+								<h4>{{name}}</h4>
+								{{/admin}} {{#admin}}
+								<button type="submit" class="btn btn-primary">Actualizar</button>
+								{{/admin}}
+							</form>
+						</div>
+						{{#citations}}
+						<div class="reference-1 caja-referencia">
+							<div class="card-custo card">
+								<div class="card-header card-header-warning">
+									<p class="card-title">Cita:</p>
 
-							</div>
-							<div class="card-body table-responsive">
-								<div class="contenido-referencia">
-								<div class="texto-referencia">
-									<form class="form-horizontal col-sm-8"
-										action="/theme/{{id}}/updateCitation" method="post">
+								</div>
+								<div class="card-body table-responsive">
+									<div class="contenido-referencia">
+										<div class="texto-referencia">
+											<form class="form-horizontal col-sm-8"
+												action="/theme/{{id}}/updateCitation" method="post">
+												{{^admin}} {{text}} {{/admin}} {{#admin}} <input type="text"
+													class="form-control text-truncate" name="text"
+													value="{{text}}"> {{/admin}} {{#admin}}
+												<button type="submit" class="btn btn-primary">Actualizar</button>
+												{{/admin}}
+											</form>
+										</div>
 										{{^admin}}
-										{{text}}
-										{{/admin}} {{#admin}} <input type="text"
-											class="form-control text-truncate" name="text"
-											value="{{text}}"> {{/admin}} {{#admin}}
-										<button type="submit" class="btn btn-primary">Actualizar</button>
+										<div class="autor-referencia">{{book.author.name}}</div>
+										{{/admin}} {{^admin}}
+										<div class="libro-referencia">{{book.title}}</div>
 										{{/admin}}
-									</form>
 									</div>
-									{{^admin}}
-									<div class="autor-referencia">{{book.author.name}}</div>
-									{{/admin}} {{^admin}}
-									<div class="libro-referencia">{{book.title}}</div>
-									{{/admin}}
 								</div>
 							</div>
+
 						</div>
 
+						<div>
+							<form class="form-horizontal col-sm-8"
+								action="/theme/{{id}}/deleteCitation" method="post">
+								{{#admin}}
+								<button type="submit" class="btn btn-sencondary">Eliminar</button>
+								{{/admin}}
+							</form>
+						</div>
+						{{/citations}}
 					</div>
-
-					<div>
-						<form class="form-horizontal col-sm-8"
-							action="/theme/{{id}}/deleteCitation" method="post">
-							{{#admin}}
-							<button type="submit" class="btn btn-sencondary">Eliminar</button>
-							{{/admin}}
-						</form>
-					</div>
-					{{/citations}}
 				</div>
 				<div class="html-generator " id="right-box">
 					<div id="html-box">
-						<span id="salida"></span>
-						<script type="text/javascript">	
-								var MyDiv1 = document.getElementById("source-html");
-								$("#salida").text(MyDiv1.innerHTML);								
+						<div id="HTMLtoPDF">
+							<span id="salida"></span>
+						</div>
+						<script type="text/javascript">
+							var MyDiv1 = document.getElementById("source-html");
+							$("#salida").text(MyDiv1.innerHTML);
 						</script>
 					</div>
+					<div class="button-pdf">
+						<button class="btn btn-sencondary" onclick="HTMLtoPDF()">Generar
+							y descargar PDF</button>
+					</div>
 				</div>
+
 			</div>
 			{{/theme}}
 		</div>
@@ -76,6 +86,6 @@
 				tema</button>
 			{{/admin}}
 		</form>
-		
+
 	</div>
 </div>
