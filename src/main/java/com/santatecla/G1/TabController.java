@@ -24,6 +24,9 @@ public class TabController {
 				this.userComponent.getLoggedUser().addTab(tab);
 			}
 		}
+		else {
+			changeActiveTabs(tab);
+		}
 		modelTabs(model);
 	}
 
@@ -42,6 +45,11 @@ public class TabController {
 			System.out.println(this.userComponent.getLoggedUser().getTabs().get(i).getName());
 		}
 
+	}
+	
+	public void changeActiveTabs(Tabs tab) {	
+		this.userComponent.getLoggedUser().inactiveAllTabs();
+		this.userComponent.getLoggedUser().activeTab(tab);	
 	}
 
 	public void updateActiveTabs(boolean active) {

@@ -60,6 +60,14 @@ public class User {
 			this.tabs.get(i).inactiveTab();
 		}
 	}
+	
+	public void activeTab(Tabs tab) {
+		for (int i = 0; i < tabs.size(); i++) {
+			if (this.tabs.get(i).getId() == tab.getId()) {
+				this.tabs.get(i).activeTab();
+			}
+		}
+	}
 
 	public List<Tabs> getTabs() {
 		return this.tabs;
