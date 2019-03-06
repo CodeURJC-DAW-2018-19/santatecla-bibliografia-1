@@ -1,5 +1,8 @@
 package com.santatecla.G1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
@@ -96,5 +99,18 @@ public class IndexController {
 	@GetMapping("/loginerror")
 	public String loginError() {
 		return "loginerror";
+	}
+	
+	@RequestMapping("/chart")
+	public String springMVC(Model modelMap) {
+		List<Theme> themes=themesService.findAll();
+		List<Integer> numBs=new ArrayList<>();
+		for(int i=0; i<themes.size();i++) {
+			List<Book> books=booksService.findByTheme(themes.get(i));
+			numBs.add(books.size());
+		} 
+		modelMap.addAttribute("themes", themes);
+		modelMap.addAttribute("numBooks",numBs);
+		return "chart";
 	}
 }
