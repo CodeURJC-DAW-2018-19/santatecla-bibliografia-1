@@ -105,6 +105,13 @@ public class Citation {
 		return "Cita: "+this.text;
 	}
 	
+	public void update(Citation c) {
+		this.book=c.book;
+		this.text=c.text;
+		this.textAux=c.textAux;
+		this.theme=c.theme;
+	}
+	
 	
 }
 
