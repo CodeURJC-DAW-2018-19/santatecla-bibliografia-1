@@ -17,6 +17,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
+import com.santatecla.G1.theme.Theme.BooksView;
+import com.santatecla.G1.theme.Theme.ThemesView;
 
 @Entity
 public class Book {
@@ -24,6 +26,8 @@ public class Book {
 	interface ThemeView{}
 	interface AuthorView{}
 	interface CitationsView{}
+	interface BooksView{}
+	interface ThemesView{}
 	
 	@JsonView(BasicView.class)
 	@Id
@@ -51,17 +55,13 @@ public class Book {
 	@JsonView(BasicView.class)
 	private int imgId;
 	
+	@JsonView(BasicView.class)
+	private Theme theme;
 	/********************************************
 	 * RELATIONS WITH OTHER CLASES TO DDBB MODEL
 	 ********************************************/
-	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL)
 	@JsonView(ThemeView.class)
-	private Theme theme;
-	
-	//To avoid cicles on DB model	
-	@OneToMany (cascade=CascadeType.ALL)
-	@JsonView(CitationsView.class)
 	public List<Citation> citation;
 	
 
@@ -170,6 +170,8 @@ public class Book {
 	public void setTheme(Theme theme) {
 		this.theme = theme;
 	}
+	
+	
 	public void setImgId(int imgId) {
 		this.imgId = imgId;
 	}

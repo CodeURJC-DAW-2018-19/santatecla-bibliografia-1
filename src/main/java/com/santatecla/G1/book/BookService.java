@@ -38,9 +38,12 @@ public class BookService {
 	public Book findByTitle(String title) {
 		return booksRepository.findByTitle(title);
 	}
+	
+	
 	public List<Book> findByTheme(Theme theme){
 		return booksRepository.findByTheme(theme);
 	}
+	
 	public Page<Book> findAll(Pageable page){
 		return booksRepository.findAll(page);
 	}

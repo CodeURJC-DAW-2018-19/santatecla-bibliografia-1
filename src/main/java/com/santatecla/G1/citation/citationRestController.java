@@ -51,6 +51,22 @@ public class citationRestController {
 		return quote;
 	}
 	
+	@JsonView(CitationDetailView.class)
+	@RequestMapping(value = "/citation/{id}", method = GET)
+	public ResponseEntity<Citation> citation(Model model, @PathVariable long id){
+		Citation citation = citationService.findById(id);
+		if(citation!=null) {
+			System.out.println(citation.toString());
+			Book book = citation.getBook();
+			Theme theme = citation.getTheme();
+			model.addAttribute("Citation", citation);
+			model.addAttribute("Book", book);
+			model.addAttribute("Theme", theme);
+			return new ResponseEntity<>(citation, HttpStatus.OK);
+		}
+		else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 	
 	@JsonView(CitationDetailView.class)
 	@RequestMapping(value="/citation/{id}", method=PATCH)
