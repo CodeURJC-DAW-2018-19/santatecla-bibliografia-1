@@ -1,11 +1,15 @@
 package com.santatecla.G1.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +41,12 @@ public class BooksRestController {
 	@RequestMapping(value="book", method = GET)
 	public Collection<Book> getBooks(){
 		return bookService.findAll();
+	}
+	
+	@JsonView(Book.BasicView.class)
+	@RequestMapping(value="/bookPageable" , method = RequestMethod.GET)
+	public List<Book> authors(Pageable page){
+		return bookService.findAll(page).getContent();
 	}
 	
 	@JsonView(Book.BasicView.class)

@@ -1,6 +1,9 @@
 package com.santatecla.G1.theme;
 
 import java.util.ArrayList;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.Collection;
 import java.util.List;
 
@@ -10,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -38,6 +42,12 @@ public class ThemeRestController {
 	@RequestMapping(value="/theme", method = GET)
 	public Collection<Theme> themes(){
 		return themeService.findAll();
+	}
+	
+	@JsonView(Theme.BasicView.class)
+	@RequestMapping(value="/themePageable" , method = RequestMethod.GET)
+	public List<Theme> authors(Pageable page){
+		return themeService.findAll(page).getContent();
 	}
 	
 	@JsonView(Theme.BasicView.class)
