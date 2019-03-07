@@ -123,7 +123,7 @@ public class AuthorController {
 				a.addBook(book);
 			}
 		}
-
+		authorService.save(a);
 		model.addAttribute("text", "Autor creado correctamente");
 		System.out.println(author.toString());
 		return "Message";
