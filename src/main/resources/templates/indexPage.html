@@ -2,68 +2,56 @@
 <html lang="en">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Citas Bibliogr&aacute;ficas</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <!-- Material Kit CSS -->
-    <link href="/css/material-dashboard.css" rel="stylesheet"/>
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <!-- Material Kit CSS -->
-    <link href="/css/material-dashboard.css?v=2.1.0" rel="stylesheet"/>
-    <!--   Core JS Files   -->
-    <script src="/js/core/jquery.min.js" type="text/javascript"></script>
-    <script src="/js/core/popper.min.js" type="text/javascript"></script>
-    <script src="/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-    <script src="/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Citas Bibliogr&aacute;ficas</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+	name="viewport" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<!-- Material Kit CSS -->
+<link href="/css/material-dashboard.css" rel="stylesheet" />
+<!--     Fonts and icons     -->
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<!-- Material Kit CSS -->
+<link href="/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+<!--   Core JS Files   -->
+<script src="/js/core/jquery.min.js" type="text/javascript"></script>
+<script src="/js/core/popper.min.js" type="text/javascript"></script>
+<script src="/js/core/bootstrap-material-design.min.js"
+	type="text/javascript"></script>
+<script src="/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 
 </head>
+
 <body>
-<div class="wrapper ">
-    <div class="main-panel">
-    	<!-- Show loggin button or logout depending of the state of the user -->
-    	{{^logged}}
-       		{{>topnavbarlogin}}
-       	{{/logged}}
-   		{{#logged}}
-       		{{>topnavbarlogout}}
-       	{{/logged}}
-       	
-       	
-        
-        <!-- Content -->
-        <div class="content">
-            <div class="container-fluid">
-                <!-- MAIN PAGE -->
-                <div class="main-page">
-                    <div class="row">
-                        <!-- TEMA -->
-                        {{>themeColumn}}
+	<!-- Show loggin button or logout depending of the state of the user -->
+	{{^logged}} {{>topnavbarlogin}} {{/logged}} {{#logged}}
+	{{>topnavbarlogout}} {{/logged}}
 
-                        <!-- OBRAS -->
-                        {{>bookColumn}}
+	<div class="wrapper ">
+		<div class="content">
+			<div class="container-fluid">
 
-                        <!-- AUTORES -->
-                        {{>authorColumn}}
-                    </div>
-                    <a href="/chart">
-            			<button class="btn btn-primary">Histograma</button>
-            		</a>
-                </div>
-            </div>
-        </div>
-        <!-- End Content -->
+				<!-- BEGIN THEME BOTTOM-->
+				<div class="container-fluid">
+					<div class="author-page flex-container">
+						<div class="row">{{>themeColumn}} {{>bookColumn}}
+							{{>authorColumn}}</div>
+						<a href="/chart">
+							<button class="btn btn-primary">Histograma</button>
+						</a>
+					</div>
+				</div>
+				<!-- END THEME BOTTOM -->
+				{{>footer}}
+			</div>
+		</div>
+	</div>
 
-    </div> <!-- end of main-panel -->
-
-<!-- Footer -->
-
-<!-- End Footer -->
-</div>
 </body>
 </html>
