@@ -10,8 +10,10 @@
     <div class="card-body">
       <div class="daw-miniatures" id="moreThemes">
         <div class="row">
+          {{^haveThemes}}
           {{#themes}}
-          <div class="col-md-6">
+        
+          <div class="col-md-6">         
             <a href="/theme/{{id}}">
               <div class="card bg-dark text-white col">
                 <img class="card-img" src="/img/theme.png" alt="Card image">
@@ -21,7 +23,10 @@
               </div>
             </a>
           </div>
+         
           {{/themes}}
+          {{/haveThemes}}
+          
         </div>
 
       </div>

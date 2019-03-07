@@ -65,11 +65,14 @@ public class AuthorController {
 
 		}
 		
-		boolean emptyThemes = false;
-		if (themes == null )
-			emptyThemes=true;
+		boolean haveThemes = false;
+		if (themes.size()>0)
+			haveThemes=true;
+		
+
 		
 		if (author != null) {
+			model.addAttribute("haveThemes", haveThemes);
 			model.addAttribute("author", author);
 			model.addAttribute("books", books);
 			model.addAttribute("themes", themes);
