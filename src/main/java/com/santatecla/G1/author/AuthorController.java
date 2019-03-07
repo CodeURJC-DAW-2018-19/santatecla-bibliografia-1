@@ -119,15 +119,15 @@ public class AuthorController {
 			a.setImgId(imgId);
 		} else
 			author.setImgId(-1);
-		
-		List<Book> arrayBook = new ArrayList<>();
 		if (b.isPresent()) {
 			for (Long o : b.get()) {
 				Book book = bookService.findById(o);
-				arrayBook.add(book);
+				a.addBook(book);
+				authorService.save(a);
+				book.setAuthor(a);
+				bookService.save(book);
 			}
 		}
-		a.addBookList(arrayBook);
 		authorService.save(a);
 		model.addAttribute("text", "Autor creado correctamente");
 		System.out.println(author.toString());
