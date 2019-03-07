@@ -63,14 +63,14 @@ public class DataBaseInitializator {
 		Author a3 = new Author(nameAlan,urlImageAlan,bornDateAlan,deathDateAlan,bornPlaceAlan,urlMapAlan,2);
 		
 
-		for(int i=0; i<25; i++) {
+		/*for(int i=0; i<25; i++) {
 			Author a = new Author(""+i,""+i,""+i,""+i,""+i,""+i,-1);
 			Book b = new Book(""+i, -2);
 			Theme t = new Theme(""+i);
-			authorService.save(a);
-			bookService.save(b);
-			themeService.save(t);
-		}
+			authorRepository.save(a);
+			bookRepository.save(b);
+			themeRepository.save(t);
+		}*/
 
 		//Books initialization
 		Book b1 = new Book("Palabras Radiantes",3);
@@ -91,20 +91,6 @@ public class DataBaseInitializator {
 		Citation c10 = new Citation("Donde hay amor no hay señor, que todo lo iguala el amor.",b4);
 		Citation c11= new Citation("La buena fe es el fundamento de toda sociedad, la perfidia es la peste.",b4);
 		
-		//Citation for pagination
-		Citation p1= new Citation("p1", b1);
-		Citation p2= new Citation("p2", b1);
-		Citation p3= new Citation("p3", b1);
-		Citation p4= new Citation("p4", b1);
-		Citation p5= new Citation("p5", b1);
-		Citation p6= new Citation("p6", b1);
-		Citation p7= new Citation("p7", b1);
-		Citation p8= new Citation("p8", b1);
-		Citation p9= new Citation("p9", b1);
-		Citation p10= new Citation("p10", b1);
-		Citation p11= new Citation("p11", b1);
-		Citation p12= new Citation("p12", b1);
-		
 		//Adding citation to books, We don't save it explicitly because they depend of the existence of a book
 		b1.addCitations(c1); 
 		b2.addCitations(c2);
@@ -118,21 +104,6 @@ public class DataBaseInitializator {
 		b4.addCitations(c10);
 		b4.addCitations(c11);
 		
-		//book for pagination citation
-		b1.addCitations(p1); 
-		b1.addCitations(p2); 
-		b1.addCitations(p3); 
-		b1.addCitations(p4); 
-		b1.addCitations(p5); 
-		b1.addCitations(p6); 
-		b1.addCitations(p8); 
-		b1.addCitations(p7); 
-		b1.addCitations(p9); 
-		b1.addCitations(p10); 
-		b1.addCitations(p11); 
-		b1.addCitations(p12); 
-		
-
 		//Set books of citations
 		c1.setBook(b1);
 		
@@ -148,20 +119,6 @@ public class DataBaseInitializator {
 		c9.setBook(b4);
 		c10.setBook(b4);
 		c11.setBook(b4);
-		
-		//Citation for pagination
-		p1.setBook(b1);
-		p2.setBook(b1);
-		p3.setBook(b1);
-		p4.setBook(b1);
-		p5.setBook(b1);
-		p6.setBook(b1);
-		p7.setBook(b1);
-		p8.setBook(b1);
-		p9.setBook(b1);
-		p10.setBook(b1);
-		p11.setBook(b1);
-		p12.setBook(b1);
 		
 
 		//Create a themes that will be relacionated with a book, the theme also depends of the existence of a book(we don't save it explicitly).
@@ -183,21 +140,6 @@ public class DataBaseInitializator {
 		c9.setTheme(th3);
 		c10.setTheme(th3);
 		c11.setTheme(th3);
-		
-		//Citation for pagination
-		p1.setTheme(th1);
-		p2.setTheme(th1);
-		p3.setTheme(th1);
-		p4.setTheme(th1);
-		p5.setTheme(th1);
-		p6.setTheme(th1);
-		p7.setTheme(th1);
-		p8.setTheme(th1);
-		p9.setTheme(th1);
-		p10.setTheme(th1);
-		p11.setTheme(th1);
-		p12.setTheme(th1);
-		
 		
 		b1.setTheme(th1);
 		b2.setTheme(th2);

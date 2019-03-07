@@ -1,22 +1,8 @@
 var themePage = 1;
 var workPage = 1;
-var citationPage = 1;
+//var authorPage = 0; this show that works
 var authorPage = 1;
 
-function loadMoreCitations() {
-    var urlPage = "/table-citation?page=" + citationPage;
-    
-    $.ajax({
-        url: urlPage
-    }).done(function (data) {
-        $("#moreCitation").append(data);
-        citationPage++;
-        
-        if (indexCitation == citationPage){
-        	$("#buttonMoreCitation").hide();
-        }
-    })
-}
 
 function loadMoreThemes() {
     var urlPage = "/table-theme?page=" + themePage;
@@ -29,6 +15,7 @@ function loadMoreThemes() {
         
         if (indexTheme == themePage){
         	$("#buttonMoreThemes").hide();
+        	console.log("esconder boton tema");
         }
     })
 }
@@ -44,6 +31,7 @@ function loadMoreWorks() {
         
         if (indexWorks == workPage){
         	$("#buttonMoreWorks").hide();
+        	console.log("esconder boton obra");
         }
     })
 }
@@ -59,6 +47,7 @@ function loadMoreAuthor() {
         
         if (indexAuthors == authorPage){
         	$("#buttonMoreAuthor").hide();
+        	console.log("esconder boton autor");
         }
     })
 }

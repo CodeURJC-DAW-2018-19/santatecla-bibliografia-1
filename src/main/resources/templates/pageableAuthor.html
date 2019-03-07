@@ -1,19 +1,16 @@
-<div class="row">
-	{{#authors}}
-	<div class="col-md-6">
-		<a href="/author/{{id}}">
-			<div class="card bg-dark text-white col">
-				<img class="card-img" src="/image/{{imgId}}" alt="Card image" style="height:10em;width:10em">
-				<div class="card-img-overlay">
-					<h4 class="card-title">{{name}}</h4>
-				</div>
-			</div>
-		</a>
+{{#authors}}
+<a href="/author/{{id}}">
+	<div class="row">
+        <div class="card bg-dark text-white col">
+            <img class="card-img" src="/image/{{imgId}}" alt="Card image">
+            <div class="card-img-overlay">
+            	<h4 class="card-title">{{name}}</h4>
+        	</div>
+    	</div>
 	</div>
-	{{/authors}}
-</div>
-
+</a>
 <script>
 	var indexAuthors={{indexAuthors}};
 </script>
 
+{{/authors}}
