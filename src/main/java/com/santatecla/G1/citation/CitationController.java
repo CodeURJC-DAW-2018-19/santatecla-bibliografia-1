@@ -32,11 +32,16 @@ public class CitationController {
 	
 	@RequestMapping("/saveCitation")
 	public String saveCitation(Model model, Citation citation) {
-		Book book = bookService.findByTitle(citation.getTextAux());
-		Citation quote = new Citation(citation.getText(),book); 
-		book.addCitations(quote);
-		citationService.save(quote);
-		model.addAttribute("text","Citation Created");
+		if(bookService.findByTitle(citation.getTextAux())!=null) {
+			Book book = bookService.findByTitle(citation.getTextAux());
+			Citation quote = new Citation(citation.getText(),book); 
+			book.addCitations(quote);
+			citationService.save(quote);
+			model.addAttribute("text","Citation Created");
+		}
+		else {
+			model.addAttribute("text","Error al crear la cita, no existe ese libro");
+		}	
 		return "Message";
 	}
 	
