@@ -69,6 +69,7 @@ public class AuthorController {
 			model.addAttribute("books", books);
 			model.addAttribute("themes",themes);
 			model.addAttribute("citations",citations);
+			model.addAttribute("entity","author");
 		}
 		
 		System.out.println("Add tab");

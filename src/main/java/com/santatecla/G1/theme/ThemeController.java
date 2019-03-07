@@ -60,6 +60,7 @@ public class ThemeController {
 			model.addAttribute("books",books);
 			model.addAttribute("theme", theme);
 			model.addAttribute("citations",citation);
+			model.addAttribute("entity","theme");
 		}
 		
 		tabs.userTabs(model, "/theme/"+ id, theme.getName(), true, id);
