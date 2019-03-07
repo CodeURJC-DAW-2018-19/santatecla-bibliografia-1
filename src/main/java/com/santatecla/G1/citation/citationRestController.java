@@ -4,8 +4,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
+import com.santatecla.G1.theme.Theme;
 import com.santatecla.G1.user.UserComponent;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -21,6 +23,8 @@ import org.springframework.ui.Model;
 @RestController
 @RequestMapping("/api")
 public class citationRestController {
+	interface CitationDetailView extends Citation.BasicView, Citation.BookView, Citation.ThemeView, Book.BasicView, Theme.BasicView {}
+	
 	@Autowired
 	private CitationService citationService;
 	@Autowired
@@ -28,12 +32,16 @@ public class citationRestController {
 	@Autowired
 	private UserComponent userComponent;
 
-	@RequestMapping(value="/citations", method = GET)
+	
+	
+	@JsonView(Citation.BasicView.class)
+	@RequestMapping(value="/citation", method = GET)
 	public Collection<Citation> citations(){
 		return citationService.findAll();
 	}
 	
-	@RequestMapping(value="/citations", method = POST)
+	@JsonView(Citation.BasicView.class)
+	@RequestMapping(value="/citation", method = POST)
 	public Citation saveCitation(Model model, Citation citation) {
 		Book book = bookService.findByTitle(citation.getTextAux());
 		Citation quote = new Citation(citation.getText(),book); 
@@ -43,7 +51,9 @@ public class citationRestController {
 		return quote;
 	}
 	
-	@RequestMapping(value="/theme/{id}", method=PATCH)
+	
+	@JsonView(CitationDetailView.class)
+	@RequestMapping(value="/citation/{id}", method=PATCH)
 	public ResponseEntity<Citation> updateCitation(Model model, Citation newCitation, @PathVariable long id) {
 		Citation oldCitation=citationService.findById(id);
 		if(oldCitation!=null) {
@@ -55,11 +65,12 @@ public class citationRestController {
 		else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@RequestMapping(value="/theme/{id}", method = DELETE)
-	public ResponseEntity<Citation> deleteAuthor(Model model, @PathVariable long id) {
+	@JsonView(CitationDetailView.class)
+	@RequestMapping(value="/citation/{id}", method = DELETE)
+	public ResponseEntity<Citation> deleteCitation(Model model, @PathVariable long id) {
 		Citation citation = citationService.findById(id);
 		if (citation!=null) {
-			model.addAttribute("theme", citation);
+			model.addAttribute("Citation", citation);
 			model.addAttribute("text","Cita eliminada de forma correcta");
 			citationService.deleteById(id);	
 			return new ResponseEntity<>(citation, HttpStatus.OK);

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
+
+import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
@@ -20,6 +22,7 @@ import com.santatecla.G1.user.UserComponent;
 @RestController
 @RequestMapping("/api")
 public class ThemeRestController {
+	interface ThemeDetailView extends Theme.BasicView, Theme.BooksView, Book.BasicView{}
 	
 	@Autowired
 	private ThemeService themeService;
@@ -29,6 +32,26 @@ public class ThemeRestController {
 	@Autowired
 	private BookService bookService;
 	
+	
+	
+	@JsonView(Theme.BasicView.class)
+	@RequestMapping(value="/theme", method = GET)
+	public Collection<Theme> themes(){
+		return themeService.findAll();
+	}
+	
+	@JsonView(Theme.BasicView.class)
+	@RequestMapping(value= "/theme", method = POST)
+	public Theme theme(Model model, Theme theme) {
+		themeService.save(theme);
+		System.out.println(theme.toString());
+		model.addAttribute("text","Theme Created");
+		return theme;
+	}	
+
+	
+	
+	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/theme/{id}", method = GET)
 	public ResponseEntity<Theme> theme(Model model, @PathVariable long id) {
 		Theme theme = themeService.findById(id);
@@ -53,19 +76,8 @@ public class ThemeRestController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@RequestMapping(value= "/themes", method = POST)
-	public Theme theme(Model model, Theme theme) {
-		themeService.save(theme);
-		System.out.println(theme.toString());
-		model.addAttribute("text","Theme Created");
-		return theme;
-	}
-	
-	@RequestMapping(value="/getThemes", method = GET)
-	public Collection<Theme> themes(){
-		return themeService.findAll();
-	}
-	
+
+	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value="/theme/{id}", method = PATCH)
 	public ResponseEntity<Theme> updateTheme(Model model, Theme newTheme, @PathVariable long id) {
 		Theme oldTheme = themeService.findById(id);
@@ -79,6 +91,7 @@ public class ThemeRestController {
 
 	}
 	
+	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/theme/{id}", method = DELETE)
 	public ResponseEntity<Theme> deleteTheme(Model model, @PathVariable long id) {
 		Theme theme = themeService.findById(id);

@@ -9,19 +9,27 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.theme.Theme;
 
 
 @Entity
 public class Citation {
+	public interface BasicView {}
+	interface BookView {}
+	interface ThemeView {}
 	
-	
+	@JsonView(BasicView.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	@JsonView(BasicView.class)
 	@Column(length=1000)
 	private String text;
+	
+	@JsonView(BasicView.class)
 	private String textAux;
 	
 	/********************************************
@@ -31,10 +39,11 @@ public class Citation {
 	//To avoid cicles on DB model
 	
 	@OneToOne()
-	@JsonIgnore
+	@JsonView(BookView.class)
 	private Book book;
+	
 	@OneToOne
-	@JsonIgnore
+	@JsonView(ThemeView.class)
 	private Theme theme;
 	
 	

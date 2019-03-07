@@ -12,30 +12,47 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
 
 
 @Entity
 public class Author {
+	public interface BasicView{}
+	interface BooksView{}
+	
+	@JsonView(BasicView.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	@JsonView(BasicView.class)
 	private String name;
 	
+	@JsonView(BasicView.class)
 	private String urlImage;
+	
+	@JsonView(BasicView.class)
 	private String birthDate;
+	
+	@JsonView(BasicView.class)
 	private String deathDate;
+	
+	@JsonView(BasicView.class)
 	private String bornPlace;
+	
+	@JsonView(BasicView.class)
 	@Column(length=500)
 	private String urlMap;
+	
+	@JsonView(BasicView.class)
 	private int imgId;
 	
 	/********************************************
 	* RELATIONS WITH OTHER CLASES TO DDBB MODEL
 	********************************************/
-	
+	@JsonView(BooksView.class)
 	@OneToMany
-	@JsonIgnore
 	private List<Book> books;
 	
 	/********************************************
