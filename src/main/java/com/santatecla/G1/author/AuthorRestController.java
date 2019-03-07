@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,6 +49,12 @@ public class AuthorRestController {
 	@RequestMapping(value="/author" , method = GET)
 	public List<Author> authors(){
 		return authorService.findAll();
+	}
+	
+	@JsonView(Author.BasicView.class)
+	@RequestMapping(value="/authorPageable" , method = RequestMethod.GET)
+	public List<Author> authors(Pageable page){
+		return authorService.findAll(page).getContent();
 	}
 	
 	@JsonView(Author.BasicView.class)
