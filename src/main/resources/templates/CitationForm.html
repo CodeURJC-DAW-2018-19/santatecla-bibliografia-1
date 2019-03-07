@@ -52,9 +52,11 @@
                                                 <div class="form-inline col-sm-0">
                                                     <label>Obra a la que pertenece</label>
                                                 </div>
+                                                {{#books}}
                                                 <div>
-													<input type="text" class="form-control" name="textAux">
+													<input type="radio" class="form-control" name="textAux" value="{{title}}">{{title}}
 												</div>
+												{{/books}}
 												
                                             </div>
                                             <button type="submit" class="btn btn-primary">Save</button>

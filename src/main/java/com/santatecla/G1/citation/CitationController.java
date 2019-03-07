@@ -1,6 +1,8 @@
 package com.santatecla.G1.citation;
 
 import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,8 @@ public class CitationController {
 	}
 	@RequestMapping("/newCitation")
 	public String citation(Model model) {
+		List<Book> books=bookService.findAll();
+		model.addAttribute("books",books);
 		return "CitationForm";
 	}
 	
