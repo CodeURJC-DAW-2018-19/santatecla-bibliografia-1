@@ -163,6 +163,11 @@ public class Author {
 	public void addBook(Book book) {
 		this.books.add(book);
 	}
+	
+	public void addBookList(List<Book> books) {
+		this.books=books;
+	}
+	
 	public List<Book> getBooks(){
 		return this.books;
 	}

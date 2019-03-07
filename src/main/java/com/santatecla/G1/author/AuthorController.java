@@ -31,6 +31,9 @@ public class AuthorController {
 
 	@Autowired
 	private AuthorService authorService;
+	
+	@Autowired
+	private AuthorRepository authorRepository;
 
 	@Autowired
 	private TabController tabs;
@@ -116,13 +119,15 @@ public class AuthorController {
 			a.setImgId(imgId);
 		} else
 			author.setImgId(-1);
-
+		
+		List<Book> arrayBook = new ArrayList<>();
 		if (b.isPresent()) {
 			for (Long o : b.get()) {
 				Book book = bookService.findById(o);
-				a.addBook(book);
+				arrayBook.add(book);
 			}
 		}
+		a.addBookList(arrayBook);
 		authorService.save(a);
 		model.addAttribute("text", "Autor creado correctamente");
 		System.out.println(author.toString());
