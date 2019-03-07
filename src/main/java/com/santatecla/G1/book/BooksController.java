@@ -103,6 +103,8 @@ public class BooksController {
 				theme.addBook(book);
 				themeService.save(theme);
 			}
+		}else {
+			bookService.save(book);
 		}
 		
 	
