@@ -28,12 +28,12 @@ public class citationRestController {
 	@Autowired
 	private UserComponent userComponent;
 
-	@RequestMapping(value="/getCitations", method = GET)
+	@RequestMapping(value="/citations", method = GET)
 	public Collection<Citation> citations(){
 		return citationService.findAll();
 	}
 	
-	@RequestMapping(value="/saveCitation", method = POST)
+	@RequestMapping(value="/citations", method = POST)
 	public Citation saveCitation(Model model, Citation citation) {
 		Book book = bookService.findByTitle(citation.getTextAux());
 		Citation quote = new Citation(citation.getText(),book); 
@@ -43,7 +43,7 @@ public class citationRestController {
 		return quote;
 	}
 	
-	@RequestMapping(value="/theme/{id}/updateCitation", method=PATCH)
+	@RequestMapping(value="/theme/{id}", method=PATCH)
 	public ResponseEntity<Citation> updateCitation(Model model, Citation newCitation, @PathVariable long id) {
 		Citation oldCitation=citationService.findById(id);
 		if(oldCitation!=null) {
@@ -55,7 +55,7 @@ public class citationRestController {
 		else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@RequestMapping(value="/theme/{id}/deleteCitation", method = DELETE)
+	@RequestMapping(value="/theme/{id}", method = DELETE)
 	public ResponseEntity<Citation> deleteAuthor(Model model, @PathVariable long id) {
 		Citation citation = citationService.findById(id);
 		if (citation!=null) {

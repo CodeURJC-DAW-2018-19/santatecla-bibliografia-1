@@ -38,13 +38,13 @@ public class AuthorRestController {
 	@Autowired
 	private UserComponent userComponent;
 	
-	@RequestMapping(value="/getAuthors" , method = GET)
+	@RequestMapping(value="/authors" , method = GET)
 	public List<Author> authors(){
 		return authorService.findAll();
 	}
 	
 	
-	@RequestMapping(value="/getAuthor/{id}", method = GET)
+	@RequestMapping(value="/author/{id}", method = GET)
 	public ResponseEntity<Author> getAuthor(Model model, @PathVariable long id) {
 		Author a=authorService.findById(id);
 		if(a!=null)
@@ -53,7 +53,7 @@ public class AuthorRestController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@RequestMapping(value="/postAuthor", method = POST)
+	@RequestMapping(value="/authors", method = POST)
 	public Author author(Model model, Author author,MultipartFile file) {
 		if((file!=null)&&(!file.isEmpty())) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
@@ -68,7 +68,7 @@ public class AuthorRestController {
 		return author;
 	}
 	
-	@RequestMapping(value = "/author/{id}/updateAuthor", method = PATCH)
+	@RequestMapping(value = "/author/{id}", method = PATCH)
 	public ResponseEntity<Author> updateAuthor(Model model, Author newAuthor, @PathVariable long id) {
 		Author oldAuthor = authorService.findById(id);
 		if(oldAuthor!=null) {
@@ -81,7 +81,7 @@ public class AuthorRestController {
 		}
 	}	
 	
-	@RequestMapping(value = "/author/{id}/deleteAuthor", method = DELETE)
+	@RequestMapping(value = "/author/{id}", method = DELETE)
 	public ResponseEntity<Author> deleteAuthor(Model model, @PathVariable long id) {
 		Author author = authorService.findById(id);
 		if (author!=null) {

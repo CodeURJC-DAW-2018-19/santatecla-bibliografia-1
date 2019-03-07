@@ -53,7 +53,7 @@ public class ThemeRestController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@RequestMapping(value= "/saveTheme", method = POST)
+	@RequestMapping(value= "/themes", method = POST)
 	public Theme theme(Model model, Theme theme) {
 		themeService.save(theme);
 		System.out.println(theme.toString());
@@ -66,7 +66,7 @@ public class ThemeRestController {
 		return themeService.findAll();
 	}
 	
-	@RequestMapping(value="/theme/{id}/updateTheme", method = PATCH)
+	@RequestMapping(value="/theme/{id}", method = PATCH)
 	public ResponseEntity<Theme> updateTheme(Model model, Theme newTheme, @PathVariable long id) {
 		Theme oldTheme = themeService.findById(id);
 		if(oldTheme!=null) {
@@ -79,7 +79,7 @@ public class ThemeRestController {
 
 	}
 	
-	@RequestMapping(value = "/theme/{id}/deleteTheme", method = DELETE)
+	@RequestMapping(value = "/theme/{id}", method = DELETE)
 	public ResponseEntity<Theme> deleteTheme(Model model, @PathVariable long id) {
 		Theme theme = themeService.findById(id);
 		if (theme!=null) {

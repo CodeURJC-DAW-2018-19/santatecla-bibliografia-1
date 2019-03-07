@@ -30,7 +30,7 @@ public class BooksRestController {
 	@Autowired
 	private BookService bookService;
 
-	@RequestMapping(value="getBooks", method = GET)
+	@RequestMapping(value="books", method = GET)
 	public Collection<Book> getBooks(){
 		return bookService.findAll();
 	}
@@ -52,7 +52,7 @@ public class BooksRestController {
 		else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@RequestMapping(value = "/saveBook", method=POST)
+	@RequestMapping(value = "/books", method=POST)
 	public Book saveBook(Model model, Book book, MultipartFile file) {
 		if((file!=null)&&(!file.isEmpty())) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
@@ -66,7 +66,7 @@ public class BooksRestController {
 		return book;
 	}
 	
-	@RequestMapping(value = "book/{id}/updateBook", method = PATCH)
+	@RequestMapping(value = "book/{id}", method = PATCH)
 	public ResponseEntity<Book> updateBook(Model model,Book newBook , @PathVariable long id, MultipartFile file) {
 		Book oldBook = bookService.findOne(id);
 		if(oldBook!=null) {
@@ -83,7 +83,7 @@ public class BooksRestController {
 		else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@RequestMapping(value = "/book/{id}/deleteBook", method = DELETE)
+	@RequestMapping(value = "/book/{id}", method = DELETE)
 	public ResponseEntity<Book> deleteAuthor(Model model, @PathVariable long id) {
 		Book book = bookService.findOne(id);
 		if (book!=null) {
