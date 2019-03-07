@@ -43,7 +43,7 @@ public class citationRestController {
 		return quote;
 	}
 	
-	@RequestMapping(value="/citation/{id}", method=PATCH)
+	@RequestMapping(value="/theme/{id}", method=PATCH)
 	public ResponseEntity<Citation> updateCitation(Model model, Citation newCitation, @PathVariable long id) {
 		Citation oldCitation=citationService.findById(id);
 		if(oldCitation!=null) {
@@ -55,11 +55,11 @@ public class citationRestController {
 		else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@RequestMapping(value="/citation/{id}", method = DELETE)
+	@RequestMapping(value="/theme/{id}", method = DELETE)
 	public ResponseEntity<Citation> deleteAuthor(Model model, @PathVariable long id) {
 		Citation citation = citationService.findById(id);
 		if (citation!=null) {
-			model.addAttribute("Citation", citation);
+			model.addAttribute("theme", citation);
 			model.addAttribute("text","Cita eliminada de forma correcta");
 			citationService.deleteById(id);	
 			return new ResponseEntity<>(citation, HttpStatus.OK);
