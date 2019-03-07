@@ -66,10 +66,11 @@ public class AuthorController {
 		}
 		
 		boolean haveThemes = false;
-		if (themes.size()>0)
+		if (themes.get(0)!=null) {
 			haveThemes=true;
+		}
 		
-
+		System.out.println("haveThemes es: " + author.getName() + haveThemes);
 		
 		if (author != null) {
 			model.addAttribute("haveThemes", haveThemes);

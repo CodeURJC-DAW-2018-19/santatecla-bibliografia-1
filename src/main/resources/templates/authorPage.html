@@ -40,9 +40,12 @@
 
                     <!-- BEGIN AUTHOR BOTTOM-->
                     <div class="row bottom-row">
-                  
-                        {{>themeColumn}}
-                        
+                        {{#haveThemes}}
+                        	{{>themeColumn}}
+                        {{/haveThemes}}
+                        {{^haveThemes}}
+                        	{{>emptyThemeColumn}}
+                        {{/haveThemes}}
                         {{>bookColumn}}
                         {{>quoteColumn}}
                     </div>
