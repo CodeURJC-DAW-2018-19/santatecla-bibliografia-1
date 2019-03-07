@@ -114,15 +114,19 @@ public class AuthorController {
 	
 	@RequestMapping(value="/saveAuthor")
 	public String author(Model model, Author author,@RequestParam("file")MultipartFile file, @RequestParam Long[] b) {
-		System.out.println(b.toString());
+		Author a= author;
 		if((file!=null)&&(!file.isEmpty())) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
 			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);	
-			author.setImgId(imgId);
+			a.setImgId(imgId);
 		}			
 		else
 			author.setImgId(-1);
-		authorService.save(author);
+		for(int i=0;i<b.length;i++) {
+			Book book=bookService.findById(b[i]);
+			a.addBook(book);
+		}
+		authorService.save(a);
 		model.addAttribute("text","Autor creado correctamente");
 		System.out.println(author.toString());
 		return "Message";
