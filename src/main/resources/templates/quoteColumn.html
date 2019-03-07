@@ -1,39 +1,38 @@
 <!-- CITAS -->
 <div class="temas-box col-sm-12 col-md-6 col-lg-4">
-    <div class="card cajas ">
-        <div class="card-header card-header-text card-header-primary">
-            <div class="card-text">
-                <h4 class="card-title">Citas</h4>
-            </div>
-        </div>
-        <div class="card-body cajas-bot">
-            <div class="daw-miniatures cajas-bot"> 
-                {{#citations}} 
-                
-                <div class="row">
-                    <div class="card bg-dark text-white col">
-                        <img class="card-img" src="/img/theme.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">{{text}}</h4>
-                        </div>
-                    </div>
-                </div>
-                {{/citations}}
-            </div>
+	<div class="card cajas ">
+		<div class="card-header card-header-text card-header-primary">
+			<div class="card-text">
+				<h4 class="card-title">Citas</h4>
+			</div>
+		</div>
+		<div class="card-body cajas-bot">
+			<div class="daw-miniatures cajas-bot">
+				{{#citations}}
 
-            <div class="daw-buttons d-flex justify-content-between">
-            {{#admin}}
-             <form action="/newCitation" method="get">
-            
-   			<input type="hidden" name="id" value="{{id}}">
-			<input type="hidden"name="entity" value="{{entity}}">
-             <button class="btn btn-primary">Añadir</button>
-              
-                
-             </form>
-            {{/admin}}
-                <button class="btn btn-primary">Buscar</button>
-            </div>
-        </div>
-    </div>
+				<div class="row">
+					<div class="card bg-dark text-white col">
+						<img class="card-img" src="/img/theme.png" alt="Card image">
+						<div class="card-img-overlay">
+							<h4 class="card-title">{{text}}</h4>
+						</div>
+					</div>
+				</div>
+				{{/citations}}
+			</div>
+
+			<div class="daw-buttons d-flex justify-content-between">
+				{{#admin}}
+				<form action="/newCitation" method="get">
+					{{#id}} <input type="hidden" name="id" value="{{id}}"> <input
+						type="hidden" name="entity" value="{{entity}}">
+					<button class="btn btn-primary">Añadir</button>
+					{{/id}} {{^id}} {{/id}}
+
+				</form>
+				{{/admin}}
+				<button class="btn btn-primary">Buscar</button>
+			</div>
+		</div>
+	</div>
 </div>
