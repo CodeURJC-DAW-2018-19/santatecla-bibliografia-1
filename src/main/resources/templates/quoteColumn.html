@@ -23,9 +23,14 @@
 
             <div class="daw-buttons d-flex justify-content-between">
             {{#admin}}
-            	<a href="/newCitation">
-                <button class="btn btn-primary">Añadir</button>
-                </a>
+             <form action="/newCitation" method="get">
+            
+   			<input type="hidden" name="id" value="{{id}}">
+			<input type="hidden"name="entity" value="theme">
+             <button class="btn btn-primary">Añadir</button>
+              
+                
+             </form>
             {{/admin}}
                 <button class="btn btn-primary">Buscar</button>
             </div>

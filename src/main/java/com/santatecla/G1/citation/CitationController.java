@@ -9,9 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
+import com.santatecla.G1.theme.Theme;
+import com.santatecla.G1.theme.ThemeService;
 import com.santatecla.G1.user.UserComponent;
 
 @Controller
@@ -22,15 +25,25 @@ public class CitationController {
 	@Autowired
 	private BookService bookService;
 	@Autowired
+	private ThemeService themeService;
+	@Autowired
 	private UserComponent userComponent;
 		
 	public Collection<Citation> citations(){
 		return citationService.findAll();
 	}
 	@RequestMapping("/newCitation")
-	public String citation(Model model) {
-		List<Book> books=bookService.findAll();
-		model.addAttribute("books",books);
+	public String citation(Model model, @RequestParam long id, @RequestParam String entity) {
+		System.out.println(id);
+		System.out.println(entity);
+		
+		if (entity.equals("theme")) {
+			Theme theme = themeService.findById(id);
+			List<Book> books=bookService.findByTheme(theme);
+			model.addAttribute("books",books);
+		}
+		
+		
 		return "CitationForm";
 	}
 	
