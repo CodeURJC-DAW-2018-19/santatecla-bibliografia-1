@@ -122,13 +122,13 @@ public class AuthorController {
 		if (b.isPresent()) {
 			for (Long o : b.get()) {
 				Book book = bookService.findById(o);
-				a.addBook(book);
+				a.addBook(bookService.findById(o));
 				authorService.save(a);
 				book.setAuthor(a);
 				bookService.save(book);
 			}
 		}
-		authorService.save(a);
+		//authorService.save(a);
 		model.addAttribute("text", "Autor creado correctamente");
 		System.out.println(author.toString());
 		return "Message";
