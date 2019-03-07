@@ -131,7 +131,7 @@ public class AuthorController {
 	@RequestMapping("/newAuthor")
 	public String newAuthor(Model model) {
 		List<Book> books= bookService.findAll();
-		model.addAttribute("Books", books);
+		model.addAttribute("books", books);
 		return "authorPageEdit"; 
 	}
 	
