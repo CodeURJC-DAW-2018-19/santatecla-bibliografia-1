@@ -16,8 +16,7 @@ import com.santatecla.G1.book.Book;
 @Entity
 public class Theme {
 	public interface BasicView {}
-	public interface BooksView {}
-	public interface ThemesView {}
+	interface BooksView {}
 	
 	@JsonView(BasicView.class)
 	@Id
@@ -35,11 +34,8 @@ public class Theme {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JsonView(BooksView.class)
-	public List<Book> books;
+	private List<Book> books;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JsonView(ThemesView.class)
-	public List<Theme> themes;
 	
 	/********************************************
 	 * METHODS OF THE CLASS
@@ -68,14 +64,9 @@ public class Theme {
 		this.name = name;
 	}
 	
-	//public void add(Theme theme) {
-	//	this.themes.add(theme);
-	//}
-	
 	public void addBook(Book book) {
 		this.books.add(book);
 	}
-	
 	public List<Book> getBook(){
 		return this.books;
 	}
@@ -89,6 +80,5 @@ public class Theme {
 		this.name=t.name;
 		this.books=t.books;
 	}
-
-
+	
 }

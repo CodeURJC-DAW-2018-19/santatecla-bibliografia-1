@@ -60,10 +60,10 @@ public class AuthorRestController {
 		}			
 		else
 			author.setImgId(-1);
-			authorService.save(author);
-			model.addAttribute("text","Autor creado correctamente");
-			System.out.println(author.toString());
-			return author;
+		authorService.save(author);
+		model.addAttribute("text","Autor creado correctamente");
+		System.out.println(author.toString());
+		return author;
 	}	
 	
 	@JsonView(AuthorDetailView.class)

@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
-import com.santatecla.G1.theme.ThemeRestController.ThemeDetailView;
 import com.santatecla.G1.user.UserComponent;
 
 @RestController
@@ -106,21 +105,4 @@ public class BooksRestController {
 		else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@JsonView(BookDetailView.class)
-	@RequestMapping(value="/book/{id1}/addTheme/{id2}", method = PATCH)
-	public ResponseEntity<Book> addTheme(Model model, @PathVariable long id1, @PathVariable long id2, Theme theme){
-		Book book = bookService.findOne(id1);
-		if(book!=null) {
-			if(theme!=null) {
-				book.getTheme();
-				
-				bookService.save(book);
-				model.addAttribute("text", "Tema añadido al libro correctamente");
-			}
-			else model.addAttribute("text", "El tema es null");
-			return new ResponseEntity<>(book, HttpStatus.OK);
-		}
-		else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
 }

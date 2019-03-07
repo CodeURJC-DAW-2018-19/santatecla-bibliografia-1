@@ -22,7 +22,7 @@ import com.santatecla.G1.user.UserComponent;
 @RestController
 @RequestMapping("/api")
 public class ThemeRestController {
-	public interface ThemeDetailView extends Theme.BasicView, Theme.BooksView, Book.BasicView{}
+	interface ThemeDetailView extends Theme.BasicView, Theme.BooksView, Book.BasicView{}
 	
 	@Autowired
 	private ThemeService themeService;
@@ -104,14 +104,13 @@ public class ThemeRestController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@JsonView(ThemeDetailView.class)
-	@RequestMapping(value="/theme/{id}/addBook/{id}", method = PATCH)
-	public ResponseEntity<Theme> addBook(Model model, @PathVariable long id1, @PathVariable long id2, Book book){
-		Theme theme=themeService.findById(id1);
+	//¿Como se le mete un book por el postman?
+	/*@RequestMapping(value="/theme/{id}/addBook", method = PATCH)
+	public ResponseEntity<Theme> addBook(Model model, @PathVariable long id, Book book){
+		Theme theme=themeService.findById(id);
 		if(theme!=null) {
 			if(book!=null) {
 				theme.addBook(book);
-				//Añadir en lugar de como libro como id
 				themeService.save(theme);
 				model.addAttribute("text", "Libro añadido al tema de forma correcta");
 			}
@@ -120,5 +119,5 @@ public class ThemeRestController {
 		}
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
+	}*/
 }
