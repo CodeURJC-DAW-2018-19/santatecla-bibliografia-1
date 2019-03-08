@@ -32,11 +32,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//Private pages 
 		http.authorizeRequests().anyRequest().authenticated();
 		http.authorizeRequests().antMatchers("/api/theme/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers("/api/theme/**").hasRole("USER");
+		http.authorizeRequests().antMatchers("/api/theme/**").hasRole("STUDENT");
 		http.authorizeRequests().antMatchers("/api/author/**").hasRole("ADMIN").and().httpBasic().realmName(REALM).authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().antMatchers("/api/author/**").hasRole("USER");
+		http.authorizeRequests().antMatchers("/api/author/**").hasRole("STUDENT");
 		http.authorizeRequests().antMatchers("/api/book/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers("/api/book/**").hasRole("USER");
+		http.authorizeRequests().antMatchers("/api/book/**").hasRole("STUDENT");
 		http.authorizeRequests().antMatchers("/api/book").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers("/api/theme").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers("/api/author").hasRole("ADMIN");
