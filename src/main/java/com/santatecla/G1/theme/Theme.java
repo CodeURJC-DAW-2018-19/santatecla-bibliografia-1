@@ -9,14 +9,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
 
 @Entity
 public class Theme {
-
+	public interface BasicView {}
+	interface BooksView {}
+	
+	@JsonView(BasicView.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	@JsonView(BasicView.class)
 	private String name;
 	
 	/********************************************
@@ -26,6 +33,7 @@ public class Theme {
 	//To avoid cicles on DB model
 	
 	@OneToMany(cascade=CascadeType.ALL)
+	@JsonView(BooksView.class)
 	private List<Book> books;
 	
 	
@@ -66,6 +74,11 @@ public class Theme {
 	@Override
 	public String toString() {
 		return "Nombe: "+name ;
+	}
+	
+	public void update(Theme t) {
+		this.name=t.name;
+		this.books=t.books;
 	}
 	
 }

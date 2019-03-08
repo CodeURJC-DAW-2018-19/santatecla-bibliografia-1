@@ -87,7 +87,7 @@ public class CitationController {
 		}
 	}
 	@RequestMapping("/theme/{id}/updateCitation")
-	public String updateAuthor(Model model, Citation citation, @PathVariable long id) {
+	public String updateCitation(Model model, Citation citation, @PathVariable long id) {
 		
 		citation.setId(id);
 		citationService.save(citation);		
@@ -97,7 +97,7 @@ public class CitationController {
 	
 	
 	@RequestMapping("/theme/{id}/deleteCitation")
-	public String deleteAuthor(Model model, @PathVariable long id) {
+	public String deleteCitation(Model model, @PathVariable long id) {
 		Citation citation = citationService.findById(id);
 		if (citation!=null) {
 			model.addAttribute("theme", citation);

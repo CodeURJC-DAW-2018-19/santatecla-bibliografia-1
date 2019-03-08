@@ -106,10 +106,10 @@ public class ThemeController {
 	}
 	
 	@RequestMapping("/theme/{id}/updateTheme")
-	public String updateAuthor(Model model, Theme theme, @PathVariable long id) {
-		
-		theme.setId(id);
-		themeService.save(theme);		
+	public String updateAuthor(Model model, Theme newTheme, @PathVariable long id) {
+		Theme oldTheme = themeService.findById(id);
+		oldTheme.update(newTheme);
+		themeService.save(oldTheme);		
 		model.addAttribute("text","Tema editado de forma correcta");
 		return "Message";
 	}
