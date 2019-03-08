@@ -3,7 +3,6 @@ var workPage = 1;
 //var authorPage = 0; this show that works
 var authorPage = 1;
 
-
 function loadMoreThemes() {
     var urlPage = "/table-theme?page=" + themePage;
     
@@ -29,10 +28,6 @@ function loadMoreWorks() {
         $("#moreWorks").append(data);
         workPage++;
         
-        if (indexWorks == workPage){
-        	$("#buttonMoreWorks").hide();
-        	console.log("esconder boton obra");
-        }
     })
 }
 
