@@ -75,7 +75,11 @@ public class Theme {
 	public String toString() {
 		return "Nombe: "+name ;
 	}
-	
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+
 	public void update(Theme t) {
 		this.name=t.name;
 		this.books=t.books;

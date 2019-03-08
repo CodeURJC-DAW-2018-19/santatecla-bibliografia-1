@@ -46,17 +46,13 @@ public class AuthorRestController {
 	
 	@RequestMapping(value="/author2", method = POST)
 	public Author author(@RequestBody Author author) {
-		ArrayList<Book> books = new ArrayList<>();
-		for(Book book : author.getBooks()) {
-			
-			books.add(bookService.findById(book.getId()));
+		if (author.getBooks()!=null) {
+			ArrayList<Book> books = new ArrayList<>();
+			for(Book book : author.getBooks()) {			
+				books.add(bookService.findById(book.getId()));
+			}	
+			author.setBooks(books);
 		}
-		
-		books.forEach((b) -> {
-			System.out.println(b.getTitle());
-		});
-		
-		author.setBooks(books);
 		authorService.save(author);
 		return author;
 	}	

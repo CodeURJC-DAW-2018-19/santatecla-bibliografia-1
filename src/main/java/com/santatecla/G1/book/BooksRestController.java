@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.author.AuthorService;
 import com.santatecla.G1.citation.Citation;
+import com.santatecla.G1.citation.CitationService;
 import com.santatecla.G1.theme.Theme;
 import com.santatecla.G1.theme.ThemeService;
 
@@ -36,6 +37,9 @@ public class BooksRestController {
 
 	@Autowired
 	private AuthorService authorService;
+	
+	@Autowired
+	private CitationService citationService;
 
 	@Autowired
 	private ThemeService themeService;
@@ -70,6 +74,23 @@ public class BooksRestController {
 			author = authorService.findById(book.getAuthor().getId());
 
 			book.setAuthor(author);
+		}
+		bookService.save(book);
+		
+		Theme theme = new Theme();
+		if (book.getTheme()!=null) {
+			theme = themeService.findById(book.getTheme().getId());
+
+			book.setTheme(theme);
+		}
+		bookService.save(book);
+		
+		if (book.getCitations()!=null) {
+			ArrayList<Citation> citations = new ArrayList<>();
+			for(Citation citation : book.getCitations()) {
+			
+				citations.add(citationService.findById(book.getId()));
+			}
 		}
 		bookService.save(book);
 		return book;

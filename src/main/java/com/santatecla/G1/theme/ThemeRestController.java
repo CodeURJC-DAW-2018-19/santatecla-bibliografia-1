@@ -46,6 +46,23 @@ public class ThemeRestController {
 		return themeService.findAll(page).getContent();
 	}
 	
+	@RequestMapping(value="/theme2", method = POST)
+	public Theme theme(@RequestBody Theme theme) {
+		ArrayList<Book> books = new ArrayList<>();
+		for(Book book : theme.getBook()) {
+			
+			books.add(bookService.findById(book.getId()));
+		}
+		
+		books.forEach((b) -> {
+			System.out.println(b.getTitle());
+		});
+		
+		theme.setBooks(books);
+		themeService.save(theme);
+		return theme;
+	}	
+	
 	@JsonView(Theme.BasicView.class)
 	@RequestMapping(value = "/theme-name-pageable", method = RequestMethod.GET)
 	public List<String> themePageableGuest(Pageable page) {

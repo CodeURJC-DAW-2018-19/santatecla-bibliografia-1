@@ -185,6 +185,10 @@ public class Book {
 		this.author = author;
 	}
 
+	public void setCitation(List<Citation> citation) {
+		this.citation = citation;
+	}
+
 	@Override
 	public String toString() {
 		return "Title: "+ this.title + "(" + this.nameEdit + ")";
