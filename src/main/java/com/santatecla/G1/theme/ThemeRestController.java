@@ -40,9 +40,20 @@ public class ThemeRestController {
 	}
 	
 	@JsonView(Theme.BasicView.class)
-	@RequestMapping(value="/themePageable" , method = RequestMethod.GET)
-	public List<Theme> authors(Pageable page){
+	@RequestMapping(value="/theme-pageable" , method = RequestMethod.GET)
+	public List<Theme> themePageable(Pageable page){
 		return themeService.findAll(page).getContent();
+	}
+	
+	@JsonView(Theme.BasicView.class)
+	@RequestMapping(value = "/theme-name-pageable", method = RequestMethod.GET)
+	public List<String> themePageableGuest(Pageable page) {
+		List<Theme> theme = themeService.findAll(page).getContent();
+		List<String> themeName = new ArrayList<>();
+		for (Theme t : theme) {
+			themeName.add(t.getName());
+		}
+		return themeName;
 	}
 	
 	@JsonView(ThemeDetailView.class)

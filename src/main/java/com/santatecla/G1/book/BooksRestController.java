@@ -47,13 +47,13 @@ public class BooksRestController {
 
 	@JsonView(Book.BasicView.class)
 	@RequestMapping(value = "/book-pageable", method = RequestMethod.GET)
-	public List<Book> authors(Pageable page) {
+	public List<Book> booksPageable(Pageable page) {
 		return bookService.findAll(page).getContent();
 	}
 
 	@JsonView(Book.BasicView.class)
 	@RequestMapping(value = "/book-name-pageable", method = RequestMethod.GET)
-	public List<String> authorsGuest(Pageable page) {
+	public List<String> booksPageableGuest(Pageable page) {
 		List<Book> books = bookService.findAll(page).getContent();
 		List<String> booksName = new ArrayList<>();
 		for (Book b : books) {

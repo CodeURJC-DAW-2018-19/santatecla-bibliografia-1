@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -33,9 +34,20 @@ public class AuthorRestController {
 	}
 	
 	@JsonView(Author.BasicView.class)
-	@RequestMapping(value="/authorPageable" , method = RequestMethod.GET)
-	public List<Author> authors(Pageable page){
+	@RequestMapping(value="/author-pageable" , method = RequestMethod.GET)
+	public List<Author> authorsPageable(Pageable page){
 		return authorService.findAll(page).getContent();
+	}
+	
+	@JsonView(Author.BasicView.class)
+	@RequestMapping(value = "/author-name-pageable", method = RequestMethod.GET)
+	public List<String> authorPageableGuest(Pageable page) {
+		List<Author> author = authorService.findAll(page).getContent();
+		List<String> authorName = new ArrayList<>();
+		for (Author a : author) {
+			authorName.add(a.getName());
+		}
+		return authorName;
 	}
 	
 	@JsonView(AuthorDetailView.class)

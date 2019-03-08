@@ -31,8 +31,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		//Private pages 
 		//http.authorizeRequests().anyRequest().authenticated();
-		http.authorizeRequests().antMatchers("/api/book-pageable").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers("/api/theme/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers("/api/book-pageable").hasAnyRole("ADMIN", "STUDENT");
+		http.authorizeRequests().antMatchers("/api/theme-pageable").hasAnyRole("ADMIN", "STUDENT");
+		http.authorizeRequests().antMatchers("/api/citation-pageable").hasAnyRole("ADMIN", "STUDENT");
+		http.authorizeRequests().antMatchers("/api/author-pageable").hasAnyRole("ADMIN", "STUDENT");
+
 		http.authorizeRequests().antMatchers("/api/theme/**").hasRole("STUDENT");
 		http.authorizeRequests().antMatchers("/api/author/**").hasRole("ADMIN").and().httpBasic().realmName(REALM).authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeRequests().antMatchers("/api/author/**").hasRole("STUDENT");

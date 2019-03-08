@@ -2,15 +2,19 @@ package com.santatecla.G1.citation;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
@@ -33,6 +37,23 @@ public class CitationRestController {
 	@RequestMapping(value="/citation", method = GET)
 	public Collection<Citation> citations(){
 		return citationService.findAll();
+	}
+	
+	@JsonView(Citation.BasicView.class)
+	@RequestMapping(value="/citation-pageable" , method = RequestMethod.GET)
+	public List<Citation> citationPageable(Pageable page){
+		return citationService.findAll(page).getContent();
+	}
+	
+	@JsonView(Citation.BasicView.class)
+	@RequestMapping(value = "/citation-name-pageable", method = RequestMethod.GET)
+	public List<String> citationPageableGuest(Pageable page) {
+		List<Citation> citation = citationService.findAll(page).getContent();
+		List<String> citationName = new ArrayList<>();
+		for (Citation c : citation) {
+			citationName.add(c.getText());
+		}
+		return citationName;
 	}
 	
 	@JsonView(CitationDetailView.class)

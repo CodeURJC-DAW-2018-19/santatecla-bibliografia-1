@@ -3,7 +3,11 @@ package com.santatecla.G1.citation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import com.santatecla.G1.book.Book;
 
 @Service
 public class CitationService {
@@ -24,5 +28,9 @@ public class CitationService {
 	
 	public void deleteById(long id) {
 		citationRepository.deleteById(id);
+	}
+	
+	public Page<Citation> findAll(Pageable page){
+		return citationRepository.findAll(page);
 	}
 }
