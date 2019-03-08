@@ -2,6 +2,7 @@ package com.santatecla.G1.citation;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -40,15 +41,25 @@ public class citationRestController {
 		return citationService.findAll();
 	}
 	
-	@JsonView(Citation.BasicView.class)
+	@JsonView(CitationDetailView.class)
 	@RequestMapping(value="/citation", method = POST)
-	public Citation saveCitation(Model model, Citation citation) {
-		Book book = bookService.findByTitle(citation.getTextAux());
-		Citation quote = new Citation(citation.getText(),book); 
-		book.addCitations(quote);
-		citationService.save(quote);
+	public ResponseEntity<Citation> saveCitation(Model model, Citation citation,@RequestParam Long bookId) {
+		citationService.save(citation);
+		if(bookId!=null) {
+			Book book = bookService.findOne(bookId);
+			if(book!=null) {
+				book.addCitations(citation);
+				citation.setBook(book);
+				bookService.save(book);
+			}
+			else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		citationService.save(citation);
 		model.addAttribute("text","Citation Created");
-		return quote;
+		return new ResponseEntity<>(citation, HttpStatus.OK);
 	}
 	
 	
@@ -71,10 +82,20 @@ public class citationRestController {
 	
 	@JsonView(CitationDetailView.class)
 	@RequestMapping(value="/citation/{id}", method=PATCH)
-	public ResponseEntity<Citation> updateCitation(Model model, Citation newCitation, @PathVariable long id) {
+	public ResponseEntity<Citation> updateCitation(Model model, Citation newCitation, @PathVariable long id, Long bookId) {
 		Citation oldCitation=citationService.findById(id);
 		if(oldCitation!=null) {
 			oldCitation.update(newCitation);
+			if(bookId!=null) {
+				Book book = bookService.findOne(bookId);
+				if(book!=null) {
+					book.addCitations(oldCitation);
+					oldCitation.setBook(book);
+					bookService.save(book);
+				}else
+					return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			citationService.save(oldCitation);		
 			model.addAttribute("text","Cita editada de forma correcta");
 			return new ResponseEntity<>(oldCitation, HttpStatus.OK);

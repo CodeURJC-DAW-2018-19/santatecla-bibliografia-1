@@ -57,9 +57,10 @@ public class AuthorRestController {
 		return authorService.findAll(page).getContent();
 	}
 	
-	@JsonView(Author.BasicView.class)
+	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value="/author", method = POST)
 	public Author author(Model model, Author author,MultipartFile file) {
+		authorService.save(author);
 		if((file!=null)&&(!file.isEmpty())) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
 			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);	

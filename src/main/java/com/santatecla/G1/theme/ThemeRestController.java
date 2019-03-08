@@ -50,7 +50,7 @@ public class ThemeRestController {
 		return themeService.findAll(page).getContent();
 	}
 	
-	@JsonView(Theme.BasicView.class)
+	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value= "/theme", method = POST)
 	public Theme theme(Model model, Theme theme) {
 		themeService.save(theme);

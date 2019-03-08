@@ -21,8 +21,10 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.author.Author;
+import com.santatecla.G1.author.AuthorService;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
+import com.santatecla.G1.theme.ThemeService;
 import com.santatecla.G1.user.UserComponent;
 
 @RestController
@@ -35,7 +37,13 @@ public class BooksRestController {
 	
 	@Autowired
 	private BookService bookService;
-
+	
+	@Autowired
+	private AuthorService authorService;
+	
+	@Autowired
+	private ThemeService themeService;
+	
 	
 	@JsonView(Book.BasicView.class)
 	@RequestMapping(value="book", method = GET)
@@ -49,9 +57,26 @@ public class BooksRestController {
 		return bookService.findAll(page).getContent();
 	}
 	
-	@JsonView(Book.BasicView.class)
+	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/book", method=POST)
-	public Book saveBook(Model model, Book book, MultipartFile file) {
+	public Book saveBook(Model model, Book book, MultipartFile file, Long authorId, Long themeId) {
+		bookService.save(book);
+		if(authorId!=null) {
+			Author author = authorService.findById(authorId);
+			if(author!=null) {
+				book.setAuthor(author);
+				author.addBook(book);
+				authorService.save(author);
+			}
+		}
+		if(themeId!=null) {
+			Theme theme = themeService.findById(themeId);
+			if(theme!=null) {
+				book.setTheme(theme);
+				theme.addBook(book);
+				themeService.save(theme);
+			}
+		}
 		if((file!=null)&&(!file.isEmpty())) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
 			book.setImgId(imgId);
@@ -86,15 +111,31 @@ public class BooksRestController {
 	
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "book/{id}", method = PATCH)
-	public ResponseEntity<Book> updateBook(Model model,Book newBook , @PathVariable long id, MultipartFile file) {
+	public ResponseEntity<Book> updateBook(Model model,Book newBook , @PathVariable long id, MultipartFile file, Long authorId, Long themeId) {
 		Book oldBook = bookService.findOne(id);
 		if(oldBook!=null) {
+			oldBook.update(newBook);
+			if(authorId!=null) {
+				Author author = authorService.findById(authorId);
+				if(author!=null) {
+					oldBook.setAuthor(author);
+					author.addBook(oldBook);
+					authorService.save(author);
+				}
+			}
+			if(themeId!=null) {
+			Theme theme = themeService.findById(themeId);
+				if(theme!=null) {
+					oldBook.setTheme(theme);
+					theme.addBook(oldBook);
+					themeService.save(theme);
+				}				
+			}
 			if((file!=null)&&(!file.isEmpty())) {
 				int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
 				oldBook.setImgId(imgId);
 				com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);				
 			}
-			oldBook.update(newBook);
 			bookService.save(oldBook);		
 			model.addAttribute("text","Libro actualizado correctamente");
 			return new ResponseEntity<>(oldBook, HttpStatus.OK);

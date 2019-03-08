@@ -68,7 +68,19 @@ public class Citation {
 		this.text = text;
 		this.textAux = book;
 	}
-
+	
+	public void update(Citation c) {
+		this.book=c.book;
+		this.text=c.text;
+		this.textAux=c.textAux;
+		this.theme=c.theme;
+	}
+	
+	@Override
+	public String toString() {
+		return "Cita: "+this.text;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -81,45 +93,25 @@ public class Citation {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
 	public Book getBook() {
 		return book;
 	}
 	public void setBook(Book book) {
 		this.book = book;
 	}
-	
-
 	public Theme getTheme() {
 		return theme;
 	}
-
 	public void setTheme(Theme theme) {
 		this.theme = theme;
 	}
-
-	
 	public String getTextAux() {
 		return textAux;
 	}
-
-
 	public void setTextAux(String textAux) {
 		this.textAux = textAux;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Cita: "+this.text;
-	}
-	
-	public void update(Citation c) {
-		this.book=c.book;
-		this.text=c.text;
-		this.textAux=c.textAux;
-		this.theme=c.theme;
-	}
 	
 	
 }
