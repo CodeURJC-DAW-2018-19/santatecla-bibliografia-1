@@ -62,6 +62,18 @@ public class BooksRestController {
 		}
 		return booksName;
 	}
+	
+	@RequestMapping(value="/book2", method = POST)
+	public Book book(@RequestBody Book book) {
+		Author author = new Author();
+		if (book.getAuthor()!=null) {
+			author = authorService.findById(book.getAuthor().getId());
+
+			book.setAuthor(author);
+		}
+		bookService.save(book);
+		return book;
+	}	
 
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/book", method = POST)

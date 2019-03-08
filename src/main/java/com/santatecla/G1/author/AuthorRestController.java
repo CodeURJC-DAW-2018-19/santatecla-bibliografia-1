@@ -18,6 +18,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
+import com.santatecla.G1.book.BookService;
 
 @RestController
 @RequestMapping("/api")
@@ -26,6 +27,9 @@ public class AuthorRestController {
 	
 	@Autowired
 	private AuthorService authorService;
+	
+	@Autowired
+	private BookService bookService;
 	
 	
 	@JsonView(Author.BasicView.class)
@@ -39,6 +43,23 @@ public class AuthorRestController {
 	public List<Author> authorsPageable(Pageable page){
 		return authorService.findAll(page).getContent();
 	}
+	
+	@RequestMapping(value="/author2", method = POST)
+	public Author author(@RequestBody Author author) {
+		ArrayList<Book> books = new ArrayList<>();
+		for(Book book : author.getBooks()) {
+			
+			books.add(bookService.findById(book.getId()));
+		}
+		
+		books.forEach((b) -> {
+			System.out.println(b.getTitle());
+		});
+		
+		author.setBooks(books);
+		authorService.save(author);
+		return author;
+	}	
 	
 	@JsonView(Author.BasicView.class)
 	@RequestMapping(value = "/author-name-pageable", method = RequestMethod.GET)
