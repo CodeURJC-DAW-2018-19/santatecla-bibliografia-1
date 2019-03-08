@@ -4,37 +4,31 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
+
+import java.util.Collection;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
 import com.santatecla.G1.theme.Theme;
-import com.santatecla.G1.user.UserComponent;
-
-import static org.springframework.web.bind.annotation.RequestMethod.*;
-
-import java.util.Collection;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-
 
 @RestController
 @RequestMapping("/api")
-public class citationRestController {
+public class CitationRestController {
 	interface CitationDetailView extends Citation.BasicView, Citation.BookView, Citation.ThemeView, Book.BasicView, Theme.BasicView {}
 	
 	@Autowired
 	private CitationService citationService;
+
 	@Autowired
 	private BookService bookService;
-	@Autowired
-	private UserComponent userComponent;
 
-	
-	
+
 	@JsonView(Citation.BasicView.class)
 	@RequestMapping(value="/citation", method = GET)
 	public Collection<Citation> citations(){
@@ -61,7 +55,6 @@ public class citationRestController {
 		model.addAttribute("text","Citation Created");
 		return new ResponseEntity<>(citation, HttpStatus.OK);
 	}
-	
 	
 	@JsonView(CitationDetailView.class)
 	@RequestMapping(value = "/citation/{id}", method = GET)

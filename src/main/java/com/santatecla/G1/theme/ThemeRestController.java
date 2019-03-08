@@ -1,12 +1,6 @@
 package com.santatecla.G1.theme;
 
-import java.util.ArrayList;
-
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import java.util.Collection;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
 import com.santatecla.G1.citation.Citation;
-import com.santatecla.G1.user.UserComponent;
+
 @RestController
 @RequestMapping("/api")
 public class ThemeRestController {
@@ -30,12 +28,9 @@ public class ThemeRestController {
 	
 	@Autowired
 	private ThemeService themeService;
-	@Autowired
-	private UserComponent userComponent;
 
 	@Autowired
 	private BookService bookService;
-	
 	
 	
 	@JsonView(Theme.BasicView.class)
@@ -59,8 +54,6 @@ public class ThemeRestController {
 		return theme;
 	}	
 
-	
-	
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/theme/{id}", method = GET)
 	public ResponseEntity<Theme> theme(Model model, @PathVariable long id) {
@@ -86,7 +79,6 @@ public class ThemeRestController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value="/theme/{id}", method = PATCH)
 	public ResponseEntity<Theme> updateTheme(Model model, Theme newTheme, @PathVariable long id) {
@@ -114,20 +106,4 @@ public class ThemeRestController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	//¿Como se le mete un book por el postman?
-	/*@RequestMapping(value="/theme/{id}/addBook", method = PATCH)
-	public ResponseEntity<Theme> addBook(Model model, @PathVariable long id, Book book){
-		Theme theme=themeService.findById(id);
-		if(theme!=null) {
-			if(book!=null) {
-				theme.addBook(book);
-				themeService.save(theme);
-				model.addAttribute("text", "Libro añadido al tema de forma correcta");
-			}
-			else model.addAttribute("text", "El libro que intentas añadir es null");
-			return new ResponseEntity<>(theme, HttpStatus.OK);
-		}
-		else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}*/
 }

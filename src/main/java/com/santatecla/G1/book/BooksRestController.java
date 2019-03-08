@@ -1,8 +1,6 @@
 package com.santatecla.G1.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import java.util.Collection;
@@ -25,15 +21,11 @@ import com.santatecla.G1.author.AuthorService;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
 import com.santatecla.G1.theme.ThemeService;
-import com.santatecla.G1.user.UserComponent;
 
 @RestController
 @RequestMapping("/api")
 public class BooksRestController {
 	interface BookDetailView extends Book.BasicView, Book.AuthorView, Book.CitationsView, Book.ThemeView, Author.BasicView, Citation.BasicView, Theme.BasicView {}
-	
-	@Autowired
-	private UserComponent userComponent;
 	
 	@Autowired
 	private BookService bookService;
@@ -88,8 +80,7 @@ public class BooksRestController {
 		model.addAttribute("text","Book Created");
 		return book;
 	}	
-	
-	
+		
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/book/{id}", method = GET)
 	public ResponseEntity<Book> getBook(Model model, @PathVariable long id) {
@@ -108,7 +99,6 @@ public class BooksRestController {
 		else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
-	
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "book/{id}", method = PATCH)
 	public ResponseEntity<Book> updateBook(Model model,Book newBook , @PathVariable long id, MultipartFile file, Long authorId, Long themeId) {

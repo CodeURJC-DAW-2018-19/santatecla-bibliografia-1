@@ -1,34 +1,21 @@
 package com.santatecla.G1.author;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
-import com.santatecla.G1.book.BookRepository;
-import com.santatecla.G1.book.BookService;
-import com.santatecla.G1.citation.Citation;
-import com.santatecla.G1.theme.Theme;
-import com.santatecla.G1.user.UserComponent;
 
 @RestController
 @RequestMapping("/api")
@@ -37,12 +24,6 @@ public class AuthorRestController {
 	
 	@Autowired
 	private AuthorService authorService;
-	@Autowired
-	private BookService bookService;
-
-	
-	@Autowired
-	private UserComponent userComponent;
 	
 	
 	@JsonView(Author.BasicView.class)
