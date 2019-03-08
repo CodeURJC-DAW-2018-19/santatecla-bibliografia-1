@@ -47,7 +47,8 @@ public class ThemeController {
 		List<Author> authors = new ArrayList<>();
 		List<Citation> citation = new ArrayList<>();
 		for(Book b: books) {
-			authors.add(b.getAuthor());
+			if(b.getAuthor()!=null)
+				authors.add(b.getAuthor());
 			System.out.println(b.getTitle());
 			List<Citation> aux = b.getCitations();
 			for(Citation c: aux) {
@@ -56,7 +57,8 @@ public class ThemeController {
 		}
 		
 		if (theme!=null) {
-			model.addAttribute("authors",authors);
+			if (!authors.isEmpty())
+				model.addAttribute("authors",authors);
 			model.addAttribute("books",books);
 			model.addAttribute("theme", theme);
 			model.addAttribute("citations",citation);

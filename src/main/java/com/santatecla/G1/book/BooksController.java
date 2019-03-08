@@ -54,8 +54,10 @@ public class BooksController {
 		Theme theme = book.getTheme();
 		if (book!=null) {
 			model.addAttribute("book", book);
-			model.addAttribute("authors", author);
-			model.addAttribute("themes", theme);
+			if(book.getAuthor()!=null)
+				model.addAttribute("authors", author);
+			if(book.getTheme()!=null)
+				model.addAttribute("themes", theme);
 			model.addAttribute("citations",citations);
 			model.addAttribute("entity","book");
 		}
@@ -99,12 +101,14 @@ public class BooksController {
 			for (Long e : t.get()) {
 				Theme theme = themeService.findById(e);
 				book.setTheme(theme);
-				bookService.save(book);
 				theme.addBook(book);
+				bookService.save(book);
+				
 				themeService.save(theme);
 			}
 		}else {
 			bookService.save(book);
+			
 		}
 		
 	

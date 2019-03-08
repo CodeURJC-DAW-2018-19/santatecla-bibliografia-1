@@ -56,7 +56,8 @@ public class AuthorController {
 		List<Citation> citations = new ArrayList<>();
 		for (Book b : books) {
 			// Get the themes of the books of the author
-			themes.add(b.getTheme());
+			if(b.getTheme()!=null)
+				themes.add(b.getTheme());
 			// We need an aux array because a book can return a list of citation
 			citations.addAll(b.getCitations());
 			for (Citation c : citations) {
@@ -64,16 +65,10 @@ public class AuthorController {
 			}
 
 		}
-		
-		boolean haveThemes = false;
-		if (themes.get(0)!=null) {
-			haveThemes=true;
-		}
-		
-		System.out.println("haveThemes es: " + author.getName() + haveThemes);
+	
 		
 		if (author != null) {
-			model.addAttribute("haveThemes", haveThemes);
+
 			model.addAttribute("author", author);
 			model.addAttribute("books", books);
 			model.addAttribute("themes", themes);
@@ -137,7 +132,7 @@ public class AuthorController {
 				bookService.save(book);
 			}
 		}
-		//authorService.save(a);
+		authorService.save(a);
 		model.addAttribute("text", "Autor creado correctamente");
 		System.out.println(author.toString());
 		return "Message";
