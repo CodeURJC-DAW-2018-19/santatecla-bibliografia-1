@@ -31,23 +31,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		//Private pages 
 		//http.authorizeRequests().anyRequest().authenticated();
+		
 		http.authorizeRequests().antMatchers("/api/book-pageable").hasAnyRole("ADMIN", "STUDENT");
 		http.authorizeRequests().antMatchers("/api/theme-pageable").hasAnyRole("ADMIN", "STUDENT");
 		http.authorizeRequests().antMatchers("/api/citation-pageable").hasAnyRole("ADMIN", "STUDENT");
 		http.authorizeRequests().antMatchers("/api/author-pageable").hasAnyRole("ADMIN", "STUDENT");
-
-		http.authorizeRequests().antMatchers("/api/theme/**").hasRole("STUDENT");
-		http.authorizeRequests().antMatchers("/api/author/**").hasRole("ADMIN").and().httpBasic().realmName(REALM).authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().antMatchers("/api/author/**").hasRole("STUDENT");
-		http.authorizeRequests().antMatchers("/api/book/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers("/api/book/**").hasRole("STUDENT");
+		http.authorizeRequests().antMatchers("/api/theme/**").hasAnyRole("ADMIN","STUDENT");
+		http.authorizeRequests().antMatchers("/api/author/**").hasAnyRole("ADMIN","STUDENT").and().httpBasic().realmName(REALM).authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.authorizeRequests().antMatchers("/api/book/**").hasAnyRole("ADMIN","STUDENT");
 		http.authorizeRequests().antMatchers("/api/book").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers("/api/theme").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers("/api/author").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers("/api/author").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.PATCH).hasRole("ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.POST).hasRole("ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE).hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.GET).permitAll();
 		//Login form
 		http.formLogin().defaultSuccessUrl("/");
 		http.formLogin().usernameParameter("username");
@@ -75,6 +73,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	  web.ignoring().antMatchers("/css/**");
 	  web.ignoring().antMatchers("/img/**");
 	  web.ignoring().antMatchers("/favicon.ico");
-
+	  web.ignoring().antMatchers("/api/book-name-pageable");
+	  web.ignoring().antMatchers("/api/citation-name-pageable");
+	  web.ignoring().antMatchers("/api/author-name-pageable");
+	  web.ignoring().antMatchers("/api/theme-name-pageable");
 	}
 }
