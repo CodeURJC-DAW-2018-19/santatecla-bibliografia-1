@@ -1,5 +1,8 @@
 package com.santatecla.G1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
@@ -38,6 +41,8 @@ public class IndexController {
 	private UserComponent userComponent;
 	@Autowired
 	private ImageManagerController imageController;
+	@Autowired
+	private TabController tabs;
 	
 	
 	
@@ -49,6 +54,12 @@ public class IndexController {
 		model.addAttribute("themes",themesService.findAll(new PageRequest(0, 10)));
 		model.addAttribute("images",imageController.getImages().values());
 		
+		tabs.modelTabs(model);	
+		try {
+			 tabs.updateActiveTabs(true);
+		}catch (Exception e) {
+			
+		}
 		return "indexPage";
 	}
 	
@@ -96,5 +107,18 @@ public class IndexController {
 	@GetMapping("/loginerror")
 	public String loginError() {
 		return "loginerror";
+	}
+	
+	@RequestMapping("/chart")
+	public String springMVC(Model modelMap) {
+		List<Theme> themes=themesService.findAll();
+		List<Integer> numBs=new ArrayList<>();
+		for(int i=0; i<themes.size();i++) {
+			List<Book> books=booksService.findByTheme(themes.get(i));
+			numBs.add(books.size());
+		} 
+		modelMap.addAttribute("themes", themes);
+		modelMap.addAttribute("numBooks",numBs);
+		return "chart";
 	}
 }

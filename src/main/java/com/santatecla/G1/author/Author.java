@@ -60,7 +60,7 @@ public class Author {
 	 ********************************************/
 	
 	//Constructor to Spring
-	public Author() {}
+	public Author() {this.books = new ArrayList<>();}
 
 	//The type of the dates is Date, when we operate with date, to show we will use SimpleFormatDate
 	public Author(String name, String bornDate, String deathDate, int imgId) {
@@ -182,6 +182,11 @@ public class Author {
 	public void addBook(Book book) {
 		this.books.add(book);
 	}
+	
+	public void addBookList(List<Book> books) {
+		this.books=books;
+	}
+	
 	public List<Book> getBooks(){
 		return this.books;
 	}

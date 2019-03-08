@@ -38,6 +38,11 @@ public class BookService {
 	public Book findByTitle(String title) {
 		return booksRepository.findByTitle(title);
 	}
+	
+	public Book findById(long id) {
+		return booksRepository.findById(id);
+	}
+	
 	public List<Book> findByTheme(Theme theme){
 		return booksRepository.findByTheme(theme);
 	}

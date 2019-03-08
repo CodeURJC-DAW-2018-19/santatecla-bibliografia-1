@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.santatecla.G1.TabController;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.citation.Citation;
@@ -31,6 +32,8 @@ public class ThemeController {
 	private ThemeService themeService;
 	@Autowired
 	private UserComponent userComponent;
+	@Autowired
+	private TabController tabs;
 
 	@Autowired
 	private BookService bookService;
@@ -44,7 +47,8 @@ public class ThemeController {
 		List<Author> authors = new ArrayList<>();
 		List<Citation> citation = new ArrayList<>();
 		for(Book b: books) {
-			authors.add(b.getAuthor());
+			if(b.getAuthor()!=null)
+				authors.add(b.getAuthor());
 			System.out.println(b.getTitle());
 			List<Citation> aux = b.getCitations();
 			for(Citation c: aux) {
@@ -53,11 +57,15 @@ public class ThemeController {
 		}
 		
 		if (theme!=null) {
-			model.addAttribute("authors",authors);
+			if (!authors.isEmpty())
+				model.addAttribute("authors",authors);
 			model.addAttribute("books",books);
 			model.addAttribute("theme", theme);
 			model.addAttribute("citations",citation);
+			model.addAttribute("entity","theme");
 		}
+		
+		tabs.userTabs(model, "/theme/"+ id, theme.getName(), true, id);
 		return "themePage";
 	}
 	
