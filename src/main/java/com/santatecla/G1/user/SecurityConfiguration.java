@@ -8,14 +8,15 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
+	 private static String REALM="MY_TEST_REALM";
 	@Autowired
 	public UserRepositoryAuthenticationProvider authenticationProvider;
-	
 	protected void configure(HttpSecurity http) throws Exception{
 		
 		
@@ -30,7 +31,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		//Private pages 
 		http.authorizeRequests().anyRequest().authenticated();
-
+		http.authorizeRequests().antMatchers("/api/theme/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers("/api/theme/**").hasRole("USER");
+		http.authorizeRequests().antMatchers("/api/author/**").hasRole("ADMIN").and().httpBasic().realmName(REALM).authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.authorizeRequests().antMatchers("/api/author/**").hasRole("USER");
+		http.authorizeRequests().antMatchers("/api/book/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers("/api/book/**").hasRole("USER");
+		http.authorizeRequests().antMatchers("/api/book").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers("/api/theme").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers("/api/author").hasRole("ADMIN");
+		
+		
 		//Login form
 		http.formLogin().defaultSuccessUrl("/");
 		http.formLogin().usernameParameter("username");
@@ -46,6 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 	}
 	
+
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 		//Database authentication provider
 		auth.authenticationProvider(authenticationProvider);
@@ -57,6 +69,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	  web.ignoring().antMatchers("/css/**");
 	  web.ignoring().antMatchers("/img/**");
 	  web.ignoring().antMatchers("/favicon.ico");
-	  web.ignoring().antMatchers("/api/**");
+	  //web.ignoring().antMatchers("/api/**");
 	}
 }
