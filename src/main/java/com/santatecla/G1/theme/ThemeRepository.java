@@ -10,6 +10,8 @@ import com.santatecla.G1.citation.Citation;
 public interface ThemeRepository extends JpaRepository<Theme,Long>{
 	
 	Theme findById(long id);
+	Theme findByNameIgnoreCase(String name);
+	
 	List<Theme> findThemesByName(String text);
 	List<Citation> findCitationByName(String theme);
 	Book findBookById(long id);

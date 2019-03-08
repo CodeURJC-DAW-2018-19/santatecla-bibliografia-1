@@ -31,6 +31,10 @@ public class BookService {
 		booksRepository.deleteById(id);
 	}
 	
+	public Book findByTitleIgnoreCase(String title) {
+		return booksRepository.findByTitleIgnoreCase(title);
+	}
+	
 	public List<Book> findByAuthor(Author author) {
 		return booksRepository.findByAuthor(author);
 	}

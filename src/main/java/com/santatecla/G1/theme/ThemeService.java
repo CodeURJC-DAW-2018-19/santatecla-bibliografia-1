@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.santatecla.G1.author.Author;
+
 @Service
 public class ThemeService {
 
@@ -23,6 +25,10 @@ public class ThemeService {
 	
 	public List<Theme> findAll(){
 		return themeRepository.findAll();
+	}
+	
+	public Theme findByNameIgnoreCase(String name) {
+		return themeRepository.findByNameIgnoreCase(name);
 	}
 	
 	public void deleteById(long id) {

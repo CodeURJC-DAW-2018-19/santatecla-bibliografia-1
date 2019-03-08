@@ -11,6 +11,8 @@ import com.santatecla.G1.theme.Theme;
 public interface BookRepository extends JpaRepository<Book,Long>{
 
 	Book findByTitle(String title);
+	Book findByTitleIgnoreCase(String title);
+	
 	Book findById(long id);
 	List <Book> findByTheme(Theme theme);
 	List<Book> findByAuthor(Author writer);

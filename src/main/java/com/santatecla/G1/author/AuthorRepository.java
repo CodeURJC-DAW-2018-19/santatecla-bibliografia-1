@@ -6,6 +6,6 @@ public interface AuthorRepository extends JpaRepository<Author,Long>{
 
 	Author findByName(String name);
 	Author findById(long id);
-
+	Author findByNameIgnoreCase(String name);
 	
 }

@@ -24,41 +24,43 @@ import com.santatecla.G1.book.BookService;
 @RestController
 @RequestMapping("/api")
 public class AuthorRestController {
-	interface AuthorDetailView extends Author.BasicView, Author.BooksView, Book.BasicView {}
-	
+	interface AuthorDetailView extends Author.BasicView, Author.BooksView, Book.BasicView {
+	}
+
 	@Autowired
 	private AuthorService authorService;
-	
+
 	@Autowired
 	private BookService bookService;
-	
-	
+
 	@JsonView(Author.BasicView.class)
-	@RequestMapping(value="/author" , method = GET)
-	public List<Author> authors(){
+	@RequestMapping(value = "/author", method = GET)
+	public List<Author> authors() {
 		return authorService.findAll();
 	}
-	
+
 	@JsonView(Author.BasicView.class)
-	@RequestMapping(value="/author-pageable" , method = RequestMethod.GET)
-	public List<Author> authorsPageable(Pageable page){
+	@RequestMapping(value = "/author-pageable", method = RequestMethod.GET)
+	public List<Author> authorsPageable(Pageable page) {
 		return authorService.findAll(page).getContent();
 	}
-	
-	@RequestMapping(value="/author2", method = POST)
-	@ResponseStatus(HttpStatus.CREATED)
-	public Author author(@RequestBody Author author) {
-		if (author.getBooks()!=null) {
-			ArrayList<Book> books = new ArrayList<>();
-			for(Book book : author.getBooks()) {			
-				books.add(bookService.findById(book.getId()));
-			}	
-			author.setBooks(books);
-		}
-		authorService.save(author);
-		return author;
-	}	
-	
+
+	@RequestMapping(value = "/author2", method = POST)
+	public ResponseEntity<Author> author(@RequestBody Author author) {
+		if (authorService.findByNameIgnoreCase(author.getName()) == null) {
+			if (author.getBooks() != null) {
+				ArrayList<Book> books = new ArrayList<>();
+				for (Book book : author.getBooks()) {
+					books.add(bookService.findById(book.getId()));
+				}
+				author.setBooks(books);
+			}
+			authorService.save(author);
+			return new ResponseEntity<>(author, HttpStatus.CREATED);
+		} else
+			return new ResponseEntity<>(HttpStatus.IM_USED);
+	}
+
 	@JsonView(Author.BasicView.class)
 	@RequestMapping(value = "/author-name-pageable", method = RequestMethod.GET)
 	public List<String> authorPageableGuest(Pageable page) {
@@ -69,57 +71,56 @@ public class AuthorRestController {
 		}
 		return authorName;
 	}
-	
+
 	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value="/author", method = POST)
-	public Author author(Model model,@RequestBody Author author,MultipartFile file) {
-		if((file!=null)&&(!file.isEmpty())) {
+	@RequestMapping(value = "/author", method = POST)
+	public Author author(Model model, @RequestBody Author author, MultipartFile file) {
+		if ((file != null) && (!file.isEmpty())) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
-			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);	
+			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
 			author.setImgId(imgId);
-		}			
-		else
+		} else
 			author.setImgId(-1);
 		authorService.save(author);
-		model.addAttribute("text","Autor creado correctamente");
+		model.addAttribute("text", "Autor creado correctamente");
 		System.out.println(author.toString());
 		return author;
-	}	
-	
+	}
+
 	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value="/author/{id}", method = GET)
+	@RequestMapping(value = "/author/{id}", method = GET)
 	public ResponseEntity<Author> getAuthor(Model model, @PathVariable long id) {
-		Author a=authorService.findById(id);
-		if(a!=null)
+		Author a = authorService.findById(id);
+		if (a != null)
 			return new ResponseEntity<>(a, HttpStatus.OK);
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	
+
 	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/author/{id}", method = PATCH)
 	public ResponseEntity<Author> updateAuthor(Model model, @RequestBody Author newAuthor, @PathVariable long id) {
 		Author oldAuthor = authorService.findById(id);
-		if(oldAuthor!=null) {
+		if (oldAuthor != null) {
 			oldAuthor.update(newAuthor);
 			authorService.save(oldAuthor);
-			model.addAttribute("text","Autor editado de forma correcta");
+			model.addAttribute("text", "Autor editado de forma correcta");
 			return new ResponseEntity<>(oldAuthor, HttpStatus.OK);
-		}else {
+		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-	}	
-	
+	}
+
 	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/author/{id}", method = DELETE)
 	public ResponseEntity<Author> deleteAuthor(Model model, @PathVariable long id) {
 		Author author = authorService.findById(id);
-		if (author!=null) {
+		if (author != null) {
 			model.addAttribute("author", author);
-			model.addAttribute("text","Autor eliminado de forma correcta");
+			model.addAttribute("text", "Autor eliminado de forma correcta");
 			authorService.deleteById(id);
 			return new ResponseEntity<>(author, HttpStatus.OK);
-		}else {
+		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 

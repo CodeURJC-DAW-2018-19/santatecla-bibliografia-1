@@ -38,7 +38,7 @@ public class BooksRestController {
 
 	@Autowired
 	private AuthorService authorService;
-	
+
 	@Autowired
 	private CitationService citationService;
 
@@ -67,40 +67,43 @@ public class BooksRestController {
 		}
 		return booksName;
 	}
-	
-	@RequestMapping(value="/book2", method = POST)
-	@ResponseStatus(HttpStatus.CREATED)
-	public Book book(@RequestBody Book book) {
-		Author author = new Author();
-		if (book.getAuthor()!=null) {
-			author = authorService.findById(book.getAuthor().getId());
 
-			book.setAuthor(author);
-		}
-		bookService.save(book);
-		
-		Theme theme = new Theme();
-		if (book.getTheme()!=null) {
-			theme = themeService.findById(book.getTheme().getId());
+	@RequestMapping(value = "/book2", method = POST)
+	public ResponseEntity<Book> book(@RequestBody Book book) {
+		if (bookService.findByTitleIgnoreCase(book.getTitle()) == null) {
+			Author author = new Author();
+			if (book.getAuthor() != null) {
+				author = authorService.findById(book.getAuthor().getId());
 
-			book.setTheme(theme);
-		}
-		bookService.save(book);
-		
-		if (book.getCitations()!=null) {
-			ArrayList<Citation> citations = new ArrayList<>();
-			for(Citation citation : book.getCitations()) {
-			
-				citations.add(citationService.findById(book.getId()));
+				book.setAuthor(author);
 			}
-		}
-		bookService.save(book);
-		return book;
-	}	
+			bookService.save(book);
+
+			Theme theme = new Theme();
+			if (book.getTheme() != null) {
+				theme = themeService.findById(book.getTheme().getId());
+
+				book.setTheme(theme);
+			}
+			bookService.save(book);
+
+			if (book.getCitations() != null) {
+				ArrayList<Citation> citations = new ArrayList<>();
+				for (Citation citation : book.getCitations()) {
+
+					citations.add(citationService.findById(book.getId()));
+				}
+			}
+			bookService.save(book);
+			return new ResponseEntity<>(book, HttpStatus.CREATED);
+		} else
+			return new ResponseEntity<>(HttpStatus.IM_USED);
+
+	}
 
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/book", method = POST)
-	public Book saveBook(Model model,@RequestBody Book book, MultipartFile file, Long authorId, Long themeId) {
+	public Book saveBook(Model model, @RequestBody Book book, MultipartFile file, Long authorId, Long themeId) {
 		bookService.save(book);
 		if (authorId != null) {
 			Author author = authorService.findById(authorId);
@@ -149,8 +152,8 @@ public class BooksRestController {
 
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "book/{id}", method = PATCH)
-	public ResponseEntity<Book> updateBook(Model model,@RequestBody Book newBook, @PathVariable long id, MultipartFile file,
-			Long authorId, Long themeId) {
+	public ResponseEntity<Book> updateBook(Model model, @RequestBody Book newBook, @PathVariable long id,
+			MultipartFile file, Long authorId, Long themeId) {
 		Book oldBook = bookService.findOne(id);
 		if (oldBook != null) {
 			oldBook.update(newBook);
