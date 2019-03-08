@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,8 +53,7 @@ public class AuthorRestController {
 	
 	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value="/author", method = POST)
-	public Author author(Model model, Author author,MultipartFile file) {
-		authorService.save(author);
+	public Author author(Model model,@RequestBody Author author,MultipartFile file) {
 		if((file!=null)&&(!file.isEmpty())) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
 			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);	
@@ -79,7 +79,7 @@ public class AuthorRestController {
 	
 	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/author/{id}", method = PATCH)
-	public ResponseEntity<Author> updateAuthor(Model model, Author newAuthor, @PathVariable long id) {
+	public ResponseEntity<Author> updateAuthor(Model model, @RequestBody Author newAuthor, @PathVariable long id) {
 		Author oldAuthor = authorService.findById(id);
 		if(oldAuthor!=null) {
 			oldAuthor.update(newAuthor);

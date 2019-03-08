@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,7 +65,7 @@ public class BooksRestController {
 
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/book", method = POST)
-	public Book saveBook(Model model, Book book, MultipartFile file, Long authorId, Long themeId) {
+	public Book saveBook(Model model,@RequestBody Book book, MultipartFile file, Long authorId, Long themeId) {
 		bookService.save(book);
 		if (authorId != null) {
 			Author author = authorService.findById(authorId);
@@ -113,7 +114,7 @@ public class BooksRestController {
 
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "book/{id}", method = PATCH)
-	public ResponseEntity<Book> updateBook(Model model, Book newBook, @PathVariable long id, MultipartFile file,
+	public ResponseEntity<Book> updateBook(Model model,@RequestBody Book newBook, @PathVariable long id, MultipartFile file,
 			Long authorId, Long themeId) {
 		Book oldBook = bookService.findOne(id);
 		if (oldBook != null) {

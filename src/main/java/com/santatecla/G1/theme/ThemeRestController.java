@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,7 +59,7 @@ public class ThemeRestController {
 	
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value= "/theme", method = POST)
-	public Theme theme(Model model, Theme theme) {
+	public Theme theme(Model model,@RequestBody Theme theme) {
 		themeService.save(theme);
 		System.out.println(theme.toString());
 		model.addAttribute("text","Theme Created");
@@ -92,7 +93,7 @@ public class ThemeRestController {
 	
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value="/theme/{id}", method = PATCH)
-	public ResponseEntity<Theme> updateTheme(Model model, Theme newTheme, @PathVariable long id) {
+	public ResponseEntity<Theme> updateTheme(Model model,@RequestBody Theme newTheme, @PathVariable long id) {
 		Theme oldTheme = themeService.findById(id);
 		if(oldTheme!=null) {
 			oldTheme.update(newTheme);

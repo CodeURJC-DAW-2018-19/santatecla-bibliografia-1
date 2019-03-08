@@ -1,6 +1,7 @@
 package com.santatecla.G1.citation;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,7 +59,7 @@ public class CitationRestController {
 	
 	@JsonView(CitationDetailView.class)
 	@RequestMapping(value="/citation", method = POST)
-	public ResponseEntity<Citation> saveCitation(Model model, Citation citation,@RequestParam Long bookId) {
+	public ResponseEntity<Citation> saveCitation(Model model,@RequestBody Citation citation,@RequestParam Long bookId) {
 		citationService.save(citation);
 		if(bookId!=null) {
 			Book book = bookService.findOne(bookId);
@@ -96,7 +97,7 @@ public class CitationRestController {
 	
 	@JsonView(CitationDetailView.class)
 	@RequestMapping(value="/citation/{id}", method=PATCH)
-	public ResponseEntity<Citation> updateCitation(Model model, Citation newCitation, @PathVariable long id, Long bookId) {
+	public ResponseEntity<Citation> updateCitation(Model model,@RequestBody Citation newCitation, @PathVariable long id, Long bookId) {
 		Citation oldCitation=citationService.findById(id);
 		if(oldCitation!=null) {
 			oldCitation.update(newCitation);
