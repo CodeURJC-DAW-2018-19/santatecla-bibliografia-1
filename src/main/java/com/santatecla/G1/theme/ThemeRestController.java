@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -47,6 +48,7 @@ public class ThemeRestController {
 	}
 	
 	@RequestMapping(value="/theme2", method = POST)
+	@ResponseStatus(HttpStatus.CREATED)
 	public Theme theme(@RequestBody Theme theme) {
 		ArrayList<Book> books = new ArrayList<>();
 		for(Book book : theme.getBook()) {

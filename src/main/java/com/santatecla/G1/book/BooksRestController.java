@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -68,6 +69,7 @@ public class BooksRestController {
 	}
 	
 	@RequestMapping(value="/book2", method = POST)
+	@ResponseStatus(HttpStatus.CREATED)
 	public Book book(@RequestBody Book book) {
 		Author author = new Author();
 		if (book.getAuthor()!=null) {
