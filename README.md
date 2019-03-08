@@ -19,7 +19,7 @@ This is a project based learning made by students at the URJC, the  objective of
 ![Image of MySql2](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/MySql2.PNG)
 6. Run the project as Spring Application and then you can visit https://localhost/8443/index in your favourite browser and see the website.
 
-
+# Phase 2 DOC
 ## Navigation Scheme
 ![Image of scheme](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/Scheme.png)
 
@@ -62,6 +62,10 @@ This diagram shows an example of the MVC implemented in the book class. All the 
 ## Security
 
 The security has been implemented using Spring Security, all the configuration relative to the security is in the package user, in the SercutiryConfiguration.java . In this file we can define the public and privates URL's. Also you can define the default login and logout page. In adittion to this, we also configure some paths that the application have to ignore, so we can use css, js, and img.
+
+# Phase 3 DOC
+
+[API DOC](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/API.md)
 
 ## Authors
 
