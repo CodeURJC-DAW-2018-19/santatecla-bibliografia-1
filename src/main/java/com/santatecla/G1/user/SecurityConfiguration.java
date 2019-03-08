@@ -40,8 +40,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/api/book").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers("/api/theme").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers("/api/author").hasRole("ADMIN");
-		
-		
+		http.authorizeRequests().antMatchers("/api/author").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.PATCH).hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.POST).hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE).hasRole("ADMIN");
 		//Login form
 		http.formLogin().defaultSuccessUrl("/");
 		http.formLogin().usernameParameter("username");
