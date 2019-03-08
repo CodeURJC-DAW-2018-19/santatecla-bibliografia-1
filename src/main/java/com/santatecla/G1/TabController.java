@@ -53,18 +53,20 @@ public class TabController {
 	}
 
 	public void updateActiveTabs(boolean active) {
-		if (active == true) {
+		if ((active == true)&(this.userComponent.getLoggedUser()!=null)) {
 			this.userComponent.getLoggedUser().inactiveAllTabs();
 		}
 	}
 
 	public boolean sameTab(Tabs tab) {
+		if(this.userComponent.getLoggedUser()!=null) {
 		for (int i = 0; i < this.userComponent.getLoggedUser().getTabs().size(); i++) {
 			if (this.userComponent.getLoggedUser().getTabs().get(i).getName().equalsIgnoreCase(tab.getName())
 					&& this.userComponent.getLoggedUser().getTabs().get(i).getUrl().equalsIgnoreCase(tab.getUrl())) {
 				return true;
 			}
 		}
+	}
 		return false;
 	}
 	

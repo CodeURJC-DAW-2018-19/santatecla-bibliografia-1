@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		
 		//Private pages 
-		http.authorizeRequests().anyRequest().authenticated();
+		//http.authorizeRequests().anyRequest().authenticated();
 		http.authorizeRequests().antMatchers("/api/theme/**").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers("/api/theme/**").hasRole("STUDENT");
 		http.authorizeRequests().antMatchers("/api/author/**").hasRole("ADMIN").and().httpBasic().realmName(REALM).authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -69,6 +69,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	  web.ignoring().antMatchers("/css/**");
 	  web.ignoring().antMatchers("/img/**");
 	  web.ignoring().antMatchers("/favicon.ico");
-	  //web.ignoring().antMatchers("/api/**");
+
 	}
 }
