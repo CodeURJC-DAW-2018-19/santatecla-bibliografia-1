@@ -27,10 +27,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/loginerror").permitAll();
 		http.authorizeRequests().antMatchers("/logout").permitAll();
 		http.authorizeRequests().antMatchers("/image/{id}").permitAll();
-
+		
 		
 		//Private pages 
 		//http.authorizeRequests().anyRequest().authenticated();
+		http.authorizeRequests().antMatchers("/api/book-pageable").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers("/api/theme/**").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers("/api/theme/**").hasRole("STUDENT");
 		http.authorizeRequests().antMatchers("/api/author/**").hasRole("ADMIN").and().httpBasic().realmName(REALM).authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
