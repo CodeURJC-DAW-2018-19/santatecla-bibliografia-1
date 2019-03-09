@@ -37,14 +37,14 @@ public class ThemeRestController {
 
 	@JsonView(Theme.BasicView.class)
 	@RequestMapping(value = "/theme", method = GET)
-	public Collection<Theme> themes() {
-		return themeService.findAll();
+	public ResponseEntity<Collection<Theme>> themes() {
+		return new ResponseEntity<>(themeService.findAll(), HttpStatus.OK);
 	}
 
 	@JsonView(Theme.BasicView.class)
 	@RequestMapping(value = "/theme-pageable", method = RequestMethod.GET)
-	public List<Theme> themePageable(Pageable page) {
-		return themeService.findAll(page).getContent();
+	public ResponseEntity<List<Theme>> themePageable(Pageable page) {
+		return new ResponseEntity<>(themeService.findAll(page).getContent(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/theme2", method = POST)
@@ -69,13 +69,13 @@ public class ThemeRestController {
 
 	@JsonView(Theme.BasicView.class)
 	@RequestMapping(value = "/theme-name-pageable", method = RequestMethod.GET)
-	public List<String> themePageableGuest(Pageable page) {
+	public ResponseEntity<List<String>> themePageableGuest(Pageable page) {
 		List<Theme> theme = themeService.findAll(page).getContent();
 		List<String> themeName = new ArrayList<>();
 		for (Theme t : theme) {
 			themeName.add(t.getName());
 		}
-		return themeName;
+		return new ResponseEntity<>(themeName, HttpStatus.OK);
 	}
 
 

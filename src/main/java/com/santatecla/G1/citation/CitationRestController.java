@@ -38,25 +38,25 @@ public class CitationRestController {
 
 	@JsonView(Citation.BasicView.class)
 	@RequestMapping(value = "/citation", method = GET)
-	public Collection<Citation> citations() {
-		return citationService.findAll();
+	public ResponseEntity<Collection<Citation>> citations() {
+		return new ResponseEntity<>(citationService.findAll(), HttpStatus.OK);
 	}
 
 	@JsonView(Citation.BasicView.class)
 	@RequestMapping(value = "/citation-pageable", method = RequestMethod.GET)
-	public List<Citation> citationPageable(Pageable page) {
-		return citationService.findAll(page).getContent();
+	public ResponseEntity<List<Citation>> citationPageable(Pageable page) {
+		return new ResponseEntity<>(citationService.findAll(page).getContent(), HttpStatus.OK);
 	}
 
 	@JsonView(Citation.BasicView.class)
 	@RequestMapping(value = "/citation-name-pageable", method = RequestMethod.GET)
-	public List<String> citationPageableGuest(Pageable page) {
+	public ResponseEntity<List<String>> citationPageableGuest(Pageable page) {
 		List<Citation> citation = citationService.findAll(page).getContent();
 		List<String> citationName = new ArrayList<>();
 		for (Citation c : citation) {
 			citationName.add(c.getText());
 		}
-		return citationName;
+		return new ResponseEntity<>(citationName, HttpStatus.OK);
 	}
 
 	@JsonView(CitationDetailView.class)

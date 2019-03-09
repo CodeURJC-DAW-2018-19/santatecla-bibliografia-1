@@ -35,14 +35,14 @@ public class AuthorRestController {
 
 	@JsonView(Author.BasicView.class)
 	@RequestMapping(value = "/author", method = GET)
-	public List<Author> authors() {
-		return authorService.findAll();
+	public ResponseEntity<List<Author>> authors() {
+		return new ResponseEntity<>(authorService.findAll(), HttpStatus.OK);
 	}
 
 	@JsonView(Author.BasicView.class)
 	@RequestMapping(value = "/author-pageable", method = RequestMethod.GET)
-	public List<Author> authorsPageable(Pageable page) {
-		return authorService.findAll(page).getContent();
+	public ResponseEntity<List<Author>> authorsPageable(Pageable page) {
+		return new ResponseEntity<>(authorService.findAll(page).getContent(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/author2", method = POST)
@@ -63,13 +63,13 @@ public class AuthorRestController {
 
 	@JsonView(Author.BasicView.class)
 	@RequestMapping(value = "/author-name-pageable", method = RequestMethod.GET)
-	public List<String> authorPageableGuest(Pageable page) {
+	public ResponseEntity<List<String>> authorPageableGuest(Pageable page) {
 		List<Author> author = authorService.findAll(page).getContent();
 		List<String> authorName = new ArrayList<>();
 		for (Author a : author) {
 			authorName.add(a.getName());
 		}
-		return authorName;
+		return new ResponseEntity<>(authorName, HttpStatus.OK);
 	}
 
 	@JsonView(AuthorDetailView.class)

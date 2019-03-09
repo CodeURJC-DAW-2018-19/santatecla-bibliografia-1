@@ -47,25 +47,25 @@ public class BooksRestController {
 
 	@JsonView(Book.BasicView.class)
 	@RequestMapping(value = "book", method = GET)
-	public Collection<Book> getBooks() {
-		return bookService.findAll();
+	public ResponseEntity<Collection<Book>> getBooks() {
+		return new ResponseEntity<>(bookService.findAll(), HttpStatus.OK);
 	}
 
 	@JsonView(Book.BasicView.class)
 	@RequestMapping(value = "/book-pageable", method = RequestMethod.GET)
-	public List<Book> booksPageable(Pageable page) {
-		return bookService.findAll(page).getContent();
+	public ResponseEntity<List<Book>> booksPageable(Pageable page) {
+		return new ResponseEntity<>(bookService.findAll(page).getContent(), HttpStatus.OK);
 	}
 
 	@JsonView(Book.BasicView.class)
 	@RequestMapping(value = "/book-name-pageable", method = RequestMethod.GET)
-	public List<String> booksPageableGuest(Pageable page) {
+	public ResponseEntity<List<String>> booksPageableGuest(Pageable page) {
 		List<Book> books = bookService.findAll(page).getContent();
 		List<String> booksName = new ArrayList<>();
 		for (Book b : books) {
 			booksName.add(b.getTitle());
 		}
-		return booksName;
+		return new ResponseEntity<>(booksName, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/book2", method = POST)
