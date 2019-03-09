@@ -4,267 +4,145 @@
 
 ## How to use our API
 1. Download [Postman](https://www.getpostman.com/).
-
+2. Run the applicattion as we explained in the readme.
+3. Open Postman.
+4. Go to File/Settings and turn off the SSL certificate validation.
+5. Now you can test the Api with postman
 ## API requests
 
 ### Resources
 The resource API has GET, POST, PATCH and DELETE methods.
+
+**GET is permited for all users. POST, PATCH and DELETE Are only allowed for the admin.**
+
+To start using the api use this url
 http: // localhost:8443 followed by the containt request URL.
 
 **All API queries have been preceded by /api**
 
 ## Authentication
 
-#### login
-Allows a user to log in.
+The basic authentication implemented can be tested in postman using the Autorization form, showed in the image below.
+
+![Image of postman](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/CapturaPostman.PNG)
+
+
+For the admin role you must use the following params:
+
+**Username**: admin
+
+**Password**: admin
+
+
+And for user/student role:
+
+**Username**: juan
+
+**Password**: 4321
+
+
+### GET requests
+
+Every user is allowed to do GET requests to the API
+
+#### GET all resources
+It works the same for authors, themes and quotes, and show all the content of the specified resource.
 
 * ##### URL:
 
-	< /login >
+	< /book >
 
 * ##### Method:
 
 	`GET`
 	
 * ##### Success Response:
-  
+  	```
+	{
+        "id": 92,
+        "title": "Nacidos de la bruma",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": 4
+    },
+    {
+        "id": 95,
+        "title": "El año de los delfines",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": 5
+    },
+    {
+        "id": 97,
+        "title": "Refranero",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": -1
+    }
+	```
   
 * ##### Error response:
-
-	**Code**: 401 UNAUTHORIZED
-	
-#### loguot  
-Allows a user to log out.
-
-* ##### URL:
-
-	< /logout >
-
-* ##### Method:
-
-	`GET`
-
-* ##### Success Response:
-
-	```
-	true
-	```
-
-  * ##### Error Response:
 
 	**Code**: 404 NOT FOUND
+	
+#### GET one resource
 
-## Admin
-The following queries will be preceded by /Admin. 
-  
-### Obtain user data
-Resource to show all users with their data.
+It works the same for authors, themes and quotes, and show in detail the resource represented by the {id}.
 
-* ##### URL
 
+* ##### URL:
+
+	< /book/{id} >
 
 * ##### Method:
 
 	`GET`
 	
-* ##### URL Params:
-	* page=[int]
-	* size=[int]
-	
-* ##### Example of query:
-
-	* URL
-		
-		`/api/Admin/UserData/?page=1&size=10`
-  
 * ##### Success Response:
-```	
-
-```
+  	```
+	{
+    "id": 92,
+    "title": "Nacidos de la bruma",
+    "publishDate": "",
+    "nameEdit": "",
+    "urlEdit": "",
+    "urlImgCoverPage": "",
+    "urlImgEdit": "",
+    "imgId": 4,
+    "theme": {
+        "id": 91,
+        "name": "Vida"
+    },
+    "citation": [
+        {
+            "id": 93,
+            "text": "La Ilusión despierta el empeño y solamente la paciencia lo termina.",
+            "textAux": null
+        }
+    ],
+    "author": {
+        "id": 107,
+        "name": "Fernando Esteso",
+        "urlImage": "https://img.bekia.es/celebrities/th/2000/2576.jpg",
+        "birthDate": "1945-2-16",
+        "deathDate": "",
+        "bornPlace": "Zaragoza, España",
+        "urlMap": "https://www.google.es/maps/place/Zaragoza/@41.6516859,-0.9300003,13z/data=!3m1!4b1!4m5!3m4!1s0xd5914dd5e618e91:0x49df13f1158489a8!8m2!3d41.6488226!4d-0.8890853",
+        "imgId": 1
+    }
+}
+	```
   
-* ##### Error Response:
-
-	**Code**: 401 UNAUTHORIZED
-  
-
-
-### Resource to show one unit
-
-* ##### URL:
-
-	< /{id} >
-
-* ##### Method:
-	
-	`GET`
-	
-* ##### URL Params:
-
-	`id=[long]`
-	
-* ##### Example of query:
-
-	* URL
-		
-		`/api/Unit/1`
-		
-* ##### Success response:
-
-	```
-	{
-	    "id": 1,
-	    "name": "Unidad 1"
-	}
-	```
-	
 * ##### Error response:
 
-	**Code:** 404 NOT FOUND
-
-
-
-### Upload images of the unit created
-
-* ##### URL:
-
-	< / {id}/Images>
-
-* ##### Method:
+	**Code**: 404 NOT FOUND
 	
-	`POST`
-
-* ##### URL Params:
-
-	`id=[long]`
-	
-* ##### URL Params:
-
-	`Empty`
-	
-* ##### Example of query:
-
-	* URL
-		
-		`/api/Unit/1/Images`
-
-* ##### Data Params:
-
-	```
-	images[]: image file format (*.jpg, *.jpeg, *.png) (length = 9)
-	```
-* ##### Error response:
-
-	**Code:** 500 INTERNAL SERVER ERROR or 400 BAD REQUEST
-
-### Change the name of the unit
-
-* ##### URL:
-
-	< /{id} >
-
-* ##### Method:
-	
-	`PUT`
-	
-* ##### URL Params:
-
-	`id=[long]`
-	
-* ##### Example of query:
-
-	* URL
-		
-		`/api/Unit/1`
-		
-* ##### Data Params:
-	
-	```
-	{
-		"name": "Unidad Prueba"
-	}
-	```
-
-* ##### Success response:
-
-	```
-	{
-	    "id": 1,
-	    "name": "Unidad Prueba"
-	}
-	```
-	
-* ##### Error response:
-
-	**Code:** 404 NOT FOUND
-
-### Delete unit
-
-* ##### URL:
-
-	< /{id} >
-
-* ##### Method:
-	
-	`DELETE`
-	
-* ##### URL Params:
-
-	`id=[long]`
-	
-* ##### Example of query:
-
-	* URL
-		
-		`/api/Unit/1`
-		
-* ##### Data Params:
-	
-	```
-	{
-		"name": "Unidad Prueba"
-	}
-	```
-
-* ##### Success response:
-
-	```
-	{
-	    "id": 1,
-	    "name": "Unidad Prueba"
-	}
-	```
-	
-* ##### Error response:
-
-	**Code:** 404 NOT FOUND
-
-
-## Lesson
-The following queries will be preceded by /Unit.
-
-### Resource to show all lessons
-
-* ##### URL:
-
-	< / / >
-
-* ##### Method:
-	
-	`GET`
-	
-* ##### URL Params:
-
-	`Empty`
-	
-* ##### Example of query:
-
-	* URL
-		
-		`/api/`
-		
-* ##### Success response:
-
-	```
-	
-	
-	```
