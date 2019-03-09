@@ -71,29 +71,39 @@ public class BooksRestController {
 	@RequestMapping(value = "/book2", method = POST)
 	public ResponseEntity<Book> book(@RequestBody Book book) {
 		if (bookService.findByTitleIgnoreCase(book.getTitle()) == null) {
-			Author author = new Author();
-			if (book.getAuthor() != null) {
-				author = authorService.findById(book.getAuthor().getId());
-
-				book.setAuthor(author);
-			}
-			bookService.save(book);
-
-			Theme theme = new Theme();
-			if (book.getTheme() != null) {
-				theme = themeService.findById(book.getTheme().getId());
-
-				book.setTheme(theme);
-			}
-			bookService.save(book);
-
-			if (book.getCitations() != null) {
-				ArrayList<Citation> citations = new ArrayList<>();
-				for (Citation citation : book.getCitations()) {
-
-					citations.add(citationService.findById(book.getId()));
+			try {
+				Author author = new Author();
+				if (book.getAuthor() != null) {
+					author = authorService.findById(book.getAuthor().getId());
+					book.setAuthor(author);
 				}
+				bookService.save(book);
+			} catch (Exception e) {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
+
+			try {
+				Theme theme = new Theme();
+				if (book.getTheme() != null) {
+					theme = themeService.findById(book.getTheme().getId());
+					book.setTheme(theme);
+				}
+				bookService.save(book);
+			} catch (Exception e) {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			try {
+				ArrayList<Citation> citations = new ArrayList<>();
+				if (book.getCitations() != null) {
+					for (Citation citation : book.getCitations()) {
+						citations.add(citationService.findById(book.getId()));
+					}
+				}
+				bookService.save(book);
+			} catch (Exception e) {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+
 			bookService.save(book);
 			return new ResponseEntity<>(book, HttpStatus.CREATED);
 		} else
@@ -101,8 +111,6 @@ public class BooksRestController {
 
 	}
 
-	
-	
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/book/{id}", method = GET)
 	public ResponseEntity<Book> getBook(@PathVariable long id) {
@@ -127,7 +135,7 @@ public class BooksRestController {
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	
+
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "book2/{id}", method = PATCH)
 	public ResponseEntity<Book> updateBook2(@RequestBody Book newBook, @PathVariable long id) {
@@ -157,13 +165,10 @@ public class BooksRestController {
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	
-	
-	
-	
-	
-	// ----------------------------- METHODS WITH UPLOAD IMAGES -------------------------------------------------
-	
+
+	// ----------------------------- METHODS WITH UPLOAD IMAGES
+	// -------------------------------------------------
+
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "book/{id}", method = PATCH)
 	public ResponseEntity<Book> updateBook(Model model, @RequestBody Book newBook, @PathVariable long id,
@@ -198,7 +203,7 @@ public class BooksRestController {
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	
+
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/book", method = POST)
 	public Book saveBook(Model model, @RequestBody Book book, MultipartFile file, Long authorId, Long themeId) {
@@ -229,6 +234,5 @@ public class BooksRestController {
 		model.addAttribute("text", "Book Created");
 		return book;
 	}
-
 
 }

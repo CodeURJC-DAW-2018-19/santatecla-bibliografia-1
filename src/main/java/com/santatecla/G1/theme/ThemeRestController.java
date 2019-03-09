@@ -63,6 +63,7 @@ public class ThemeRestController {
 
 				theme.setBooks(books);
 			} catch (Exception e) {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
 			themeService.save(theme);
 			return new ResponseEntity<>(theme, HttpStatus.CREATED);
