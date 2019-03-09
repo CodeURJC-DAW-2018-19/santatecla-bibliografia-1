@@ -19,7 +19,7 @@ import com.santatecla.G1.book.Book;
 @Entity
 public class Author {
 	public interface BasicView{}
-	interface BooksView{}
+	public interface BooksView{}
 	
 	@JsonView(BasicView.class)
 	@Id

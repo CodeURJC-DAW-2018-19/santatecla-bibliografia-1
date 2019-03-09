@@ -20,6 +20,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.book.Book;
+import com.santatecla.G1.book.Book.AuthorView;
 import com.santatecla.G1.book.BookService;
 import com.santatecla.G1.theme.Theme;
 
@@ -27,7 +28,7 @@ import com.santatecla.G1.theme.Theme;
 @RequestMapping("/api")
 public class CitationRestController {
 	interface CitationDetailView
-			extends Citation.BasicView, Citation.BookView, Citation.ThemeView, Book.BasicView, Theme.BasicView {
+			extends Citation.BasicView, Citation.BookView, Citation.ThemeView, Book.BasicView, Theme.BasicView, Book.AuthorView, Author.BasicView {
 	}
 
 	@Autowired

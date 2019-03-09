@@ -26,7 +26,7 @@ import com.santatecla.G1.citation.Citation;
 @RestController
 @RequestMapping("/api")
 public class ThemeRestController {
-	interface ThemeDetailView extends Theme.BasicView, Theme.BooksView, Book.BasicView {
+	interface ThemeDetailView extends Theme.BasicView, Theme.BooksView, Book.BasicView, Book.AuthorView, Author.BasicView, Book.CitationsView, Citation.BasicView{
 	}
 
 	@Autowired

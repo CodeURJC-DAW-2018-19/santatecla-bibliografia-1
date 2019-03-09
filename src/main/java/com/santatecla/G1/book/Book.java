@@ -21,9 +21,9 @@ import com.santatecla.G1.theme.Theme;
 @Entity
 public class Book {
 	public interface BasicView{}
-	interface ThemeView{}
-	interface AuthorView{}
-	interface CitationsView{}
+	public interface ThemeView{}
+	public interface AuthorView{}
+	public interface CitationsView{}
 	
 	@JsonView(BasicView.class)
 	@Id
