@@ -8,8 +8,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.AuthenticationEntryPoint;
 
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -27,25 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/loginerror").permitAll();
 		http.authorizeRequests().antMatchers("/logout").permitAll();
 		http.authorizeRequests().antMatchers("/image/{id}").permitAll();
-		
-		
-		//Private pages 
-		//http.authorizeRequests().anyRequest().authenticated();
-		
-		http.authorizeRequests().antMatchers("/api/book-pageable").hasAnyRole("ADMIN", "STUDENT");
-		http.authorizeRequests().antMatchers("/api/theme-pageable").hasAnyRole("ADMIN", "STUDENT");
-		http.authorizeRequests().antMatchers("/api/citation-pageable").hasAnyRole("ADMIN", "STUDENT");
-		http.authorizeRequests().antMatchers("/api/author-pageable").hasAnyRole("ADMIN", "STUDENT");
-		http.authorizeRequests().antMatchers("/api/theme/**").hasAnyRole("ADMIN","STUDENT");
-		http.authorizeRequests().antMatchers("/api/author/**").hasAnyRole("ADMIN","STUDENT").and().httpBasic().realmName(REALM).authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().antMatchers("/api/book/**").hasAnyRole("ADMIN","STUDENT");
-		http.authorizeRequests().antMatchers("/api/book").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers("/api/theme").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers("/api/author").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.PATCH).hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.POST).hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE).hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.GET).permitAll();
+				
 		//Login form
 		http.formLogin().defaultSuccessUrl("/");
 		http.formLogin().usernameParameter("username");
@@ -55,7 +35,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//Logout
 		http.logout().logoutUrl("/logout");
 		http.logout().logoutSuccessUrl("/");
-
 		
 		//CSRF
 		http.csrf().disable();

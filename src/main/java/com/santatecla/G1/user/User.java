@@ -14,6 +14,8 @@ import javax.persistence.Id;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class User {
@@ -24,6 +26,7 @@ public class User {
 	
 	private String name;
 	
+	@JsonIgnore
 	private String passwordHash;
 	
 	private ArrayList<Tabs> tabs = new ArrayList<>();
