@@ -42,6 +42,12 @@ public class CitationRestController {
 	public ResponseEntity<Collection<Citation>> citations() {
 		return new ResponseEntity<>(citationService.findAll(), HttpStatus.OK);
 	}
+	
+	@JsonView(CitationDetailView.class)
+	@RequestMapping(value = "/citation-search/{text}", method = GET)
+	public ResponseEntity<List<Citation>> searchAuthor(@PathVariable String text) {
+		return new ResponseEntity<>(citationService.findByTextContaining(text), HttpStatus.OK);
+	}
 
 	@JsonView(Citation.BasicView.class)
 	@RequestMapping(value = "/citation-pageable", method = RequestMethod.GET)

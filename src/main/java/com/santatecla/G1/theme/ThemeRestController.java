@@ -40,7 +40,13 @@ public class ThemeRestController {
 	public ResponseEntity<Collection<Theme>> themes() {
 		return new ResponseEntity<>(themeService.findAll(), HttpStatus.OK);
 	}
-
+	
+	@JsonView(ThemeDetailView.class)
+	@RequestMapping(value = "/theme-search/{name}", method = GET)
+	public ResponseEntity<List<Theme>> searchTheme(@PathVariable String name) {
+		return new ResponseEntity<>(themeService.findByNameContaining(name), HttpStatus.OK);
+	}
+	
 	@JsonView(Theme.BasicView.class)
 	@RequestMapping(value = "/theme-pageable", method = RequestMethod.GET)
 	public ResponseEntity<List<Theme>> themePageable(Pageable page) {

@@ -22,7 +22,11 @@ public class BookService {
 	public List<Book> findAll() {
 		return booksRepository.findAll();
 	}
-
+	
+	public List<Book> findByTitleContaining(String title) {
+		return booksRepository.findByTitleContaining(title);
+	}
+	
 	public void save(Book book) {
 		booksRepository.save(book);
 	}

@@ -27,6 +27,10 @@ public class ThemeService {
 		return themeRepository.findAll();
 	}
 	
+	public List<Theme> findByNameContaining(String name) {
+		return themeRepository.findByNameContaining(name);
+	}
+	
 	public Theme findByNameIgnoreCase(String name) {
 		return themeRepository.findByNameIgnoreCase(name);
 	}

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.santatecla.G1.author.Author;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.theme.Theme;
 
@@ -25,6 +26,10 @@ public class CitationService {
 	}
 	public Citation findById(long id) {
 		return citationRepository.findById(id);
+	}
+	
+	public List<Citation> findByTextContaining(String text) {
+		return citationRepository.findByTextContaining(text);
 	}
 	
 	public void deleteById(long id) {

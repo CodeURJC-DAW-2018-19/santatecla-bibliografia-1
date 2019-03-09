@@ -19,4 +19,5 @@ public interface BookRepository extends JpaRepository<Book,Long>{
 	
 	@Query(value="SELECT * FROM Book WHERE theme_id = ?1 ",nativeQuery = true)
 	List<Book> findByTheme_id(long id);
+	List<Book> findByTitleContaining(String title);
 }

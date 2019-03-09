@@ -1,6 +1,7 @@
 package com.santatecla.G1.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,12 @@ public class BooksRestController {
 	@RequestMapping(value = "book", method = GET)
 	public ResponseEntity<Collection<Book>> getBooks() {
 		return new ResponseEntity<>(bookService.findAll(), HttpStatus.OK);
+	}
+	
+	@JsonView(BookDetailView.class)
+	@RequestMapping(value = "/book-search/{title}", method = GET)
+	public ResponseEntity<List<Book>> searchBook(@PathVariable String title) {
+		return new ResponseEntity<>(bookService.findByTitleContaining(title), HttpStatus.OK);
 	}
 
 	@JsonView(Book.BasicView.class)
