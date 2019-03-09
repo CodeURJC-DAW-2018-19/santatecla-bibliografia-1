@@ -65,7 +65,10 @@ The security has been implemented using Spring Security, all the configuration r
 
 # Phase 3 DOC
 
-[API DOC](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/API.md)
+## Navigation Scheme
+![Image of diagram](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/DiagramaFase3.jpg)
+
+[API DOC](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/API.md)
 
 ## Authors
 
