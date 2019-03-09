@@ -2,8 +2,8 @@ version: '2'
 services:
    # Definition of MySQL service
    db:
-      # Name of the container 
-      container_name: mysql
+      # Name of the container
+      container_name: mysql 
       hostname: localhost
       image: mysql:5.6
       environment:
