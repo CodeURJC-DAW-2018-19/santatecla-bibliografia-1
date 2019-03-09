@@ -128,6 +128,36 @@ public class BooksRestController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
+	@JsonView(BookDetailView.class)
+	@RequestMapping(value = "book2/{id}", method = PATCH)
+	public ResponseEntity<Book> updateBook2(@RequestBody Book newBook, @PathVariable long id) {
+		Book oldBook = bookService.findOne(id);
+		if (oldBook != null) {
+			oldBook.update(newBook);
+			Author author = new Author();
+			if (oldBook.getAuthor() != null) {
+				author = authorService.findById(oldBook.getAuthor().getId());
+				if (author != null) {
+					oldBook.setAuthor(author);
+					author.addBook(oldBook);
+					authorService.save(author);
+				}
+			}
+			Theme theme = new Theme();
+			if (oldBook.getTheme() != null) {
+				theme = themeService.findById(oldBook.getTheme().getId());
+				if (theme != null) {
+					oldBook.setTheme(theme);
+					theme.addBook(oldBook);
+					themeService.save(theme);
+				}
+			}
+			bookService.save(oldBook);
+			return new ResponseEntity<>(oldBook, HttpStatus.OK);
+		} else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
 	
 	
 	
