@@ -78,18 +78,10 @@ public class ThemeRestController {
 		return themeName;
 	}
 
-	@JsonView(ThemeDetailView.class)
-	@RequestMapping(value = "/theme", method = POST)
-	public Theme theme(Model model, @RequestBody Theme theme) {
-		themeService.save(theme);
-		System.out.println(theme.toString());
-		model.addAttribute("text", "Theme Created");
-		return theme;
-	}
 
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/theme/{id}", method = GET)
-	public ResponseEntity<Theme> theme(Model model, @PathVariable long id) {
+	public ResponseEntity<Theme> theme(@PathVariable long id) {
 		Theme theme = themeService.findById(id);
 		if (theme != null) {
 			List<Book> books = bookService.findByTheme(theme);
@@ -103,10 +95,6 @@ public class ThemeRestController {
 					citation.add(c);
 				}
 			}
-			model.addAttribute("authors", authors);
-			model.addAttribute("books", books);
-			model.addAttribute("theme", theme);
-			model.addAttribute("citations", citation);
 			return new ResponseEntity<>(theme, HttpStatus.OK);
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -114,12 +102,11 @@ public class ThemeRestController {
 
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/theme/{id}", method = PATCH)
-	public ResponseEntity<Theme> updateTheme(Model model, @RequestBody Theme newTheme, @PathVariable long id) {
+	public ResponseEntity<Theme> updateTheme(@RequestBody Theme newTheme, @PathVariable long id) {
 		Theme oldTheme = themeService.findById(id);
 		if (oldTheme != null) {
 			oldTheme.update(newTheme);
 			themeService.save(oldTheme);
-			model.addAttribute("text", "Tema editado de forma correcta");
 			return new ResponseEntity<>(oldTheme, HttpStatus.OK);
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -128,15 +115,27 @@ public class ThemeRestController {
 
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/theme/{id}", method = DELETE)
-	public ResponseEntity<Theme> deleteTheme(Model model, @PathVariable long id) {
+	public ResponseEntity<Theme> deleteTheme(@PathVariable long id) {
 		Theme theme = themeService.findById(id);
 		if (theme != null) {
-			model.addAttribute("theme", theme);
-			model.addAttribute("text", "Tema eliminado de forma correcta");
 			themeService.deleteById(id);
 			return new ResponseEntity<>(theme, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
+	
+	// ----------------------------- METHODS WITH UPLOAD IMAGES -------------------------------------------------
+
+	@JsonView(ThemeDetailView.class)
+	@RequestMapping(value = "/theme", method = POST)
+	public Theme theme(Model model, @RequestBody Theme theme) {
+		themeService.save(theme);
+		System.out.println(theme.toString());
+		model.addAttribute("text", "Theme Created");
+		return theme;
 	}
 
 }

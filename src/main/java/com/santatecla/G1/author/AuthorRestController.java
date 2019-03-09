@@ -73,6 +73,47 @@ public class AuthorRestController {
 	}
 
 	@JsonView(AuthorDetailView.class)
+	@RequestMapping(value = "/author/{id}", method = GET)
+	public ResponseEntity<Author> getAuthor(@PathVariable long id) {
+		Author a = authorService.findById(id);
+		if (a != null)
+			return new ResponseEntity<>(a, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+
+	@JsonView(AuthorDetailView.class)
+	@RequestMapping(value = "/author/{id}", method = PATCH)
+	public ResponseEntity<Author> updateAuthor(@RequestBody Author newAuthor, @PathVariable long id) {
+		Author oldAuthor = authorService.findById(id);
+		if (oldAuthor != null) {
+			oldAuthor.update(newAuthor);
+			authorService.save(oldAuthor);
+			return new ResponseEntity<>(oldAuthor, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@JsonView(AuthorDetailView.class)
+	@RequestMapping(value = "/author/{id}", method = DELETE)
+	public ResponseEntity<Author> deleteAuthor(@PathVariable long id) {
+		Author author = authorService.findById(id);
+		if (author != null) {
+			authorService.deleteById(id);
+			return new ResponseEntity<>(author, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+	}
+	
+	
+	
+	
+	// ----------------------------- METHODS WITH UPLOAD IMAGES -------------------------------------------------
+	
+	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/author", method = POST)
 	public Author author(Model model, @RequestBody Author author, MultipartFile file) {
 		if ((file != null) && (!file.isEmpty())) {
@@ -85,44 +126,5 @@ public class AuthorRestController {
 		model.addAttribute("text", "Autor creado correctamente");
 		System.out.println(author.toString());
 		return author;
-	}
-
-	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/author/{id}", method = GET)
-	public ResponseEntity<Author> getAuthor(Model model, @PathVariable long id) {
-		Author a = authorService.findById(id);
-		if (a != null)
-			return new ResponseEntity<>(a, HttpStatus.OK);
-		else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
-
-	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/author/{id}", method = PATCH)
-	public ResponseEntity<Author> updateAuthor(Model model, @RequestBody Author newAuthor, @PathVariable long id) {
-		Author oldAuthor = authorService.findById(id);
-		if (oldAuthor != null) {
-			oldAuthor.update(newAuthor);
-			authorService.save(oldAuthor);
-			model.addAttribute("text", "Autor editado de forma correcta");
-			return new ResponseEntity<>(oldAuthor, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-
-	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/author/{id}", method = DELETE)
-	public ResponseEntity<Author> deleteAuthor(Model model, @PathVariable long id) {
-		Author author = authorService.findById(id);
-		if (author != null) {
-			model.addAttribute("author", author);
-			model.addAttribute("text", "Autor eliminado de forma correcta");
-			authorService.deleteById(id);
-			return new ResponseEntity<>(author, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-
 	}
 }

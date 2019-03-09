@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.santatecla.G1.author.Author;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
 import com.santatecla.G1.theme.Theme;
@@ -58,6 +59,53 @@ public class CitationRestController {
 	}
 	
 	@JsonView(CitationDetailView.class)
+	@RequestMapping(value="/citation2", method = POST)
+	public ResponseEntity<Citation> citation(@RequestBody Citation citation) {
+		if (citationService.findByTextIgnoreCase(citation.getText()) == null) {
+			Book book = new Book();
+			if (citation.getBook() != null) {
+				book = bookService.findById(citation.getBook().getId());
+
+				citation.setBook(book);
+			}
+			citationService.save(citation);
+			return new ResponseEntity<>(citation, HttpStatus.CREATED);
+		} else
+			return new ResponseEntity<>(HttpStatus.IM_USED);
+	}
+	
+	@JsonView(CitationDetailView.class)
+	@RequestMapping(value = "/citation/{id}", method = GET)
+	public ResponseEntity<Citation> citation(@PathVariable long id){
+		Citation citation = citationService.findById(id);
+		if(citation!=null) {
+			System.out.println(citation.toString());
+			Book book = citation.getBook();
+			Theme theme = citation.getTheme();
+			return new ResponseEntity<>(citation, HttpStatus.OK);
+		}
+		else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	@JsonView(CitationDetailView.class)
+	@RequestMapping(value="/citation/{id}", method = DELETE)
+	public ResponseEntity<Citation> deleteCitation(@PathVariable long id) {
+		Citation citation = citationService.findById(id);
+		if (citation!=null) {
+			citationService.deleteById(id);	
+			return new ResponseEntity<>(citation, HttpStatus.OK);
+		}else 
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
+	
+	
+	// ----------------------------- METHODS WITH UPLOAD IMAGES -------------------------------------------------
+	
+	@JsonView(CitationDetailView.class)
 	@RequestMapping(value="/citation", method = POST)
 	public ResponseEntity<Citation> saveCitation(Model model,@RequestBody Citation citation,@RequestParam Long bookId) {
 		citationService.save(citation);
@@ -76,23 +124,6 @@ public class CitationRestController {
 		citationService.save(citation);
 		model.addAttribute("text","Citation Created");
 		return new ResponseEntity<>(citation, HttpStatus.OK);
-	}
-	
-	@JsonView(CitationDetailView.class)
-	@RequestMapping(value = "/citation/{id}", method = GET)
-	public ResponseEntity<Citation> citation(Model model, @PathVariable long id){
-		Citation citation = citationService.findById(id);
-		if(citation!=null) {
-			System.out.println(citation.toString());
-			Book book = citation.getBook();
-			Theme theme = citation.getTheme();
-			model.addAttribute("Citation", citation);
-			model.addAttribute("Book", book);
-			model.addAttribute("Theme", theme);
-			return new ResponseEntity<>(citation, HttpStatus.OK);
-		}
-		else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 	@JsonView(CitationDetailView.class)
@@ -117,18 +148,4 @@ public class CitationRestController {
 		}
 		else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	
-	@JsonView(CitationDetailView.class)
-	@RequestMapping(value="/citation/{id}", method = DELETE)
-	public ResponseEntity<Citation> deleteCitation(Model model, @PathVariable long id) {
-		Citation citation = citationService.findById(id);
-		if (citation!=null) {
-			model.addAttribute("Citation", citation);
-			model.addAttribute("text","Cita eliminada de forma correcta");
-			citationService.deleteById(id);	
-			return new ResponseEntity<>(citation, HttpStatus.OK);
-		}else 
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
-	
 }

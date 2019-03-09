@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.santatecla.G1.book.Book;
+import com.santatecla.G1.theme.Theme;
 
 @Service
 public class CitationService {
@@ -32,5 +33,9 @@ public class CitationService {
 	
 	public Page<Citation> findAll(Pageable page){
 		return citationRepository.findAll(page);
+	}
+	
+	public Citation findByTextIgnoreCase(String text) {
+		return citationRepository.findByTextIgnoreCase(text);
 	}
 }

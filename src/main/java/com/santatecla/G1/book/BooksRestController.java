@@ -101,55 +101,39 @@ public class BooksRestController {
 
 	}
 
-	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "/book", method = POST)
-	public Book saveBook(Model model, @RequestBody Book book, MultipartFile file, Long authorId, Long themeId) {
-		bookService.save(book);
-		if (authorId != null) {
-			Author author = authorService.findById(authorId);
-			if (author != null) {
-				book.setAuthor(author);
-				author.addBook(book);
-				authorService.save(author);
-			}
-		}
-		if (themeId != null) {
-			Theme theme = themeService.findById(themeId);
-			if (theme != null) {
-				book.setTheme(theme);
-				theme.addBook(book);
-				themeService.save(theme);
-			}
-		}
-		if ((file != null) && (!file.isEmpty())) {
-			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
-			book.setImgId(imgId);
-			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
-		} else
-			book.setImgId(-2);
-		bookService.save(book);
-		model.addAttribute("text", "Book Created");
-		return book;
-	}
-
+	
+	
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/book/{id}", method = GET)
-	public ResponseEntity<Book> getBook(Model model, @PathVariable long id) {
+	public ResponseEntity<Book> getBook(@PathVariable long id) {
 		Book book = bookService.findOne(id);
 		if (book != null) {
 			System.out.println(book.toString());
 			List<Citation> citations = book.getCitations();
 			Author author = book.getAuthor();
 			Theme theme = book.getTheme();
-			model.addAttribute("book", book);
-			model.addAttribute("authors", author);
-			model.addAttribute("themes", theme);
-			model.addAttribute("citations", citations);
 			return new ResponseEntity<>(book, HttpStatus.OK);
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
+	@JsonView(BookDetailView.class)
+	@RequestMapping(value = "/book/{id}", method = DELETE)
+	public ResponseEntity<Book> deleteAuthor(@PathVariable long id) {
+		Book book = bookService.findOne(id);
+		if (book != null) {
+			bookService.deleteById(id);
+			return new ResponseEntity<>(book, HttpStatus.OK);
+		} else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
+	
+	
+	// ----------------------------- METHODS WITH UPLOAD IMAGES -------------------------------------------------
+	
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "book/{id}", method = PATCH)
 	public ResponseEntity<Book> updateBook(Model model, @RequestBody Book newBook, @PathVariable long id,
@@ -184,18 +168,37 @@ public class BooksRestController {
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-
+	
 	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "/book/{id}", method = DELETE)
-	public ResponseEntity<Book> deleteAuthor(Model model, @PathVariable long id) {
-		Book book = bookService.findOne(id);
-		if (book != null) {
-			model.addAttribute("book", book);
-			model.addAttribute("text", "Libro eliminado de forma correcta");
-			bookService.deleteById(id);
-			return new ResponseEntity<>(book, HttpStatus.OK);
+	@RequestMapping(value = "/book", method = POST)
+	public Book saveBook(Model model, @RequestBody Book book, MultipartFile file, Long authorId, Long themeId) {
+		bookService.save(book);
+		if (authorId != null) {
+			Author author = authorService.findById(authorId);
+			if (author != null) {
+				book.setAuthor(author);
+				author.addBook(book);
+				authorService.save(author);
+			}
+		}
+		if (themeId != null) {
+			Theme theme = themeService.findById(themeId);
+			if (theme != null) {
+				book.setTheme(theme);
+				theme.addBook(book);
+				themeService.save(theme);
+			}
+		}
+		if ((file != null) && (!file.isEmpty())) {
+			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
+			book.setImgId(imgId);
+			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
 		} else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			book.setImgId(-2);
+		bookService.save(book);
+		model.addAttribute("text", "Book Created");
+		return book;
 	}
+
 
 }
