@@ -66,16 +66,36 @@ The security has been implemented using Spring Security, all the configuration r
 # Phase 3 DOC
 
 ## Navigation Scheme
+
 ![Image of diagram](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/DiagramaFase3.jpg)
 
+Login as an admin you can add, delete, and update resources. And all users can view all the detailed resources following the navigation showed up.
+
+## API DOCUMENTATION
 [API DOC](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/API.md)
+
+## Getting strted with docker
+1. Be sure u are using Windows Pro/Student, because docker will not work in other editions.
+2. Download and install docker. [Docker] (https://hub.docker.com/editions/community/docker-ce-desktop-windows)
+3.
+4.
+5.
+
+## Instructions to execute the dockerized application
+1.
+2.
+3.
+4.
+5.
+6.
+
 
 ## Authors
 
 * **Rubén Bernabe Menéndez** - *r.bernabem@alumnos.urjc.es* - [GitHub](https://github.com/RubenBernabe)
 * **Rodrigo Lopez Sanchez** - *r.lopezsanch@alumnos.urjc.es* - [GitHub](https://github.com/RodriLs)
 * **Raúl Martín Pintos** - *r.martinpin@alumnos.urjc.es* - [GitHub](https://github.com/martinpin)
-* **Ana Maria Jurado Crespo** - *am.juradoc@alumnos.urjc.es* - [GitHub](https://github.com/anaJurado)
+* **Natalia Madrueño Sierro** - *n.madrueno@alumnos.urjc.es* - [GitHub](https://github.com/madrueno)
 * **Óscar Carazo Cámara** - *o.carazoc@alumnos.urjc.es* - [GitHub](https://github.com/OscarFlay96)
 
 ## Requirements Document
