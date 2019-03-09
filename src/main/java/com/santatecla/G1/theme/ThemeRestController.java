@@ -50,17 +50,20 @@ public class ThemeRestController {
 	@RequestMapping(value = "/theme2", method = POST)
 	public ResponseEntity<Theme> theme(@RequestBody Theme theme) {
 		if (themeService.findByNameIgnoreCase(theme.getName()) == null) {
-			ArrayList<Book> books = new ArrayList<>();
-			for (Book book : theme.getBook()) {
+			try {
+				ArrayList<Book> books = new ArrayList<>();
+				for (Book book : theme.getBook()) {
 
-				books.add(bookService.findById(book.getId()));
+					books.add(bookService.findById(book.getId()));
+				}
+
+				books.forEach((b) -> {
+					System.out.println(b.getTitle());
+				});
+
+				theme.setBooks(books);
+			} catch (Exception e) {
 			}
-
-			books.forEach((b) -> {
-				System.out.println(b.getTitle());
-			});
-
-			theme.setBooks(books);
 			themeService.save(theme);
 			return new ResponseEntity<>(theme, HttpStatus.CREATED);
 		} else
@@ -77,7 +80,6 @@ public class ThemeRestController {
 		}
 		return new ResponseEntity<>(themeName, HttpStatus.OK);
 	}
-
 
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/theme/{id}", method = GET)
@@ -123,11 +125,9 @@ public class ThemeRestController {
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	
-	
-	
-	
-	// ----------------------------- METHODS WITH UPLOAD IMAGES -------------------------------------------------
+
+	// ----------------------------- METHODS WITH UPLOAD IMAGES
+	// -------------------------------------------------
 
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/theme", method = POST)
