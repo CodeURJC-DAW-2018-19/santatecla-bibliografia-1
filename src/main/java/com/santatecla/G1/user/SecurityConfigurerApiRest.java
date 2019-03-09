@@ -21,6 +21,7 @@ public class SecurityConfigurerApiRest extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.antMatcher("/api/**");	
+		http.authorizeRequests().antMatchers("/api/signup").permitAll();
 		
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/usuario/**").hasAnyRole("ADMIN");
 		
