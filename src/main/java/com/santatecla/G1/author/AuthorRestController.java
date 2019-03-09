@@ -46,6 +46,14 @@ public class AuthorRestController {
 	public ResponseEntity<List<Author>> authorsPageable(Pageable page) {
 		return new ResponseEntity<>(authorService.findAll(page).getContent(), HttpStatus.OK);
 	}
+	
+	
+	@JsonView(AuthorDetailView.class)
+	@RequestMapping(value = "/author-search/{name}", method = GET)
+	public ResponseEntity<List<Author>> searchAuthor(@PathVariable String name) {
+		System.out.println(authorService.findByNameContaining(name).get(0));
+		return new ResponseEntity<>(authorService.findByNameContaining(name), HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "/author2", method = POST)
 	public ResponseEntity<Author> author(@RequestBody Author author) {

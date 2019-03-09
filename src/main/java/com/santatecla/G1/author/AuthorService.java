@@ -17,6 +17,10 @@ public class AuthorService {
 		return authorRepository.findByName(name);
 	}
 	
+	public List<Author> findByNameContaining(String name) {
+		return authorRepository.findByNameContaining(name);
+	}
+	
 	public Author findByNameIgnoreCase(String name) {
 		return authorRepository.findByNameIgnoreCase(name);
 	}
