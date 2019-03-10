@@ -91,15 +91,14 @@ To know how to use the API rest go to the link below.
 
 ## Getting started with docker
 
-1. Be sure u are using Windows Pro/Student/Enterprise, otherwise docker will not work in your computer.
+1. Be sure u are using Windows Pro/Student/Enterprise, Linux, or iOS otherwise docker will not work in your computer.
 2. Download and install Docker. [Docker download] (https://hub.docker.com/editions/community/docker-ce-desktop-windows)
 3. Download and install Maven. [Maven download] (https://maven.apache.org/download.cgi)
 4. Go to the /Docker folder in the project and run docker_develop.sh
-5. Now go to yor prefered terminal, cd to the same folder and write in the command line ``` docker-compose up ```
 
 ## Instructions to execute the dockerized application
 
-1.
+1. The first thing you need to do is go to the Bash at the docker folder and use the commnad ``` docker-compose up ```
 2.
 3.
 4.
