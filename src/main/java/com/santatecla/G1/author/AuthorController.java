@@ -32,8 +32,6 @@ public class AuthorController {
 	@Autowired
 	private AuthorService authorService;
 	
-	@Autowired
-	private AuthorRepository authorRepository;
 
 	@Autowired
 	private TabController tabs;
@@ -76,7 +74,7 @@ public class AuthorController {
 			model.addAttribute("entity", "author");
 		}
 
-		System.out.println("Add tab");
+		System.out.println(userComponent.getLoggedUser().getName());
 		tabs.userTabs(model, "/author/" + id, author.getName(), true, id);
 		System.out.println("aqui");
 		return "authorPage";

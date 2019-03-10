@@ -14,7 +14,7 @@ services:
    bibliografia:
       image: santatecla/bibliografia:latest
       ports:
-        - "8080:8080"
+        - "8443:8443"
       depends_on:
         - db
       entrypoint: ["/usr/src/wait-for-it.sh", "db:3306", "--", "java", "-jar", "app.jar"]

@@ -73,7 +73,7 @@ public class DataBaseInitializator {
 		String nameR="Joanne Rowling";
 		String urlImageR="https://commons.wikimedia.org/wiki/File:J._K._Rowling_2010.jpg";
 		String bornDateR="1965-07-31";
-		String deathDateR=null;
+		String deathDateR="";
 		String urlMapR="https://www.google.es/maps/place/Gloucestershire+Sur,+Reino+Unido/@51.5488153,-2.7615817,10z/data=!3m1!4b1!4m5!3m4!1s0x48719a6a7dccc6d5:0x30d8b23d499a000!8m2!3d51.5264361!4d-2.4728487";
 		String bornPlaceR="Gloucestershire Sur, Reino Unido";
 		Author a6= new Author(nameR,urlImageR,bornDateR,deathDateR,bornPlaceR,urlMapR,-1);
@@ -89,7 +89,7 @@ public class DataBaseInitializator {
 		String nameS="Stephen King";
 		String urlImageS="https://i.blogs.es/899a7f/king/450_1000.jpeg";
 		String bornDateS="1947-09-21";
-		String deathDateS=null;
+		String deathDateS="";
 		String urlMapS="https://www.google.com/maps/place/Portland,+Oreg%C3%B3n,+EE.+UU./data=!4m2!3m1!1s0x54950b0b7da97427:0x1c36b9e6f6d18591?ved=2ahUKEwjw0fKFvvjgAhVirHEKHYXeDR4Q8gEwAHoECAIQAQ";
 		String bornPlaceS="Portland, Oregón, EE. UU.";
 		Author a7= new Author(nameS,urlImageS,bornDateS,deathDateS,bornPlaceS,urlMapS,-1);
@@ -107,11 +107,11 @@ public class DataBaseInitializator {
 		Book b1 = new Book("Palabras Radiantes",3);
 		Book b2 = new Book("Nacidos de la bruma",4);
 		Book b3 = new Book("El año de los delfines",5);
-		Book b4 = new Book("Refranero",-1);
-		Book b5 = new Book("Romancero Gitano",-1);
-		Book b6 = new Book("Harry Potter y la Piedra Filosofal",-1);
-		Book b7 = new Book("IT",-1);
-		Book b8= new Book("El Resplandor",-1);
+		Book b4 = new Book("Refranero",-2);
+		Book b5 = new Book("Romancero Gitano",-2);
+		Book b6 = new Book("Harry Potter y la Piedra Filosofal",-2);
+		Book b7 = new Book("IT",-2);
+		Book b8= new Book("El Resplandor",-2);
 		
 		//Citation initialization  --> We dont need to save because they deppends of the books. (Cascade.)	
 		Citation c1 = new Citation("El misterio de la vida no es un problema a resolver, sino una realidad a experimentar",b1);

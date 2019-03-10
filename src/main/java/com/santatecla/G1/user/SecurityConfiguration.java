@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	 private static String REALM="MY_TEST_REALM";
+	 
 	@Autowired
 	public UserRepositoryAuthenticationProvider authenticationProvider;
 	protected void configure(HttpSecurity http) throws Exception{
