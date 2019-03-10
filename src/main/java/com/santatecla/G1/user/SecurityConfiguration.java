@@ -29,6 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/table-author").permitAll();
 		http.authorizeRequests().antMatchers("/table-works").permitAll();
 		http.authorizeRequests().antMatchers("/table-theme").permitAll();
+		
 		//Private pages 
 		http.authorizeRequests().anyRequest().authenticated();
 	
