@@ -3,11 +3,15 @@
 This is a project based learning made by students at the URJC, the  objective of the project is making a website to manage authors, books and quotes in a bibliography supported in a data base.
 
 ## Built With
+
 * [Bootstrap CreativeTim](https://demos.creative-tim.com/material-dashboard/docs/2.1/components/breadcrumb.html) - Used template
 * [Spring](https://spring.io/tools) - Project Management
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [MySql](https://www.mysql.com/products/workbench/) - Backend technology
-* [JAVA 8] (https://www.java.com/es/) - Backend programmign lenguage
+* [JAVA 8](https://www.java.com/es/) - Backend programing lenguage
+* [Docker](https://www.hub.docker.com/) - Create image of the application
+
+# Phase 2 DOC
 
 ## Setting up
 
@@ -19,7 +23,6 @@ This is a project based learning made by students at the URJC, the  objective of
 ![Image of MySql2](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/MySql2.PNG)
 6. Run the project as Spring Application and then you can visit https://localhost/8443/index in your favourite browser and see the website.
 
-# Phase 2 DOC
 ## Navigation Scheme
 ![Image of scheme](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/Scheme.png)
 
@@ -73,7 +76,7 @@ Loged as an admin you can add, delete, and update resources. And all users can v
 
 ## REST CONTROLLER DIAGRAM
  
- ![Image of diagram](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/RestDiagram.jpg)
+ ![Image of diagram](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/RestDiagram.png)
 
  
  In this diagram is showed the relation between the RestController Service and Class, as an example with the author entity.
