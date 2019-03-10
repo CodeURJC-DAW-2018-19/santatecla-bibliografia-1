@@ -19,9 +19,11 @@ public class SecurityConfigurerApiRest extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
+		
+		http.authorizeRequests().antMatchers("/api/login").permitAll();
 		http.antMatcher("/api/**");	
 		http.authorizeRequests().antMatchers("/api/signup").permitAll();
+
 		http.authorizeRequests().antMatchers("/api//create-pdf/*").permitAll();
 		
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/usuario/**").hasAnyRole("ADMIN");
