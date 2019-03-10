@@ -1,6 +1,7 @@
 #! /bin/bash
  
 cp Dockerfile ../
+cp "wait-for-it.sh" ../ 
 
 cd ..
 
@@ -11,5 +12,6 @@ docker run -it --rm -v `pwd`:/usr/src/mymaven -w /usr/src/mymaven jtim/maven-non
 docker build -t santatecla/bibliografia .
 
 rm Dockerfile
+rm "wait-for-it.sh"
 
 cd Docker
