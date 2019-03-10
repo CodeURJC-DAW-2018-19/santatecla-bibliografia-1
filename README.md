@@ -69,19 +69,33 @@ The security has been implemented using Spring Security, all the configuration r
 
 ![Image of diagram](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/DiagramaFase3.jpg)
 
-Login as an admin you can add, delete, and update resources. And all users can view all the detailed resources following the navigation showed up.
+Loged as an admin you can add, delete, and update resources. And all users can view all the detailed resources following the navigation showed up.
+
+## REST CONTROLLER DIAGRAM
+ 
+ ![Image of diagram](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/RestDiagram.jpg)
+
+ 
+ In this diagram is showed the relation between the RestController Service and Class, as an example with the author entity.
+
+
 
 ## API DOCUMENTATION
+
+To know how to use the API rest go to the link below.
+
 [API DOC](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/API.md)
 
 ## Getting started with docker
+
 1. Be sure u are using Windows Pro/Student/Enterprise, otherwise docker will not work in your computer.
 2. Download and install Docker. [Docker download] (https://hub.docker.com/editions/community/docker-ce-desktop-windows)
 3. Download and install Maven. [Maven download] (https://maven.apache.org/download.cgi)
 4. Go to the /Docker folder in the project and run docker_develop.sh
-5. Now go to yor prefered terminalñd to the same folder and write in the command line ``` docker-compose up ```
+5. Now go to yor prefered terminal, cd to the same folder and write in the command line ``` docker-compose up ```
 
 ## Instructions to execute the dockerized application
+
 1.
 2.
 3.
@@ -101,4 +115,3 @@ Login as an admin you can add, delete, and update resources. And all users can v
 ## Requirements Document
 [Document](https://docs.google.com/document/d/1CWRq8RUXchpzgKLwoRW4MFCGlrEd05Fe1oJTlBbKZs0/edit?usp=sharing)
 
-Doc: https://docs.google.com/document/d/1nyK1UKLXcJqGNJcQNH4hE4urLx0fvnFmNnkJ2F11rcE/edit?usp=sharing
