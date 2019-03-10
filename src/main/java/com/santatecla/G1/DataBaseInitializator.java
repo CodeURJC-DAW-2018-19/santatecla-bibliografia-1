@@ -180,11 +180,8 @@ public class DataBaseInitializator {
 
 		//Set books of citations
 		c1.setBook(b1);
-		
 		c2.setBook(b2);
-		
 		c3.setBook(b3);
-		
 		c4.setBook(b4);
 		c5.setBook(b4);
 		c6.setBook(b4);
@@ -238,6 +235,7 @@ public class DataBaseInitializator {
 		c13.setTheme(th4);
 		c14.setTheme(th4);
 		c15.setTheme(th5);
+		
 		//Citation for pagination
 		/*p1.setTheme(th1);
 		p2.setTheme(th1);
@@ -316,18 +314,22 @@ public class DataBaseInitializator {
 		bookService.save(b8);
 		
 		//Save the author who has write the b1
-		/*citationRepository.save(c1);
-		citationRepository.save(c2);
-		citationRepository.save(c3);
-		citationRepository.save(c4);
-		citationRepository.save(c5);
-		citationRepository.save(c6);
-		citationRepository.save(c6);
-		citationRepository.save(c7);
-		citationRepository.save(c8);
-		citationRepository.save(c9);
-		citationRepository.save(c10);
-		citationRepository.save(c11);*/
+		citationService.save(c1);
+		citationService.save(c2);
+		citationService.save(c3);
+		citationService.save(c4);
+		citationService.save(c5);
+		citationService.save(c6);
+		citationService.save(c6);
+		citationService.save(c7);
+		citationService.save(c8);
+		citationService.save(c9);
+		citationService.save(c10);
+		citationService.save(c11);
+		citationService.save(c12);
+		citationService.save(c13);
+		citationService.save(c14);
+		citationService.save(c15);
 
 		
 		
