@@ -1219,3 +1219,187 @@ Only the admin is allowed to do DELETE requests to the API.
 
 	**Code**: 404 NOT FOUND or 500 INTERNAL SERVER ERROR
 		
+### PATCH requests	
+
+PATCH method is only available for admin, and updates a rosurce in the API rest. The data is sended in the body as a JSON.
+		
+#### PATCH a book
+
+* ##### URL
+
+	< /book/{id}>
+
+* ##### Method:
+
+	`PATCH`
+  
+* ##### Body data
+
+```
+	{
+        "id": 2,
+        "title": "Libro editado",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": -2
+    	}
+    
+```
+	
+* ##### Success response:
+
+```
+    {
+    "id": 2,
+    "title": "Libro editado",
+    "publishDate": "",
+    "nameEdit": "",
+    "urlEdit": "",
+    "urlImgCoverPage": "",
+    "urlImgEdit": "",
+    "imgId": -2,
+    "theme": null,
+    "citation": [],
+    "author": null
+     }
+```
+
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND
+
+* ##### Confirmation response:
+	
+	**Code**: 200 OK
+
+#### PATCH a theme
+
+* ##### URL
+
+	< /theme/{id}>
+
+* ##### Method:
+
+	`PATCH`
+  
+* ##### Body data
+
+```
+    {
+        "id": 3,
+        "name": "Nuevo tema editado"
+    }
+    
+```
+	
+* ##### Success response:
+
+```
+  {
+    "id": 3,
+    "name": "Nuevo tema editado",
+    "books": null
+   }
+ 
+```
+
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND
+
+* ##### Confirmation response:
+	
+	**Code**: 200 OK
+
+#### PATCH an author
+* ##### URL
+
+	< /author/{id}>
+
+* ##### Method:
+
+	`PATCH`
+  
+* ##### Body data
+
+```
+   {
+        "id": 1,
+        "name": "Nombre editado",
+        "urlImage": "0",
+        "birthDate": "0",
+        "deathDate": "0",
+        "bornPlace": "Editado",
+        "urlMap": "0",
+        "imgId": -1
+    }
+    
+```
+	
+* ##### Success response:
+
+```
+	{
+	    "id": 1,
+	    "name": "Nombre editado",
+	    "urlImage": "0",
+	    "birthDate": "0",
+	    "deathDate": "0",
+	    "bornPlace": "Editado",
+	    "urlMap": "0",
+	    "imgId": -1,
+	    "books": []
+	}
+
+```
+
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND
+
+* ##### Confirmation response:
+	
+	**Code**: 200 OK
+
+#### PATCH a quote
+
+* ##### URL
+
+	< /citation/{id}>
+
+* ##### Method:
+
+	`PATCH`
+  
+* ##### Body data
+
+```
+ {
+        "id": 79,
+        "text": "Solo sé que no se nada",
+        "textAux": "Cita editada"
+    }
+    
+```
+	
+* ##### Success response:
+
+```
+  {
+        "id": 79,
+        "text": "Solo sé que no se nada",
+        "textAux": "Cita editada"
+    }
+```
+
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND
+
+* ##### Confirmation response:
+	
+	**Code**: 200 OK
+
