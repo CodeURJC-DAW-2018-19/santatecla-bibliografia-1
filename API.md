@@ -64,6 +64,40 @@ And for user/student role:
 * ##### Error response:
 
 	**Code**: 401 UNAUTHORIZED or 400 BAD REQUEST
+
+### Sign up
+
+* ##### URL:
+
+	< /singup >
+
+* ##### Method:
+
+	`GET`
+	
+* ##### Body data:
+  ```
+	{
+	"name": "Óscar",
+	"passwordHash": "qwerty"
+	}
+  ```
+ * ##### Success Response:
+
+  	```
+		{
+	    "id": 120,
+	    "name": "Óscar",
+	    "roles": [
+		"ROLE_USER"
+	    ]
+	}
+	```
+	
+* ##### Error response:
+
+	**Code**: 405 Method not allowed
+	
 	
 ### Logout
 
@@ -891,7 +925,7 @@ Only the admin is allowed to do POST requests to the API, some of the post reque
   
 * ##### Body data
 
-	```
+```
 		{
 	    "name": "Nombre del tema",
 	    "books": [
@@ -899,18 +933,19 @@ Only the admin is allowed to do POST requests to the API, some of the post reque
 		]
 		}
 
-	```
+```
+	
 * ##### Success response:
 
-	```
-{
-    "id": 117,
-    "name": "Nombre del tema",
-    "books": [],
-    "book": []
-}
+```
+	{
+	    "id": 117,
+	    "name": "Nombre del tema",
+	    "books": [],
+	    "book": []
+	}
 
-	```	
+```
 
 * ##### Error response:
 
@@ -934,45 +969,47 @@ Only the admin is allowed to do POST requests to the API, some of the post reque
 * ##### Body data
 
 ```
-{
-    "name": "El nombre del autor",
-    "urlImage": "La url de la imagen",
-    "birthDate": "La fecha de nacimiento",
-    "deathDate": "La fecha de muerte",
-    "bornPlace": "El lugar de nacimiento",
-    "urlMap": "La url del mapa",
-    "imgId": 2,
-    "books": [ {
-        "id": 112,
-        "title": "El titulo del libro",
-        "publishDate": "La fecha de publicacion",
-        "nameEdit": "El nombre de edicion",
-        "urlEdit": "La url de edicion",
-        "urlImgCoverPage": "La imagen de portada",
-        "urlImgEdit": "La imagen de edicion",
-        "imgId": -2
-    }]
-}
+	{
+	    "name": "El nombre del autor",
+	    "urlImage": "La url de la imagen",
+	    "birthDate": "La fecha de nacimiento",
+	    "deathDate": "La fecha de muerte",
+	    "bornPlace": "El lugar de nacimiento",
+	    "urlMap": "La url del mapa",
+	    "imgId": 2,
+	    "books": [ {
+		"id": 112,
+		"title": "El titulo del libro",
+		"publishDate": "La fecha de publicacion",
+		"nameEdit": "El nombre de edicion",
+		"urlEdit": "La url de edicion",
+		"urlImgCoverPage": "La imagen de portada",
+		"urlImgEdit": "La imagen de edicion",
+		"imgId": -2
+	    }]
+	}
 ```
+
+	
 * ##### Success response:
 
-	```
-{
-    "id": 112,
-    "name": "El nombre del autor",
-    "urlImage": "La url de la imagen",
-    "birthDate": "La fecha de nacimiento",
-    "deathDate": "La fecha de muerte",
-    "bornPlace": "El lugar de nacimiento",
-    "urlMap": "La url del mapa",
-    "imgId": 2,
-    "books": [
-        null
-    ],
-    "bornDate": "La fecha de nacimiento"
-}
+```
+	{
+	    "id": 112,
+	    "name": "El nombre del autor",
+	    "urlImage": "La url de la imagen",
+	    "birthDate": "La fecha de nacimiento",
+	    "deathDate": "La fecha de muerte",
+	    "bornPlace": "El lugar de nacimiento",
+	    "urlMap": "La url del mapa",
+	    "imgId": 2,
+	    "books": [
+		null
+	    ],
+	    "bornDate": "La fecha de nacimiento"
+	}
 
-	```	
+```
 
 * ##### Error response:
 
@@ -1039,3 +1076,6 @@ Only the admin is allowed to do POST requests to the API, some of the post reque
 * ##### Confirmation response:
 	
 	**Code**: 201 Created
+	
+
+
