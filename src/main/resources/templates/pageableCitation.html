@@ -1,19 +1,17 @@
 <div class="row">
-	{{#themes}}
+	{{#citations}}
 	<div class="col-md-6">
-		<a href="/theme/{{id}}">
 			<div class="card bg-dark text-white col">
 				<img class="card-img" src="/img/theme.png" alt="Card image"
 					style="height: 10em; width: 10em">
 				<div class="card-img-overlay">
-					<h4 class="card-title">{{name}}</h4>
+					<h4 class="card-title">{text}}</h4>
 				</div>
 			</div>
-		</a>
 	</div>
-	{{/themes}}
+	{{/citations}}
 </div>
 
 <script>
-	var indexTheme={{indexTheme}};
+	var indexCitation={{indexCitation}};
 </script>

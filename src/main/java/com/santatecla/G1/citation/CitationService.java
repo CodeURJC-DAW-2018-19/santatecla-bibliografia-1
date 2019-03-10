@@ -11,6 +11,7 @@ import com.santatecla.G1.author.Author;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.theme.Theme;
 
+
 @Service
 public class CitationService {
 	@Autowired
@@ -43,4 +44,5 @@ public class CitationService {
 	public Citation findByTextIgnoreCase(String text) {
 		return citationRepository.findByTextIgnoreCase(text);
 	}
+
 }

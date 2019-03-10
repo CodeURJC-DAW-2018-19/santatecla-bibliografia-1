@@ -6,31 +6,28 @@
 				<h4 class="card-title">Citas</h4>
 			</div>
 		</div>
-		<div class="card-body cajas-bot">
-			<div class="daw-miniatures cajas-bot">
-				{{#citations}}
-
+		<div class="card-body">
+			<div class="daw-miniatures id="moreCitation">
 				<div class="row">
-					<div class="card bg-dark text-white col">
-						<img class="card-img" src="/img/theme.png" alt="Card image">
-						<div class="card-img-overlay">
-							<h4 class="card-title">{{text}}</h4>
+					{{#citations}}
+					<div class="col-md-6">
+						<div class="card bg-dark text-white col">
+							<img class="card-img" src="/img/theme.png" alt="Card image"
+								style="height: 10em; width: 10em">
+							<div class="card-img-overlay">
+								<h4 class="card-title">{{text}}</h4>
+							</div>
 						</div>
 					</div>
+					{{/citations}}
 				</div>
-				{{/citations}}
 			</div>
 
 			<div class="daw-buttons d-flex justify-content-between">
-				{{#admin}}
-				<form action="/newCitation" method="get">
-					{{#id}} <input type="hidden" name="id" value="{{id}}"> <input
-						type="hidden" name="entity" value="{{entity}}">
+			<button type="button" class="btn btn-primary" id="buttonMoreCitation" onClick="loadMoreCitations()">Mas</button>
+				{{#admin}} <a href="/newCitation">
 					<button class="btn btn-primary">Añadir</button>
-					{{/id}} {{^id}} {{/id}}
-
-				</form>
-				{{/admin}}
+				</a> {{/admin}}
 				<button class="btn btn-primary">Buscar</button>
 			</div>
 		</div>

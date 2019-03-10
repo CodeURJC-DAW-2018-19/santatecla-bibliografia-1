@@ -1,0 +1,27 @@
+version: '2' 
+services:
+   # Definition of MySQL service
+   db:
+      # Name of the container
+      container_name: mysql 
+      hostname: localhost
+      image: mysql:5.6
+      environment:
+         MYSQL_DATABASE: "test"
+         MYSQL_ROOT_PASSWORD: "root_password"
+         MYSQL_USER: "root"
+   # Definition of Spring application container (ports, ddbb config, docker image...)
+   bibliografia:
+      image: santatecla/bibliografia:latest
+      ports:
+        - "8080:8443"
+      depends_on:
+        - db
+      entrypoint: ["/usr/src/wait-for-it.sh", "db:3306", "--", "java", "-jar", "app.jar"]
+      environment:
+        - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false
+        - DATABASE_HOST=db
+        - DATABASE_USER=root
+        - DATABASE_PASSWORD=root_password
+        - DATABASE_NAME=test
+        - DATABASE_PORT=3306
