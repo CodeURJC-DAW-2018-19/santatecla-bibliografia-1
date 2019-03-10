@@ -22,6 +22,7 @@ public class SecurityConfigurerApiRest extends WebSecurityConfigurerAdapter {
 
 		http.antMatcher("/api/**");	
 		http.authorizeRequests().antMatchers("/api/signup").permitAll();
+		http.authorizeRequests().antMatchers("/api//create-pdf/*").permitAll();
 		
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/usuario/**").hasAnyRole("ADMIN");
 		
