@@ -3,11 +3,9 @@
 cp Dockerfile ../
 
 cd ..
-# First of all we clean the target directory
-mvn clean 
 
-# Build the pakcage
-mvn package
+# Clean and build the pakcage
+docker run -it --rm -v `pwd`:/usr/src/mymaven -w /usr/src/mymaven jtim/maven-non-root:3.5.4-jdk-8-alpine mvn clean package
 
 # Generate the image using the Dockerfile 
 docker build -t santatecla/bibliografia .
@@ -15,4 +13,3 @@ docker build -t santatecla/bibliografia .
 rm Dockerfile
 
 cd Docker
-
