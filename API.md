@@ -63,7 +63,7 @@ And for user/student role:
   
 * ##### Error response:
 
-	**Code**: 401 UNAUTHORIZED
+	**Code**: 401 UNAUTHORIZED or 400 BAD REQUEST
 	
 ### Logout
 
@@ -151,7 +151,8 @@ It works the same for authors, themes and quotes, and show in detail the resourc
 	`GET`
 	
 * ##### Success Response:
-  	```
+
+  ```
 	{
     "id": 92,
     "title": "Nacidos de la bruma",
@@ -182,7 +183,6 @@ It works the same for authors, themes and quotes, and show in detail the resourc
         "urlMap": "https://www.google.es/maps/place/Zaragoza/@41.6516859,-0.9300003,13z/data=!3m1!4b1!4m5!3m4!1s0xd5914dd5e618e91:0x49df13f1158489a8!8m2!3d41.6488226!4d-0.8890853",
         "imgId": 1
     }
-}
 	```
   
 * ##### Error response:
@@ -454,3 +454,216 @@ It works the same for authors, themes and quotes, and show in detail the resourc
 
 	**Code**: 404 NOT FOUND
 		
+### POST requests
+
+Only the admin is allowed to do POST requests to the API, some of the post requests are allowed to upload images.
+
+#### POST a book 
+
+* ##### URL
+
+	< /book>
+
+* ##### Method:
+
+	`POST`
+  
+* ##### Data Params
+
+	```
+	{
+	    "title": "El titulo del libro",
+	    "publishDate": "La fecha de publicacion",
+	    "nameEdit": "El nombre de edicion",
+	    "urlEdit": "La url de edicion",
+	    "urlImgCoverPage": "La imagen de portada",
+	    "urlImgEdit": "La imagen de edicion",
+	    "imgId": -2
+	}
+	
+	```
+	
+* ##### Success response:
+
+	```
+	{
+	    "id": 113,
+	    "title": "El titulo del libro",
+	    "publishDate": "La fecha de publicacion",
+	    "nameEdit": "El nombre de edicion",
+	    "urlEdit": "La url de edicion",
+	    "urlImgCoverPage": "La imagen de portada",
+	    "urlImgEdit": "La imagen de edicion",
+	    "imgId": -2,
+	    "theme": null,
+	    "citation": null,
+	    "author": null,
+	    "citations": null
+	}
+	
+	```	
+
+* ##### Error response:
+
+	**Code**: 400 Bad request
+
+	
+
+#### POST a theme
+
+* ##### URL
+
+	< /theme>
+
+* ##### Method:
+
+	`POST`
+  
+* ##### Body data
+
+	```
+		{
+	    "name": "Nombre del tema",
+	    "books": [
+		Here you can add the data of the book is theme related
+		]
+		}
+
+	```
+* ##### Success response:
+
+	```
+{
+    "id": 117,
+    "name": "Nombre del tema",
+    "books": [],
+    "book": []
+}
+
+	```	
+
+* ##### Error response:
+
+	**Code**: 400 Bad request
+
+* ##### Confirmation response:
+	
+	**Code**: 201 Created
+
+
+#### POST an author 
+
+* ##### URL
+
+	< /author>
+
+* ##### Method:
+
+	`POST`
+  
+* ##### Body data
+
+```
+{
+    "name": "El nombre del autor",
+    "urlImage": "La url de la imagen",
+    "birthDate": "La fecha de nacimiento",
+    "deathDate": "La fecha de muerte",
+    "bornPlace": "El lugar de nacimiento",
+    "urlMap": "La url del mapa",
+    "imgId": 2,
+    "books": [ {
+        "id": 112,
+        "title": "El titulo del libro",
+        "publishDate": "La fecha de publicacion",
+        "nameEdit": "El nombre de edicion",
+        "urlEdit": "La url de edicion",
+        "urlImgCoverPage": "La imagen de portada",
+        "urlImgEdit": "La imagen de edicion",
+        "imgId": -2
+    }]
+}
+```
+* ##### Success response:
+
+	```
+{
+    "id": 112,
+    "name": "El nombre del autor",
+    "urlImage": "La url de la imagen",
+    "birthDate": "La fecha de nacimiento",
+    "deathDate": "La fecha de muerte",
+    "bornPlace": "El lugar de nacimiento",
+    "urlMap": "La url del mapa",
+    "imgId": 2,
+    "books": [
+        null
+    ],
+    "bornDate": "La fecha de nacimiento"
+}
+
+	```	
+
+* ##### Error response:
+
+	**Code**: 400 Bad request
+
+* ##### Confirmation response:
+	
+	**Code**: 201 Created
+
+	
+#### POST a quote
+
+* ##### URL
+
+	< /citation>
+
+* ##### Method:
+
+	`POST`
+  
+* ##### Body data
+
+```
+{
+    "text": "Texto",
+    "textAux": "Texto auxiliar",
+    "book": {
+        "id": 112,
+        "title": "El titulo del libro",
+        "publishDate": "La fecha de publicacion",
+        "nameEdit": "El nombre de edicion",
+        "urlEdit": "La url de edicion",
+        "urlImgCoverPage": "La imagen de portada",
+        "urlImgEdit": "La imagen de edicion",
+        "imgId": -2
+    },
+    "theme": {"id": 116,
+    "name": "Nombre del tema"}
+}
+
+```
+* ##### Success response:
+
+	```
+{
+    "id": 118,
+    "text": "Texto",
+    "textAux": "Texto auxiliar",
+    "book": null,
+    "theme": {
+        "id": 116,
+        "name": "Nombre del tema"
+    }
+}
+
+	```	
+
+* ##### Error response:
+
+	**Code**: 400 Bad request
+
+* ##### Confirmation response:
+	
+	**Code**: 201 Created
