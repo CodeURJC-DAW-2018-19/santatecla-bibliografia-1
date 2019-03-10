@@ -21,42 +21,34 @@
 </head>
 
 <body>
+	{{>topnavbarlogout}}
 
-    <div class="main-panel">
+	<div class="wrapper ">
+		<div class="content">
+			<div class="container-fluid">
 
-        <!-- NAV BAR TOP -->        
-		{{>topnavbarlogout}}
-        <!-- End Navbar -->
+				<!-- Content -->
+				<!-- BEGIN THEME FORM -->
+				<div class="container-fluid">{{>authorForm}}</div>
+				<!-- END THEME FORM-->
 
-        <!-- Content -->
-        <div class="content content-page">
-            <div class="container-fluid">
-                <div class="author-page flex-container">
+				<!-- BEGIN THEME BOTTOM-->
 
-                    <!-- BEGIN Author FORM -->
-                   	{{>authorForm}}
-                    <!-- END AUTHOR FORM-->
-  
+				<div class="container-fluid">
+					<div class="author-page flex-container">
+						<div class="row">{{>themeColumn}} {{>bookColumn}}
+							{{>quoteColumn}}</div>
+					</div>
+				</div>
 
-                    <!-- BEGIN AUTHOR BOTTOM-->
-                    <div class="row bottom-row">
-                        {{>themeColumn}}
-                        {{>bookColumn}}
-                        {{>quoteColumn}}
-                    </div>
-                    <!-- END AUTHOR BOTTOM -->
+				<!-- END THEME BOTTOM -->
 
-                </div>
-            </div>
-        </div>
-        <!-- End Content -->
+				{{>footer}}
+				
 
-    </div>
+			</div>
+		</div>
+	</div>
 
-
-<!-- Footer -->
-{{>footer}}
-<!-- End Footer -->
 </body>
-
 </html>

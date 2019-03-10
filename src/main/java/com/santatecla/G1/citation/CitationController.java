@@ -2,12 +2,16 @@ package com.santatecla.G1.citation;
 
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.santatecla.G1.author.Author;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
 import com.santatecla.G1.user.UserComponent;
@@ -38,6 +42,18 @@ public class CitationController {
 		citationService.save(quote);
 		model.addAttribute("text","Citation Created");
 		return "Message";
+	}
+	
+	@GetMapping("/table-citation")
+	public String showMoreAuthor(Model model, Pageable page) {
+		Page<Citation> citation = citationService.findAll(page);
+
+		model.addAttribute("citations", citation);
+		model.addAttribute("nCitation", page.getPageNumber());
+		model.addAttribute("indexCitation", citation.getTotalPages());
+
+
+		return "pageableCitation";
 	}
 	
 	@ModelAttribute

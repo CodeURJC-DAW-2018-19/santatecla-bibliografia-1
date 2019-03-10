@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.santatecla.G1.TabController;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
 import com.santatecla.G1.citation.Citation;
@@ -31,8 +32,13 @@ public class AuthorController {
 	
 	@Autowired
 	private AuthorService authorService;
+	
 	@Autowired
+	private TabController tabs;
+  
+  @Autowired
 	private BookService bookService;
+
 
 	
 	@Autowired
@@ -64,6 +70,10 @@ public class AuthorController {
 			model.addAttribute("themes",themes);
 			model.addAttribute("citations",citations);
 		}
+		
+		System.out.println("Add tab");
+		tabs.userTabs(model, "/author/"+ id, author.getName(), true, id);
+		System.out.println("aqui");
 		return "authorPage";
 	}
 	
@@ -92,7 +102,9 @@ public class AuthorController {
 	
 	/*@RequestMapping("/author/{id}")
 	public String updateAuthor(Model model, @PathVariable long id) {
-		Optional<com.santatecla.G1.author.Author> author = repository.findById(id);
+		Optional<com.santatecla.G1.author.Author> author = 
+    
+    sitory.findById(id);
 		if (author!=null) {
 			model.addAttribute("author", author);
 		}
