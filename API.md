@@ -22,7 +22,7 @@ http: // localhost:8443 followed by the containt request URL.
 
 ## Authentication
 
-The basic authentication implemented can be tested in postman using the Autorization form, showed in the image below.
+The basic authentication implemented can be tested in postman using the Autorization form, showed in the image below. First you need to send one BAsic Auth petition, and then inherith auth from parent to use it during the session.
 
 ![Image of postman](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/CapturaPostman.PNG)
 
@@ -137,6 +137,126 @@ Every user is allowed to do GET requests to the API
 
 	**Code**: 404 NOT FOUND
 	
+	
+#### GET paged books
+
+* ##### URL:
+
+	< /book-pageable?page={numPage} >
+
+* ##### Method:
+
+	`GET`
+	
+* ##### Success Response:
+  	```
+	  {
+        "id": 32,
+        "title": "10",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": -2
+    },
+    {
+        "id": 35,
+        "title": "11",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": -2
+    },
+    {
+        "id": 38,
+        "title": "12",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": -2
+    },
+    {
+        "id": 41,
+        "title": "13",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": -2
+    },
+    {
+        "id": 44,
+        "title": "14",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": -2
+    },
+    {
+        "id": 47,
+        "title": "15",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": -2
+    },
+    {
+        "id": 50,
+        "title": "16",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": -2
+    },
+    {
+        "id": 53,
+        "title": "17",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": -2
+    },
+    {
+        "id": 56,
+        "title": "18",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": -2
+    },
+    {
+        "id": 59,
+        "title": "19",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": -2
+    }
+	```
+  
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND
+
+
 #### GET one book
 
 It works the same for authors, themes and quotes, and show in detail the resource represented by the {id}.
@@ -220,6 +340,67 @@ It works the same for authors, themes and quotes, and show in detail the resourc
 * ##### Error response:
 
 	**Code**: 404 NOT FOUND
+	
+	
+#### GET paged themes
+
+* ##### URL:
+
+	< /theme-pageable?page={numPage} >
+
+* ##### Method:
+
+	`GET`
+	
+* ##### Success Response:
+  	```
+   {
+        "id": 3,
+        "name": "0"
+    },
+    {
+        "id": 6,
+        "name": "1"
+    },
+    {
+        "id": 9,
+        "name": "2"
+    },
+    {
+        "id": 12,
+        "name": "3"
+    },
+    {
+        "id": 15,
+        "name": "4"
+    },
+    {
+        "id": 18,
+        "name": "5"
+    },
+    {
+        "id": 21,
+        "name": "6"
+    },
+    {
+        "id": 24,
+        "name": "7"
+    },
+    {
+        "id": 27,
+        "name": "8"
+    },
+    {
+        "id": 30,
+        "name": "9"
+    }
+	```
+  
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND
+
+
 		
 #### GET one theme
 
@@ -318,6 +499,126 @@ It works the same for authors, themes and quotes, and show in detail the resourc
 * ##### Error response:
 
 	**Code**: 404 NOT FOUND
+
+
+#### GET paged authors
+
+* ##### URL:
+
+	< /author-pageable?page={numPage} >
+
+* ##### Method:
+
+	`GET`
+	
+* ##### Success Response:
+  	```
+    {
+        "id": 1,
+        "name": "0",
+        "urlImage": "0",
+        "birthDate": "0",
+        "deathDate": "0",
+        "bornPlace": "0",
+        "urlMap": "0",
+        "imgId": -1
+    },
+    {
+        "id": 4,
+        "name": "1",
+        "urlImage": "1",
+        "birthDate": "1",
+        "deathDate": "1",
+        "bornPlace": "1",
+        "urlMap": "1",
+        "imgId": -1
+    },
+    {
+        "id": 7,
+        "name": "2",
+        "urlImage": "2",
+        "birthDate": "2",
+        "deathDate": "2",
+        "bornPlace": "2",
+        "urlMap": "2",
+        "imgId": -1
+    },
+    {
+        "id": 10,
+        "name": "3",
+        "urlImage": "3",
+        "birthDate": "3",
+        "deathDate": "3",
+        "bornPlace": "3",
+        "urlMap": "3",
+        "imgId": -1
+    },
+    {
+        "id": 13,
+        "name": "4",
+        "urlImage": "4",
+        "birthDate": "4",
+        "deathDate": "4",
+        "bornPlace": "4",
+        "urlMap": "4",
+        "imgId": -1
+    },
+    {
+        "id": 16,
+        "name": "5",
+        "urlImage": "5",
+        "birthDate": "5",
+        "deathDate": "5",
+        "bornPlace": "5",
+        "urlMap": "5",
+        "imgId": -1
+    },
+    {
+        "id": 19,
+        "name": "6",
+        "urlImage": "6",
+        "birthDate": "6",
+        "deathDate": "6",
+        "bornPlace": "6",
+        "urlMap": "6",
+        "imgId": -1
+    },
+    {
+        "id": 22,
+        "name": "7",
+        "urlImage": "7",
+        "birthDate": "7",
+        "deathDate": "7",
+        "bornPlace": "7",
+        "urlMap": "7",
+        "imgId": -1
+    },
+    {
+        "id": 25,
+        "name": "8",
+        "urlImage": "8",
+        "birthDate": "8",
+        "deathDate": "8",
+        "bornPlace": "8",
+        "urlMap": "8",
+        "imgId": -1
+    },
+    {
+        "id": 28,
+        "name": "9",
+        "urlImage": "9",
+        "birthDate": "9",
+        "deathDate": "9",
+        "bornPlace": "9",
+        "urlMap": "9",
+        "imgId": -1
+    }
+	```
+  
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND
+	
 		
 #### GET one author
 
@@ -408,6 +709,75 @@ It works the same for authors, themes and quotes, and show in detail the resourc
 
 	**Code**: 404 NOT FOUND
 	
+	
+#### GET paged quotes
+
+* ##### URL:
+
+	< /citation-pageable?page={numPage} >
+
+* ##### Method:
+
+	`GET`
+	
+* ##### Success Response:
+  	```
+    {
+        "id": 78,
+        "text": "El misterio de la vida no es un problema a resolver, sino una realidad a experimentar",
+        "textAux": null
+    },
+    {
+        "id": 79,
+        "text": "p1",
+        "textAux": null
+    },
+    {
+        "id": 80,
+        "text": "p2",
+        "textAux": null
+    },
+    {
+        "id": 81,
+        "text": "p3",
+        "textAux": null
+    },
+    {
+        "id": 82,
+        "text": "p4",
+        "textAux": null
+    },
+    {
+        "id": 83,
+        "text": "p5",
+        "textAux": null
+    },
+    {
+        "id": 84,
+        "text": "p6",
+        "textAux": null
+    },
+    {
+        "id": 85,
+        "text": "p8",
+        "textAux": null
+    },
+    {
+        "id": 86,
+        "text": "p7",
+        "textAux": null
+    },
+    {
+        "id": 87,
+        "text": "p9",
+        "textAux": null
+    }
+	```
+  
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND
+
 	
 ### GET one quote
 
@@ -644,21 +1014,23 @@ Only the admin is allowed to do POST requests to the API, some of the post reque
 }
 
 ```
+	
 * ##### Success response:
 
-	```
-{
-    "id": 118,
-    "text": "Texto",
-    "textAux": "Texto auxiliar",
-    "book": null,
-    "theme": {
-        "id": 116,
-        "name": "Nombre del tema"
-    }
-}
+```
+	{
+	    "id": 118,
+	    "text": "Texto",
+	    "textAux": "Texto auxiliar",
+	    "book": null,
+	    "theme": {
+		"id": 116,
+		"name": "Nombre del tema"
+	    }
+	}
 
-	```	
+```
+
 
 * ##### Error response:
 
