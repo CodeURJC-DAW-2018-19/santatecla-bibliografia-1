@@ -105,13 +105,21 @@ public class AuthorRestController {
 		}
 	}
 
-	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/author/{id}", method = DELETE)
 	public ResponseEntity<Author> deleteAuthor(@PathVariable long id) {
 		Author author = authorService.findById(id);
 		if (author != null) {
-			authorService.deleteById(id);
-			return new ResponseEntity<>(author, HttpStatus.OK);
+			if (author.getBooks()!=null) {
+				author.setBooks(null);
+				authorService.save(author);
+				authorService.deleteById(id);
+				return new ResponseEntity<>(author, HttpStatus.OK);
+			}
+			else {
+				System.out.println("sdfdfsda");
+				return new ResponseEntity<>(HttpStatus.IM_USED);
+			}
+			
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
