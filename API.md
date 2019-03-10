@@ -343,6 +343,113 @@ It works the same for authors, themes and quotes, and show in detail the resourc
 
 	**Code**: 404 NOT FOUND
 	
+	
+#### GET book by name
+
+* ##### URL:
+
+	< /book-search/{bookName} >
+
+* ##### Method:
+
+	`GET`
+	
+* ##### Success Response:
+  	```
+	   {
+        "id": 77,
+        "title": "Palabras Radiantes",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": 3,
+        "theme": {
+            "id": 76,
+            "name": "Amor"
+        },
+        "citation": [
+            {
+                "id": 78,
+                "text": "El misterio de la vida no es un problema a resolver, sino una realidad a experimentar",
+                "textAux": null
+            },
+            {
+                "id": 79,
+                "text": "p1",
+                "textAux": null
+            },
+            {
+                "id": 80,
+                "text": "p2",
+                "textAux": null
+            },
+            {
+                "id": 81,
+                "text": "p3",
+                "textAux": null
+            },
+            {
+                "id": 82,
+                "text": "p4",
+                "textAux": null
+            },
+            {
+                "id": 83,
+                "text": "p5",
+                "textAux": null
+            },
+            {
+                "id": 84,
+                "text": "p6",
+                "textAux": null
+            },
+            {
+                "id": 86,
+                "text": "p7",
+                "textAux": null
+            },
+            {
+                "id": 87,
+                "text": "p9",
+                "textAux": null
+            },
+            {
+                "id": 88,
+                "text": "p10",
+                "textAux": null
+            },
+            {
+                "id": 89,
+                "text": "p11",
+                "textAux": null
+            },
+            {
+                "id": 90,
+                "text": "p12",
+                "textAux": null
+            }
+        ],
+        "author": {
+            "id": 106,
+            "name": "Brandon Sanderson",
+            "urlImage": "https://www.goodreads.com/photo/author/38550.Brandon_Sanderson",
+            "birthDate": "1975-12-19",
+            "deathDate": "",
+            "bornPlace": "Lincoln, Nebraska",
+            "urlMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96647.87182448553!2d-96.76076790212979!3d40.80058782506782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8796be59ca561265%3A0x633a859b1fd5deb9!2sLincoln%2C+Nebraska%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1551055373899",
+            "imgId": 0
+        }
+    }
+
+	```
+  
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND
+	
+	
 
 #### GET all themes
 
@@ -483,6 +590,114 @@ It works the same for authors, themes and quotes, and show in detail the resourc
 
 	**Code**: 404 NOT FOUND
 	
+	
+#### GET theme by name
+
+* ##### URL:
+
+	< /theme-search/{themeName} >
+
+* ##### Method:
+
+	`GET`
+	
+* ##### Success Response:
+  	```
+	{
+        "id": 76,
+        "name": "Amor",
+        "books": [
+            {
+                "id": 77,
+                "title": "Palabras Radiantes",
+                "publishDate": "",
+                "nameEdit": "",
+                "urlEdit": "",
+                "urlImgCoverPage": "",
+                "urlImgEdit": "",
+                "imgId": 3,
+                "citation": [
+                    {
+                        "id": 78,
+                        "text": "El misterio de la vida no es un problema a resolver, sino una realidad a experimentar",
+                        "textAux": null
+                    },
+                    {
+                        "id": 79,
+                        "text": "p1",
+                        "textAux": null
+                    },
+                    {
+                        "id": 80,
+                        "text": "p2",
+                        "textAux": null
+                    },
+                    {
+                        "id": 81,
+                        "text": "p3",
+                        "textAux": null
+                    },
+                    {
+                        "id": 82,
+                        "text": "p4",
+                        "textAux": null
+                    },
+                    {
+                        "id": 83,
+                        "text": "p5",
+                        "textAux": null
+                    },
+                    {
+                        "id": 84,
+                        "text": "p6",
+                        "textAux": null
+                    },
+                    {
+                        "id": 86,
+                        "text": "p7",
+                        "textAux": null
+                    },
+                    {
+                        "id": 87,
+                        "text": "p9",
+                        "textAux": null
+                    },
+                    {
+                        "id": 88,
+                        "text": "p10",
+                        "textAux": null
+                    },
+                    {
+                        "id": 89,
+                        "text": "p11",
+                        "textAux": null
+                    },
+                    {
+                        "id": 90,
+                        "text": "p12",
+                        "textAux": null
+                    }
+                ],
+                "author": {
+                    "id": 106,
+                    "name": "Brandon Sanderson",
+                    "urlImage": "https://www.goodreads.com/photo/author/38550.Brandon_Sanderson",
+                    "birthDate": "1975-12-19",
+                    "deathDate": "",
+                    "bornPlace": "Lincoln, Nebraska",
+                    "urlMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96647.87182448553!2d-96.76076790212979!3d40.80058782506782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8796be59ca561265%3A0x633a859b1fd5deb9!2sLincoln%2C+Nebraska%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1551055373899",
+                    "imgId": 0
+                }
+            }
+        ]
+    }
+
+	```
+  
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND
+		
 	
 		
 #### GET all authors
@@ -699,6 +914,115 @@ It works the same for authors, themes and quotes, and show in detail the resourc
 * ##### Error response:
 
 	**Code**: 404 NOT FOUND
+
+
+#### GET author by name
+
+* ##### URL:
+
+	< /author-search/{authorName} >
+
+* ##### Method:
+
+	`GET`
+	
+* ##### Success Response:
+  	```
+	   {
+        "id": 106,
+        "name": "Brandon Sanderson",
+        "urlImage": "https://www.goodreads.com/photo/author/38550.Brandon_Sanderson",
+        "birthDate": "1975-12-19",
+        "deathDate": "",
+        "bornPlace": "Lincoln, Nebraska",
+        "urlMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96647.87182448553!2d-96.76076790212979!3d40.80058782506782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8796be59ca561265%3A0x633a859b1fd5deb9!2sLincoln%2C+Nebraska%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1551055373899",
+        "imgId": 0,
+        "books": [
+            {
+                "id": 77,
+                "title": "Palabras Radiantes",
+                "publishDate": "",
+                "nameEdit": "",
+                "urlEdit": "",
+                "urlImgCoverPage": "",
+                "urlImgEdit": "",
+                "imgId": 3,
+                "theme": {
+                    "id": 76,
+                    "name": "Amor"
+                },
+                "citation": [
+                    {
+                        "id": 78,
+                        "text": "El misterio de la vida no es un problema a resolver, sino una realidad a experimentar",
+                        "textAux": null
+                    },
+                    {
+                        "id": 79,
+                        "text": "p1",
+                        "textAux": null
+                    },
+                    {
+                        "id": 80,
+                        "text": "p2",
+                        "textAux": null
+                    },
+                    {
+                        "id": 81,
+                        "text": "p3",
+                        "textAux": null
+                    },
+                    {
+                        "id": 82,
+                        "text": "p4",
+                        "textAux": null
+                    },
+                    {
+                        "id": 83,
+                        "text": "p5",
+                        "textAux": null
+                    },
+                    {
+                        "id": 84,
+                        "text": "p6",
+                        "textAux": null
+                    },
+                    {
+                        "id": 86,
+                        "text": "p7",
+                        "textAux": null
+                    },
+                    {
+                        "id": 87,
+                        "text": "p9",
+                        "textAux": null
+                    },
+                    {
+                        "id": 88,
+                        "text": "p10",
+                        "textAux": null
+                    },
+                    {
+                        "id": 89,
+                        "text": "p11",
+                        "textAux": null
+                    },
+                    {
+                        "id": 90,
+                        "text": "p12",
+                        "textAux": null
+                    }
+                ]
+            }
+        ]
+    }
+	```
+  
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND
+	
+
 	
 ### GET all quotes
 
@@ -857,7 +1181,57 @@ It works the same for authors, themes and quotes, and show in detail the resourc
 * ##### Error response:
 
 	**Code**: 404 NOT FOUND
-		
+	
+#### GET quote by name
+
+* ##### URL:
+
+	< /citation-search/{quoteName} >
+
+* ##### Method:
+
+	`GET`
+	
+* ##### Success Response:
+  	```
+	   {
+        "id": 104,
+        "text": "Donde hay amor no hay señor, que todo lo iguala el amor.",
+        "textAux": null,
+        "book": {
+            "id": 97,
+            "title": "Refranero",
+            "publishDate": "",
+            "nameEdit": "",
+            "urlEdit": "",
+            "urlImgCoverPage": "",
+            "urlImgEdit": "",
+            "imgId": -1,
+            "author": {
+                "id": 108,
+                "name": "Alan Mathison Turing",
+                "urlImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Alan_Turing_Aged_16.jpg/440px-Alan_Turing_Aged_16.jpg",
+                "birthDate": "1912-06-23",
+                "deathDate": "1954-06-07",
+                "bornPlace": "Maida Vale, Reino Unido de Gran Bretaña e Irlanda",
+                "urlMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d75132.22175705049!2d-0.2604624272851899!3d51.53606625037453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761009a098e00b%3A0x261185c6bcdb02a2!2sMaida+Vale%2C+Londres%2C+Reino+Unido!5e0!3m2!1ses!2ses!4v1549226048515",
+                "imgId": 2
+            }
+        },
+        "theme": {
+            "id": 94,
+            "name": "Clasico"
+        }
+    }
+	```
+  
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND
+	
+	
+
+
 ### POST requests
 
 Only the admin is allowed to do POST requests to the API, some of the post requests are allowed to upload images.
