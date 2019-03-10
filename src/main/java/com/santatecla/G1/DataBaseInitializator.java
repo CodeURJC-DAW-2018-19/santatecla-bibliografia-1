@@ -107,11 +107,11 @@ public class DataBaseInitializator {
 		Book b1 = new Book("Palabras Radiantes",3);
 		Book b2 = new Book("Nacidos de la bruma",4);
 		Book b3 = new Book("El año de los delfines",5);
-		Book b4 = new Book("Refranero",-1);
-		Book b5 = new Book("Romancero Gitano",-1);
-		Book b6 = new Book("Harry Potter y la Piedra Filosofal",-1);
-		Book b7 = new Book("IT",-1);
-		Book b8= new Book("El Resplandor",-1);
+		Book b4 = new Book("Refranero",-2);
+		Book b5 = new Book("Romancero Gitano",-2);
+		Book b6 = new Book("Harry Potter y la Piedra Filosofal",-2);
+		Book b7 = new Book("IT",-2);
+		Book b8= new Book("El Resplandor",-2);
 		
 		//Citation initialization  --> We dont need to save because they deppends of the books. (Cascade.)	
 		Citation c1 = new Citation("El misterio de la vida no es un problema a resolver, sino una realidad a experimentar",b1);
