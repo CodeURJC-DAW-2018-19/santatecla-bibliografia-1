@@ -22,36 +22,42 @@ import com.santatecla.G1.user.UserComponent;
 @RestController
 @RequestMapping("/api")
 public class PdfRestController {
-	
+
 	@Autowired
 	private UserComponent userComponent;
-	
+
 	@Autowired
 	private ThemeService themeService;
-	
+
 	@Autowired
 	private PdfGenerator pdfGenerator;
-	
+
 	@RequestMapping("/create-pdf/{id}")
-	  public void handleFileDownloadPDF(HttpServletResponse res, @PathVariable long id)
-	      throws FileNotFoundException, IOException {
-	    
+	public void handleFileDownloadPDF(HttpServletResponse res, @PathVariable long id)
+			throws FileNotFoundException, IOException {
+
 		Theme theme = themeService.findById(id);
-		User user = userComponent.getLoggedUser();
-		String name = theme.getName();
-	    
-	    pdfGenerator.generatePdf(user, theme);
-	    
-	    Path FILES_FOLDER = Paths.get(System.getProperty("user.dir"), "files");
-	    Path pdf = FILES_FOLDER.resolve(name);
 
-	    if (Files.exists(pdf)) {
-	      res.setContentType("bibliografia/pdf");
-	      res.setContentLength((int) pdf.toFile().length());
-	      FileCopyUtils.copy(Files.newInputStream(pdf), res.getOutputStream());
+		if (theme == null) {
+			res.sendError(404);
+		} else {
 
-	    } else {
-	      res.sendError(404);
-	    }
-	  }
+			User user = userComponent.getLoggedUser();
+			String name = theme.getName();
+
+			pdfGenerator.generatePdf(user, theme);
+
+			Path FILES_FOLDER = Paths.get(System.getProperty("user.dir"), "files");
+			Path pdf = FILES_FOLDER.resolve(name);
+
+			if (Files.exists(pdf)) {
+				res.setContentType("bibliografia/pdf");
+				res.setContentLength((int) pdf.toFile().length());
+				FileCopyUtils.copy(Files.newInputStream(pdf), res.getOutputStream());
+
+			} else {
+				res.sendError(404);
+			}
+		}
+	}
 }

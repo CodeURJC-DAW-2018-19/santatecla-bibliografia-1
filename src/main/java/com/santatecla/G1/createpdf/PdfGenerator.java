@@ -10,19 +10,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.TabSettings;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
 import com.santatecla.G1.theme.Theme;
-import com.santatecla.G1.theme.ThemeService;
 import com.santatecla.G1.user.User;
-
-import org.springframework.stereotype.Service;
 
 @Service
 public class PdfGenerator {
@@ -37,8 +31,6 @@ public class PdfGenerator {
 		List<Book> books = bookService.findByTheme(theme);
 
 		try {
-			Paragraph paragraph = new Paragraph();
-
 			Path FILES_FOLDER = Paths.get(System.getProperty("user.dir"), "files");
 			if (!Files.exists(FILES_FOLDER))
 				Files.createDirectories(FILES_FOLDER);
@@ -54,7 +46,6 @@ public class PdfGenerator {
 				document.add(new Paragraph("Error: Theme book's is Empty"));
 			}
 
-			System.out.println('a');
 			document.close();
 		} catch (Exception e) {
 			e.printStackTrace();
