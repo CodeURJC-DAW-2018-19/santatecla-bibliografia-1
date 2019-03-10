@@ -1,8 +1,10 @@
 package com.santatecla.G1.image;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,8 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class ImageManagerController {
 
-	private static final Path FILES_FOLDER = Paths.get(System.getProperty("user.dir"), "assets/img");
+	private static final Path FILES_FOLDER = Paths.get(System.getProperty("user.dir"), "/assets/img/");
 
+	
+	
 	private static AtomicInteger imageId = new AtomicInteger(6);
 	private static Map<Integer, Image> images = new ConcurrentHashMap<>();
 
@@ -56,13 +60,13 @@ public class ImageManagerController {
 	@RequestMapping("/image/{id}")
 	public void handleFileDownload(@PathVariable String id, HttpServletResponse res)
 			throws FileNotFoundException, IOException {
-
+		
 		String fileName = "image-" + id + ".jpg";
 		
 		Path image = FILES_FOLDER.resolve(fileName);
 
 		if (Files.exists(image)) {
-			res.setContentType("image/jpeg");
+			res.setContentType("image/jpg");
 			res.setContentLength((int) image.toFile().length());
 			FileCopyUtils.copy(Files.newInputStream(image), res.getOutputStream());
 
