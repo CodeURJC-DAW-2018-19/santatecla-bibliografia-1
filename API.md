@@ -1078,4 +1078,144 @@ Only the admin is allowed to do POST requests to the API, some of the post reque
 	**Code**: 201 Created
 	
 
+### DELETE requests
 
+Only the admin is allowed to do DELETE requests to the API.
+
+#### DELETE a book 
+
+* ##### URL:
+
+	< /book/{id} >
+
+* ##### Method:
+
+	`DELETE`
+	
+* ##### Success Response:
+ ```
+    {
+    "id": 2,
+    "title": "0",
+    "publishDate": "",
+    "nameEdit": "",
+    "urlEdit": "",
+    "urlImgCoverPage": "",
+    "urlImgEdit": "",
+    "imgId": -2,
+    "theme": null,
+    "citation": [],
+    "author": null
+	}
+```
+  
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND or 500 INTERNAL SERVER ERROR
+	
+	
+	
+#### DELETE a theme 
+
+* ##### URL:
+
+	< /theme/{id} >
+
+* ##### Method:
+
+	`DELETE`
+	
+* ##### Success Response:
+
+ ```
+    {
+    "id": 3,
+    "name": "0",
+    "books": []
+    }
+```
+  
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND or 500 INTERNAL SERVER ERROR
+
+
+#### DELETE an author 
+
+* ##### URL:
+
+	< /author/{id} >
+
+* ##### Method:
+
+	`DELETE`
+	
+* ##### Success Response:
+	 ```
+	 {
+	    "id": 1,
+	    "name": "0",
+	    "urlImage": "0",
+	    "birthDate": "0",
+	    "deathDate": "0",
+	    "bornPlace": "0",
+	    "urlMap": "0",
+	    "imgId": -1,
+	    "books": []
+	}
+  	
+	```
+  
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND or 500 INTERNAL SERVER ERROR
+	
+#### DELETE a quote 
+
+* ##### URL:
+
+	< /citation/{id} >
+
+* ##### Method:
+
+	`DELETE`
+	
+* ##### Success Response:
+
+ ```
+ {
+    "id": 85,
+    "text": "p8",
+    "textAux": null,
+    "book": {
+        "id": 77,
+        "title": "Palabras Radiantes",
+        "publishDate": "",
+        "nameEdit": "",
+        "urlEdit": "",
+        "urlImgCoverPage": "",
+        "urlImgEdit": "",
+        "imgId": 3,
+        "author": {
+            "id": 106,
+            "name": "Brandon Sanderson",
+            "urlImage": "https://www.goodreads.com/photo/author/38550.Brandon_Sanderson",
+            "birthDate": "1975-12-19",
+            "deathDate": "",
+            "bornPlace": "Lincoln, Nebraska",
+            "urlMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96647.87182448553!2d-96.76076790212979!3d40.80058782506782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8796be59ca561265%3A0x633a859b1fd5deb9!2sLincoln%2C+Nebraska%2C+EE.+UU.!5e0!3m2!1ses!2ses!4v1551055373899",
+            "imgId": 0
+        }
+    },
+    "theme": {
+        "id": 76,
+        "name": "Amor"
+    }
+}
+
+```
+  
+* ##### Error response:
+
+	**Code**: 404 NOT FOUND or 500 INTERNAL SERVER ERROR
+		
