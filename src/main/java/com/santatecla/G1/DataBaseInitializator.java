@@ -73,7 +73,7 @@ public class DataBaseInitializator {
 		String nameR="Joanne Rowling";
 		String urlImageR="https://commons.wikimedia.org/wiki/File:J._K._Rowling_2010.jpg";
 		String bornDateR="1965-07-31";
-		String deathDateR=null;
+		String deathDateR="";
 		String urlMapR="https://www.google.es/maps/place/Gloucestershire+Sur,+Reino+Unido/@51.5488153,-2.7615817,10z/data=!3m1!4b1!4m5!3m4!1s0x48719a6a7dccc6d5:0x30d8b23d499a000!8m2!3d51.5264361!4d-2.4728487";
 		String bornPlaceR="Gloucestershire Sur, Reino Unido";
 		Author a6= new Author(nameR,urlImageR,bornDateR,deathDateR,bornPlaceR,urlMapR,-1);
@@ -89,7 +89,7 @@ public class DataBaseInitializator {
 		String nameS="Stephen King";
 		String urlImageS="https://i.blogs.es/899a7f/king/450_1000.jpeg";
 		String bornDateS="1947-09-21";
-		String deathDateS=null;
+		String deathDateS="";
 		String urlMapS="https://www.google.com/maps/place/Portland,+Oreg%C3%B3n,+EE.+UU./data=!4m2!3m1!1s0x54950b0b7da97427:0x1c36b9e6f6d18591?ved=2ahUKEwjw0fKFvvjgAhVirHEKHYXeDR4Q8gEwAHoECAIQAQ";
 		String bornPlaceS="Portland, Oregón, EE. UU.";
 		Author a7= new Author(nameS,urlImageS,bornDateS,deathDateS,bornPlaceS,urlMapS,-1);

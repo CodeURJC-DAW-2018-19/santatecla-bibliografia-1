@@ -25,9 +25,13 @@
 
 			<div class="daw-buttons d-flex justify-content-between">
 			<button type="button" class="btn btn-primary" id="buttonMoreCitation" onClick="loadMoreCitations()">Mas</button>
-				{{#admin}} <a href="/newCitation">
-					<button class="btn btn-primary">AÃ±adir</button>
-				</a> {{/admin}}
+				{{#admin}} <form action="/newCitation" method="get">
+					{{#id}} <input type="hidden" name="id" value="{{id}}"> <input
+						type="hidden" name="entity" value="{{entity}}">
+					<button class="btn btn-primary">Añadir</button>
+					{{/id}} {{^id}} {{/id}}
+
+				</form> {{/admin}}
 				<button class="btn btn-primary">Buscar</button>
 			</div>
 		</div>

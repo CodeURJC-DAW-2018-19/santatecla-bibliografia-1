@@ -42,7 +42,7 @@ public class SecurityConfigurerApiRest extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(HttpMethod.GET).permitAll();
 		
 		// Other URLs can be accessed without authentication
-		http.authorizeRequests().anyRequest().permitAll();
+		//http.authorizeRequests().anyRequest().permitAll();
 
 		// Disable CSRF protection (it is difficult to implement with ng2)
 		http.csrf().disable();
