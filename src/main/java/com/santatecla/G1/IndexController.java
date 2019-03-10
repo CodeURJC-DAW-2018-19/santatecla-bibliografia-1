@@ -110,7 +110,7 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/chart")
-	public String springMVC(Model modelMap) {
+	public String chart(Model modelMap) {
 		List<Theme> themes=themesService.findAll();
 		List<Integer> numBs=new ArrayList<>();
 		for(int i=0; i<themes.size();i++) {
