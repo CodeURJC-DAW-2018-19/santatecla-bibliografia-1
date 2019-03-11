@@ -105,6 +105,7 @@ To run the dockerize application, you need instal docker (with docker compose)
 4. Execute the instruction ```docker-compose up ´´´, that command will download the image of the DDBB and it will run the 2 containers
 
 * Optionally if you want upload your image to a docker repository, you can use the "upload_docker_image.sh" wich need as arguments the name of the image, the version, the user of dockerhub, the password, and the repository. 
+*IN THIS CASE WE UNDERSTAND YOU ARE A DEVELOP, SO YOU HAVE TO HAD MAVEN (2.*) INSTALLED*
 
 
 ## Authors
