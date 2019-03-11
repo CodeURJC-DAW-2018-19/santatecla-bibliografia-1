@@ -98,12 +98,13 @@ To know how to use the API rest go to the link below.
 
 ## Instructions to execute the dockerized application
 
-1. The first thing you need to do is go to the Bash at the docker folder and use the commnad ``` docker-compose up ```
-2.
-3.
-4.
-5.
-6.
+To run the dockerize application, you need instal docker (with docker compose)
+1. From the root of the project, go to the Docker folder.
+2. Generate the image of the application, by running the script "docker_develop.sh".
+3. Then check if the image has been correctly created executing ``` docker images ´´´
+4. Execute the instruction ```docker-compose up ´´´, that command will download the image of the DDBB and it will run the 2 containers
+
+* Optionally if you want upload your image to a docker repository, you can use the "upload_docker_image.sh" wich need as arguments the name of the image, the version, the user of dockerhub, the password, and the repository. 
 
 
 ## Authors
