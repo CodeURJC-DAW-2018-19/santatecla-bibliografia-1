@@ -103,7 +103,7 @@ public class BooksRestController {
 				ArrayList<Citation> citations = new ArrayList<>();
 				if (book.getCitations() != null) {
 					for (Citation citation : book.getCitations()) {
-						citations.add(citationService.findById(book.getId()));
+						citations.add(citationService.findById(citation.getId()));
 					}
 				}
 				bookService.save(book);

@@ -94,15 +94,6 @@ public class DataBaseInitializator {
 		String bornPlaceS="Portland, Oregón, EE. UU.";
 		Author a7= new Author(nameS,urlImageS,bornDateS,deathDateS,bornPlaceS,urlMapS,-1);
 
-		/*for(int i=0; i<25; i++) {
-			Author a = new Author(""+i,""+i,""+i,""+i,""+i,""+i,-1);
-			Book b = new Book(""+i, -2);
-			Theme t = new Theme(""+i);
-			authorService.save(a);
-			bookService.save(b);
-			themeService.save(t);
-		}*/
-
 		//Books initialization
 		Book b1 = new Book("Palabras Radiantes",3);
 		Book b2 = new Book("Nacidos de la bruma",4);
@@ -331,8 +322,14 @@ public class DataBaseInitializator {
 		citationService.save(c14);
 		citationService.save(c15);
 
-		
-		
+		for(int i=0; i<25; i++) {
+			Author a = new Author("zzz"+i,""+i,""+i,""+i,""+i,""+i,-1);
+			Book b = new Book("zzz"+i, -2);
+			Theme t = new Theme("zzz"+i);
+			authorService.save(a);
+			bookService.save(b);
+			themeService.save(t);
+		}
 		
 		
 		//Initialization of the users of the application
