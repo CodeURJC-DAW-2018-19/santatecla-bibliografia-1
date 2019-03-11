@@ -62,21 +62,47 @@ public class DataBaseInitializator {
 		String urlMapAlan= "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d75132.22175705049!2d-0.2604624272851899!3d51.53606625037453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761009a098e00b%3A0x261185c6bcdb02a2!2sMaida+Vale%2C+Londres%2C+Reino+Unido!5e0!3m2!1ses!2ses!4v1549226048515";                            
 		Author a3 = new Author(nameAlan,urlImageAlan,bornDateAlan,deathDateAlan,bornPlaceAlan,urlMapAlan,2);
 		
-
-		for(int i=0; i<25; i++) {
-			Author a = new Author(""+i,""+i,""+i,""+i,""+i,""+i,-1);
-			Book b = new Book(""+i, -2);
-			Theme t = new Theme(""+i);
-			authorService.save(a);
-			bookService.save(b);
-			themeService.save(t);
-		}
+		String nameF="Federico García Lorca";
+		String urlImageF="https://ep00.epimg.net/elpais/imagenes/2016/05/04/opinion/1462357086_520070_1462359062_noticia_normal.jpg";
+		String bornDateF="1898-06-05";
+		String deathDateF="1936-08-18";
+		String bornPlaceF="Granada, España";
+		String urlMapF="https://www.google.com/maps/place/Granada/@37.1851062,-3.649012,12.25z/data=!4m5!3m4!1s0xd71fce62d32c27d:0x9258f79dd3600d72!8m2!3d37.1773363!4d-3.5985571";
+		Author a5= new Author(nameF,urlImageF,bornDateF,deathDateF,bornPlaceF,urlMapF,-1);
+		
+		String nameR="Joanne Rowling";
+		String urlImageR="https://commons.wikimedia.org/wiki/File:J._K._Rowling_2010.jpg";
+		String bornDateR="1965-07-31";
+		String deathDateR="";
+		String urlMapR="https://www.google.es/maps/place/Gloucestershire+Sur,+Reino+Unido/@51.5488153,-2.7615817,10z/data=!3m1!4b1!4m5!3m4!1s0x48719a6a7dccc6d5:0x30d8b23d499a000!8m2!3d51.5264361!4d-2.4728487";
+		String bornPlaceR="Gloucestershire Sur, Reino Unido";
+		Author a6= new Author(nameR,urlImageR,bornDateR,deathDateR,bornPlaceR,urlMapR,-1);
+		
+		String nameJK="Rafael Alberti Merello";
+		String urlImageJK="https://www.elviejotopo.com/wp-content/uploads/2017/10/rafael-alberti.jpg";
+		String bornDateJK="1902-12-16";
+		String deathDateJK="1999-10-28";
+		String urlMapJK="https://www.google.com/maps/place/El+Puerto+de+Santa+Mar%C3%ADa,+11500,+C%C3%A1diz/@36.6231038,-6.3714151,11z/data=!3m1!4b1!4m5!3m4!1s0xd0dc5568150cc8d:0x40463fd8ca03bf0!8m2!3d36.6393281!4d-6.2588369";
+		String bornPlaceJK="Puerto de Santa María, Cádiz, España";
+		Author a4= new Author(nameJK,urlImageJK,bornDateJK,deathDateJK,bornPlaceJK,urlMapJK,-1);
+		
+		String nameS="Stephen King";
+		String urlImageS="https://i.blogs.es/899a7f/king/450_1000.jpeg";
+		String bornDateS="1947-09-21";
+		String deathDateS="";
+		String urlMapS="https://www.google.com/maps/place/Portland,+Oreg%C3%B3n,+EE.+UU./data=!4m2!3m1!1s0x54950b0b7da97427:0x1c36b9e6f6d18591?ved=2ahUKEwjw0fKFvvjgAhVirHEKHYXeDR4Q8gEwAHoECAIQAQ";
+		String bornPlaceS="Portland, Oregón, EE. UU.";
+		Author a7= new Author(nameS,urlImageS,bornDateS,deathDateS,bornPlaceS,urlMapS,-1);
 
 		//Books initialization
 		Book b1 = new Book("Palabras Radiantes",3);
 		Book b2 = new Book("Nacidos de la bruma",4);
 		Book b3 = new Book("El año de los delfines",5);
-		Book b4 = new Book("Refranero",-1);
+		Book b4 = new Book("Refranero",-2);
+		Book b5 = new Book("Romancero Gitano",-2);
+		Book b6 = new Book("Harry Potter y la Piedra Filosofal",-2);
+		Book b7 = new Book("IT",-2);
+		Book b8= new Book("El Resplandor",-2);
 		
 		//Citation initialization  --> We dont need to save because they deppends of the books. (Cascade.)	
 		Citation c1 = new Citation("El misterio de la vida no es un problema a resolver, sino una realidad a experimentar",b1);
@@ -90,6 +116,12 @@ public class DataBaseInitializator {
 		Citation c9 = new Citation("La furia con que el mundo actual busca el placer prueba que carece de él.",b4);
 		Citation c10 = new Citation("Donde hay amor no hay señor, que todo lo iguala el amor.",b4);
 		Citation c11= new Citation("La buena fe es el fundamento de toda sociedad, la perfidia es la peste.",b4);
+		
+		Citation c12 = new Citation("¡Soledad, qué pena tienes!\n" + 
+				"¡Qué pena tan lastimosa!",b5);
+		Citation c13= new Citation("Nunca he encontrado ningún motivo para temer pronunciar el nombre de Voldemort.",b6);
+		Citation c14= new Citation("Te pareces mucho a tu padre, pero tienes los ojos de tu madre.",b6);
+		Citation c15= new Citation("¡No voy a hacerte daño! Wendy, querida, luz de mi vida, ¿de qué tienes miedo?. No me has dejado acabar la frase, dije: No voy a hacerte daño, sólo voy a aplastarte los sesos. ¡Aplastaré tus jodidos sesos!",b8);
 		
 		//Citation for pagination
 		Citation p1= new Citation("p1", b1);
@@ -117,6 +149,10 @@ public class DataBaseInitializator {
 		b4.addCitations(c9);
 		b4.addCitations(c10);
 		b4.addCitations(c11);
+		b5.addCitations(c12);
+		b6.addCitations(c13);
+		b6.addCitations(c14);
+		b8.addCitations(c15);
 		
 		//book for pagination citation
 		b1.addCitations(p1); 
@@ -135,11 +171,8 @@ public class DataBaseInitializator {
 
 		//Set books of citations
 		c1.setBook(b1);
-		
 		c2.setBook(b2);
-		
 		c3.setBook(b3);
-		
 		c4.setBook(b4);
 		c5.setBook(b4);
 		c6.setBook(b4);
@@ -148,6 +181,10 @@ public class DataBaseInitializator {
 		c9.setBook(b4);
 		c10.setBook(b4);
 		c11.setBook(b4);
+		c12.setBook(b5);
+		c13.setBook(b6);
+		c14.setBook(b6);
+		c15.setBook(b8);
 		
 		//Citation for pagination
 		p1.setBook(b1);
@@ -168,6 +205,8 @@ public class DataBaseInitializator {
 		Theme th1  = new Theme("Amor");
 		Theme th2  = new Theme("Vida");
 		Theme th3  = new Theme("Clasico");
+		Theme th4 = new Theme("Aventura");
+		Theme th5= new Theme("Miedo");
 		
 		
 		//Add the theme to the book
@@ -183,6 +222,10 @@ public class DataBaseInitializator {
 		c9.setTheme(th3);
 		c10.setTheme(th3);
 		c11.setTheme(th3);
+		c12.setTheme(th1);
+		c13.setTheme(th4);
+		c14.setTheme(th4);
+		c15.setTheme(th5);
 		
 		//Citation for pagination
 		p1.setTheme(th1);
@@ -203,54 +246,90 @@ public class DataBaseInitializator {
 		b2.setTheme(th2);
 		b3.setTheme(th3);
 		b4.setTheme(th3);
+		b5.setTheme(th1);
+		b6.setTheme(th4);
+		b7.setTheme(th5);
+		b8.setTheme(th5);
 	
 		th1.addBook(b1);
 		th2.addBook(b2);
 		th3.addBook(b3);
 		th3.addBook(b4);
+		th1.addBook(b5);
+		th4.addBook(b6);
+		th5.addBook(b7);
+		th5.addBook(b8);
 		
 		themeService.save(th1);
 		themeService.save(th2);
 		themeService.save(th3);
+		themeService.save(th4);
+		themeService.save(th5);
 		
 		//Add the book to the author, the existence of the book depends of the existence of the author, so we don't save the book explicitly.
 		a1.addBook(b1);
 		a2.addBook(b2);
 		a3.addBook(b4);
 		a3.addBook(b3);
+		a5.addBook(b5);
+		a6.addBook(b6);
+		a7.addBook(b7);
+		a7.addBook(b8);
 		
 		b1.setAuthor(a1);
 		b2.setAuthor(a2);
 		b3.setAuthor(a3);
 		b4.setAuthor(a3);
-			
+		b5.setAuthor(a5);
+		b6.setAuthor(a6);
+		b7.setAuthor(a7);
+		b8.setAuthor(a7);
 		
 		
 		authorService.save(a1);
 		authorService.save(a2);
 		authorService.save(a3);
+		authorService.save(a4);
+		authorService.save(a5);
+		authorService.save(a6);
+		authorService.save(a7);
+		
 		//Save the book wich has no author.
 		bookService.save(b2);
 		bookService.save(b1);
 		bookService.save(b4);
 		bookService.save(b3);
+		bookService.save(b5);
+		bookService.save(b6);
+		bookService.save(b7);
+		bookService.save(b8);
 		
 		//Save the author who has write the b1
-		/*citationRepository.save(c1);
-		citationRepository.save(c2);
-		citationRepository.save(c3);
-		citationRepository.save(c4);
-		citationRepository.save(c5);
-		citationRepository.save(c6);
-		citationRepository.save(c6);
-		citationRepository.save(c7);
-		citationRepository.save(c8);
-		citationRepository.save(c9);
-		citationRepository.save(c10);
-		citationRepository.save(c11);*/
+		citationService.save(c1);
+		citationService.save(c2);
+		citationService.save(c3);
+		citationService.save(c4);
+		citationService.save(c5);
+		citationService.save(c6);
+		citationService.save(c6);
+		citationService.save(c7);
+		citationService.save(c8);
+		citationService.save(c9);
+		citationService.save(c10);
+		citationService.save(c11);
+		citationService.save(c12);
+		citationService.save(c13);
+		citationService.save(c14);
+		citationService.save(c15);
 
-		
-		
+		for(int i=0; i<25; i++) {
+			Author a = new Author("zzz"+i,""+i,""+i,""+i,""+i,""+i,-1);
+			Book b = new Book("zzz"+i, -2);
+			Theme t = new Theme("zzz"+i);
+			authorService.save(a);
+			bookService.save(b);
+			themeService.save(t);
+		}
 		
 		
 		//Initialization of the users of the application

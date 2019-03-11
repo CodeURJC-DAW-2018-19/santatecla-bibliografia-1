@@ -3,6 +3,7 @@ package com.santatecla.G1.book;
 import java.util.Collection;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import com.santatecla.G1.TabController;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
+import com.santatecla.G1.theme.ThemeService;
 import com.santatecla.G1.user.UserComponent;
 
 
@@ -32,8 +34,11 @@ public class BooksController {
 	@Autowired
 	private TabController tabs;
   
-  @Autowired
+	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+ 	private ThemeService themeService;
 
 	
 	public Collection<Book> books(){
@@ -49,9 +54,12 @@ public class BooksController {
 		Theme theme = book.getTheme();
 		if (book!=null) {
 			model.addAttribute("book", book);
-			model.addAttribute("authors", author);
-			model.addAttribute("themes", theme);
+			if(book.getAuthor()!=null)
+				model.addAttribute("authors", author);
+			if(book.getTheme()!=null)
+				model.addAttribute("themes", theme);
 			model.addAttribute("citations",citations);
+			model.addAttribute("entity","book");
 		}
 		System.out.println("Add tab");
 		tabs.userTabs(model, "/book/"+ id, book.getTitle(), true, id);
@@ -60,7 +68,8 @@ public class BooksController {
 	
 	@RequestMapping("/newBook")
 	public String newBook(Model model) {
-		
+		List<Theme> themes = themeService.findAll();
+		model.addAttribute("themes", themes);
 		return "booksPageEdit";
 	}
 	
@@ -76,7 +85,8 @@ public class BooksController {
 	}
 	
 	@RequestMapping("/saveBook")
-	public String saveBook(Model model, Book book, @RequestParam("file")MultipartFile file) {
+	public String saveBook(Model model, Book book, @RequestParam("file")MultipartFile file, 
+			@RequestParam Optional<Long[]> t) {
 		if((file!=null)&&(!file.isEmpty())) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
 			book.setImgId(imgId);
@@ -85,7 +95,23 @@ public class BooksController {
 		}
 		else
 			book.setImgId(-2);
-		bookService.save(book);
+		
+		
+		if (t.isPresent()) {
+			for (Long e : t.get()) {
+				Theme theme = themeService.findById(e);
+				book.setTheme(theme);
+				theme.addBook(book);
+				bookService.save(book);
+				
+				themeService.save(theme);
+			}
+		}else {
+			bookService.save(book);
+			
+		}
+		
+	
 		model.addAttribute("text","Book Created");
 		return "Message";
 	}

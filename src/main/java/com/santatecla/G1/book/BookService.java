@@ -22,13 +22,21 @@ public class BookService {
 	public List<Book> findAll() {
 		return booksRepository.findAll();
 	}
-
+	
+	public List<Book> findByTitleContaining(String title) {
+		return booksRepository.findByTitleContaining(title);
+	}
+	
 	public void save(Book book) {
 		booksRepository.save(book);
 	}
 
 	public void deleteById(long id) {
 		booksRepository.deleteById(id);
+	}
+	
+	public Book findByTitleIgnoreCase(String title) {
+		return booksRepository.findByTitleIgnoreCase(title);
 	}
 	
 	public List<Book> findByAuthor(Author author) {
@@ -38,6 +46,11 @@ public class BookService {
 	public Book findByTitle(String title) {
 		return booksRepository.findByTitle(title);
 	}
+	
+	public Book findById(long id) {
+		return booksRepository.findById(id);
+	}
+	
 	public List<Book> findByTheme(Theme theme){
 		return booksRepository.findByTheme(theme);
 	}

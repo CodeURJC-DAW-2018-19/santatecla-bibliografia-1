@@ -2,6 +2,7 @@ package com.santatecla.G1.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,10 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
+	 
 	@Autowired
 	public UserRepositoryAuthenticationProvider authenticationProvider;
-	
 	protected void configure(HttpSecurity http) throws Exception{
 		
 		
@@ -25,11 +25,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/loginerror").permitAll();
 		http.authorizeRequests().antMatchers("/logout").permitAll();
 		http.authorizeRequests().antMatchers("/image/{id}").permitAll();
-
+		http.authorizeRequests().antMatchers("/table-citation").permitAll();
+		http.authorizeRequests().antMatchers("/table-author").permitAll();
+		http.authorizeRequests().antMatchers("/table-works").permitAll();
+		http.authorizeRequests().antMatchers("/table-theme").permitAll();
 		
 		//Private pages 
 		http.authorizeRequests().anyRequest().authenticated();
-
+	
 		//Login form
 		http.formLogin().defaultSuccessUrl("/");
 		http.formLogin().usernameParameter("username");
@@ -39,12 +42,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//Logout
 		http.logout().logoutUrl("/logout");
 		http.logout().logoutSuccessUrl("/");
-
 		
 		//CSRF
 		http.csrf().disable();
 	}
 	
+
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 		//Database authentication provider
 		auth.authenticationProvider(authenticationProvider);
@@ -56,6 +59,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	  web.ignoring().antMatchers("/css/**");
 	  web.ignoring().antMatchers("/img/**");
 	  web.ignoring().antMatchers("/favicon.ico");
-	  
+	  web.ignoring().antMatchers("/api/book-name-pageable");
+	  web.ignoring().antMatchers("/api/citation-name-pageable");
+	  web.ignoring().antMatchers("/api/author-name-pageable");
+	  web.ignoring().antMatchers("/api/theme-name-pageable");
 	}
 }

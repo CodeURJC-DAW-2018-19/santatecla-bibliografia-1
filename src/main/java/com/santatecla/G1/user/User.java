@@ -11,17 +11,26 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.santatecla.G1.author.Author.BasicView;
 
 
 @Entity
 public class User {
-
+	
+	public interface BasicView{}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(BasicView.class)
 	private Long id;
 	
+	@JsonView(BasicView.class)
 	private String name;
 	
 	private String passwordHash;
@@ -29,6 +38,7 @@ public class User {
 	private ArrayList<Tabs> tabs = new ArrayList<>();
 	
 	@ElementCollection(fetch = FetchType.EAGER)
+	@JsonView(BasicView.class)
 	private List<String> roles;
 	
 	public User() {}
@@ -104,7 +114,6 @@ public class User {
 	public void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
-	
 
 }
 	

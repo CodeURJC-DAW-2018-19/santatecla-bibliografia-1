@@ -8,6 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.santatecla.G1.author.Author;
+import com.santatecla.G1.book.Book;
+import com.santatecla.G1.theme.Theme;
+
 
 @Service
 public class CitationService {
@@ -26,6 +29,10 @@ public class CitationService {
 		return citationRepository.findById(id);
 	}
 	
+	public List<Citation> findByTextContaining(String text) {
+		return citationRepository.findByTextContaining(text);
+	}
+	
 	public void deleteById(long id) {
 		citationRepository.deleteById(id);
 	}
@@ -33,4 +40,9 @@ public class CitationService {
 	public Page<Citation> findAll(Pageable page){
 		return citationRepository.findAll(page);
 	}
+	
+	public Citation findByTextIgnoreCase(String text) {
+		return citationRepository.findByTextIgnoreCase(text);
+	}
+
 }

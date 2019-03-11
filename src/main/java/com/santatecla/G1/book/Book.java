@@ -12,21 +12,43 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
 
 @Entity
 public class Book {
+	public interface BasicView{}
+	public interface ThemeView{}
+	public interface AuthorView{}
+	public interface CitationsView{}
+	
+	@JsonView(BasicView.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	@JsonView(BasicView.class)
 	private String title;
+	
+	@JsonView(BasicView.class)
 	private String publishDate;
+	
+	@JsonView(BasicView.class)
 	private String nameEdit;
+	
+	@JsonView(BasicView.class)
 	private String urlEdit;
+	
+	@JsonView(BasicView.class)
 	private String urlImgCoverPage;
+	
+	@JsonView(BasicView.class)
 	private String urlImgEdit;
+	
+	@JsonView(BasicView.class)
 	private int imgId;
 	
 	/********************************************
@@ -34,14 +56,17 @@ public class Book {
 	 ********************************************/
 	
 	@OneToOne(cascade=CascadeType.ALL)
+	@JsonView(ThemeView.class)
 	private Theme theme;
 	
 	//To avoid cicles on DB model	
 	@OneToMany (cascade=CascadeType.ALL)
+	@JsonView(CitationsView.class)
 	public List<Citation> citation;
 	
 
 	@OneToOne()
+	@JsonView(AuthorView.class)
 	private Author author;
 	
 	/********************************************
@@ -158,6 +183,10 @@ public class Book {
 
 	public void setAuthor(Author author) {
 		this.author = author;
+	}
+
+	public void setCitation(List<Citation> citation) {
+		this.citation = citation;
 	}
 
 	@Override

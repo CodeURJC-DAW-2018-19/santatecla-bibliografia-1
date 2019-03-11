@@ -11,28 +11,47 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
 
 
 @Entity
 public class Author {
+	public interface BasicView{}
+	public interface BooksView{}
+	
+	@JsonView(BasicView.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	@JsonView(BasicView.class)
 	private String name;
 	
+	@JsonView(BasicView.class)
 	private String urlImage;
+	
+	@JsonView(BasicView.class)
 	private String birthDate;
+	
+	@JsonView(BasicView.class)
 	private String deathDate;
+	
+	@JsonView(BasicView.class)
 	private String bornPlace;
+	
+	@JsonView(BasicView.class)
 	@Column(length=500)
 	private String urlMap;
+	
+	@JsonView(BasicView.class)
 	private int imgId;
 	
 	/********************************************
 	* RELATIONS WITH OTHER CLASES TO DDBB MODEL
 	********************************************/
-	
+	@JsonView(BooksView.class)
 	@OneToMany
 	private List<Book> books;
 	
@@ -41,7 +60,7 @@ public class Author {
 	 ********************************************/
 	
 	//Constructor to Spring
-	public Author() {}
+	public Author() {this.books = new ArrayList<>();}
 
 	//The type of the dates is Date, when we operate with date, to show we will use SimpleFormatDate
 	public Author(String name, String bornDate, String deathDate, int imgId) {
@@ -128,6 +147,10 @@ public class Author {
 	}
 
 
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+
 	public String getBornPlace() {
 		return bornPlace;
 	}
@@ -163,6 +186,11 @@ public class Author {
 	public void addBook(Book book) {
 		this.books.add(book);
 	}
+	
+	public void addBookList(List<Book> books) {
+		this.books=books;
+	}
+	
 	public List<Book> getBooks(){
 		return this.books;
 	}
