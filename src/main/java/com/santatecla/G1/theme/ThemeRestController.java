@@ -54,6 +54,7 @@ public class ThemeRestController {
 		return new ResponseEntity<>(themeService.findAll(page).getContent(), HttpStatus.OK);
 	}
 
+	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/theme2", method = POST)
 	public ResponseEntity<Theme> theme(@RequestBody Theme theme) {
 		if (themeService.findByNameIgnoreCase(theme.getName()) == null) {
