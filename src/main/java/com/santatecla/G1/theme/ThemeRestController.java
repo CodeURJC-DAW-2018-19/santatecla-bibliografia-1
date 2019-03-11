@@ -62,7 +62,6 @@ public class ThemeRestController {
 				for (Book book : theme.getBook()) {
 
 					books.add(bookService.findById(book.getId()));
-					themeService.save(theme);
 					book.setTheme(theme);
 					bookService.save(book);
 				}
