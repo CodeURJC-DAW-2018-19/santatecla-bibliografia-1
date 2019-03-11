@@ -15,15 +15,18 @@ import com.santatecla.G1.book.Book;
 
 @Entity
 public class Theme {
-	public interface BasicView {}
+	public interface NameView {}
+	public interface BasicView extends NameView, IdView {}
+	interface IdView {}
 	interface BooksView {}
+
 	
-	@JsonView(BasicView.class)
+	@JsonView(IdView.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@JsonView(BasicView.class)
+	@JsonView(NameView.class)
 	private String name;
 	
 	/********************************************

@@ -178,7 +178,7 @@ public class BooksRestController {
 
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "book/{id}", method = PATCH)
-	public ResponseEntity<Book> updateBook(Model model, @RequestBody Book newBook, @PathVariable long id,
+	public ResponseEntity<Book> updateBook(Model model, Book newBook, @PathVariable long id,
 			MultipartFile file, Long authorId, Long themeId) {
 		Book oldBook = bookService.findOne(id);
 		if (oldBook != null) {
@@ -213,7 +213,7 @@ public class BooksRestController {
 
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/book", method = POST)
-	public Book saveBook(Model model, @RequestBody Book book, MultipartFile file, Long authorId, Long themeId) {
+	public Book saveBook(Model model, Book book, MultipartFile file, Long authorId, Long themeId) {
 		bookService.save(book);
 		if (authorId != null) {
 			Author author = authorService.findById(authorId);

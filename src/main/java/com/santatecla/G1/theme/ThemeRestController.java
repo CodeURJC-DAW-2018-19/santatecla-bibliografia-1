@@ -110,7 +110,7 @@ public class ThemeRestController {
 	}
 
 	@JsonView(ThemeDetailView.class)
-	@RequestMapping(value = "/theme/{id}", method = PATCH)
+	@RequestMapping(value = "/theme2/{id}", method = PATCH)
 	public ResponseEntity<Theme> updateTheme(@RequestBody Theme newTheme, @PathVariable long id) {
 		Theme oldTheme = themeService.findById(id);
 		if (oldTheme != null) {

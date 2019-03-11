@@ -54,14 +54,17 @@ public class AuthorRestController {
 		System.out.println(authorService.findByNameContaining(name).get(0));
 		return new ResponseEntity<>(authorService.findByNameContaining(name), HttpStatus.OK);
 	}
-
+	
+	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/author2", method = POST)
 	public ResponseEntity<Author> author(@RequestBody Author author) {
 		if (authorService.findByNameIgnoreCase(author.getName()) == null) {
 			if (author.getBooks() != null) {
+				authorService.save(author);
 				ArrayList<Book> books = new ArrayList<>();
 				for (Book book : author.getBooks()) {
 					books.add(bookService.findById(book.getId()));
+					book.setAuthor(author);
 				}
 				author.setBooks(books);
 			}
@@ -93,7 +96,7 @@ public class AuthorRestController {
 	}
 
 	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/author/{id}", method = PATCH)
+	@RequestMapping(value = "/author2/{id}", method = PATCH)
 	public ResponseEntity<Author> updateAuthor(@RequestBody Author newAuthor, @PathVariable long id) {
 		Author oldAuthor = authorService.findById(id);
 		if (oldAuthor != null) {
@@ -133,7 +136,7 @@ public class AuthorRestController {
 	
 	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/author", method = POST)
-	public Author author(Model model, @RequestBody Author author, MultipartFile file) {
+	public Author author(Model model, Author author, MultipartFile file) {
 		if ((file != null) && (!file.isEmpty())) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
 			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
@@ -144,5 +147,24 @@ public class AuthorRestController {
 		model.addAttribute("text", "Autor creado correctamente");
 		System.out.println(author.toString());
 		return author;
+	}
+	
+	@JsonView(AuthorDetailView.class)
+	@RequestMapping(value = "/author/{id}", method = PATCH)
+	public ResponseEntity<Author> updateAuthor(Model model, Author newAuthor, @PathVariable long id, MultipartFile file) {
+		Author oldAuthor = authorService.findById(id);
+		if (oldAuthor != null) {
+			if ((file != null) && (!file.isEmpty())) {
+				int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
+				com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
+				oldAuthor.setImgId(imgId);
+			} else
+				oldAuthor.setImgId(-1);
+			oldAuthor.update(newAuthor);
+			authorService.save(oldAuthor);
+			return new ResponseEntity<>(oldAuthor, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 }

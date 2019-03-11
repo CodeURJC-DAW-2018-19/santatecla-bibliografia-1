@@ -23,7 +23,7 @@ import com.santatecla.G1.user.UserComponent;
 @RestController
 @RequestMapping("/api")
 public class ChartRestController {
-	interface ChartBasicView extends Chart.BasicView{}
+	interface ChartBasicView extends Chart.BasicView, Theme.NameView{}
 	
 	@Autowired
 	private ThemeService themeService;
@@ -31,7 +31,7 @@ public class ChartRestController {
 	private BookService bookService;
 
 	
-	@JsonView(Chart.BasicView.class)
+	@JsonView(ChartBasicView.class)
 	@RequestMapping(value = "/chart", method = GET)
 	public ResponseEntity<Chart> chart() {
 		Chart c= new Chart();
