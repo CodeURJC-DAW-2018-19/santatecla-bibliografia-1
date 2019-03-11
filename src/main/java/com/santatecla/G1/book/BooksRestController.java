@@ -97,10 +97,6 @@ public class BooksRestController {
 					theme = themeService.findById(book.getTheme().getId());
 					theme.addBook(book);
 					book.setTheme(theme);
-<<<<<<< refs/remotes/origin/F3-ApiRest
-=======
-					theme.addBook(book);
->>>>>>> fixed all relations in post
 					themeService.save(theme);
 				}
 				bookService.save(book);
@@ -112,8 +108,6 @@ public class BooksRestController {
 				if (book.getCitations() != null) {
 					for (Citation citation : book.getCitations()) {
 						citations.add(citationService.findById(book.getId()));
-						book.addCitations(citation);
-						citationService.save(citation);
 					}
 				}
 				bookService.save(book);
