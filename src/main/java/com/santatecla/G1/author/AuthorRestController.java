@@ -65,6 +65,7 @@ public class AuthorRestController {
 				for (Book book : author.getBooks()) {
 					books.add(bookService.findById(book.getId()));
 					book.setAuthor(author);
+					bookService.save(book);
 				}
 				author.setBooks(books);
 			}
