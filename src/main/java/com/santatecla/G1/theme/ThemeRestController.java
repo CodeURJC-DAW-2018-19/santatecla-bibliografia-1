@@ -52,7 +52,8 @@ public class ThemeRestController {
 	public ResponseEntity<List<Theme>> themePageable(Pageable page) {
 		return new ResponseEntity<>(themeService.findAll(page).getContent(), HttpStatus.OK);
 	}
-
+	
+	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/theme2", method = POST)
 	public ResponseEntity<Theme> theme(@RequestBody Theme theme) {
 		if (themeService.findByNameIgnoreCase(theme.getName()) == null) {
@@ -61,11 +62,9 @@ public class ThemeRestController {
 				for (Book book : theme.getBook()) {
 
 					books.add(bookService.findById(book.getId()));
+					book.setTheme(theme);
+					bookService.save(book);
 				}
-
-				books.forEach((b) -> {
-					System.out.println(b.getTitle());
-				});
 
 				theme.setBooks(books);
 			} catch (Exception e) {
