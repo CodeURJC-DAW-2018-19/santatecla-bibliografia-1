@@ -83,8 +83,6 @@ public class BooksRestController {
 				if (book.getAuthor() != null) {
 					author = authorService.findById(book.getAuthor().getId());
 					book.setAuthor(author);
-					author.addBook(book);
-					authorService.save(author);
 				}
 				bookService.save(book);
 			} catch (Exception e) {
@@ -95,9 +93,7 @@ public class BooksRestController {
 				Theme theme = new Theme();
 				if (book.getTheme() != null) {
 					theme = themeService.findById(book.getTheme().getId());
-					theme.addBook(book);
 					book.setTheme(theme);
-					themeService.save(theme);
 				}
 				bookService.save(book);
 			} catch (Exception e) {
