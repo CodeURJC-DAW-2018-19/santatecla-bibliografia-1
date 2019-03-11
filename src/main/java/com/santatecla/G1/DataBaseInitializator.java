@@ -133,7 +133,7 @@ public class DataBaseInitializator {
 		Citation c15= new Citation("¡No voy a hacerte daño! Wendy, querida, luz de mi vida, ¿de qué tienes miedo?. No me has dejado acabar la frase, dije: No voy a hacerte daño, sólo voy a aplastarte los sesos. ¡Aplastaré tus jodidos sesos!",b8);
 		
 		//Citation for pagination
-		/*Citation p1= new Citation("p1", b1);
+		Citation p1= new Citation("p1", b1);
 		Citation p2= new Citation("p2", b1);
 		Citation p3= new Citation("p3", b1);
 		Citation p4= new Citation("p4", b1);
@@ -175,7 +175,7 @@ public class DataBaseInitializator {
 		b1.addCitations(p9); 
 		b1.addCitations(p10); 
 		b1.addCitations(p11); 
-		b1.addCitations(p12); */
+		b1.addCitations(p12); 
 		
 
 		//Set books of citations
@@ -199,7 +199,7 @@ public class DataBaseInitializator {
 		c15.setBook(b8);
 		
 		//Citation for pagination
-		/*p1.setBook(b1);
+		p1.setBook(b1);
 		p2.setBook(b1);
 		p3.setBook(b1);
 		p4.setBook(b1);
@@ -210,7 +210,7 @@ public class DataBaseInitializator {
 		p9.setBook(b1);
 		p10.setBook(b1);
 		p11.setBook(b1);
-		p12.setBook(b1);*/
+		p12.setBook(b1);
 		
 
 		//Create a themes that will be relacionated with a book, the theme also depends of the existence of a book(we don't save it explicitly).
@@ -239,7 +239,7 @@ public class DataBaseInitializator {
 		c14.setTheme(th4);
 		c15.setTheme(th5);
 		//Citation for pagination
-		/*p1.setTheme(th1);
+		p1.setTheme(th1);
 		p2.setTheme(th1);
 		p3.setTheme(th1);
 		p4.setTheme(th1);
@@ -250,7 +250,7 @@ public class DataBaseInitializator {
 		p9.setTheme(th1);
 		p10.setTheme(th1);
 		p11.setTheme(th1);
-		p12.setTheme(th1);*/
+		p12.setTheme(th1);
 		
 		
 		b1.setTheme(th1);
