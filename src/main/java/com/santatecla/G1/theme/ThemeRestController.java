@@ -26,7 +26,8 @@ import com.santatecla.G1.citation.Citation;
 @RestController
 @RequestMapping("/api")
 public class ThemeRestController {
-	interface ThemeDetailView extends Theme.BasicView, Theme.BooksView, Book.BasicView, Book.AuthorView, Author.BasicView, Book.CitationsView, Citation.BasicView{
+	interface ThemeDetailView extends Theme.BasicView, Theme.BooksView, Book.BasicView, Book.AuthorView,
+			Author.BasicView, Book.CitationsView, Citation.BasicView {
 	}
 
 	@Autowired
@@ -40,13 +41,13 @@ public class ThemeRestController {
 	public ResponseEntity<Collection<Theme>> themes() {
 		return new ResponseEntity<>(themeService.findAll(), HttpStatus.OK);
 	}
-	
+
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/theme-search/{name}", method = GET)
 	public ResponseEntity<List<Theme>> searchTheme(@PathVariable String name) {
 		return new ResponseEntity<>(themeService.findByNameContaining(name), HttpStatus.OK);
 	}
-	
+
 	@JsonView(Theme.BasicView.class)
 	@RequestMapping(value = "/theme-pageable", method = RequestMethod.GET)
 	public ResponseEntity<List<Theme>> themePageable(Pageable page) {
@@ -56,20 +57,17 @@ public class ThemeRestController {
 	@RequestMapping(value = "/theme2", method = POST)
 	public ResponseEntity<Theme> theme(@RequestBody Theme theme) {
 		if (themeService.findByNameIgnoreCase(theme.getName()) == null) {
-			try {
-				ArrayList<Book> books = new ArrayList<>();
-				for (Book book : theme.getBook()) {
+			if (theme.getBook() != null) {
+				try {
+					ArrayList<Book> books = new ArrayList<>();
+					for (Book book : theme.getBook()) {
+						books.add(bookService.findById(book.getId()));
+					}
 
-					books.add(bookService.findById(book.getId()));
+					theme.setBooks(books);
+				} catch (Exception e) {
+					return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 				}
-
-				books.forEach((b) -> {
-					System.out.println(b.getTitle());
-				});
-
-				theme.setBooks(books);
-			} catch (Exception e) {
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
 			themeService.save(theme);
 			return new ResponseEntity<>(theme, HttpStatus.CREATED);
