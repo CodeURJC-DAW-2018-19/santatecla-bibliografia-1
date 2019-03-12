@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.santatecla.G1.author.Author;
+import com.santatecla.G1.author.AuthorSerializer;
 import com.santatecla.G1.author.AuthorService;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
@@ -330,7 +333,13 @@ public class DataBaseInitializator {
 			bookService.save(b);
 			themeService.save(t);
 		}
-		
+		/*
+		ObjectMapper authorMapper = new ObjectMapper();
+		SimpleModule authorModule = new SimpleModule();
+		authorModule.addSerializer(Author.class, new AuthorSerializer());
+		authorMapper.registerModule(authorModule);
+		String serializer = authorMapper.writeValueAsString(a1); //Esto creo q no va aqui (puede que nada vaya aqui xD)
+		*/
 		
 		//Initialization of the users of the application
 
