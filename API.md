@@ -45,7 +45,7 @@ And for user/student role:
 * ##### URL:
 
 	< /login >
-
+`
 * ##### Method:
 
 	`GET`
@@ -176,7 +176,7 @@ Every user is allowed to do GET requests to the API
 
 * ##### URL:
 
-	< /book-pageable?page={numPage} >
+	< /books?page={numPage} >
 
 * ##### Method:
 
@@ -289,8 +289,35 @@ Every user is allowed to do GET requests to the API
 * ##### Error response:
 
 	**Code**: 404 NOT FOUND
+	
+#### GET paged books titles
 
+* ##### URL:
 
+	< /books?page={numPage}&filter=titles >
+
+* ##### Method:
+
+	`GET`
+	
+* ##### Success Response
+```
+	[
+    "Palabras Radiantes",
+    "Romancero Gitano",
+    "Nacidos de la bruma",
+    "El año de los delfines",
+    "Refranero",
+    "Harry Potter y la Piedra Filosofal",
+    "IT",
+    "El Resplandor",
+    "zzz0",
+    "zzz1"
+     ]```
+
+* ##### Error response:
+
+	**Code**: 400 BAD REQUEST
 #### GET one book
 
 It works the same for authors, themes and quotes, and show in detail the resource represented by the {id}.
