@@ -163,12 +163,12 @@ public class Author {
 		return urlMap;
 	}
 
-	public String getBornDate() {
-		return birthDate;
-	}
-
 	public String getBirthDate() {
 		return birthDate;
+	}
+	
+	public String getDeathDate() {
+		return deathDate;
 	}
 
 	public void setBirthDate(String birthDate) {

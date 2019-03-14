@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
 import com.santatecla.G1.citation.Citation;
@@ -86,6 +87,7 @@ public class AuthorRestController {
 		return new ResponseEntity<>(authorName, HttpStatus.OK);
 	}
 
+	//@JsonSerialize(using = AuthorSerializer.class)//Esta mierda peta
 	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/author/{id}", method = GET)
 	public ResponseEntity<Author> getAuthor(@PathVariable long id) {
