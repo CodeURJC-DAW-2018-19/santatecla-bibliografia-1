@@ -1,7 +1,7 @@
 package com.santatecla.G1.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,32 +48,47 @@ public class BooksRestController {
 	private ThemeService themeService;
 
 	@JsonView(Book.BasicView.class)
-	@RequestMapping(value = "book", method = GET)
+	@RequestMapping(value = "books", method = GET)
 	public ResponseEntity<Collection<Book>> getBooks() {
 		return new ResponseEntity<>(bookService.findAll(), HttpStatus.OK);
 	}
 	
 	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "/book-search/{title}", method = GET)
+	@RequestMapping(value = "/books/{title}", method = GET)
 	public ResponseEntity<List<Book>> searchBook(@PathVariable String title) {
 		return new ResponseEntity<>(bookService.findByTitleContaining(title), HttpStatus.OK);
 	}
 
 	@JsonView(Book.BasicView.class)
-	@RequestMapping(value = "/book-pageable", method = RequestMethod.GET)
-	public ResponseEntity<List<Book>> booksPageable(Pageable page) {
-		return new ResponseEntity<>(bookService.findAll(page).getContent(), HttpStatus.OK);
+	@RequestMapping(value = "/books", 
+					params = {"page"}, 
+					method = GET)
+	public ResponseEntity<List<Book>> booksPageable(@RequestParam(value="page",defaultValue="0") int page) {
+		Pageable pageableRequest = PageRequest.of(page,10);
+		return new ResponseEntity<>(bookService.findAll(pageableRequest).getContent(), HttpStatus.OK);
 	}
 
 	@JsonView(Book.BasicView.class)
-	@RequestMapping(value = "/book-name-pageable", method = RequestMethod.GET)
-	public ResponseEntity<List<String>> booksPageableGuest(Pageable page) {
-		List<Book> books = bookService.findAll(page).getContent();
-		List<String> booksName = new ArrayList<>();
-		for (Book b : books) {
-			booksName.add(b.getTitle());
+	@RequestMapping(value = "/books",
+					params = {"page", "filter"},
+					method = RequestMethod.GET)
+	public ResponseEntity<List<String>> booksPageableGuest(@RequestParam(value="page",defaultValue="0") int page,
+															@RequestParam(value="filter",defaultValue="") String name) {
+		if(name.equals("title"))
+		{
+			Pageable pageableRequest = PageRequest.of(page,10);
+			List<Book> books = bookService.findAll(pageableRequest).getContent();
+			List<String> booksName = new ArrayList<>();
+			for (Book b : books) {
+				booksName.add(b.getTitle());
+			}
+			return new ResponseEntity<>(booksName, HttpStatus.OK);
 		}
-		return new ResponseEntity<>(booksName, HttpStatus.OK);
+		else
+		{
+			return new ResponseEntity<>( HttpStatus.BAD_REQUEST);	
+		}
+		
 	}
 
 	@RequestMapping(value = "/book2", method = POST)
