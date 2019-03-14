@@ -313,7 +313,8 @@ Every user is allowed to do GET requests to the API
     "El Resplandor",
     "zzz0",
     "zzz1"
-     ]```
+     ]
+```
 
 * ##### Error response:
 
