@@ -55,7 +55,7 @@ public class Book {
 	 * RELATIONS WITH OTHER CLASES TO DDBB MODEL
 	 ********************************************/
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne()
 	@JsonView(ThemeView.class)
 	private Theme theme;
 	
@@ -84,7 +84,6 @@ public class Book {
 		this.urlImgCoverPage="";
 		this.urlEdit="";
 		this.urlImgEdit="";
-		this.theme = null;
 		this.publishDate="";
 		this.imgId = imgId;
 	}

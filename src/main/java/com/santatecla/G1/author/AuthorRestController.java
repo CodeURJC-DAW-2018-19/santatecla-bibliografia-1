@@ -63,10 +63,12 @@ public class AuthorRestController {
 			if (author.getBooks() != null) {
 				authorService.save(author);
 				ArrayList<Book> books = new ArrayList<>();
+				Book bookAux= new Book();
 				for (Book book : author.getBooks()) {
 					books.add(bookService.findById(book.getId()));
-					book.setAuthor(author);
-					bookService.save(book);
+					bookAux=bookService.findById(book.getId());
+					bookAux.setAuthor(author);
+					bookService.save(bookAux);
 				}
 				author.setBooks(books);
 			}

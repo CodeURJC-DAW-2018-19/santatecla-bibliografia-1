@@ -23,6 +23,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.author.AuthorService;
+
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.citation.CitationService;
 import com.santatecla.G1.theme.Theme;
@@ -90,15 +91,18 @@ public class BooksRestController {
 		}
 		
 	}
-
+	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/book2", method = POST)
 	public ResponseEntity<Book> book(@RequestBody Book book) {
 		if (bookService.findByTitleIgnoreCase(book.getTitle()) == null) {
 			try {
+				bookService.save(book);
 				Author author = new Author();
 				if (book.getAuthor() != null) {
 					author = authorService.findById(book.getAuthor().getId());
+					author.addBook(book);
 					book.setAuthor(author);
+					authorService.save(author);					
 				}
 				bookService.save(book);
 			} catch (Exception e) {
@@ -106,10 +110,13 @@ public class BooksRestController {
 			}
 
 			try {
+				bookService.save(book);
 				Theme theme = new Theme();
 				if (book.getTheme() != null) {
 					theme = themeService.findById(book.getTheme().getId());
+					theme.addBook(book);
 					book.setTheme(theme);
+					themeService.save(theme);
 				}
 				bookService.save(book);
 			} catch (Exception e) {

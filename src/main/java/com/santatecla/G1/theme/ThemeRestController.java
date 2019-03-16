@@ -60,9 +60,14 @@ public class ThemeRestController {
 		if (themeService.findByNameIgnoreCase(theme.getName()) == null) {
 			if (theme.getBook() != null) {
 				try {
+					themeService.save(theme);
+					Book bookAux= new Book();
 					ArrayList<Book> books = new ArrayList<>();
 					for (Book book : theme.getBook()) {
 						books.add(bookService.findById(book.getId()));
+						bookAux=bookService.findById(book.getId());
+						bookAux.setTheme(theme);
+						bookService.save(bookAux);
 					}
 
 					theme.setBooks(books);

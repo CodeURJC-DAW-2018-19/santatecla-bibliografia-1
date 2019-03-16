@@ -44,7 +44,7 @@ public class Theme {
 	 * METHODS OF THE CLASS
 	 ********************************************/
 	
-	public Theme() {}
+	public Theme() {this.books = new ArrayList<Book>();}
 	
 	public Theme(String name) {
 		this.setName(name);

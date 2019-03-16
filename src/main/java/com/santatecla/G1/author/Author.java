@@ -76,7 +76,6 @@ public class Author {
 	}
 	public Author(String name, String bornDate, int imgId) {
 		super();
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		this.name = name;
 		this.urlImage= "";
 		this.urlMap="";
@@ -88,7 +87,6 @@ public class Author {
 	}
 	public Author(String name, String bornDate) {
 		super();
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		this.name = name;
 		this.urlImage= "";
 		this.urlMap="";
@@ -202,7 +200,6 @@ public class Author {
 	}
 	@Override
 	public String toString() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		return "Nombe: "+name + "; Fecha de nacimiento: " +birthDate + "; Fecha de defunción: "+ deathDate;
 	}
 }
