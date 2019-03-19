@@ -27,6 +27,10 @@ public class BookService {
 		return booksRepository.findByTitleContaining(title);
 	}
 	
+	public List<Book> findByTitleContaining(String title, Pageable page) {
+		return booksRepository.findByTitleContaining(title, page);
+	}
+	
 	public void save(Book book) {
 		booksRepository.save(book);
 	}

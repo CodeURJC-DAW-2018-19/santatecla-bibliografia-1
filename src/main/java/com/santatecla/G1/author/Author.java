@@ -1,6 +1,5 @@
 package com.santatecla.G1.author;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
 
@@ -95,7 +93,6 @@ public class Author {
 		this.birthDate = bornDate;
 		this.deathDate = "";
 		this.books = new ArrayList<>();
-		this.imgId = imgId;
 	}
 
 	public Author(String name, String urlImage, String bornDate, String deathDate, String bornPlace,

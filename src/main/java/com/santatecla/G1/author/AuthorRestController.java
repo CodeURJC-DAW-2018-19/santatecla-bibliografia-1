@@ -51,7 +51,7 @@ public class AuthorRestController {
 		MappingJacksonValue result = new MappingJacksonValue(authors);
 		if(authors!=null) {
 			if(userComponent.isLoggedUser())
-				result.setSerializationView(AuthorDetailView.class);
+				result.setSerializationView(AuthorBasicView.class);
 			else
 				result.setSerializationView(Author.NameView.class);
 			return result;

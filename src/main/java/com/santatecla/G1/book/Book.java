@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.citation.Citation;
@@ -20,6 +19,7 @@ import com.santatecla.G1.theme.Theme;
 
 @Entity
 public class Book {
+	public interface NameView{}
 	public interface BasicView{}
 	public interface ThemeView{}
 	public interface AuthorView{}
@@ -30,7 +30,7 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@JsonView(BasicView.class)
+	@JsonView(NameView.class)
 	private String title;
 	
 	@JsonView(BasicView.class)
