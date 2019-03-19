@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
 import com.santatecla.G1.citation.Citation;
@@ -31,6 +29,7 @@ import com.santatecla.G1.user.UserComponent;
 public class AuthorRestController {
 	interface AuthorDetailView extends Author.NameView, Author.BasicView, Author.BooksView, Book.BasicView, Book.ThemeView, Theme.BasicView, Book.CitationsView, Citation.BasicView {}
 	interface AuthorBasicView extends Author.NameView, Author.BasicView {}
+	
 	@Autowired
 	private UserComponent userComponent;
 	
@@ -41,31 +40,39 @@ public class AuthorRestController {
 	private BookService bookService;
 
 	@RequestMapping(value = "/authors", method = RequestMethod.GET)
-	public MappingJacksonValue authorsPageable(Pageable page) {
-		
-		List<Author> authors = authorService.findAll(page).getContent();
+	public MappingJacksonValue authors(Pageable page, String name) {
+		List<Author> authors;
+		if(name!=null) {
+			authors = authorService.findByNameContaining(name, page);
+		}
+		else {
+			authors = authorService.findAll(page).getContent();		
+		}
 		MappingJacksonValue result = new MappingJacksonValue(authors);
 		if(authors!=null) {
 			if(userComponent.isLoggedUser())
 				result.setSerializationView(AuthorDetailView.class);
 			else
 				result.setSerializationView(Author.NameView.class);
-			System.out.println(userComponent.isLoggedUser());
 			return result;
 		}
 		else return null;
 	}
 	
-	
+
 	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/author-search/{name}", method = GET)
-	public ResponseEntity<List<Author>> searchAuthor(@PathVariable String name) {
-		System.out.println(authorService.findByNameContaining(name).get(0));
-		return new ResponseEntity<>(authorService.findByNameContaining(name), HttpStatus.OK);
+	@RequestMapping(value = "/authors/{id}", method = GET)
+	public ResponseEntity<Author> getAuthor(@PathVariable long id) {
+		Author a = authorService.findById(id);
+		if (a != null)
+			return new ResponseEntity<>(a, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
+	
 	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/author2", method = POST)
+	@RequestMapping(value = "/authors2", method = POST)
 	public ResponseEntity<Author> author(@RequestBody Author author) {
 		if (authorService.findByNameIgnoreCase(author.getName()) == null) {
 			if (author.getBooks() != null) {
@@ -86,19 +93,8 @@ public class AuthorRestController {
 			return new ResponseEntity<>(HttpStatus.IM_USED);
 	}
 
-	//@JsonSerialize(using = AuthorSerializer.class)//Esta mierda peta
 	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/author/{id}", method = GET)
-	public ResponseEntity<Author> getAuthor(@PathVariable long id) {
-		Author a = authorService.findById(id);
-		if (a != null)
-			return new ResponseEntity<>(a, HttpStatus.OK);
-		else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
-
-	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/author2/{id}", method = PATCH)
+	@RequestMapping(value = "/authors2/{id}", method = PATCH)
 	public ResponseEntity<Author> updateAuthor(@RequestBody Author newAuthor, @PathVariable long id) {
 		Author oldAuthor = authorService.findById(id);
 		if (oldAuthor != null) {
@@ -110,7 +106,7 @@ public class AuthorRestController {
 		}
 	}
 
-	@RequestMapping(value = "/author/{id}", method = DELETE)
+	@RequestMapping(value = "/authors/{id}", method = DELETE)
 	public ResponseEntity<Author> deleteAuthor(@PathVariable long id) {
 		Author author = authorService.findById(id);
 		if (author != null) {
@@ -137,7 +133,7 @@ public class AuthorRestController {
 	// ----------------------------- METHODS WITH UPLOAD IMAGES -------------------------------------------------
 	
 	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/author", method = POST)
+	@RequestMapping(value = "/authors", method = POST)
 	public Author author(Model model, Author author, MultipartFile file) {
 		if ((file != null) && (!file.isEmpty())) {
 			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
@@ -152,7 +148,7 @@ public class AuthorRestController {
 	}
 	
 	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/author/{id}", method = PATCH)
+	@RequestMapping(value = "/authors/{id}", method = PATCH)
 	public ResponseEntity<Author> updateAuthor(Model model, Author newAuthor, @PathVariable long id, MultipartFile file) {
 		Author oldAuthor = authorService.findById(id);
 		if (oldAuthor != null) {

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.santatecla.G1.author.Author;
-import com.santatecla.G1.author.AuthorSerializer;
 import com.santatecla.G1.author.AuthorService;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
