@@ -18,6 +18,7 @@ import com.santatecla.G1.book.Book;
 
 @Entity
 public class Author {
+	public interface NameView{}
 	public interface BasicView{}
 	public interface BooksView{}
 	
@@ -26,7 +27,7 @@ public class Author {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@JsonView(BasicView.class)
+	@JsonView(NameView.class)
 	private String name;
 	
 	@JsonView(BasicView.class)

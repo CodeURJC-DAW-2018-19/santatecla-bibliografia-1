@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,29 +24,36 @@ import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.theme.Theme;
+import com.santatecla.G1.user.UserComponent;
 
 @RestController
 @RequestMapping("/api")
 public class AuthorRestController {
-	interface AuthorDetailView extends Author.BasicView, Author.BooksView, Book.BasicView, Book.ThemeView, Theme.BasicView, Book.CitationsView, Citation.BasicView {
-	}
-
+	interface AuthorDetailView extends Author.NameView, Author.BasicView, Author.BooksView, Book.BasicView, Book.ThemeView, Theme.BasicView, Book.CitationsView, Citation.BasicView {}
+	interface AuthorBasicView extends Author.NameView, Author.BasicView {}
+	@Autowired
+	private UserComponent userComponent;
+	
 	@Autowired
 	private AuthorService authorService;
 
 	@Autowired
 	private BookService bookService;
 
-	@JsonView(Author.BasicView.class)
-	@RequestMapping(value = "/author", method = GET)
-	public ResponseEntity<List<Author>> authors() {
-		return new ResponseEntity<>(authorService.findAll(), HttpStatus.OK);
-	}
-
-	@JsonView(Author.BasicView.class)
-	@RequestMapping(value = "/author-pageable", method = RequestMethod.GET)
-	public ResponseEntity<List<Author>> authorsPageable(Pageable page) {
-		return new ResponseEntity<>(authorService.findAll(page).getContent(), HttpStatus.OK);
+	@RequestMapping(value = "/authors", method = RequestMethod.GET)
+	public MappingJacksonValue authorsPageable(Pageable page) {
+		
+		List<Author> authors = authorService.findAll(page).getContent();
+		MappingJacksonValue result = new MappingJacksonValue(authors);
+		if(authors!=null) {
+			if(userComponent.isLoggedUser())
+				result.setSerializationView(AuthorDetailView.class);
+			else
+				result.setSerializationView(Author.NameView.class);
+			System.out.println(userComponent.isLoggedUser());
+			return result;
+		}
+		else return null;
 	}
 	
 	
@@ -76,17 +84,6 @@ public class AuthorRestController {
 			return new ResponseEntity<>(author, HttpStatus.CREATED);
 		} else
 			return new ResponseEntity<>(HttpStatus.IM_USED);
-	}
-
-	@JsonView(Author.BasicView.class)
-	@RequestMapping(value = "/author-name-pageable", method = RequestMethod.GET)
-	public ResponseEntity<List<String>> authorPageableGuest(Pageable page) {
-		List<Author> author = authorService.findAll(page).getContent();
-		List<String> authorName = new ArrayList<>();
-		for (Author a : author) {
-			authorName.add(a.getName());
-		}
-		return new ResponseEntity<>(authorName, HttpStatus.OK);
 	}
 
 	//@JsonSerialize(using = AuthorSerializer.class)//Esta mierda peta
