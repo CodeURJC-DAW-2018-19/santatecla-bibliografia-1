@@ -48,41 +48,7 @@
                             <authorColumn></authorColumn>
                         </div>
                         <div flex-gt-sm="33">
-                            <mat-card>
-                                <mat-card-title>
-                                    <div layout="row" layout-align="start center">
-                                        <span flex>Card title</span>
-                                        <span>
-                                            <button mat-icon-button matTooltip="Card settings" [mat-menu-trigger-for]="settings1">
-                                                <mat-icon>more_vert</mat-icon>
-                                            </button>
-                                            <mat-menu xPosition="before" #settings1="matMenu">
-                                                <button mat-menu-item (click)="openTemplate()">Settings</button>
-                                                <mat-divider></mat-divider>
-                                                <button mat-menu-item>Remove</button>
-                                            </mat-menu>
-                                        </span>
-                                    </div>
-                                </mat-card-title>
-                                <mat-divider></mat-divider>
-                                <div [style.height.px]="280" class="push-top-sm">
-                                    <ngx-charts-line-chart
-                                        [scheme]="{ domain: ['#4DD0E1', '#BA68C8', '#FF7043'] }"
-                                        [results]="times"
-                                        [gradient]="gradient"
-                                        [autoScale]="false"
-                                        [xAxis]="true"
-                                        [yAxis]="true"
-                                        [legend]="true"
-                                        [showXAxisLabel]="true"
-                                        [showYAxisLabel]="true"
-                                        [xAxisLabel]="xAxisLabel"
-                                        [yAxisLabel]="yAxisLabel"
-                                        [xAxisTickFormatting]="axisDate"
-                                    >
-                                    </ngx-charts-line-chart>
-                                </div>
-                            </mat-card>
+                            <bookColumn></bookColumn>
                         </div>
                         <div flex-gt-sm="33">
                             <mat-card>

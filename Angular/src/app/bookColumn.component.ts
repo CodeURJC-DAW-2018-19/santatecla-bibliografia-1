@@ -6,15 +6,14 @@ import { DatePipe } from '@angular/common';
 import { single, multi, pie, times } from './data';
 
 @Component({
-    selector: 'authorColumn',
-    templateUrl: './authorColumn.component.html',
+    selector: 'bookColumn',
+    templateUrl: './bookColumn.component.html',
     styleUrls: ['./app.component.css'],
     animations: [tdRotateAnimation],
 })
-export class AuthorColumnComponent {
+export class BookColumnComponent {
+    
    
-
-
 
 
 
