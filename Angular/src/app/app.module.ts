@@ -56,6 +56,7 @@ import {
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AuthorColumnComponent } from './authorColumn.component';
 
 @NgModule({
     imports: [
@@ -106,7 +107,7 @@ import { DomSanitizer } from '@angular/platform-browser';
         /** Additional **/
         NgxChartsModule,
     ],
-    declarations: [AppComponent, HelloComponent, HeaderComponent],
+    declarations: [AppComponent, HelloComponent, HeaderComponent,AuthorColumnComponent],
     bootstrap: [AppComponent],
 })
 export class AppModule {

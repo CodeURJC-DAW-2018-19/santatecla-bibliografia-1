@@ -6,24 +6,15 @@ import { DatePipe } from '@angular/common';
 import { single, multi, pie, times } from './data';
 
 @Component({
-    selector: 'my-app',
-    templateUrl: './app.component.html',
+    selector: 'authorColumn',
+    templateUrl: './authorColumn.component.html',
     styleUrls: ['./app.component.css'],
     animations: [tdRotateAnimation],
 })
-export class AppComponent implements AfterViewInit {
-    @ViewChild('manageList') manageList: TdLayoutManageListComponent;
-    @ViewChild('dialogContent') template: TemplateRef<any>;
-
-    name = 'UI Platform';
-
-    pie: any[];
-    single: any[];
-    multi: any[];
-    times: any[];
-
+export class AuthorColumnComponent {
+    
     miniNav: boolean = false;
-
+    
     // Theme toggle
     get activeTheme(): string {
         return localStorage.getItem('theme');
@@ -32,22 +23,9 @@ export class AppComponent implements AfterViewInit {
         localStorage.setItem('theme', theme);
     }
 
-    // Timeframe
-    dateFrom: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);
-    dateTo: Date = new Date(new Date().getTime() - 1 * 60 * 60 * 24 * 1000);
-
-    // Dialog
-    config = {
-        width: '50%',
-        height: '50%',
-    };
-
-
-
     constructor(
         public media: TdMediaService,
         public dialog: MatDialog,
-        private _changeDetectorRef: ChangeDetectorRef,
         private _iconRegistry: MatIconRegistry,
         private _domSanitizer: DomSanitizer,
     ) {
@@ -62,22 +40,6 @@ export class AppComponent implements AfterViewInit {
         Object.assign(this, { pie, single, multi, times });
     }
 
-    ngAfterViewInit(): void {
-        // broadcast to all listener observables when loading the page
-        this.media.broadcast();
-        this._changeDetectorRef.detectChanges();
-    }
 
-    openTemplate() {
-        this.dialog.open(this.template, this.config);
-    }
 
-    // NGX Charts Axis
-    axisDigits(val: any): any {
-        return new TdDigitsPipe().transform(val);
-    }
-
-    axisDate(val: string): string {
-        return new DatePipe('en').transform(val, 'hh a');
-    }
 }

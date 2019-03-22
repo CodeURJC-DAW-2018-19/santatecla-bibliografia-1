@@ -6,107 +6,46 @@
     <td-layout-nav
         [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 'Bibliografía' : ''"
         logo="assets:covalent"
-        navigationRoute="/"
-    >
-       <div td-toolbar-content layout="row" layout-align="start center" flex> 
-               
-               <header></header>
-        </div>
-        <td-layout-manage-list
-            #manageList
-            [opened]="media.registerQuery('gt-sm') | async"
-            [mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'over'"
-            [sidenavWidth]="!miniNav ? '257px' : '64px'"
-        >
-            <mat-sidenav-container flex>
-                <!--Menu Setting-->
-                <mat-sidenav #sidenav align="end">
-                    <div layout="column" layout-fill>
-                        <mat-toolbar>Settings</mat-toolbar>
-                        <div flex class="mat-content"></div>
-                    </div>
-                </mat-sidenav>
-
-                <td-layout-nav color="none">
-                    <div td-toolbar-content flex layout="row" layout-align="start center">
-                        <button mat-icon-button tdLayoutManageListToggle>
-                            <mat-icon>menu</mat-icon>
-                        </button>
-                        <span hide-xs>Dashboard 1</span>
-                        <span flex></span>
-                        <span layout="row" class="push-left-sm push-right mat-body-1">
-                            <mat-form-field floatPlaceholder="never" flex>
-                                <input
+        navigationRoute="/">
+        <div td-toolbar-content layout="row" layout-align="end" flex> 
+            <header></header>
+        </div>        
+        <td-layout-nav color="none">
+                <!-- Se borrará-->
+                <div td-toolbar-content flex layout="row" layout-align="start center">
+                    <span hide-xs>Dashboard 1</span>
+                    <span flex></span>
+                    <span layout="row" class="push-left-sm push-right mat-body-1">
+                        <mat-form-field floatPlaceholder="never" flex>
+                            <input
                                     matInput
                                     [max]="maxFromDate"
                                     readonly
                                     [(ngModel)]="dateFrom"
                                     [matDatepicker]="pickerFrom"
-                                />
-                                <mat-datepicker-toggle
+                            />
+                            <mat-datepicker-toggle
                                     matSuffix
                                     matTooltip="Start date"
                                     [for]="pickerFrom"
-                                ></mat-datepicker-toggle>
-                                <mat-datepicker #pickerFrom [startAt]="dateFrom"></mat-datepicker>
-                            </mat-form-field>
-                        </span>
-                        <span hide-xs class="mat-body-2 push-right"> to </span>
-                        <span layout="row" class="mat-body-1">
-                            <mat-form-field floatPlaceholder="never" flex>
-                                <input matInput [max]="maxToDate" readonly [(ngModel)]="dateTo" [matDatepicker]="pickerTo" />
+                            ></mat-datepicker-toggle>
+                            <mat-datepicker #pickerFrom [startAt]="dateFrom"></mat-datepicker>
+                        </mat-form-field>
+                    </span>
+                    <span hide-xs class="mat-body-2 push-right"> to </span>
+                    <span layout="row" class="mat-body-1">
+                        <mat-form-field floatPlaceholder="never" flex>
+                            <input matInput [max]="maxToDate" readonly [(ngModel)]="dateTo" [matDatepicker]="pickerTo" />
                                 <mat-datepicker-toggle matSuffix matTooltip="End date" [for]="pickerTo"></mat-datepicker-toggle>
                                 <mat-datepicker #pickerTo [startAt]="dateTo"></mat-datepicker>
                             </mat-form-field>
-                        </span>
-                        <button
-                            matTooltip="Dashboard Settings"
-                            matTooltipPosition="before"
-                            type="button"
-                            mat-icon-button
-                            (click)="sidenav.open()"
-                        >
-                            <mat-icon>settings</mat-icon>
-                        </button>
-                    </div>
-                    <!--Columns -->
-                    <div flex layout-gt-sm="row" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
+                    </span>
+                </div>
+                <!--/Se borrará-->
+                <!--Columns -->
+                <div flex layout-gt-sm="row" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
                         <div flex-gt-sm="33">
-                            <mat-card>
-                                <mat-card-title>
-                                    <div layout="row" layout-align="start center">
-                                        <span flex>Card title</span>
-                                        <span>
-                                            <button mat-icon-button matTooltip="Card settings" [mat-menu-trigger-for]="settings1">
-                                                <mat-icon>more_vert</mat-icon>
-                                            </button>
-                                            <mat-menu xPosition="before" #settings1="matMenu">
-                                                <button mat-menu-item (click)="openTemplate()">Settings</button>
-                                                <mat-divider></mat-divider>
-                                                <button mat-menu-item>Remove</button>
-                                            </mat-menu>
-                                        </span>
-                                    </div>
-                                </mat-card-title>
-                                <mat-divider></mat-divider>
-                                <div [style.height.px]="280" class="push-top-sm">
-                                    <ngx-charts-line-chart
-                                        [scheme]="{ domain: ['#4DD0E1', '#BA68C8', '#FF7043'] }"
-                                        [results]="times"
-                                        [gradient]="gradient"
-                                        [autoScale]="false"
-                                        [xAxis]="true"
-                                        [yAxis]="true"
-                                        [legend]="true"
-                                        [showXAxisLabel]="true"
-                                        [showYAxisLabel]="true"
-                                        [xAxisLabel]="xAxisLabel"
-                                        [yAxisLabel]="yAxisLabel"
-                                        [xAxisTickFormatting]="axisDate"
-                                    >
-                                    </ngx-charts-line-chart>
-                                </div>
-                            </mat-card>
+                            <authorColumn></authorColumn>
                         </div>
                         <div flex-gt-sm="33">
                             <mat-card>
@@ -182,11 +121,9 @@
                                 </div>
                             </mat-card>
                         </div>
-                    </div>
-                    <!--/Columns-->
-                </td-layout-nav>
-            </mat-sidenav-container>
-        </td-layout-manage-list>
+                </div>
+                <!--/Columns-->
+        </td-layout-nav>
         <td-layout-footer>
             <div layout="row" layout-align="start center">
                 <span class="mat-caption"
