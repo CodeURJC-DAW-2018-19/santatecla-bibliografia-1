@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
+import { HeaderComponent} from './header.component';
 
 import {
     MatButtonModule,
@@ -105,7 +106,7 @@ import { DomSanitizer } from '@angular/platform-browser';
         /** Additional **/
         NgxChartsModule,
     ],
-    declarations: [AppComponent, HelloComponent],
+    declarations: [AppComponent, HelloComponent, HeaderComponent],
     bootstrap: [AppComponent],
 })
 export class AppModule {
