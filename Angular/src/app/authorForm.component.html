@@ -1,3 +1,4 @@
+
 <style>
     mat-form-field {
         width: 90%;
@@ -9,57 +10,74 @@
         <mat-card>
             <mat-card-title>
                 <div >
-                    <span hide-xs>Dashboard 1</span>
+                    <span hide-xs>Autor</span>
                 </div>
             </mat-card-title>
             <mat-divider></mat-divider>
-                <form flex >
-                    <div flex layout-gt-sm="row" layout-align="center center">
-                        <div flex-gt-sm="40">
-                            <mat-form-field fxFlex>
-                                <input type="date" matInput  placeholder="Favorite food" >
-                            </mat-form-field>
-                        </div> 
-                        <div flex-gt-sm="40">
-                            <mat-form-field >
-                                <input type="date" matInput placeholder="Leave a comment">
-                            </mat-form-field>
-                        </div>
+            <div flex layout-gt-sm="row" layout-align="center center">
+                    <div flex-gt-sm="60">
+                        <form flex >
+                            <div flex layout-gt-sm="row" layout-align="center start">
+                                <div flex-gt-sm="80">
+                                    <mat-form-field >
+                                        <input type="text" matInput  placeholder="Nombre" >
+                                    </mat-form-field>
+                                </div>
+                            </div> 
+                            <div flex layout-gt-sm="row" layout-align="center start">
+                                <div flex-gt-sm="80">
+                                    <mat-form-field >
+                                        <input type="text" matInput  placeholder="URL Imagen" >
+                                    </mat-form-field>
+                                </div>
+                            </div> 
+                            <div flex layout-gt-sm="row" layout-align="center start">
+                                <div flex-gt-sm="40">
+                                    <mat-form-field >
+                                        <input matInput [max]="maxToDate" placeholder="Fecha de nacimiento" [(ngModel)]="dateBirth" [matDatepicker]="pickerBirth" />
+                                        <mat-datepicker-toggle matSuffix matTooltip="Fecha de nacimiento" [for]="pickerBirth"></mat-datepicker-toggle>
+                                        <mat-datepicker #pickerBirth [startAt]="dateBirth"></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div flex-gt-sm="40">
+                                    <mat-form-field >
+                                        <input matInput [max]="maxToDate" placeholder="Fecha de defunción" [(ngModel)]="dateDeath" [matDatepicker]="pickerDeath" />
+                                        <mat-datepicker-toggle matSuffix matTooltip="Fecha de defunción" [for]="pickerDeath"></mat-datepicker-toggle>
+                                        <mat-datepicker #pickerDeath [startAt]="dateDeath"></mat-datepicker>
+                                    </mat-form-field>
+                                </div> 
+                            </div>
+                            <div flex layout-gt-sm="row" layout-align="center start">
+                                <div flex-gt-sm="80">
+                                    <mat-form-field >
+                                        <input type="text" matInput  placeholder="Lugar de nacimiento" >
+                                    </mat-form-field>
+                                </div>
+                            </div> 
+                            <div flex layout-gt-sm="row" layout-align="center start">
+                                <div flex-gt-sm="80">
+                                    <mat-form-field >
+                                        <input type="text" matInput  placeholder="URL Mapa" >
+                                    </mat-form-field>
+                                </div>
+                            </div> 
+                            <div flex layout-gt-sm="row" layout-align="center start">
+                                <div flex-gt-sm="30">
+                                    <mat-checkbox>Libro 1</mat-checkbox>
+                                    <mat-checkbox>Libro 2</mat-checkbox>
+                                </div>
+                            </div> 
+                        </form> 
                     </div>
-                    <div flex layout-gt-sm="row" layout-align="center center">
-                        <div flex-gt-sm="80">
-                            <mat-form-field fxFlex>
-                                <input type="text" matInput  placeholder="Favorite food" >
-                            </mat-form-field>
-                        </div>
-                    </div> 
-                </form>
- 
-                <!--<span layout="row" class="push-left-sm push-right mat-body-1">
-                    <mat-form-field floatPlaceholder="never" flex>
-                        <input
-                                matInput
-                                [max]="maxFromDate"
-                                readonly
-                                [(ngModel)]="dateFrom"
-                                [matDatepicker]="pickerFrom"
-                        />
-                        <mat-datepicker-toggle
-                                matSuffix
-                                matTooltip="Start date"
-                                [for]="pickerFrom"
-                        ></mat-datepicker-toggle>
-                        <mat-datepicker #pickerFrom [startAt]="dateFrom"></mat-datepicker>
-                    </mat-form-field>
-                </span>
-                <span hide-xs class="mat-body-2 push-right"> to </span>
-                <span layout="row" class="mat-body-1">
-                    <mat-form-field floatPlaceholder="never" flex>
-                        <input matInput [max]="maxToDate" readonly [(ngModel)]="dateTo" [matDatepicker]="pickerTo" />
-                            <mat-datepicker-toggle matSuffix matTooltip="End date" [for]="pickerTo"></mat-datepicker-toggle>
-                            <mat-datepicker #pickerTo [startAt]="dateTo"></mat-datepicker>
-                        </mat-form-field>
-                </span>-->
-            
+                    <div flex-gt-sm="40">
+                            
+                        <mat-radio-group>
+                            <mat-radio-button value="1">Option 1</mat-radio-button>
+                            <mat-radio-button value="2">Option 2</mat-radio-button>
+                        </mat-radio-group>
+                        <!--Image and Map-->
+                    </div>
+            </div>
+           
         </mat-card>
 </div>

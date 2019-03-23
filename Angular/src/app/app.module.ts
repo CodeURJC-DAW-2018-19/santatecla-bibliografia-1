@@ -36,6 +36,7 @@ import {
     MatNativeDateModule,
     MatSliderModule,
     MatAutocompleteModule,
+    MatCheckboxModule,
 } from '@angular/material';
 
 import {
@@ -73,6 +74,7 @@ import { AuthorFormComponent } from './authorForm.component';
         MatListModule,
         MatIconModule,
         MatCardModule,
+        MatCheckboxModule,
         MatMenuModule,
         MatInputModule,
         MatSelectModule,
