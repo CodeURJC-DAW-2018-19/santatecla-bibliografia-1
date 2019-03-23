@@ -4,46 +4,19 @@
     [class]="activeTheme"
 >
     <td-layout-nav
-        [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 'Bibliografía' : ''"
+        [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 'Citas Bibliográficas' : ''"
         logo="assets:covalent"
         navigationRoute="/">
         <div td-toolbar-content layout="row" layout-align="end" flex> 
             <header></header>
         </div>        
-        <td-layout-nav color="none">
+            <div flex layout-gt-sm="row" layout-align="center center" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
                 <!-- Se borrará-->
-                <div td-toolbar-content flex layout="row" layout-align="start center">
-                    <span hide-xs>Dashboard 1</span>
-                    <span flex></span>
-                    <span layout="row" class="push-left-sm push-right mat-body-1">
-                        <mat-form-field floatPlaceholder="never" flex>
-                            <input
-                                    matInput
-                                    [max]="maxFromDate"
-                                    readonly
-                                    [(ngModel)]="dateFrom"
-                                    [matDatepicker]="pickerFrom"
-                            />
-                            <mat-datepicker-toggle
-                                    matSuffix
-                                    matTooltip="Start date"
-                                    [for]="pickerFrom"
-                            ></mat-datepicker-toggle>
-                            <mat-datepicker #pickerFrom [startAt]="dateFrom"></mat-datepicker>
-                        </mat-form-field>
-                    </span>
-                    <span hide-xs class="mat-body-2 push-right"> to </span>
-                    <span layout="row" class="mat-body-1">
-                        <mat-form-field floatPlaceholder="never" flex>
-                            <input matInput [max]="maxToDate" readonly [(ngModel)]="dateTo" [matDatepicker]="pickerTo" />
-                                <mat-datepicker-toggle matSuffix matTooltip="End date" [for]="pickerTo"></mat-datepicker-toggle>
-                                <mat-datepicker #pickerTo [startAt]="dateTo"></mat-datepicker>
-                            </mat-form-field>
-                    </span>
+                <div flex-gt-sm="80" >
+                    <authorForm></authorForm>
                 </div>
                 <!--/Se borrará-->
                 <!--Columns -->
-                <div flex layout-gt-sm="row" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
                         <div flex-gt-sm="33">
                             <authorColumn></authorColumn>
                         </div>
@@ -87,9 +60,9 @@
                                 </div>
                             </mat-card>
                         </div>
-                </div>
+            </div>
                 <!--/Columns-->
-        </td-layout-nav>
+        
         <td-layout-footer>
             <div layout="row" layout-align="start center">
                 <span class="mat-caption"

@@ -32,9 +32,7 @@ export class AppComponent implements AfterViewInit {
         localStorage.setItem('theme', theme);
     }
 
-    // Timeframe
-    dateFrom: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);
-    dateTo: Date = new Date(new Date().getTime() - 1 * 60 * 60 * 24 * 1000);
+    
 
     // Dialog
     config = {

@@ -1,0 +1,37 @@
+<div >
+        <mat-card>
+            <mat-card-title>
+                <div >
+                    <span hide-xs>Dashboard 1</span>
+                </div>
+            </mat-card-title>
+            <mat-divider></mat-divider>
+            <div flex layout-gt-sm="row"  layout-align="center center"tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
+                <span layout="row" class="push-left-sm push-right mat-body-1">
+                    <mat-form-field floatPlaceholder="never" flex>
+                        <input
+                                matInput
+                                [max]="maxFromDate"
+                                readonly
+                                [(ngModel)]="dateFrom"
+                                [matDatepicker]="pickerFrom"
+                        />
+                        <mat-datepicker-toggle
+                                matSuffix
+                                matTooltip="Start date"
+                                [for]="pickerFrom"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker #pickerFrom [startAt]="dateFrom"></mat-datepicker>
+                    </mat-form-field>
+                </span>
+                <span hide-xs class="mat-body-2 push-right"> to </span>
+                <span layout="row" class="mat-body-1">
+                    <mat-form-field floatPlaceholder="never" flex>
+                        <input matInput [max]="maxToDate" readonly [(ngModel)]="dateTo" [matDatepicker]="pickerTo" />
+                            <mat-datepicker-toggle matSuffix matTooltip="End date" [for]="pickerTo"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerTo [startAt]="dateTo"></mat-datepicker>
+                        </mat-form-field>
+                </span>
+            </div>
+        </mat-card>
+        </div>
