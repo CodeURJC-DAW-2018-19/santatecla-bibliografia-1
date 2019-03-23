@@ -1,3 +1,10 @@
+<style>
+    mat-form-field {
+        width: 90%;
+        margin-left:5px;
+}
+</style>
+
 <div >
         <mat-card>
             <mat-card-title>
@@ -6,8 +13,29 @@
                 </div>
             </mat-card-title>
             <mat-divider></mat-divider>
-            <div flex layout-gt-sm="row"  layout-align="center center"tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
-                <span layout="row" class="push-left-sm push-right mat-body-1">
+                <form flex >
+                    <div flex layout-gt-sm="row" layout-align="center center">
+                        <div flex-gt-sm="40">
+                            <mat-form-field fxFlex>
+                                <input type="date" matInput  placeholder="Favorite food" >
+                            </mat-form-field>
+                        </div> 
+                        <div flex-gt-sm="40">
+                            <mat-form-field >
+                                <input type="date" matInput placeholder="Leave a comment">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div flex layout-gt-sm="row" layout-align="center center">
+                        <div flex-gt-sm="80">
+                            <mat-form-field fxFlex>
+                                <input type="text" matInput  placeholder="Favorite food" >
+                            </mat-form-field>
+                        </div>
+                    </div> 
+                </form>
+ 
+                <!--<span layout="row" class="push-left-sm push-right mat-body-1">
                     <mat-form-field floatPlaceholder="never" flex>
                         <input
                                 matInput
@@ -31,7 +59,7 @@
                             <mat-datepicker-toggle matSuffix matTooltip="End date" [for]="pickerTo"></mat-datepicker-toggle>
                             <mat-datepicker #pickerTo [startAt]="dateTo"></mat-datepicker>
                         </mat-form-field>
-                </span>
-            </div>
+                </span>-->
+            
         </mat-card>
-        </div>
+</div>
