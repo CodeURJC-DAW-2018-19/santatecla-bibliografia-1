@@ -53,6 +53,7 @@ import {
     CovalentMenuModule,
     CovalentDataTableModule,
     CovalentMessageModule,
+    CovalentVirtualScrollModule,
 } from '@covalent/core';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -60,7 +61,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AuthorColumnComponent } from './authorColumn.component';
 import { BookColumnComponent } from './bookColumn.component';
 import { AuthorFormComponent } from './authorForm.component';
-import { BookFormComponent } from './bookForm.component.';
+import { BookFormComponent } from './bookForm.component';
+import { ThemeFormComponent } from './themeForm.component';
 
 @NgModule({
     imports: [
@@ -97,6 +99,7 @@ import { BookFormComponent } from './bookForm.component.';
         MatAutocompleteModule,
         /** Covalent Modules */
         CovalentCommonModule,
+        CovalentVirtualScrollModule,
         CovalentLayoutModule,
         CovalentMediaModule,
         CovalentExpansionPanelModule,
@@ -113,7 +116,7 @@ import { BookFormComponent } from './bookForm.component.';
         NgxChartsModule,
     ],
     declarations: [AppComponent, HelloComponent, HeaderComponent,AuthorColumnComponent,BookColumnComponent,
-    AuthorFormComponent,BookFormComponent],
+    AuthorFormComponent,BookFormComponent, ThemeFormComponent],
     bootstrap: [AppComponent],
 })
 export class AppModule {

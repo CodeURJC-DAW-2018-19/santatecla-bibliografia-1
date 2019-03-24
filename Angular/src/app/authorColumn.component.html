@@ -17,14 +17,24 @@
             </mat-card-title>
             <mat-divider></mat-divider>
             <div flex layout-gt-sm="row" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
-                    <div flex-gt-sm="50">
-                            <h1>Nombres de autores</h1>
-                            
-                    </div>
-                    <div flex-gt-sm="50">
-                            <h1>Nombres de autores</h1>
-                    </div>
-
+                <div flex-gt-sm="50">
+                    <mat-card>
+                        <mat-card-content>
+                            <h3>Card with Image First</h3>
+                            <p>100% Width Image</p>
+                            <img mat-card-image src="assets/theme.png">
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div flex-gt-sm="50">
+                    <mat-card>
+                        <mat-card-content>
+                            <h3>Card with Image First</h3>
+                            <p>100% Width Image</p>
+                            <img mat-card-image src="assets/theme.png">
+                        </mat-card-content>
+                    </mat-card>
+                </div>
             </div>
             <div flex layout-gt-sm="row">
                 <button matTooltip="Cargar Más" matTooltipPosition="before" type="button" mat-icon-button (click)="sidenav.open()">
