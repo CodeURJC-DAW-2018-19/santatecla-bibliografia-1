@@ -10,7 +10,7 @@
         <mat-card>
             <mat-card-title>
                 <div >
-                    <span hide-xs>Autor</span>
+                    <span hide-xs>Libro</span>
                 </div>
             </mat-card-title>
             <mat-divider></mat-divider>
@@ -20,65 +20,76 @@
                             <div flex layout-gt-sm="row" layout-align="center start">
                                 <div flex-gt-sm="80">
                                     <mat-form-field >
-                                        <input type="text" matInput  placeholder="Nombre" >
+                                        <input type="text" matInput  placeholder="Titulo Obra" >
                                     </mat-form-field>
                                 </div>
                             </div> 
                             <div flex layout-gt-sm="row" layout-align="center start">
                                 <div flex-gt-sm="80">
                                     <mat-form-field >
-                                        <input type="text" matInput  placeholder="URL Imagen" >
+                                        <input type="text" matInput  placeholder="URL Portada" >
                                     </mat-form-field>
                                 </div>
                             </div> 
                             <div flex layout-gt-sm="row" layout-align="center start">
-                                <div flex-gt-sm="40">
-                                    <mat-form-field >
-                                        <input matInput [max]="maxToDate" placeholder="Fecha de nacimiento" [(ngModel)]="dateBirth" [matDatepicker]="pickerBirth" />
-                                        <mat-datepicker-toggle matSuffix matTooltip="Fecha de nacimiento" [for]="pickerBirth"></mat-datepicker-toggle>
-                                        <mat-datepicker #pickerBirth [startAt]="dateBirth"></mat-datepicker>
-                                    </mat-form-field>
+                                <div flex-gt-sm="80">
+                                    <div flex-gt-sm="50">
+                                        <mat-form-field >
+                                            <input matInput [max]="maxToDate" placeholder="Fecha"[(ngModel)]="date" [matDatepicker]="pickerDate" />
+                                            <mat-datepicker-toggle matSuffix matTooltip="Fecha" [for]="pickerDate"></mat-datepicker-toggle>
+                                            <mat-datepicker #pickerDate [startAt]="date"></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
                                 </div>
-                                <div flex-gt-sm="40">
-                                    <mat-form-field >
-                                        <input matInput [max]="maxToDate" placeholder="Fecha de defunción" [(ngModel)]="dateDeath" [matDatepicker]="pickerDeath" />
-                                        <mat-datepicker-toggle matSuffix matTooltip="Fecha de defunción" [for]="pickerDeath"></mat-datepicker-toggle>
-                                        <mat-datepicker #pickerDeath [startAt]="dateDeath"></mat-datepicker>
-                                    </mat-form-field>
-                                </div> 
                             </div>
                             <div flex layout-gt-sm="row" layout-align="center start">
                                 <div flex-gt-sm="80">
                                     <mat-form-field >
-                                        <input type="text" matInput  placeholder="Lugar de nacimiento" >
+                                        <input type="text" matInput  placeholder="Nombre Editorial" >
                                     </mat-form-field>
                                 </div>
                             </div> 
                             <div flex layout-gt-sm="row" layout-align="center start">
                                 <div flex-gt-sm="80">
                                     <mat-form-field >
-                                        <input type="text" matInput  placeholder="URL Mapa" >
+                                        <input type="text" matInput  placeholder="URL Editorial" >
                                     </mat-form-field>
                                 </div>
-                            </div> 
+                            </div>
+                        <div flex layout-gt-sm="row" layout-align="center center"> 
                             <div flex layout-gt-sm="row" layout-align="center start">
                                 <div flex-gt-sm="30">
-                                    <mat-checkbox>Libro 1</mat-checkbox>
-                                    <mat-checkbox>Libro 2</mat-checkbox>
+                                    <mat-checkbox>Cita 1</mat-checkbox>
+                                    <mat-checkbox>Cita 2</mat-checkbox>
                                 </div>
                             </div>
+                        
                             <div flex layout-gt-sm="row" layout-align="center start">
+                                <div flex-gt-sm="30">
+                                        <mat-radio-group>
+                                            <mat-radio-button value="1">Tema 1</mat-radio-button>
+                                            <mat-radio-button value="2">Tema 2</mat-radio-button>
+                                        </mat-radio-group>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="push-top-lg"flex layout-gt-sm="row" layout-align="center start">
                                     <div flex-gt-sm="80">
                                             <button mat-button>Guardar</button>
                                             <button mat-button>Eliminar</button>
                                     </div>
-                                </div>
+                            </div>
+                        
                              
                         </form> 
                     </div>
                     <div flex-gt-sm="40">
-                        <img src="assets/theme.png">
-                        <iframe src="https://www.google.com/maps/place/Calama,+Regi%C3%B3n+de+Antofagasta,+Chile/@-22.4611894,-68.9584051,13z/data=!3m1!4b1!4m5!3m4!1s0x96ab978f95a58b0d:0xfe7a093627c72306!8m2!3d-22.4543923!4d-68.9293819" frameborder="0" style="border:0"></iframe>
+                        <div  flex-gt-sm="100">
+                            <img src="assets/theme.png">
+                        </div>
+                        <div class="push-top-xs"lex-gt-sm="100">
+                            <img src="assets/theme.png">
+                        </div>
                         <!--Image and Map-->
                     </div>
                     

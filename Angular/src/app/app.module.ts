@@ -60,6 +60,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AuthorColumnComponent } from './authorColumn.component';
 import { BookColumnComponent } from './bookColumn.component';
 import { AuthorFormComponent } from './authorForm.component';
+import { BookFormComponent } from './bookForm.component.';
 
 @NgModule({
     imports: [
@@ -112,7 +113,7 @@ import { AuthorFormComponent } from './authorForm.component';
         NgxChartsModule,
     ],
     declarations: [AppComponent, HelloComponent, HeaderComponent,AuthorColumnComponent,BookColumnComponent,
-    AuthorFormComponent],
+    AuthorFormComponent,BookFormComponent],
     bootstrap: [AppComponent],
 })
 export class AppModule {
