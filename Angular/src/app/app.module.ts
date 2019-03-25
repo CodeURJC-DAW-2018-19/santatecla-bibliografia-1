@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
 import { HeaderComponent} from './header.component';
 
+
 import {
     MatButtonModule,
     MatListModule,
@@ -63,7 +64,7 @@ import { BookColumnComponent } from './bookColumn.component';
 import { AuthorFormComponent } from './authorForm.component';
 import { BookFormComponent } from './bookForm.component';
 import { ThemeFormComponent } from './themeForm.component';
-import { Tab } from './tabs/tab';
+import { TabsComponent } from './tabs/tabs.component';
 
 @NgModule({
     imports: [
@@ -117,7 +118,7 @@ import { Tab } from './tabs/tab';
         NgxChartsModule,
     ],
     declarations: [AppComponent, HelloComponent, HeaderComponent,AuthorColumnComponent,BookColumnComponent,
-    AuthorFormComponent,BookFormComponent, ThemeFormComponent],
+    AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent],
     bootstrap: [AppComponent],
 })
 export class AppModule {
