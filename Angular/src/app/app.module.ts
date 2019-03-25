@@ -63,6 +63,7 @@ import { BookColumnComponent } from './bookColumn.component';
 import { AuthorFormComponent } from './authorForm.component';
 import { BookFormComponent } from './bookForm.component';
 import { ThemeFormComponent } from './themeForm.component';
+import { Tab } from './tabs/tab';
 
 @NgModule({
     imports: [
