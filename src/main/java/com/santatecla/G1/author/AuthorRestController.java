@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -72,7 +73,7 @@ public class AuthorRestController {
 	
 	
 	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/authors2", method = POST)
+	@RequestMapping(value = "/authors", method = RequestMethod.POST)
 	public ResponseEntity<Author> author(@RequestBody Author author) {
 		if (authorService.findByNameIgnoreCase(author.getName()) == null) {
 			if (author.getBooks() != null) {
@@ -94,7 +95,7 @@ public class AuthorRestController {
 	}
 
 	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/authors2/{id}", method = PATCH)
+	@RequestMapping(value = "/authors/{id}", method = PATCH)
 	public ResponseEntity<Author> updateAuthor(@RequestBody Author newAuthor, @PathVariable long id) {
 		Author oldAuthor = authorService.findById(id);
 		if (oldAuthor != null) {
@@ -117,7 +118,6 @@ public class AuthorRestController {
 				return new ResponseEntity<>(author, HttpStatus.OK);
 			}
 			else {
-				System.out.println("sdfdfsda");
 				return new ResponseEntity<>(HttpStatus.IM_USED);
 			}
 			
@@ -132,33 +132,18 @@ public class AuthorRestController {
 	
 	// ----------------------------- METHODS WITH UPLOAD IMAGES -------------------------------------------------
 	
-	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/authors", method = POST)
-	public Author author(Model model, Author author, MultipartFile file) {
-		if ((file != null) && (!file.isEmpty())) {
-			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
-			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
-			author.setImgId(imgId);
-		} else
-			author.setImgId(-1);
-		authorService.save(author);
-		model.addAttribute("text", "Autor creado correctamente");
-		System.out.println(author.toString());
-		return author;
-	}
+	
 	
 	@JsonView(AuthorDetailView.class)
-	@RequestMapping(value = "/authors/{id}", method = PATCH)
-	public ResponseEntity<Author> updateAuthor(Model model, Author newAuthor, @PathVariable long id, MultipartFile file) {
+	@RequestMapping(value = "/authors/{id}/image", method = PATCH)
+	public ResponseEntity<Author> updateAuthorImage(Model model, @PathVariable long id, @RequestParam(value="file")MultipartFile file) {
 		Author oldAuthor = authorService.findById(id);
 		if (oldAuthor != null) {
 			if ((file != null) && (!file.isEmpty())) {
 				int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
 				com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
 				oldAuthor.setImgId(imgId);
-			} else
-				oldAuthor.setImgId(-1);
-			oldAuthor.update(newAuthor);
+			}
 			authorService.save(oldAuthor);
 			return new ResponseEntity<>(oldAuthor, HttpStatus.OK);
 		} else {

@@ -49,6 +49,7 @@ public class BooksRestController {
 	@Autowired
 	private ThemeService themeService;
 
+	//Get the book/s with pagination or not, to logged or not logged users.
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
 	public MappingJacksonValue books(Pageable page, String title) {
 		List<Book> books;
@@ -69,10 +70,13 @@ public class BooksRestController {
 		else return null;
 	}
 	
+	//Create a book without a img
 	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "/book2", method = POST)
+	@RequestMapping(value = "/books", method = POST)
 	public ResponseEntity<Book> book(@RequestBody Book book) {
+		//If the book doesn't exists, we create it
 		if (bookService.findByTitleIgnoreCase(book.getTitle()) == null) {
+			//Trying to associate an author to the book
 			try {
 				bookService.save(book);
 				Author author = new Author();
@@ -86,7 +90,7 @@ public class BooksRestController {
 			} catch (Exception e) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-
+			//Trying  to associate a theme to the book
 			try {
 				bookService.save(book);
 				Theme theme = new Theme();
@@ -100,6 +104,7 @@ public class BooksRestController {
 			} catch (Exception e) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
+			//Trying to associte the citations to the boook.
 			try {
 				ArrayList<Citation> citations = new ArrayList<>();
 				if (book.getCitations() != null) {
@@ -118,9 +123,9 @@ public class BooksRestController {
 			return new ResponseEntity<>(HttpStatus.IM_USED);
 
 	}
-
+	// Get the book by the id
 	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "/book/{id}", method = GET)
+	@RequestMapping(value = "/books/{id}", method = GET)
 	public ResponseEntity<Book> getBook(@PathVariable long id) {
 		Book book = bookService.findOne(id);
 		if (book != null) {
@@ -128,9 +133,9 @@ public class BooksRestController {
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-
+	// Delete the book by the id
 	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "/book/{id}", method = DELETE)
+	@RequestMapping(value = "/books/{id}", method = DELETE)
 	public ResponseEntity<Book> deleteAuthor(@PathVariable long id) {
 		Book book = bookService.findOne(id);
 		if (book != null) {
@@ -139,9 +144,10 @@ public class BooksRestController {
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-
+	
+	//Update the book by id.
 	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "book2/{id}", method = PATCH)
+	@RequestMapping(value = "books/{id}", method = PATCH)
 	public ResponseEntity<Book> updateBook2(@RequestBody Book newBook, @PathVariable long id) {
 		Book oldBook = bookService.findOne(id);
 		if (oldBook != null) {
@@ -172,30 +178,14 @@ public class BooksRestController {
 
 	// ----------------------------- METHODS WITH UPLOAD IMAGES
 	// -------------------------------------------------
-
+	
 	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "book/{id}", method = PATCH)
+	@RequestMapping(value = "books/{id}/image", method = PATCH)
 	public ResponseEntity<Book> updateBook(Model model, Book newBook, @PathVariable long id,
 			MultipartFile file, Long authorId, Long themeId) {
 		Book oldBook = bookService.findOne(id);
 		if (oldBook != null) {
 			oldBook.update(newBook);
-			if (authorId != null) {
-				Author author = authorService.findById(authorId);
-				if (author != null) {
-					oldBook.setAuthor(author);
-					author.addBook(oldBook);
-					authorService.save(author);
-				}
-			}
-			if (themeId != null) {
-				Theme theme = themeService.findById(themeId);
-				if (theme != null) {
-					oldBook.setTheme(theme);
-					theme.addBook(oldBook);
-					themeService.save(theme);
-				}
-			}
 			if ((file != null) && (!file.isEmpty())) {
 				int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
 				oldBook.setImgId(imgId);
@@ -207,36 +197,8 @@ public class BooksRestController {
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-
-	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "/book", method = POST)
-	public Book saveBook(Model model, Book book, MultipartFile file, Long authorId, Long themeId) {
-		bookService.save(book);
-		if (authorId != null) {
-			Author author = authorService.findById(authorId);
-			if (author != null) {
-				book.setAuthor(author);
-				author.addBook(book);
-				authorService.save(author);
-			}
-		}
-		if (themeId != null) {
-			Theme theme = themeService.findById(themeId);
-			if (theme != null) {
-				book.setTheme(theme);
-				theme.addBook(book);
-				themeService.save(theme);
-			}
-		}
-		if ((file != null) && (!file.isEmpty())) {
-			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
-			book.setImgId(imgId);
-			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
-		} else
-			book.setImgId(-2);
-		bookService.save(book);
-		model.addAttribute("text", "Book Created");
-		return book;
-	}
+	
+	
+	
 
 }
