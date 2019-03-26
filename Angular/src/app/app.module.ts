@@ -63,6 +63,7 @@ import { BookColumnComponent } from './bookColumn.component';
 import { AuthorFormComponent } from './authorForm.component';
 import { BookFormComponent } from './bookForm.component';
 import { ThemeFormComponent } from './themeForm.component';
+import {routing} from './app.routing';
 
 @NgModule({
     imports: [
@@ -114,6 +115,7 @@ import { ThemeFormComponent } from './themeForm.component';
         CovalentMessageModule,
         /** Additional **/
         NgxChartsModule,
+        routing,
     ],
     declarations: [AppComponent, HelloComponent, HeaderComponent,AuthorColumnComponent,BookColumnComponent,
     AuthorFormComponent,BookFormComponent, ThemeFormComponent],

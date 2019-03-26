@@ -1,5 +1,6 @@
 <div >
         <mat-card>
+            
             <mat-card-title>
                 <div layout="row" layout-align="start center">
                     <span flex>Columna de libros</span>
@@ -36,9 +37,12 @@
                         </mat-card>
                     </div>
             </div>
-            <div flex layout-gt-sm="row">
+            <div flex layout-gt-sm="row" layout-align="start center">
                 <button matTooltip="Cargar Más" matTooltipPosition="before" type="button" mat-icon-button (click)="sidenav.open()">
                         <mat-icon>expand_more</mat-icon>
+                </button>
+                <button mat-raised-button class="push-left-md"  (click)="newBook()">
+                    <mat-icon>add</mat-icon> New
                 </button>
                 <span flex *ngIf="!searchBox.searchVisible"></span>
                 <td-search-box
