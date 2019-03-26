@@ -1,6 +1,9 @@
 <div class style="height:50px">
   <mat-tab-group>
-    <mat-tab label="Ejemplo1"></mat-tab>
-    <mat-tab label="Ejemplo2"></mat-tab>
+    <mat-tab label="Inicio"></mat-tab>
+    <div *ngFor="let tab of nTabs">
+      <mat-tab label={{tab}}></mat-tab>
+    </div>
   </mat-tab-group>
 </div>
+  
