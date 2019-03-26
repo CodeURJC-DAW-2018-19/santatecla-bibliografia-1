@@ -12,7 +12,7 @@ export class TabsComponent implements OnInit {
   addTabs(){
     this.nTabs.push("Tab1");
     this.nTabs.push("Tab2");
-    this.nTabs.push("Tab2");
+    this.nTabs.push("Tab3");
     this.nTabs.push("Tab4");
   }
 
