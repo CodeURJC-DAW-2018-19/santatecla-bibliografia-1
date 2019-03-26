@@ -48,7 +48,7 @@ public class Book {
 	@JsonView(BasicView.class)
 	private String urlImgEdit;
 	
-	@JsonView(BasicView.class)
+	@JsonView(NameView.class)
 	private int imgId;
 	
 	/********************************************

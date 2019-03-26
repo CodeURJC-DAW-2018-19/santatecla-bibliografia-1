@@ -57,7 +57,7 @@ public class CitationRestController {
 	}
 
 	@JsonView(CitationDetailView.class)
-	@RequestMapping(value = "/citation2", method = POST)
+	@RequestMapping(value = "/citations", method = POST)
 	public ResponseEntity<Citation> citation(@RequestBody Citation citation) {
 		if (citationService.findByTextIgnoreCase(citation.getText()) == null) {
 			Book book = new Book();
@@ -73,7 +73,7 @@ public class CitationRestController {
 	}
 
 	@JsonView(CitationDetailView.class)
-	@RequestMapping(value = "/citation/{id}", method = GET)
+	@RequestMapping(value = "/citations/{id}", method = GET)
 	public ResponseEntity<Citation> citation(@PathVariable long id) {
 		Citation citation = citationService.findById(id);
 		if (citation != null) {
@@ -83,7 +83,7 @@ public class CitationRestController {
 	}
 
 	@JsonView(CitationDetailView.class)
-	@RequestMapping(value = "/citation/{id}", method = DELETE)
+	@RequestMapping(value = "/citations/{id}", method = DELETE)
 	public ResponseEntity<Citation> deleteCitation(@PathVariable long id) {
 		Citation citation = citationService.findById(id);
 		if (citation != null) {
@@ -94,7 +94,7 @@ public class CitationRestController {
 	}
 
 	@JsonView(CitationDetailView.class)
-	@RequestMapping(value = "/citation2/{id}", method = PATCH)
+	@RequestMapping(value = "/citations/{id}", method = PATCH)
 	public ResponseEntity<Citation> updateCitation2(@RequestBody Citation newCitation, @PathVariable long id) {
 		Citation oldCitation = citationService.findById(id);
 		if (oldCitation != null) {

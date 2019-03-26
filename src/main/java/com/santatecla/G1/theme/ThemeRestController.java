@@ -60,7 +60,7 @@ public class ThemeRestController {
 	}
 
 	@JsonView(ThemeDetailView.class)
-	@RequestMapping(value = "/theme2", method = POST)
+	@RequestMapping(value = "/themes", method = POST)
 	public ResponseEntity<Theme> theme(@RequestBody Theme theme) {
 		if (themeService.findByNameIgnoreCase(theme.getName()) == null) {
 			if (theme.getBook() != null) {
@@ -87,7 +87,7 @@ public class ThemeRestController {
 	}
 
 	@JsonView(ThemeDetailView.class)
-	@RequestMapping(value = "/theme/{id}", method = GET)
+	@RequestMapping(value = "/themes/{id}", method = GET)
 	public ResponseEntity<Theme> theme(@PathVariable long id) {
 		Theme theme = themeService.findById(id);
 		if (theme != null) {
@@ -108,7 +108,7 @@ public class ThemeRestController {
 	}
 
 	@JsonView(ThemeDetailView.class)
-	@RequestMapping(value = "/theme2/{id}", method = PATCH)
+	@RequestMapping(value = "/themes/{id}", method = PATCH)
 	public ResponseEntity<Theme> updateTheme(@RequestBody Theme newTheme, @PathVariable long id) {
 		Theme oldTheme = themeService.findById(id);
 		if (oldTheme != null) {
@@ -121,7 +121,7 @@ public class ThemeRestController {
 	}
 
 	@JsonView(ThemeDetailView.class)
-	@RequestMapping(value = "/theme/{id}", method = DELETE)
+	@RequestMapping(value = "/themes/{id}", method = DELETE)
 	public ResponseEntity<Theme> deleteTheme(@PathVariable long id) {
 		Theme theme = themeService.findById(id);
 		if (theme != null) {
