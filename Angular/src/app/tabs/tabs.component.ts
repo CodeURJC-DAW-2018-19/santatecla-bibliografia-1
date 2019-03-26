@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-
+import { Tab } from "./tab";
 
 @Component({
   selector: 'tabs',
@@ -7,13 +7,14 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['tabs.component.css'],
 })
 export class TabsComponent implements OnInit {
-  private nTabs: string[] = [];
+  private nTabs: Tab[] = [];
   
+
   addTabs(){
-    this.nTabs.push("Tab1");
-    this.nTabs.push("Tab2");
-    this.nTabs.push("Tab3");
-    this.nTabs.push("Tab4");
+    this.nTabs.push(new Tab("Tab1", "fdsfs"));
+    this.nTabs.push(new Tab("Tab2", "fdsfs"));
+    this.nTabs.push(new Tab("Tab3", "fdsfs"));
+    this.nTabs.push(new Tab("Tab4", "fdsfs"));
   }
 
   ngOnInit() {
