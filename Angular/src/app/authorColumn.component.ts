@@ -2,8 +2,7 @@ import { Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef } f
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
-import { DatePipe } from '@angular/common';
-import { single, multi, pie, times } from './data';
+import {ActivatedRoute,Router} from '@angular/router'
 
 @Component({
     selector: 'authorColumn',
@@ -13,7 +12,14 @@ import { single, multi, pie, times } from './data';
 })
 export class AuthorColumnComponent {
    
-
+    constructor(
+        private router: Router,
+        activatedRoute: ActivatedRoute,
+    ){}
+    
+    newAuthor() {
+        this.router.navigate(['/author']);
+    }
 
 
 
