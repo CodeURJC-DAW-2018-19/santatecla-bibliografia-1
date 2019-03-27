@@ -5,6 +5,7 @@ import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
 import { DatePipe } from '@angular/common';
 import { single, multi, pie, times } from '../histogram/data';
+import { Author, AuthorService } from './author.service';
 
 @Component({
     selector: 'authorForm',
