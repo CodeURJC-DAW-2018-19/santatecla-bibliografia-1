@@ -23,8 +23,8 @@ export class AuthorColumnComponent implements OnInit{
 
     ngOnInit() {
         this.service.getAuthors().subscribe(
-          authors => this.authors = authors,
-          error => console.log(error)
+           authors => this.authors = authors,
+           error => console.log(error)
         );
     }
     
