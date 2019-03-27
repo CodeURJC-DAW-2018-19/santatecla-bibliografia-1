@@ -4,10 +4,10 @@ import { RouterModule } from '@angular/router';
 import { BookDetailComponent } from './book-detail.component';
 import { BookFormComponent } from './book-form.component';*/
 
-import {BookFormComponent} from './bookForm.component'
-import {AuthorFormComponent} from './authorForm.component'
+import {BookFormComponent} from './book/bookForm.component'
+import {AuthorFormComponent} from './author/authorForm.component'
 import { AppComponent } from './app.component';
-import { ThemeFormComponent } from './themeForm.component';
+import { ThemeFormComponent } from './theme/themeForm.component';
 
 const appRoutes = [
   /*{ path: 'books', component: BookListComponent, useAsDefault: true },

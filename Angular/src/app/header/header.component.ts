@@ -3,12 +3,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
 import { DatePipe } from '@angular/common';
-import { single, multi, pie, times } from './data';
+import { single, multi, pie, times } from '../histogram/data';
 
 @Component({
     selector: 'header',
     templateUrl: './header.component.html',
-    styleUrls: ['./app.component.css'],
+    styleUrls: ['../app.component.css'],
     animations: [tdRotateAnimation],
 })
 export class HeaderComponent {

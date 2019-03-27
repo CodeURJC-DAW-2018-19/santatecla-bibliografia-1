@@ -7,7 +7,7 @@ import {ActivatedRoute,Router} from '@angular/router'
 @Component({
     selector: 'authorColumn',
     templateUrl: './authorColumn.component.html',
-    styleUrls: ['./app.component.css'],
+    styleUrls: ['../app.component.css'],
     animations: [tdRotateAnimation],
 })
 export class AuthorColumnComponent {

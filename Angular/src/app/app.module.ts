@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
-import { HeaderComponent} from './header.component';
+import { HeaderComponent} from './header/header.component';
 
 import {
     MatButtonModule,
@@ -58,11 +58,11 @@ import {
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AuthorColumnComponent } from './authorColumn.component';
-import { BookColumnComponent } from './bookColumn.component';
-import { AuthorFormComponent } from './authorForm.component';
-import { BookFormComponent } from './bookForm.component';
-import { ThemeFormComponent } from './themeForm.component';
+import { AuthorColumnComponent } from './author/authorColumn.component';
+import { BookColumnComponent } from './book/bookColumn.component';
+import { AuthorFormComponent } from './author/authorForm.component';
+import { BookFormComponent } from './book/bookForm.component';
+import { ThemeFormComponent } from './theme/themeForm.component';
 import {routing} from './app.routing';
 
 @NgModule({
