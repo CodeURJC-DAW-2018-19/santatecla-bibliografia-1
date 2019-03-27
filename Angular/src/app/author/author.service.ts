@@ -22,7 +22,7 @@ export class AuthorService {
     constructor(private http: Http) { }
 
     getAuthors() {
-        return this.http.get(URL, { withCredentials: true })
+        return this.http.get(URL, { withCredentials: false })
           .pipe(
             map(response => response.json()),
             catchError(error => this.handleError(error))

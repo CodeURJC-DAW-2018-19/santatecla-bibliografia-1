@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
@@ -11,16 +11,24 @@ import { Book, BookService } from './book.service';
     styleUrls: ['../app.component.css'],
     animations: [tdRotateAnimation],
 })
-export class BookColumnComponent {
+export class BookColumnComponent implements OnInit{
     
+    books: Book[];
+
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,
+        private service: BookService,
     ){}
-    
-    newBook() {
+
+    ngOnInit() {
+        this.service.getBooks().subscribe(
+          books => this.books = books,
+          error => console.log(error)
+        );
+    } 
+
+    newBook(){
         this.router.navigate(['/book']);
     }
-    
-
 }

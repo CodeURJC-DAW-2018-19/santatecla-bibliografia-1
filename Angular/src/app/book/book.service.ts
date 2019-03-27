@@ -15,14 +15,14 @@ export interface Book {
   imgId?: number;
 }
 
-const URL = '/api/book';
+const URL = '/api/books';
 
 @Injectable()
 export class BookService {
   constructor(private http: Http) { }
 
   getBooks() {
-    return this.http.get(URL, { withCredentials: true })
+    return this.http.get(URL, { withCredentials: false })
       .pipe(
         map(response => response.json()),
         catchError(error => this.handleError(error))
