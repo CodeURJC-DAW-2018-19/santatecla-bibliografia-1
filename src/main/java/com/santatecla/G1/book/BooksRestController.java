@@ -1,41 +1,42 @@
 package com.santatecla.G1.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
+
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.author.Author;
 import com.santatecla.G1.author.AuthorService;
-
 import com.santatecla.G1.citation.Citation;
 import com.santatecla.G1.citation.CitationService;
 import com.santatecla.G1.theme.Theme;
 import com.santatecla.G1.theme.ThemeService;
+import com.santatecla.G1.user.UserComponent;
 
 @RestController
 @RequestMapping("/api")
 public class BooksRestController {
-	interface BookDetailView extends Book.BasicView, Book.AuthorView, Book.CitationsView, Book.ThemeView,
-			Author.BasicView, Citation.BasicView, Theme.BasicView {
-	}
+	interface BookBasicView extends Book.NameView, Book.BasicView {} 
+	interface BookDetailView extends Book.NameView, Book.BasicView, Book.AuthorView, Book.CitationsView, Book.ThemeView,
+			Author.BasicView, Citation.BasicView, Theme.BasicView {}
 
+	@Autowired
+	private UserComponent userComponent;
+	
 	@Autowired
 	private BookService bookService;
 
@@ -48,53 +49,34 @@ public class BooksRestController {
 	@Autowired
 	private ThemeService themeService;
 
-	@JsonView(Book.BasicView.class)
-	@RequestMapping(value = "books", method = GET)
-	public ResponseEntity<Collection<Book>> getBooks() {
-		return new ResponseEntity<>(bookService.findAll(), HttpStatus.OK);
+	//Get the book/s with pagination or not, to logged or not logged users.
+	@RequestMapping(value = "/books", method = RequestMethod.GET)
+	public MappingJacksonValue books(Pageable page, String title) {
+		List<Book> books;
+		if(title!=null) {
+			books = bookService.findByTitleContaining(title, page);
+		}
+		else {
+			books = bookService.findAll(page).getContent();		
+		}
+		MappingJacksonValue result = new MappingJacksonValue(books);
+		if(books!=null) {
+			if(userComponent.isLoggedUser())
+				result.setSerializationView(BookBasicView.class);
+			else
+				result.setSerializationView(Book.NameView.class);
+			return result;
+		}
+		else return null;
 	}
 	
+	//Create a book without a img
 	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "/books/{title}", method = GET)
-	public ResponseEntity<List<Book>> searchBook(@PathVariable String title) {
-		return new ResponseEntity<>(bookService.findByTitleContaining(title), HttpStatus.OK);
-	}
-
-	@JsonView(Book.BasicView.class)
-	@RequestMapping(value = "/books", 
-					params = {"page"}, 
-					method = GET)
-	public ResponseEntity<List<Book>> booksPageable(@RequestParam(value="page",defaultValue="0") int page) {
-		Pageable pageableRequest = PageRequest.of(page,10);
-		return new ResponseEntity<>(bookService.findAll(pageableRequest).getContent(), HttpStatus.OK);
-	}
-
-	@JsonView(Book.BasicView.class)
-	@RequestMapping(value = "/books",
-					params = {"page", "filter"},
-					method = RequestMethod.GET)
-	public ResponseEntity<List<String>> booksPageableGuest(@RequestParam(value="page",defaultValue="0") int page,
-															@RequestParam(value="filter",defaultValue="") String name) {
-		if(name.equals("title"))
-		{
-			Pageable pageableRequest = PageRequest.of(page,10);
-			List<Book> books = bookService.findAll(pageableRequest).getContent();
-			List<String> booksName = new ArrayList<>();
-			for (Book b : books) {
-				booksName.add(b.getTitle());
-			}
-			return new ResponseEntity<>(booksName, HttpStatus.OK);
-		}
-		else
-		{
-			return new ResponseEntity<>( HttpStatus.BAD_REQUEST);	
-		}
-		
-	}
-	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "/book2", method = POST)
+	@RequestMapping(value = "/books", method = POST)
 	public ResponseEntity<Book> book(@RequestBody Book book) {
+		//If the book doesn't exists, we create it
 		if (bookService.findByTitleIgnoreCase(book.getTitle()) == null) {
+			//Trying to associate an author to the book
 			try {
 				bookService.save(book);
 				Author author = new Author();
@@ -108,7 +90,7 @@ public class BooksRestController {
 			} catch (Exception e) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-
+			//Trying  to associate a theme to the book
 			try {
 				bookService.save(book);
 				Theme theme = new Theme();
@@ -122,6 +104,7 @@ public class BooksRestController {
 			} catch (Exception e) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
+			//Trying to associte the citations to the boook.
 			try {
 				ArrayList<Citation> citations = new ArrayList<>();
 				if (book.getCitations() != null) {
@@ -140,23 +123,19 @@ public class BooksRestController {
 			return new ResponseEntity<>(HttpStatus.IM_USED);
 
 	}
-
+	// Get the book by the id
 	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "/book/{id}", method = GET)
+	@RequestMapping(value = "/books/{id}", method = GET)
 	public ResponseEntity<Book> getBook(@PathVariable long id) {
 		Book book = bookService.findOne(id);
 		if (book != null) {
-			System.out.println(book.toString());
-			List<Citation> citations = book.getCitations();
-			Author author = book.getAuthor();
-			Theme theme = book.getTheme();
 			return new ResponseEntity<>(book, HttpStatus.OK);
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-
+	// Delete the book by the id
 	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "/book/{id}", method = DELETE)
+	@RequestMapping(value = "/books/{id}", method = DELETE)
 	public ResponseEntity<Book> deleteAuthor(@PathVariable long id) {
 		Book book = bookService.findOne(id);
 		if (book != null) {
@@ -165,9 +144,10 @@ public class BooksRestController {
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-
+	
+	//Update the book by id.
 	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "book2/{id}", method = PATCH)
+	@RequestMapping(value = "books/{id}", method = PATCH)
 	public ResponseEntity<Book> updateBook2(@RequestBody Book newBook, @PathVariable long id) {
 		Book oldBook = bookService.findOne(id);
 		if (oldBook != null) {
@@ -198,30 +178,14 @@ public class BooksRestController {
 
 	// ----------------------------- METHODS WITH UPLOAD IMAGES
 	// -------------------------------------------------
-
+	
 	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "book/{id}", method = PATCH)
+	@RequestMapping(value = "books/{id}/image", method = PATCH)
 	public ResponseEntity<Book> updateBook(Model model, Book newBook, @PathVariable long id,
 			MultipartFile file, Long authorId, Long themeId) {
 		Book oldBook = bookService.findOne(id);
 		if (oldBook != null) {
 			oldBook.update(newBook);
-			if (authorId != null) {
-				Author author = authorService.findById(authorId);
-				if (author != null) {
-					oldBook.setAuthor(author);
-					author.addBook(oldBook);
-					authorService.save(author);
-				}
-			}
-			if (themeId != null) {
-				Theme theme = themeService.findById(themeId);
-				if (theme != null) {
-					oldBook.setTheme(theme);
-					theme.addBook(oldBook);
-					themeService.save(theme);
-				}
-			}
 			if ((file != null) && (!file.isEmpty())) {
 				int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
 				oldBook.setImgId(imgId);
@@ -233,36 +197,8 @@ public class BooksRestController {
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-
-	@JsonView(BookDetailView.class)
-	@RequestMapping(value = "/book", method = POST)
-	public Book saveBook(Model model, Book book, MultipartFile file, Long authorId, Long themeId) {
-		bookService.save(book);
-		if (authorId != null) {
-			Author author = authorService.findById(authorId);
-			if (author != null) {
-				book.setAuthor(author);
-				author.addBook(book);
-				authorService.save(author);
-			}
-		}
-		if (themeId != null) {
-			Theme theme = themeService.findById(themeId);
-			if (theme != null) {
-				book.setTheme(theme);
-				theme.addBook(book);
-				themeService.save(theme);
-			}
-		}
-		if ((file != null) && (!file.isEmpty())) {
-			int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
-			book.setImgId(imgId);
-			com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
-		} else
-			book.setImgId(-2);
-		bookService.save(book);
-		model.addAttribute("text", "Book Created");
-		return book;
-	}
+	
+	
+	
 
 }

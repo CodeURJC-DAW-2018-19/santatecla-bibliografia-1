@@ -32,7 +32,7 @@ public class PdfRestController {
 	@Autowired
 	private PdfGenerator pdfGenerator;
 
-	@RequestMapping("/create-pdf/{id}")
+	@RequestMapping("/themes/{id}/pdf")
 	public void handleFileDownloadPDF(HttpServletResponse res, @PathVariable long id)
 			throws FileNotFoundException, IOException {
 
