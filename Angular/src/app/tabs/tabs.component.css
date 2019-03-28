@@ -1,3 +1,10 @@
 :host {
     background-color: whitesmoke;
 }
+
+::ng-deep .mat-tab-label{
+    background-color:  lightgray;
+ }
+::ng-deep .mat-tab-label-active{
+    background-color:  gray;
+ }

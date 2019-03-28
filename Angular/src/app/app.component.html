@@ -1,25 +1,20 @@
-<td-layout
-    [mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'push'"
-    [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '240px' : '100%'"
-    [class]="activeTheme"
->
-    <td-layout-nav
-        [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 'Citas Bibliográficas' : ''"
-        logo="assets:covalent"
-        navigationRoute="/">
-        <div td-toolbar-content layout="row" layout-align="end" flex> 
-           <header></header> 
-        </div> 
-        <tabs>  </tabs>      
-            <!--<div flex layout-gt-sm="row" layout-align="center start" tdMediaToggle="gt-xs" 
+<td-layout [mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'push'"
+    [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '240px' : '100%'" [class]="activeTheme">
+    <td-layout-nav [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 'Citas Bibliográficas' : ''"
+        logo="assets:covalent" navigationRoute="/">
+        <div td-toolbar-content layout="row" layout-align="end" flex>
+            <header></header>
+        </div>
+        <tabs> </tabs>
+        <!--<div flex layout-gt-sm="row" layout-align="center start" tdMediaToggle="gt-xs" 
             layout-wrap [mediaClasses]="['push-sm']">-->
-                <!-- Se borrará-->
-               <!--  <div flex-gt-sm="80" >
+        <!-- Se borrará-->
+        <!--  <div flex-gt-sm="80" >
                     <router-outlet></router-outlet>
                 </div>-->
-                <!--/Se borrará-->
-                <!--Columns -->
-                        <!--<div flex-gt-sm="33">
+        <!--/Se borrará-->
+        <!--Columns -->
+        <!--<div flex-gt-sm="33">
                             <authorColumn></authorColumn>
                         </div>
                         <div flex-gt-sm="33">
@@ -69,17 +64,20 @@
                                 </button>
                             </div>
                         </div>
-            </div>
-       
-                <!--/Columns-->
-            
-        
+            </div>-->
+
+        <!--/Columns-->
+
+
         <td-layout-footer>
             <div layout="row" layout-align="start center">
-                <span class="mat-caption"
-                    >Made with <mat-icon class="text-md">favorite</mat-icon> using
-                    <a href="http://getcovalent.com" class="text-nodecoration tc-teal-600">Covalent</a>, built on Angular v7 +
-                    Angular Material + NGX-Charts.</span>
+                    <span class="mat-caption">
+                        Rodrigo López, Raúl Martín, Rubén Bernabé, Óscar Carazo, Natalia Madrueño
+                    </span>
+                    <span flex></span>
+                    <span class="mat-caption">
+                        Made with <mat-icon class="text-md">favorite</mat-icon> by Grupo 1
+                    </span>
             </div>
         </td-layout-footer>
     </td-layout-nav>
