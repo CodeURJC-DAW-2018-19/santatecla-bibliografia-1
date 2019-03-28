@@ -36,6 +36,7 @@ import {
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DomSanitizer } from '@angular/platform-browser';
 
+import { IndexComponent } from './index/index.component';
 import { AuthorColumnComponent } from './author/authorColumn.component';
 import { BookColumnComponent } from './book/bookColumn.component';
 import { AuthorFormComponent } from './author/authorForm.component';
@@ -67,8 +68,9 @@ import { routing } from './app.routing';
         HttpModule, //Remove when migrated to HttpClient
     ],
 
-    declarations: [AppComponent, HelloComponent, HeaderComponent,AuthorColumnComponent,BookColumnComponent,
-    AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent],
+    declarations: [AppComponent, HelloComponent, HeaderComponent,
+        IndexComponent, AuthorColumnComponent,BookColumnComponent,
+        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent],
 
     bootstrap: [AppComponent],
     providers: [BookService, AuthorService, ThemeService]
