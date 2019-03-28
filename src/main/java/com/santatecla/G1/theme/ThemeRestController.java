@@ -4,16 +4,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -22,13 +20,18 @@ import com.santatecla.G1.author.Author;
 import com.santatecla.G1.book.Book;
 import com.santatecla.G1.book.BookService;
 import com.santatecla.G1.citation.Citation;
+import com.santatecla.G1.user.UserComponent;
 
 @RestController
 @RequestMapping("/api")
 public class ThemeRestController {
+	interface ThemeBasicView extends Theme.NameView, Theme.BasicView {}
 	interface ThemeDetailView extends Theme.BasicView, Theme.BooksView, Book.BasicView, Book.AuthorView,
 			Author.BasicView, Book.CitationsView, Citation.BasicView {
 	}
+	
+	@Autowired
+	private UserComponent userComponent;
 
 	@Autowired
 	private ThemeService themeService;
@@ -36,26 +39,28 @@ public class ThemeRestController {
 	@Autowired
 	private BookService bookService;
 
-	@JsonView(Theme.BasicView.class)
-	@RequestMapping(value = "/theme", method = GET)
-	public ResponseEntity<Collection<Theme>> themes() {
-		return new ResponseEntity<>(themeService.findAll(), HttpStatus.OK);
+	@RequestMapping(value = "/themes", method = RequestMethod.GET)
+	public MappingJacksonValue themes(Pageable page, String name) {
+		List<Theme> themes;
+		if(name!=null) {
+			themes = themeService.findByNameContaining(name, page);
+		}
+		else {
+			themes = themeService.findAll(page).getContent();		
+		}
+		MappingJacksonValue result = new MappingJacksonValue(themes);
+		if(themes!=null) {
+			if(userComponent.isLoggedUser())
+				result.setSerializationView(ThemeBasicView.class);
+			else
+				result.setSerializationView(Theme.NameView.class);
+			return result;
+		}
+		else return null;
 	}
 
 	@JsonView(ThemeDetailView.class)
-	@RequestMapping(value = "/theme-search/{name}", method = GET)
-	public ResponseEntity<List<Theme>> searchTheme(@PathVariable String name) {
-		return new ResponseEntity<>(themeService.findByNameContaining(name), HttpStatus.OK);
-	}
-
-	@JsonView(Theme.BasicView.class)
-	@RequestMapping(value = "/theme-pageable", method = RequestMethod.GET)
-	public ResponseEntity<List<Theme>> themePageable(Pageable page) {
-		return new ResponseEntity<>(themeService.findAll(page).getContent(), HttpStatus.OK);
-	}
-
-	@JsonView(ThemeDetailView.class)
-	@RequestMapping(value = "/theme2", method = POST)
+	@RequestMapping(value = "/themes", method = POST)
 	public ResponseEntity<Theme> theme(@RequestBody Theme theme) {
 		if (themeService.findByNameIgnoreCase(theme.getName()) == null) {
 			if (theme.getBook() != null) {
@@ -81,19 +86,8 @@ public class ThemeRestController {
 			return new ResponseEntity<>(HttpStatus.IM_USED);
 	}
 
-	@JsonView(Theme.BasicView.class)
-	@RequestMapping(value = "/theme-name-pageable", method = RequestMethod.GET)
-	public ResponseEntity<List<String>> themePageableGuest(Pageable page) {
-		List<Theme> theme = themeService.findAll(page).getContent();
-		List<String> themeName = new ArrayList<>();
-		for (Theme t : theme) {
-			themeName.add(t.getName());
-		}
-		return new ResponseEntity<>(themeName, HttpStatus.OK);
-	}
-
 	@JsonView(ThemeDetailView.class)
-	@RequestMapping(value = "/theme/{id}", method = GET)
+	@RequestMapping(value = "/themes/{id}", method = GET)
 	public ResponseEntity<Theme> theme(@PathVariable long id) {
 		Theme theme = themeService.findById(id);
 		if (theme != null) {
@@ -114,7 +108,7 @@ public class ThemeRestController {
 	}
 
 	@JsonView(ThemeDetailView.class)
-	@RequestMapping(value = "/theme2/{id}", method = PATCH)
+	@RequestMapping(value = "/themes/{id}", method = PATCH)
 	public ResponseEntity<Theme> updateTheme(@RequestBody Theme newTheme, @PathVariable long id) {
 		Theme oldTheme = themeService.findById(id);
 		if (oldTheme != null) {
@@ -127,7 +121,7 @@ public class ThemeRestController {
 	}
 
 	@JsonView(ThemeDetailView.class)
-	@RequestMapping(value = "/theme/{id}", method = DELETE)
+	@RequestMapping(value = "/themes/{id}", method = DELETE)
 	public ResponseEntity<Theme> deleteTheme(@PathVariable long id) {
 		Theme theme = themeService.findById(id);
 		if (theme != null) {
@@ -135,18 +129,6 @@ public class ThemeRestController {
 			return new ResponseEntity<>(theme, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
-
-	// ----------------------------- METHODS WITH UPLOAD IMAGES
-	// -------------------------------------------------
-
-	@JsonView(ThemeDetailView.class)
-	@RequestMapping(value = "/theme", method = POST)
-	public Theme theme(Model model, @RequestBody Theme theme) {
-		themeService.save(theme);
-		System.out.println(theme.toString());
-		model.addAttribute("text", "Theme Created");
-		return theme;
 	}
 
 }

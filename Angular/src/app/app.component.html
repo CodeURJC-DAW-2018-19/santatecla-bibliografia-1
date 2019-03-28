@@ -14,7 +14,7 @@
             <div flex layout-gt-sm="row" layout-align="center start" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
                 <!-- Se borrará-->
                 <div flex-gt-sm="80" >
-                    <themeForm></themeForm>
+                    <router-outlet></router-outlet>
                 </div>
                 <!--/Se borrará-->
                 <!--Columns -->
@@ -61,9 +61,17 @@
                                 </div>
                             </mat-card>
                         </div>
+                        <div flex layout-gt-sm="row" layout-align="center center">
+                            <div flex-gt-sm="100">
+                                <button mat-raised-button matTooltip="Histograma" class="push-left-md"  >
+                                    <mat-icon>add</mat-icon> Histograma
+                                </button>
+                            </div>
+                        </div>
             </div>
        
                 <!--/Columns-->
+            
         
         <td-layout-footer>
             <div layout="row" layout-align="start center">
@@ -75,7 +83,7 @@
         </td-layout-footer>
     </td-layout-nav>
 </td-layout>
-
+<!--
 <ng-template #dialogContent let-dialogRef="dialogRef">
     <div layout="column" layout-fill>
         <h2 mat-dialog-title>
@@ -101,3 +109,4 @@
         </mat-dialog-actions>
     </div>
 </ng-template>
+-->

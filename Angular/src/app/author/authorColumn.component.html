@@ -47,6 +47,9 @@
                     <button matTooltip="Cargar Más" matTooltipPosition="before" type="button" mat-icon-button (click)="sidenav.open()">
                             <mat-icon>expand_more</mat-icon>
                     </button>
+                    <button mat-raised-button matTooltip="Nuevo Autor"class="push-left-md"  (click)="newAuthor()">
+                        <mat-icon>add</mat-icon> New
+                    </button>
                     <span flex *ngIf="!searchBox.searchVisible"></span>
                     <td-search-box
                         hide-xs
