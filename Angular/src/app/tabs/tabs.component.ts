@@ -12,10 +12,10 @@ export class TabsComponent implements OnInit {
   
 
   exampleTabs(){
-    this.nTabs.push(new Tab("Inicio", "fdsafa"));
-    this.nTabs.push(new Tab("Temas", "/themes"));
-    this.nTabs.push(new Tab("Autores", "fdsfs"));
-    this.nTabs.push(new Tab("Libros", "fdsfs"));
+    this.nTabs.push(new Tab("Inicio", "/"));
+    this.nTabs.push(new Tab("Temas", "/theme"));
+    this.nTabs.push(new Tab("Autores", "/author"));
+    this.nTabs.push(new Tab("Libros", "/book"));
   } 
 
   changeTab(name:string) {

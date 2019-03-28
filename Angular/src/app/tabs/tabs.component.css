@@ -1,10 +1,4 @@
-:host {
+.mat-tab-link {
     background-color: whitesmoke;
+    border: 1px solid #6e6d6d;
 }
-
-::ng-deep .mat-tab-label{
-    background-color:  lightgray;
- }
-::ng-deep .mat-tab-label-active{
-    background-color:  gray;
- }

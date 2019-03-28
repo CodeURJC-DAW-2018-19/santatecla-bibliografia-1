@@ -3,4 +3,7 @@ export class Tab{
     get Name():string{
         return this.name;
     }
+    get Url():string{
+        return this.url;
+    }
 }

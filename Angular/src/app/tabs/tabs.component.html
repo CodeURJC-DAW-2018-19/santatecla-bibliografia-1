@@ -1,24 +1,10 @@
-<div class>
-  <mat-tab-group>
-    <div *ngFor="let tab of nTabs">
-      <mat-tab label={{tab.name}}>
-        <div [ngSwitch]=tab.name>
-          <div *ngSwitchCase="'Autores'">
-            <authorColumn></authorColumn>
-          </div>
-          <div *ngSwitchCase="'Temas'">
-            <themeForm></themeForm>
-          </div>
-          <div *ngSwitchCase="'Libros'">
-            <bookColumn></bookColumn>
-          </div>
+<nav mat-tab-nav-bar>
+    <a mat-tab-link 
+    *ngFor="let tab of nTabs"
+    [routerLink]=tab.url>
+        {{tab.name}}
+      
+    </a>
+</nav>
 
-          <div *ngSwitchCase="'Inicio'">
-            <indexComponent></indexComponent>
-          </div>
-        </div>
-      </mat-tab>
-
-    </div>
-  </mat-tab-group>
-</div>
+<router-outlet></router-outlet>
