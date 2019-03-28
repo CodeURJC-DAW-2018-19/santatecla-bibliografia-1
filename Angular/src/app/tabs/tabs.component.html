@@ -1,7 +1,11 @@
 <nav mat-tab-nav-bar>
     <a mat-tab-link 
     *ngFor="let tab of nTabs"
-    [routerLink]=tab.url>
+    [routerLink]=tab.url
+    routerLinkActive
+    #rla="routerLinkActive"
+    [routerLinkActiveOptions]="{exact: true}"
+    [active]="rla.isActive">
         {{tab.name}}
       
     </a>
