@@ -1,0 +1,10 @@
+<div class style="height:50px">
+  <mat-tab-group>
+    <div *ngFor="let tab of nTabs">
+      <mat-tab label={{tab.name}}>
+        <container-element [ngSwitch]="asdf">
+       </container-element>
+      </mat-tab>
+    </div>
+  </mat-tab-group>  
+</div>

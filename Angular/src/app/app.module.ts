@@ -16,6 +16,7 @@ import { BookService } from './book/book.service';
 import { AuthorService } from './author/author.service';
 import { ThemeService } from './theme/theme.service';
 
+
 import {
     MatButtonModule,MatListModule, MatIconModule,MatCardModule,MatMenuModule,MatInputModule,
     MatButtonToggleModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, 
@@ -33,12 +34,14 @@ import {
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DomSanitizer } from '@angular/platform-browser';
+
 import { AuthorColumnComponent } from './author/authorColumn.component';
 import { BookColumnComponent } from './book/bookColumn.component';
 import { AuthorFormComponent } from './author/authorForm.component';
 import { BookFormComponent } from './book/bookForm.component';
 import { ThemeFormComponent } from './theme/themeForm.component';
-import {routing} from './app.routing';
+import { routing } from './app.routing';
+
 
 @NgModule({
     imports: [
@@ -62,9 +65,10 @@ import {routing} from './app.routing';
         routing,
         HttpModule, //Remove when migrated to HttpClient
     ],
-    declarations: [AppComponent, HelloComponent, HeaderComponent,
-                    AuthorColumnComponent,BookColumnComponent,
-                    AuthorFormComponent,BookFormComponent, ThemeFormComponent],
+
+    declarations: [AppComponent, HelloComponent, HeaderComponent,AuthorColumnComponent,BookColumnComponent,
+    AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent],
+
     bootstrap: [AppComponent],
     providers: [BookService, AuthorService, ThemeService]
 })
