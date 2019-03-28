@@ -7,8 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.santatecla.G1.author.Author;
-
 @Service
 public class ThemeService {
 
@@ -29,6 +27,10 @@ public class ThemeService {
 	
 	public List<Theme> findByNameContaining(String name) {
 		return themeRepository.findByNameContaining(name);
+	}
+
+	public List<Theme> findByNameContaining(String name, Pageable page) {
+		return themeRepository.findByNameContaining(name, page);
 	}
 	
 	public Theme findByNameIgnoreCase(String name) {
