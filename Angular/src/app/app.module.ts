@@ -15,6 +15,7 @@ import { HeaderComponent} from './header/header.component';
 import { BookService } from './book/book.service';
 import { AuthorService } from './author/author.service';
 import { ThemeService } from './theme/theme.service';
+import { TabsComponent } from './tabs/tabs.component';
 
 
 import {
