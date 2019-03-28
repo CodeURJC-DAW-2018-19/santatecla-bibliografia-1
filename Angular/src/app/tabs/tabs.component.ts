@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Tab } from "./tab";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tabs',
@@ -11,11 +12,29 @@ export class TabsComponent implements OnInit {
   
 
   exampleTabs(){
-    this.nTabs.push(new Tab("Tab1", "fdsfs"));
-    this.nTabs.push(new Tab("Tab2", "fdsfs"));
-    this.nTabs.push(new Tab("Tab3", "fdsfs"));
-    this.nTabs.push(new Tab("Tab4", "fdsfs"));
-  }
+    this.nTabs.push(new Tab("Inicio", "fdsafa"));
+    this.nTabs.push(new Tab("Temas", "/themes"));
+    this.nTabs.push(new Tab("Autores", "fdsfs"));
+    this.nTabs.push(new Tab("Libros", "fdsfs"));
+  } 
+
+  changeTab(name:string) {
+    console.log("1");
+    if (name === "Inicio"){
+      console.log("1");
+      //this.router.navigateByUrl('/');
+    } else if (name === "Temas"){
+      //this.router.navigateByUrl('/themes');
+      console.log("1");
+    } else if (name === "Autores"){
+      //this.router.navigateByUrl('/authors');
+      console.log("1");
+    } else if (name === "Libros"){
+      //this.router.navigateByUrl('/libros');
+      console.log("1");
+    } 
+    
+  };
 
   removeTab(name:string){
     for (var i=0; i<this.nTabs.length; i++){
