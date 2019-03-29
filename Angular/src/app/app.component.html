@@ -1,16 +1,18 @@
 <td-layout [mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'push'"
-    [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '240px' : '100%'" 
-    [class]="activeTheme">
+    [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '240px' : '100%'" [class]="activeTheme">
     <td-layout-nav [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 
     'Citas Bibliográficas' : ''" navigationRoute="/">
-    <!-- If we want logo covalent: logo="assets:covalent"-->
+        <a md-icon-button td-menu-button >
+            <img src="./assets/quotes.png" style="height:30px;width:30px;padding-right: 10px;">
+        </a>
+        <!-- If we want logo covalent: logo="assets:covalent"-->
         <div td-toolbar-content layout="row" layout-align="end" flex>
             <header></header>
         </div>
         <tabs> </tabs>
         <indexComponent></indexComponent>
 
-        <td-layout-footer>
+        <td-layout-footer color="primary">
             <div layout="row" layout-align="start center">
                 <span class="mat-caption">
                     Rodrigo López, Raúl Martín, Rubén Bernabé, Óscar Carazo, Natalia Madrueño
