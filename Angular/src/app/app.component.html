@@ -3,6 +3,11 @@
     <td-layout-nav [toolbarTitle]="(media.registerQuery('gt-xs') | async) ? 'Citas Bibliográficas' : ''"
         logo="assets:covalent" navigationRoute="/">
         <div td-toolbar-content layout="row" layout-align="end" flex>
+            <span flex *ngIf="!searchBox.searchVisible"></span>
+            <td-search-box hide-xs flex #searchBox
+                [ngClass]="{ 'push-left push-right mat-whiteframe-z1 bgc-white tc-black': searchBox.searchVisible }"
+                placeholder="search"></td-search-box>
+            <login></login>
             <header></header>
         </div>
         <tabs> </tabs>
@@ -10,13 +15,13 @@
 
         <td-layout-footer>
             <div layout="row" layout-align="start center">
-                    <span class="mat-caption">
-                        Rodrigo López, Raúl Martín, Rubén Bernabé, Óscar Carazo, Natalia Madrueño
-                    </span>
-                    <span flex></span>
-                    <span class="mat-caption">
-                        Made with <mat-icon class="text-md">favorite</mat-icon> by Grupo 1
-                    </span>
+                <span class="mat-caption">
+                    Rodrigo López, Raúl Martín, Rubén Bernabé, Óscar Carazo, Natalia Madrueño
+                </span>
+                <span flex></span>
+                <span class="mat-caption">
+                    Made with <mat-icon class="text-md">favorite</mat-icon> by Grupo 1
+                </span>
             </div>
         </td-layout-footer>
     </td-layout-nav>

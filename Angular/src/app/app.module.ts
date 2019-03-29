@@ -15,7 +15,10 @@ import { HeaderComponent} from './header/header.component';
 import { BookService } from './book/book.service';
 import { AuthorService } from './author/author.service';
 import { ThemeService } from './theme/theme.service';
+import { LoginService } from './login/login.service';
+
 import { TabsComponent } from './tabs/tabs.component';
+import { LoginComponent } from './login/login.component'
 
 
 import {
@@ -69,11 +72,11 @@ import { routing } from './app.routing';
     ],
 
     declarations: [AppComponent, HelloComponent, HeaderComponent,
-        IndexComponent, AuthorColumnComponent,BookColumnComponent,
+        IndexComponent, AuthorColumnComponent,BookColumnComponent, LoginComponent,
         AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent],
 
     bootstrap: [AppComponent],
-    providers: [BookService, AuthorService, ThemeService]
+    providers: [BookService, AuthorService, ThemeService, LoginService]
 })
 export class AppModule {
     constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
