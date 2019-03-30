@@ -8,7 +8,7 @@ export interface Theme {
   name: string;
 }
 
-const URL = '/api/theme';
+const URL = '/api/themes';
 
 @Injectable()
 export class ThemeService {

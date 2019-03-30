@@ -1,0 +1,64 @@
+<div >
+    <mat-card>
+        <mat-card-title>
+            <div layout="row" layout-align="start center">
+                <span flex>Columna de temas</span>
+                <span>
+                    <button mat-icon-button matTooltip="Card settings" [mat-menu-trigger-for]="settings1">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu xPosition="before" #settings1="matMenu">
+                        <button mat-menu-item (click)="openTemplate()">Settings</button>
+                        <mat-divider></mat-divider>
+                        <button mat-menu-item>Remove</button>
+                    </mat-menu>
+                </span>
+            </div>
+        </mat-card-title>
+        <mat-divider></mat-divider>
+        <!-- NOT WORK-->
+        <!--<td-virtual-scroll-container [style.height.px]="200">
+            <ng-template let-row="row" tdVirtualScrollRow>
+            
+            </ng-template>
+        </td-virtual-scroll-container>-->
+            <mat-card-content>
+            <div flex layout-gt-sm="row" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
+                <div flex-gt-sm="50">
+                    <mat-card>
+                        <mat-card-content>
+                            <h3>Card with Image First</h3>
+                            <p>100% Width Image</p>
+                            <img mat-card-image src="assets/theme.png">
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div flex-gt-sm="50">
+                    <mat-card>
+                        <mat-card-content>
+                            <h3>Card with Image First</h3>
+                            <p>100% Width Image</p>
+                            <img mat-card-image src="assets/theme.png">
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+            <div flex layout-gt-sm="row">
+                <button matTooltip="Cargar Más" matTooltipPosition="before" type="button" mat-icon-button (click)="sidenav.open()">
+                        <mat-icon>expand_more</mat-icon>
+                </button>
+                <button mat-raised-button matTooltip="Nuevo Tema"class="push-left-md"  (click)="newTheme()">
+                    <mat-icon>add</mat-icon> New
+                </button>
+                <span flex *ngIf="!searchBox.searchVisible"></span>
+                <td-search-box
+                    hide-xs
+                    flex
+                    #searchBox
+                    [ngClass]="{ 'push-left push-right mat-whiteframe-z1 bgc-white tc-black': searchBox.searchVisible }"
+                    placeholder="search"
+                ></td-search-box>
+            </div>
+            </mat-card-content>
+    </mat-card>
+</div>

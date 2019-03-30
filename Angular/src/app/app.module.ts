@@ -42,6 +42,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { IndexComponent } from './index/index.component';
 import { AuthorColumnComponent } from './author/authorColumn.component';
 import { BookColumnComponent } from './book/bookColumn.component';
+import { ThemeColumnComponent } from './theme/themeColumn.component';
 import { AuthorFormComponent } from './author/authorForm.component';
 import { BookFormComponent } from './book/bookForm.component';
 import { ThemeFormComponent } from './theme/themeForm.component';
@@ -72,7 +73,7 @@ import { routing } from './app.routing';
     ],
 
     declarations: [AppComponent, HelloComponent, HeaderComponent,
-        IndexComponent, AuthorColumnComponent,BookColumnComponent, LoginComponent,
+        IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
         AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent],
 
     bootstrap: [AppComponent],

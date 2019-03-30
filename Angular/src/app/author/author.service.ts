@@ -15,7 +15,7 @@ export interface Author {
   imgId?: number;
 }
 
-const URL = '/api/author';
+const URL = '/api/authors';
 
 @Injectable()
 export class AuthorService {
