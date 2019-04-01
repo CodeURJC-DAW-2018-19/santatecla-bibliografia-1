@@ -14,18 +14,34 @@ import { Author, AuthorService } from './author.service';
 export class AuthorColumnComponent implements OnInit{
    
     authors: Author[];
-
+    page: number;
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,
         private service: AuthorService,
-    ){}
+    ){
+        this.page = 0;
+    }
 
     ngOnInit() {
-        this.service.getAuthors().subscribe(
+        var createUrl: string;
+        createUrl = "?page=" + (this.page);
+        console.log(createUrl);
+        this.service.getAuthors(createUrl).subscribe(
            authors => this.authors = authors,
            error => console.log(error)
         );
+    }
+
+    loadMore(){
+        var createUrl: string;
+        this.page +=1;
+        createUrl = "?page=" + (this.page);
+        this.service.getAuthors(createUrl).subscribe(
+            authors => this.authors = this.authors.concat(authors),
+            error => console.log(error)
+         );
+         console.log(this.authors);
     }
     
     newAuthor() {

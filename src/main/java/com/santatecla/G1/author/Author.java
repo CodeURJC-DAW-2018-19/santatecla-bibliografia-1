@@ -44,7 +44,7 @@ public class Author {
 	@Column(length=500)
 	private String urlMap;
 	
-	@JsonView(BasicView.class)
+	@JsonView(NameView.class)
 	private int imgId;
 	
 	/********************************************
