@@ -7,7 +7,7 @@ import { map, catchError } from 'rxjs/operators'
 export interface Book {
   id?: number;
   title: string;
-  publishDate?: string;
+  publishDate?: Date;
   nameEdit?: string;
   urlEdit?: string;
   urlImgCoverPage?: string;
@@ -27,6 +27,14 @@ export class BookService {
         map(response => response.json()),
         catchError(error => this.handleError(error))
     );
+  }
+
+  getBook(id: number | string) {
+    return this.http.get(URL + "/" +id, { withCredentials: true })
+      .pipe(
+          map(response => response.json()),
+          catchError(error => this.handleError(error))
+      );
   }
 
   private handleError(error: any) {
