@@ -8,8 +8,8 @@ export interface Author {
   id?: number;
   name: string;
   urlImage?: string;
-  birthDate?: string;
-  deathDate?: string;
+  birthDate?: Date;
+  deathDate?: Date;
   bornPlace?: string;
   urlMap?: string;
   imgId?: number;
@@ -17,18 +17,18 @@ export interface Author {
 
 const URL = '/api/authors';
 
+
 @Injectable()
 export class AuthorService {
-    constructor(private http: Http) { }
+    constructor(private http: Http) {}
 
-    getAuthors() {
-        return this.http.get(URL, { withCredentials: false })
+    getAuthors(customURL: string) {
+        return this.http.get(URL+customURL,{ withCredentials: false })
           .pipe(
             map(response => response.json()),
             catchError(error => this.handleError(error))
         );
     }
-
 
     private handleError(error: any) {
         console.error(error);

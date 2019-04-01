@@ -23,12 +23,12 @@
                 </ng-template>
             </td-virtual-scroll-container>-->
                 <mat-card-content>
-                <div flex layout-gt-sm="row" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
+                <!--<div flex layout-gt-sm="row" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
                     <div flex-gt-sm="50">
                         <mat-card>
                             <mat-card-content>
                                 <h3>Card with Image First</h3>
-                                <p>100% Width Image</p>
+                                
                                 <img mat-card-image src="assets/theme.png">
                             </mat-card-content>
                         </mat-card>
@@ -42,9 +42,25 @@
                             </mat-card-content>
                         </mat-card>
                     </div>
+                </div>-->
+                <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']" style="overflow:scroll;height: 316px">
+                    <div *ngFor="let author of authors" mat-list-item [routerLink]="['/authors', author.id]">
+                        <div flex-gt-sm="50" >
+                                <mat-card>
+                                    <mat-card-content>
+                                        <p>{{author.name}}</p>
+                                        <script type="text/javascript">
+                                            document.getElementById('imageBox').src="assets/author.imgId.png";
+                                        </script>
+                                    <img id="imgBox" mat-card-image >
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+
                 </div>
                 <div flex layout-gt-sm="row">
-                    <button matTooltip="Cargar Más" matTooltipPosition="before" type="button" mat-icon-button (click)="sidenav.open()">
+                    <button matTooltip="Cargar Más" matTooltipPosition="before" type="button" mat-icon-button (click)="loadMore()">
                             <mat-icon>expand_more</mat-icon>
                     </button>
                     <button mat-raised-button matTooltip="Nuevo Autor"class="push-left-md"  (click)="newAuthor()">
