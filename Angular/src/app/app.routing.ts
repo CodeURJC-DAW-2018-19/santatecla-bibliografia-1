@@ -10,6 +10,7 @@ import { AuthorFormComponent } from './author/authorForm.component';
 import { AuthorDetailComponent } from './author/authorDetail.component';
 import { AppComponent } from './app.component';
 import { ThemeFormComponent } from './theme/themeForm.component';
+import { ThemeDetailComponent } from './theme/themeDetail.component';
 
 const appRoutes = [
   /*{ path: 'books', component: BookListComponent, useAsDefault: true },
@@ -20,6 +21,7 @@ const appRoutes = [
   { path: 'theme', component: ThemeFormComponent },
   { path: 'author/:id', component: AuthorDetailComponent },
   { path: 'book/:id', component: BookDetailComponent },
+  { path: 'theme/:id', component: ThemeDetailComponent },
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

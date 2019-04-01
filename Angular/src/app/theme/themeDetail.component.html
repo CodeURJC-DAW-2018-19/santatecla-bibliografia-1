@@ -1,0 +1,120 @@
+<style>
+    mat-form-field {
+        width: 90%;
+        margin-left: 5px;
+    }
+</style>
+
+<div *ngIf="theme">
+    <div>
+        <mat-card>
+            <mat-card-title>
+                <div>
+                    <span hide-xs>Tema {{theme.name}}</span>
+                </div>
+            </mat-card-title>
+            <mat-divider></mat-divider>
+            <div flex layout-gt-sm="row" layout-align="center center">
+                <div flex-gt-sm="50">
+                    <div flex layout-gt-sm="row" layout-align="center start">
+                        <div flex-gt-sm="100">
+                            <form flex>
+                                <mat-card>
+                                    <mat-card-title>
+                                        <h3>Cita 1</h3>
+                                    </mat-card-title>
+                                    <mat-card-content>
+                                        <div flex layout-gt-sm="row" layout-align="center start">
+                                            <div flex-gt-sm="80">
+                                                <mat-form-field>
+                                                    <input type="text" matInput placeholder="Texto de la cita">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div flex layout-gt-sm="row" layout-align="center start">
+                                            <div flex layout-gt-sm="row" layout-align="center start">
+                                                <div flex-gt-sm="80">
+                                                    <button mat-stroked-button>
+                                                        <mat-icon>save</mat-icon>
+                                                        Guardar
+                                                    </button>
+                                                    <button mat-stroked-button class="push-left-md">
+                                                        <mat-icon>delete</mat-icon>
+                                                        Eliminar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-card-content>
+                                </mat-card>
+                            </form>
+                        </div>
+                    </div>
+                    <div flex layout-gt-sm="row" layout-align="center start">
+                        <div flex-gt-sm="100">
+                            <form flex>
+                                <mat-card>
+                                    <mat-card-title>
+                                        <h3>Cita 2</h3>
+                                    </mat-card-title>
+                                    <mat-card-content>
+                                        <div flex layout-gt-sm="row" layout-align="center start">
+                                            <div flex-gt-sm="80">
+                                                <mat-form-field>
+                                                    <input type="text" matInput placeholder="Texto de la cita">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div flex layout-gt-sm="row" layout-align="center start">
+                                            <div flex layout-gt-sm="row" layout-align="center start">
+                                                <div flex-gt-sm="80">
+                                                    <button mat-stroked-button>
+                                                        <mat-icon>save</mat-icon>
+                                                        Guardar
+                                                    </button>
+                                                    <button mat-stroked-button class="push-left-md">
+                                                        <mat-icon>delete</mat-icon>
+                                                        Eliminar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-card-content>
+                                </mat-card>
+                            </form>
+                        </div>
+                    </div>
+                    <div flex layout-gt-sm="row" layout-align="center start">
+                        <div flex-gt-sm="80">
+                            <button mat-stroked-button>
+                                <mat-icon>save</mat-icon>
+                                Guardar
+                            </button>
+                            <button mat-stroked-button class="push-left-md">
+                                <mat-icon>delete</mat-icon>
+                                Eliminar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div flex-gt-sm="50">
+                    <div flex layout-gt-sm="row" layout-align="center none">
+                        <div flex-gt-sm="100" class="bgc-grey-200">
+                            <mat-card>
+                                <mat-card-content>
+                                    <mat-form-field>
+                                        <textarea matInput placeholder="Autosize textarea" matTextareaAutosize
+                                            matAutosizeMinRows="30"></textarea>
+                                    </mat-form-field>
+                                    <button mat-stroked-button>Generar y Descargar PDF</button>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </mat-card>
+    </div>
+</div>
