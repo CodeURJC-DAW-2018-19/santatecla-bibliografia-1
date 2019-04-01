@@ -5,16 +5,7 @@ import { Author, AuthorService } from './author.service';
 import { LoginService } from '../login/login.service';
 
 @Component({
-    template: `
-  <div *ngIf="author">
-  <h2>Author "{{author.name}}"</h2>
-  <div>
-    <p>fdsfs</p>
-  </div>
-  <p>
-    <br>
-  </p>
-  </div>`
+  templateUrl: './authorDetail.component.html',
 })
 export class AuthorDetailComponent implements OnInit{
 
