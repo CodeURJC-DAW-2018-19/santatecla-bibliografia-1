@@ -15,17 +15,34 @@ export class ThemeColumnComponent implements OnInit{
    
     themes: Theme[];
 
+    page: number;
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,
         private service: ThemeService,
-    ){}
+    ){
+        this.page=0;
+    }
 
     ngOnInit() {
-        this.service.getThemes().subscribe(
+        var createUrl: string;
+        createUrl = "?page=" + (this.page);
+        console.log(createUrl);
+        this.service.getThemes(createUrl).subscribe(
            themes => this.themes = themes,
            error => console.log(error)
         );
+    }
+
+    loadMore(){
+        var createUrl: string;
+        this.page +=1;
+        createUrl = "?page=" + (this.page);
+        this.service.getThemes(createUrl).subscribe(
+            themes => this.themes = this.themes.concat(themes),
+            error => console.log(error)
+         );
+         console.log(this.themes);
     }
     
     newTheme() {

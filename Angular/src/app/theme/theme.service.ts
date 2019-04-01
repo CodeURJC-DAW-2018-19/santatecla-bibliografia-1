@@ -14,8 +14,8 @@ const URL = '/api/themes';
 export class ThemeService {
   constructor(private http: Http) { }
 
-  getThemes() {
-    return this.http.get(URL, { withCredentials: false })
+  getThemes(customURL: string) {
+    return this.http.get(URL + customURL, { withCredentials: false })
       .pipe(
         map(response => response.json()),
         catchError(error => this.handleError(error))
@@ -24,6 +24,6 @@ export class ThemeService {
 
   private handleError(error: any) {
     console.error(error);
-    return Observable.throw('Server error (' + error.status + '): ' + error.text());
-  } 
+    return Observable.throw('Server error theme (' + error.status + '): ' + error.text());
+  }
 }
