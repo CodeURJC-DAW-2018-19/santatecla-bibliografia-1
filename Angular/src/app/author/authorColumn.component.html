@@ -49,11 +49,8 @@
                                 <mat-card>
                                     <mat-card-content>
                                         <p>{{author.name}}</p>
-                                        <script type="text/javascript">
-                                            document.getElementById('imageBox').src="assets/author.imgId.png";
-                                        </script>
-                                    <img id="imgBox" mat-card-image >
-                                </mat-card-content>
+                                        <img mat-card-image src="{{'image/' + author.imgId}}">
+                                    </mat-card-content>
                             </mat-card>
                         </div>
                     </div>
