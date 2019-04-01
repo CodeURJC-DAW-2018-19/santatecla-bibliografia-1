@@ -44,6 +44,7 @@ import { AuthorColumnComponent } from './author/authorColumn.component';
 import { BookColumnComponent } from './book/bookColumn.component';
 import { ThemeColumnComponent } from './theme/themeColumn.component';
 import { AuthorFormComponent } from './author/authorForm.component';
+import { AuthorDetailComponent } from './author/authorDetail.component';
 import { BookFormComponent } from './book/bookForm.component';
 import { ThemeFormComponent } from './theme/themeForm.component';
 import { routing } from './app.routing';
@@ -72,7 +73,7 @@ import { routing } from './app.routing';
         HttpModule, //Remove when migrated to HttpClient
     ],
 
-    declarations: [AppComponent, HelloComponent, HeaderComponent,
+    declarations: [AppComponent, HelloComponent, HeaderComponent, AuthorDetailComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
         AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent],
 

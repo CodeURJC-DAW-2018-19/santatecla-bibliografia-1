@@ -4,8 +4,9 @@ import { RouterModule } from '@angular/router';
 import { BookDetailComponent } from './book-detail.component';
 import { BookFormComponent } from './book-form.component';*/
 
-import {BookFormComponent} from './book/bookForm.component'
-import {AuthorFormComponent} from './author/authorForm.component'
+import { BookFormComponent } from './book/bookForm.component';
+import { AuthorFormComponent } from './author/authorForm.component';
+import { AuthorDetailComponent } from './author/authorDetail.component';
 import { AppComponent } from './app.component';
 import { ThemeFormComponent } from './theme/themeForm.component';
 
@@ -15,7 +16,8 @@ const appRoutes = [
   { path: 'book/:id', component: BookDetailComponent },*/
   { path: 'book', component: BookFormComponent},
   { path: 'author', component: AuthorFormComponent },
-  { path: 'theme', component: ThemeFormComponent }
+  { path: 'theme', component: ThemeFormComponent },
+  { path: 'author/:id', component: AuthorDetailComponent },
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

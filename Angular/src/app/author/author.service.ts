@@ -30,6 +30,14 @@ export class AuthorService {
         );
     }
 
+    getAuthor(id: number | string) {
+      return this.http.get(URL + "/" +id, { withCredentials: true })
+        .pipe(
+            map(response => response.json()),
+            catchError(error => this.handleError(error))
+        );
+    }
+
     private handleError(error: any) {
         console.error(error);
         return Observable.throw('Server error author (' + error.status + '): ' + error.text());
