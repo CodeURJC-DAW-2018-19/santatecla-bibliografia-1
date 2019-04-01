@@ -34,14 +34,14 @@
                             <div flex layout-gt-sm="row" layout-align="center start">
                                 <div flex-gt-sm="40">
                                     <mat-form-field >
-                                        <input matInput [max]="maxToDate" placeholder="Fecha de nacimiento" [(ngModel)]="dateBirth" [matDatepicker]="pickerBirth" />
+                                        <input matInput [max]="maxToDate" placeholder="Fecha de nacimiento" [(ngModel)]="dateBirth" [matDatepicker]="pickerBirth" [ngModelOptions]="{standalone: true}" />
                                         <mat-datepicker-toggle matSuffix matTooltip="Fecha de nacimiento" [for]="pickerBirth"></mat-datepicker-toggle>
                                         <mat-datepicker #pickerBirth [startAt]="dateBirth"></mat-datepicker>
                                     </mat-form-field>
                                 </div>
                                 <div flex-gt-sm="40">
                                     <mat-form-field >
-                                        <input matInput [max]="maxToDate" placeholder="Fecha de defunción" [(ngModel)]="dateDeath" [matDatepicker]="pickerDeath" />
+                                        <input matInput [max]="maxToDate" placeholder="Fecha de defunción" [(ngModel)]="dateDeath" [matDatepicker]="pickerDeath" [ngModelOptions]="{standalone: true}" />
                                         <mat-datepicker-toggle matSuffix matTooltip="Fecha de defunción" [for]="pickerDeath"></mat-datepicker-toggle>
                                         <mat-datepicker #pickerDeath [startAt]="dateDeath"></mat-datepicker>
                                     </mat-form-field>

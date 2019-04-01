@@ -14,8 +14,6 @@ import { Author, AuthorService } from './author.service';
     animations: [tdRotateAnimation],
 })
 export class AuthorFormComponent {
-   
-
 
 // Timeframe
 dateDeath: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);

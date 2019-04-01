@@ -35,7 +35,7 @@
                                 <div flex-gt-sm="80">
                                     <div flex-gt-sm="50">
                                         <mat-form-field >
-                                            <input matInput [max]="maxToDate" placeholder="Fecha"[(ngModel)]="date" [matDatepicker]="pickerDate" />
+                                            <input matInput [max]="maxToDate" placeholder="Fecha"[(ngModel)]="date" [matDatepicker]="pickerDate" [ngModelOptions]="{standalone: true}" />
                                             <mat-datepicker-toggle matSuffix matTooltip="Fecha" [for]="pickerDate"></mat-datepicker-toggle>
                                             <mat-datepicker #pickerDate [startAt]="date"></mat-datepicker>
                                         </mat-form-field>
