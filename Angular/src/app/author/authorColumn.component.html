@@ -53,15 +53,15 @@
             <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
                 style="overflow:scroll;height: 370px;overflow-x: hidden">
                 <section id="container">
-                    <div *ngFor="let author of authors" mat-list-item [routerLink]="['/authors', author.id]">
+                    <a *ngFor="let author of authors" mat-list-item [routerLink]="['/author', author.id]">
                             <mat-card style="margin-top: 0%"> 
                                 <mat-card-content>
                                     <p>{{author.name}}</p>
                                     <img mat-card-image style="height:10em;width:10em;"
-                                     src="{{'image/' + author.imgId}}">
+                                     src="{{'image/' + author.imgId}}" [routerLink]="['/author', author.id]">
                                 </mat-card-content>
                             </mat-card>
-                    </div>
+                        </a>
                 </section>
             </div>
             <div flex layout-gt-sm="row">
