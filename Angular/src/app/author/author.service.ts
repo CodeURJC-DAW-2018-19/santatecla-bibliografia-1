@@ -32,6 +32,6 @@ export class AuthorService {
 
     private handleError(error: any) {
         console.error(error);
-        return Observable.throw('Server error (' + error.status + '): ' + error.text());
+        return Observable.throw('Server error author (' + error.status + '): ' + error.text());
     }
 }

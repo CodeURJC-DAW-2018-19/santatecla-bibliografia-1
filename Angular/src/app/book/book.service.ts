@@ -21,8 +21,8 @@ const URL = '/api/books';
 export class BookService {
   constructor(private http: Http) { }
 
-  getBooks() {
-    return this.http.get(URL, { withCredentials: false })
+  getBooks(customURL: string) {
+    return this.http.get(URL+customURL, { withCredentials: false })
       .pipe(
         map(response => response.json()),
         catchError(error => this.handleError(error))
@@ -31,7 +31,7 @@ export class BookService {
 
   private handleError(error: any) {
     console.error(error);
-    return Observable.throw('Server error (' + error.status + '): ' + error.text());
+    return Observable.throw('Server error book (' + error.status + '): ' + error.text());
   }
 }
 
