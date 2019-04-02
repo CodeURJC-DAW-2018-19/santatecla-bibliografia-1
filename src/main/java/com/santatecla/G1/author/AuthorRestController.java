@@ -60,6 +60,20 @@ public class AuthorRestController {
 		else return null;
 	}
 	
+	@RequestMapping(value = "/authors/search/{title}", method = RequestMethod.GET)
+	public MappingJacksonValue authorSearch(Pageable page, @PathVariable String title) {
+		List<Author> authors;
+		authors = authorService.findByNameContaining(title, page);
+		MappingJacksonValue result = new MappingJacksonValue(authors);
+		if(authors!=null) {
+			if(userComponent.isLoggedUser())
+				result.setSerializationView(AuthorBasicView.class);
+			else
+				result.setSerializationView(Author.NameView.class);
+			return result;
+		}
+		else return null;
+	}
 
 	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/authors/{id}", method = GET)
