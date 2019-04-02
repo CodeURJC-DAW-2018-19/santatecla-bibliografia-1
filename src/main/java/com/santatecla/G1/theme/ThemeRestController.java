@@ -1,7 +1,6 @@
 package com.santatecla.G1.theme;
 
 import org.springframework.data.domain.Pageable;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,22 +58,7 @@ public class ThemeRestController {
 		}
 		else return null;
 	}
-	
-	@RequestMapping(value = "/themes/search/{title}", method = RequestMethod.GET)
-	public MappingJacksonValue themesSearch(Pageable page, @PathVariable String title) {
-		List<Theme> themes;
-		themes = themeService.findByNameContaining(title, page);
-		MappingJacksonValue result = new MappingJacksonValue(themes);
-		if(themes!=null) {
-			if(userComponent.isLoggedUser())
-				result.setSerializationView(ThemeBasicView.class);
-			else
-				result.setSerializationView(Theme.NameView.class);
-			return result;
-		}
-		else return null;
-	}
-	
+
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/themes", method = POST)
 	public ResponseEntity<Theme> theme(@RequestBody Theme theme) {

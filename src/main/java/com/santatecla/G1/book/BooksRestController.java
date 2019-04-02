@@ -70,21 +70,6 @@ public class BooksRestController {
 		else return null;
 	}
 	
-	@RequestMapping(value = "/books/search/{title}", method = RequestMethod.GET)
-	public MappingJacksonValue booksSearch(Pageable page, @PathVariable String title) {
-		List<Book> books;
-		books = bookService.findByTitleContaining(title, page);
-		MappingJacksonValue result = new MappingJacksonValue(books);
-		if(books!=null) {
-			if(userComponent.isLoggedUser())
-				result.setSerializationView(BookBasicView.class);
-			else
-				result.setSerializationView(Book.NameView.class);
-			return result;
-		}
-		else return null;
-	}
-	
 	//Create a book without a img
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/books", method = POST)
