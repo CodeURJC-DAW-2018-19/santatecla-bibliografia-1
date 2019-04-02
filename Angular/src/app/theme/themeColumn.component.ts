@@ -15,8 +15,9 @@ import { LoginService } from '../login/login.service';
 export class ThemeColumnComponent implements OnInit{
    
     themes: Theme[];
-
     page: number;
+    name: string;
+
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,
@@ -34,6 +35,16 @@ export class ThemeColumnComponent implements OnInit{
            themes => this.themes = themes,
            error => console.log(error)
         );
+    }
+
+    searchTheme(name:string){
+        console.log("searchpulsado")
+        console.log("Theme search name: ", name)
+        this.service.searchTheme(name).subscribe(            
+            themes => this.themes = themes,
+            error => console.log(error) 
+        );
+        console.log(this.themes);
     }
 
     loadMore(){
