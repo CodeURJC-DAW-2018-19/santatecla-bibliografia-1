@@ -6,6 +6,8 @@ import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnim
 import { DatePipe } from '@angular/common';
 import { single, multi, pie, times } from '../histogram/data';
 import { Author, AuthorService } from './author.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LoginService } from '../login/login.service';
 
 @Component({
     selector: 'authorForm',
@@ -15,6 +17,11 @@ import { Author, AuthorService } from './author.service';
 })
 export class AuthorFormComponent {
 
+    constructor(
+        private router: Router, 
+        public activatedRoute: ActivatedRoute, 
+        public service: AuthorService,
+        public loginService: LoginService) {}
 // Timeframe
 dateDeath: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);
 dateBirth: Date = new Date(new Date().getTime() - 1 * 60 * 60 * 24 * 1000);
