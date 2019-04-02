@@ -40,14 +40,21 @@ export class AuthorService {
         );
     }
 
-    postAuthor(url: string, param: any) {
-      let body = JSON.stringify(param);
-      return this.http
-          .post(url, body)
-          .map(this.extractData)
-          .catchError(this.handleError);
-      }
+    // postAuthor(url: string, param: any) {
+    //   let body = JSON.stringify(param);
+    //   return this.http
+    //       .post(url, body)
+    //       .map(this.extractData)
+    //       .catchError(this.handleError);
+    //   }
 
+    searchAuthor(name:string){
+      return this.http.get(URL + "?name=" + name, { withCredentials: true })
+        .pipe(
+            map(response => response.json()),
+            catchError(error => this.handleError(error))
+        );
+    }
 
     patchAuthor (id: number | string, body: any) {
       return this.http.patch(URL + "/" +id, { withCredentials: true })

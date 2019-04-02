@@ -16,6 +16,8 @@ export class AuthorColumnComponent implements OnInit{
    
     authors: Author[];
     page: number;
+    name:string; 
+
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,
@@ -35,6 +37,16 @@ export class AuthorColumnComponent implements OnInit{
         );
     }
 
+    searchAuthor(name:string){
+        console.log("searchpulsado")
+        console.log("Author search name: ", name)
+        this.service.searchAuthor(name).subscribe(            
+            authors => this.authors = authors,
+            error => console.log(error) 
+        );
+        console.log(this.authors);
+    }
+
     loadMore(){
         var createUrl: string;
         this.page +=1;
@@ -43,7 +55,7 @@ export class AuthorColumnComponent implements OnInit{
             authors => this.authors = this.authors.concat(authors),
             error => console.log(error)
          );
-         console.log(this.authors);
+        console.log(this.authors);
     }
     
     newAuthor() {
