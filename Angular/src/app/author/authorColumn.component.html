@@ -8,14 +8,7 @@
 <div>
     <mat-card>
         <mat-card-title>
-            <div layout="row" layout-align="start center">
-
-                    <input [(ngModel)]=name placeholder="Author name"/>
-                    <button (click)="searchAuthor(name)">Save</button>
-
-
-
-
+            <div layout="row" layout-align="start center">         
                 <span flex>Columna de autores</span>
                 <span>
                     <button mat-icon-button matTooltip="Card settings" [mat-menu-trigger-for]="settings1">
@@ -88,7 +81,9 @@
                 <td-search-box hide-xs flex #searchBox
                     [ngClass]="{ 'push-left push-right mat-whiteframe-z1 bgc-white tc-black': searchBox.searchVisible }"
                     placeholder="search"
-                    [(ngModel)]="name"></td-search-box>
+                    [(ngModel)]=name
+                    (search)="searchAuthor(name)">
+                </td-search-box>
             </div>
         </mat-card-content>
     </mat-card>
