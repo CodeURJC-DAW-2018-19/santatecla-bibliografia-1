@@ -46,7 +46,9 @@
                     <div *ngFor="let author of authors" mat-list-item >
                             <mat-card style="margin-top: 0%"> 
                                 <mat-card-content *ngIf="loginService.isLogged">
-                                    <mat-icon>delete</mat-icon>
+                                    <button mat-button (click)="deleteAuthor(author)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
                                     <a [routerLink]="['/author', author.id]">{{author.name}}</a>
                                     <img mat-card-image style="height:10em;width:10em;"
                                      src="{{'image/' + author.imgId}}" [routerLink]="['/author', author.id]">

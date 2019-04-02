@@ -47,6 +47,20 @@ export class AuthorColumnComponent implements OnInit{
         console.log(this.authors);
     }
 
+    deleteAuthor(author:Author){
+        console.log("delete pulsado con id: ", author.id)
+        let aux:Author[];
+        aux = this.authors;
+        aux.forEach( (item, index) => {
+            if(item === author) aux.splice(index,1);
+          });
+        this.service.deleteAuthor(author).subscribe(            
+            authors =>  this.authors = aux,
+            error => console.log(error) 
+        );
+        console.log(this.authors);
+    }
+
     loadMore(){
         var createUrl: string;
         this.page +=1;

@@ -48,6 +48,19 @@ export class AuthorService {
     //       .catchError(this.handleError);
     //   }
 
+    deleteAuthor(author: Author) {
+      const headers = new Headers({
+        'X-Requested-With': 'XMLHttpRequest'
+      });
+      const options = new RequestOptions({ withCredentials: true, headers });
+  
+      return this.http.delete(URL + "/" + author.id, options)
+        .pipe(
+          map(response => undefined),
+          catchError(error => this.handleError(error))
+        );
+    }
+
     searchAuthor(name:string){
       return this.http.get(URL + "?name=" + name, { withCredentials: true })
         .pipe(

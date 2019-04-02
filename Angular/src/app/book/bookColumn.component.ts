@@ -47,7 +47,7 @@ export class BookColumnComponent implements OnInit{
             if(item === book) aux.splice(index,1);
           });
         this.service.deleteBook(book).subscribe(            
-            themes =>  this.books = aux,
+            books =>  this.books = aux,
             error => console.log(error) 
         );
         console.log(this.books);
