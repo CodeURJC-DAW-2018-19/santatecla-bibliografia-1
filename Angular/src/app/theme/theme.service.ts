@@ -1,3 +1,7 @@
+
+
+
+
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
@@ -30,6 +34,20 @@ export class ThemeService {
       );
   }
 
+  deleteTheme(theme: Theme) {
+    const headers = new Headers({
+      'X-Requested-With': 'XMLHttpRequest'
+    });
+    const options = new RequestOptions({ withCredentials: true, headers });
+
+    return this.http.delete(URL + "/" + theme.id, options)
+      .pipe(
+        map(response => undefined),
+        catchError(error => this.handleError(error))
+      );
+  }
+
+
   searchTheme(name:string){
     return this.http.get(URL + "?name=" + name, { withCredentials: true })
       .pipe(
@@ -43,3 +61,6 @@ export class ThemeService {
     return Observable.throw('Server error theme (' + error.status + '): ' + error.text());
   }
 }
+
+
+

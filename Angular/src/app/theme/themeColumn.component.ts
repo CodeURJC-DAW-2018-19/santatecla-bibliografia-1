@@ -1,3 +1,4 @@
+
 import { Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry, MatDialog } from '@angular/material';
@@ -47,6 +48,20 @@ export class ThemeColumnComponent implements OnInit{
         console.log(this.themes);
     }
 
+    deleteTheme(theme:Theme){
+        console.log("delete pulsado con id: ", theme.id)
+        let aux:Theme[];
+        aux = this.themes;
+        aux.forEach( (item, index) => {
+            if(item === theme) aux.splice(index,1);
+          });
+        this.service.deleteTheme(theme).subscribe(            
+            themes =>  this.themes = aux,
+            error => console.log(error) 
+        );
+        console.log(this.themes);
+    }
+
     loadMore(){
         var createUrl: string;
         this.page +=1;
@@ -61,8 +76,6 @@ export class ThemeColumnComponent implements OnInit{
     newTheme() {
         this.router.navigate(['/theme']);
     }
-
-
 
 
 }
