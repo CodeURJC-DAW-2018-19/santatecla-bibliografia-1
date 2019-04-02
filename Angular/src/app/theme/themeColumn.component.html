@@ -27,12 +27,12 @@
             <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
                 style="overflow:scroll;height: 370px;overflow-x: hidden">
                 <section id="container">
-                    <a *ngFor="let theme of themes" mat-list-item [routerLink]="['/themes', theme.id]">
+                    <a *ngFor="let theme of themes" mat-list-item [routerLink]="['/theme', theme.id]">
                         <mat-card style="margin-top: 0%">
                             <mat-card-content>
                                 <p>{{theme.name}}</p>
                                 <img mat-card-image style="height:10em;width:10em;" 
-                                src="../assets/theme.png" [routerLink]="['/themes', theme.id]">
+                                src="../assets/theme.png" [routerLink]="['/theme', theme.id]">
                             </mat-card-content>
                         </mat-card>
                     </a>
