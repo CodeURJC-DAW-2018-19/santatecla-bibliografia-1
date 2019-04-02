@@ -5,6 +5,7 @@ import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
 import {ActivatedRoute,Router} from '@angular/router'
 import { Book, BookService } from './book.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
     selector: 'bookForm',
@@ -17,6 +18,7 @@ export class BookFormComponent {
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,
+        public loginService: LoginService
     ){}
 
 

@@ -27,12 +27,17 @@
             <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
                 style="overflow:scroll;height: 370px;overflow-x: hidden">
                 <section id="container">
-                    <a *ngFor="let book of books" mat-list-item [routerLink]="['/book', book.id]">
+                    <a *ngFor="let book of books" mat-list-item >
                         <mat-card style="margin-top: 0%">
-                            <mat-card-content>  
-                                <p>{{book.title}}</p>
+                            <mat-card-content *ngIf="loginService.isLogged">   
+                                <a [routerLink]="['/book', book.id]">{{book.title}}</a>
                                 <img mat-card-image style="height:10em;width:10em;" 
                                 src="{{'image/' + book.imgId}}" [routerLink]="['/book', book.id]">
+                            </mat-card-content>
+                            <mat-card-content *ngIf="!loginService.isLogged">  
+                                <a >{{book.title}}</a>
+                                <img mat-card-image style="height:10em;width:10em;" 
+                                src="{{'image/' + book.imgId}}"> 
                             </mat-card-content>
                         </mat-card>
                     </a>
@@ -43,7 +48,7 @@
                     (click)="loadMore()">
                     <mat-icon>expand_more</mat-icon>
                 </button>
-                <button mat-raised-button matTooltip="Nuevo Libro" class="push-left-md" (click)="newBook()">
+                <button *ngIf="loginService.isLogged && loginService.isAdmin" mat-raised-button matTooltip="Nuevo Libro" class="push-left-md" (click)="newBook()">
                     <mat-icon>add</mat-icon> New
                 </button>
                 <span flex *ngIf="!searchBox.searchVisible"></span>

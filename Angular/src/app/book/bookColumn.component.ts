@@ -4,6 +4,7 @@ import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
 import {ActivatedRoute,Router} from '@angular/router'
 import { Book, BookService } from './book.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
     selector: 'bookColumn',
@@ -20,6 +21,8 @@ export class BookColumnComponent implements OnInit{
         private router: Router,
         activatedRoute: ActivatedRoute,
         private service: BookService,
+        public loginService: LoginService 
+        
     ){
         this.page = 0;
     }

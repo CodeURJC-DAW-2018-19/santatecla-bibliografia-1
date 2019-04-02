@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="push-top-lg" flex layout-gt-sm="row" layout-align="center start">
+                            <div *ngIf="loginService.isLogged && loginService.isAdmin" class="push-top-lg" flex layout-gt-sm="row" layout-align="center start">
                                     <div flex-gt-sm="80">
                                             <button mat-stroked-button> 
                                                 <mat-icon>save</mat-icon>
