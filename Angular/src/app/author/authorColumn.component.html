@@ -53,12 +53,17 @@
             <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
                 style="overflow:scroll;height: 370px;overflow-x: hidden">
                 <section id="container">
-                    <a *ngFor="let author of authors" mat-list-item [routerLink]="['/author', author.id]">
+                    <a *ngFor="let author of authors" mat-list-item >
                             <mat-card style="margin-top: 0%"> 
-                                <mat-card-content>
-                                    <p>{{author.name}}</p>
+                                <mat-card-content *ngIf="loginService.isLogged">
+                                    <a [routerLink]="['/author', author.id]">{{author.name}}</a>
                                     <img mat-card-image style="height:10em;width:10em;"
                                      src="{{'image/' + author.imgId}}" [routerLink]="['/author', author.id]">
+                                </mat-card-content>
+                                <mat-card-content *ngIf="!loginService.isLogged">
+                                    <a>{{author.name}}</a>
+                                    <img mat-card-image style="height:10em;width:10em;"
+                                     src="{{'image/' + author.imgId}}" >
                                 </mat-card-content>
                             </mat-card>
                         </a>
@@ -69,7 +74,7 @@
                     (click)="loadMore()">
                     <mat-icon>expand_more</mat-icon>
                 </button>
-                <button mat-raised-button matTooltip="Nuevo Autor" class="push-left-md" (click)="newAuthor()">
+                <button *ngIf="loginService.isLogged && loginService.isAdmin" mat-raised-button matTooltip="Nuevo Autor" class="push-left-md" (click)="newAuthor()">
                     <mat-icon>add</mat-icon> New
                 </button>
                 <span flex *ngIf="!searchBox.searchVisible"></span>

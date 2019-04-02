@@ -4,6 +4,7 @@ import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
 import {ActivatedRoute,Router} from '@angular/router'
 import { Author, AuthorService } from './author.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
     selector: 'authorColumn',
@@ -19,6 +20,7 @@ export class AuthorColumnComponent implements OnInit{
         private router: Router,
         activatedRoute: ActivatedRoute,
         private service: AuthorService,
+        public loginService: LoginService
     ){
         this.page = 0;
     }

@@ -75,7 +75,7 @@
                                 <mat-checkbox>Libro 2</mat-checkbox>
                             </div>
                         </div>
-                        <div flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
+                        <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
                             <div flex-gt-sm="80">
                                 <button mat-stroked-button>
                                     <mat-icon>edit</mat-icon>
