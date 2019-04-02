@@ -39,6 +39,20 @@ export class BookColumnComponent implements OnInit{
         console.log(this.books)
     } 
 
+    deleteBook(book:Book){
+        console.log("delete pulsado con id: ", book.id)
+        let aux:Book[];
+        aux = this.books;
+        aux.forEach( (item, index) => {
+            if(item === book) aux.splice(index,1);
+          });
+        this.service.deleteBook(book).subscribe(            
+            themes =>  this.books = aux,
+            error => console.log(error) 
+        );
+        console.log(this.books);
+    }
+
     searchBook(title:string){
         console.log("searchpulsado")
         console.log("Book search name: ", name)

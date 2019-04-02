@@ -20,7 +20,9 @@
                     <div *ngFor="let book of books" mat-list-item >
                         <mat-card style="margin-top: 0%">
                             <mat-card-content *ngIf="loginService.isLogged">   
-                                <mat-icon>delete</mat-icon>
+                                <button mat-button (click)="deleteBook(book)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
                                 <a [routerLink]="['/book', book.id]">{{book.title}}</a>
                                 <img mat-card-image style="height:10em;width:10em;" 
                                 src="{{'image/' + book.imgId}}" [routerLink]="['/book', book.id]">

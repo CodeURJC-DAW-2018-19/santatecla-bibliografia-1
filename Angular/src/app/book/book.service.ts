@@ -37,6 +37,19 @@ export class BookService {
       );
   }
 
+  deleteBook(book: Book) {
+    const headers = new Headers({
+      'X-Requested-With': 'XMLHttpRequest'
+    });
+    const options = new RequestOptions({ withCredentials: true, headers });
+
+    return this.http.delete(URL + "/" + book.id, options)
+      .pipe(
+        map(response => undefined),
+        catchError(error => this.handleError(error))
+      );
+  }
+
   searchBook(name:string){
     return this.http.get(URL + "?title=" + name, { withCredentials: true })
       .pipe(
