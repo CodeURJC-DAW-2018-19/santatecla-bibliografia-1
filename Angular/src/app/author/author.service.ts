@@ -34,8 +34,34 @@ export class AuthorService {
       return this.http.get(URL + "/" +id, { withCredentials: true })
         .pipe(
             map(response => response.json()),
+
+
             catchError(error => this.handleError(error))
         );
+    }
+
+    postAuthor(url: string, param: any) {
+      let body = JSON.stringify(param);
+      return this.http
+          .post(url, body)
+          .map(this.extractData)
+          .catchError(this.handleError);
+      }
+
+
+    patchAuthor (id: number | string, body: any) {
+      return this.http.patch(URL + "/" +id, { withCredentials: true })
+      .pipe(
+          map(response => response.json()),
+
+          catchError(error => this.handleError(error))
+
+      );
+    }
+
+    private extractData(res: Response) {
+      let body = res.json();
+      return body || {};
     }
 
     private handleError(error: any) {
