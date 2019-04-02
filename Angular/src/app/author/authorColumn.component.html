@@ -10,16 +10,6 @@
         <mat-card-title>
             <div layout="row" layout-align="start center">         
                 <span flex>Columna de autores</span>
-                <span>
-                    <button mat-icon-button matTooltip="Card settings" [mat-menu-trigger-for]="settings1">
-                        <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu xPosition="before" #settings1="matMenu">
-                        <button mat-menu-item (click)="openTemplate()">Settings</button>
-                        <mat-divider></mat-divider>
-                        <button mat-menu-item>Remove</button>
-                    </mat-menu>
-                </span>
             </div>
         </mat-card-title>
         <mat-divider></mat-divider>
@@ -53,9 +43,10 @@
             <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
                 style="overflow:scroll;height: 370px;overflow-x: hidden">
                 <section id="container">
-                    <a *ngFor="let author of authors" mat-list-item >
+                    <div *ngFor="let author of authors" mat-list-item >
                             <mat-card style="margin-top: 0%"> 
                                 <mat-card-content *ngIf="loginService.isLogged">
+                                    <mat-icon>delete</mat-icon>
                                     <a [routerLink]="['/author', author.id]">{{author.name}}</a>
                                     <img mat-card-image style="height:10em;width:10em;"
                                      src="{{'image/' + author.imgId}}" [routerLink]="['/author', author.id]">
@@ -66,7 +57,7 @@
                                      src="{{'image/' + author.imgId}}" >
                                 </mat-card-content>
                             </mat-card>
-                        </a>
+                        </div>
                 </section>
             </div>
             <div flex layout-gt-sm="row">
