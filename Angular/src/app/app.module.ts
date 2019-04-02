@@ -79,7 +79,7 @@ import { routing } from './app.routing';
         HttpModule, //Remove when migrated to HttpClient
     ],
 
-    declarations: [AppComponent, HelloComponent, HeaderComponent, 
+    declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, 
         AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
         AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent],
