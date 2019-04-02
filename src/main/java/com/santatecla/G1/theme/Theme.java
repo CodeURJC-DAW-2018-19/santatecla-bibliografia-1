@@ -20,7 +20,7 @@ public class Theme {
 	interface BooksView {}
 
 	
-	@JsonView(IdView.class)
+	@JsonView(NameView.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;

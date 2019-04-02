@@ -20,7 +20,7 @@ public class Author {
 	public interface BasicView{}
 	public interface BooksView{}
 	
-	@JsonView(BasicView.class)
+	@JsonView(NameView.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;

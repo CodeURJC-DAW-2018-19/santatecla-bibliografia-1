@@ -25,7 +25,7 @@ public class Book {
 	public interface AuthorView{}
 	public interface CitationsView{}
 	
-	@JsonView(BasicView.class)
+	@JsonView(NameView.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
