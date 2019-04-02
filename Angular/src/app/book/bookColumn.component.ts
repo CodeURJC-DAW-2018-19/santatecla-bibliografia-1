@@ -15,8 +15,9 @@ import { LoginService } from '../login/login.service';
 export class BookColumnComponent implements OnInit{
     
     books: Book[];
-
     page: number;
+    title: string;
+
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,
@@ -37,6 +38,16 @@ export class BookColumnComponent implements OnInit{
         );
         console.log(this.books)
     } 
+
+    searchBook(title:string){
+        console.log("searchpulsado")
+        console.log("Book search name: ", name)
+        this.service.searchBook(title).subscribe(            
+            books => this.books = books,
+            error => console.log(error) 
+        );
+        console.log(this.books);
+    }
 
     loadMore(){
         var createUrl: string;

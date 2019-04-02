@@ -54,7 +54,10 @@
                 <span flex *ngIf="!searchBox.searchVisible"></span>
                 <td-search-box hide-xs flex #searchBox
                     [ngClass]="{ 'push-left push-right mat-whiteframe-z1 bgc-white tc-black': searchBox.searchVisible }"
-                    placeholder="search"></td-search-box>
+                    placeholder="search"
+                    [(ngModel)]=title
+                    (search)="searchBook(title)">
+                </td-search-box>
             </div>
         </mat-card-content>
     </mat-card>

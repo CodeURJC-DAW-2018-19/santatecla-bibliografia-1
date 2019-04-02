@@ -37,6 +37,14 @@ export class BookService {
       );
   }
 
+  searchBook(name:string){
+    return this.http.get(URL + "?title=" + name, { withCredentials: true })
+      .pipe(
+          map(response => response.json()),
+          catchError(error => this.handleError(error))
+      );
+  }
+
   private handleError(error: any) {
     console.error(error);
     return Observable.throw('Server error book (' + error.status + '): ' + error.text());
