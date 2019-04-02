@@ -27,12 +27,17 @@
             <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
                 style="overflow:scroll;height: 370px;overflow-x: hidden">
                 <section id="container">
-                    <a *ngFor="let theme of themes" mat-list-item [routerLink]="['/theme', theme.id]">
+                    <a *ngFor="let theme of themes" mat-list-item >
                         <mat-card style="margin-top: 0%">
-                            <mat-card-content>
-                                <p>{{theme.name}}</p>
+                            <mat-card-content *ngIf="loginService.isLogged">
+                                <a [routerLink]="['/theme', theme.id]">{{theme.name}}</a>
                                 <img mat-card-image style="height:10em;width:10em;" 
                                 src="../assets/theme.png" [routerLink]="['/theme', theme.id]">
+                            </mat-card-content>
+                            <mat-card-content *ngIf="!loginService.isLogged">
+                                <a >{{theme.name}}</a>
+                                <img mat-card-image style="height:10em;width:10em;" 
+                                src="../assets/theme.png" >
                             </mat-card-content>
                         </mat-card>
                     </a>
@@ -43,7 +48,7 @@
                     (click)="loadMore()">
                     <mat-icon>expand_more</mat-icon>
                 </button>
-                <button mat-raised-button matTooltip="Nuevo Tema" class="push-left-md" (click)="newTheme()">
+                <button *ngIf="loginService.isLogged && loginService.isAdmin"mat-raised-button matTooltip="Nuevo Tema" class="push-left-md" (click)="newTheme()">
                     <mat-icon>add</mat-icon> New
                 </button>
                 <span flex *ngIf="!searchBox.searchVisible"></span>

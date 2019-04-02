@@ -4,6 +4,7 @@ import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
 import {ActivatedRoute,Router} from '@angular/router'
 import { Theme, ThemeService } from './theme.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
     selector: 'themeColumn',
@@ -20,6 +21,7 @@ export class ThemeColumnComponent implements OnInit{
         private router: Router,
         activatedRoute: ActivatedRoute,
         private service: ThemeService,
+        public loginService: LoginService
     ){
         this.page=0;
     }
