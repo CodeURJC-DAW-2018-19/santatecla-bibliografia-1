@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
+import { HttpHeaders } from '@angular/common/http';
 
 
 export interface Author {
@@ -69,8 +70,11 @@ export class AuthorService {
         );
     }
 
-    patchAuthor (id: number | string, body: any) {
-      return this.http.patch(URL + "/" +id, { withCredentials: true })
+    patchAuthor (author:Author){
+      const body= JSON.stringify(author)
+      const headers = new Headers({'Content-Type': 'application/json',withCredentials: true});
+
+      return this.http.patch(URL + "/" +author.id,body, {headers})
       .pipe(
           map(response => response.json()),
 
@@ -78,6 +82,7 @@ export class AuthorService {
 
       );
     }
+
 
     private extractData(res: Response) {
       let body = res.json();

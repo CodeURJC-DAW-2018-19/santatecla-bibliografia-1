@@ -24,4 +24,13 @@ export class AuthorDetailComponent implements OnInit{
             error => console.error(error)
         );
     }
+
+    saveEditAuthor(author:Author) {
+        console.log(author)
+        this.service.patchAuthor(author).subscribe(
+            _ => {},
+            (error: Error) => console.error('Error updating an author: ' + error),
+        );
+        window.history.back();
+    } 
 }

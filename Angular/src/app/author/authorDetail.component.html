@@ -16,26 +16,29 @@
             <mat-divider></mat-divider>
             <div flex layout-gt-sm="row" layout-align="center center">
                 <div flex-gt-sm="60">
-                    <form flex>
+                    <form flex #authorForm="ngForm">
                         <div flex layout-gt-sm="row" layout-align="center start">
                             <div flex-gt-sm="80">
                                 <mat-form-field>
-                                    <input type="text" matInput placeholder={{author.name}}>
+                                    <input type="text" matInput  name="name"[(ngModel)]="author.name"value={{author.name}} #authorFormElement
+                                    #authorFormControl="ngModel" placeholder="Nombre">
                                 </mat-form-field>
                             </div>
                         </div>
                         <div flex layout-gt-sm="row" layout-align="center start">
                             <div flex-gt-sm="80">
                                 <mat-form-field>
-                                    <input type="text" matInput placeholder={{author.urlImage}}>
+                                    <input type="text" matInput  name="urlImage"[(ngModel)]="author.urlImage" value={{author.urlImage}} #authorFormElement
+                                    #authorFormControl="ngModel" placeholder="URL Imagen">
                                 </mat-form-field>
                             </div>
                         </div>
                         <div flex layout-gt-sm="row" layout-align="center start">
                             <div flex-gt-sm="40">
                                 <mat-form-field>
-                                    <input matInput [max]="maxToDate" placeholder={{author.birthDate}}
-                                        [(ngModel)]="dateBirth" [matDatepicker]="pickerBirth"
+                                    <input  name="birthDate" matInput [max]="maxToDate" value={{author.birthDate}} placeholder="Fecha de nacimiento" #authorFormElement
+                                    #authorFormControl="ngModel"
+                                        [(ngModel)]="author.birthDate" [matDatepicker]="pickerBirth"
                                         [ngModelOptions]="{standalone: true}" />
                                     <mat-datepicker-toggle matSuffix matTooltip="Fecha de nacimiento"
                                         [for]="pickerBirth">
@@ -45,8 +48,9 @@
                             </div>
                             <div flex-gt-sm="40">
                                 <mat-form-field>
-                                    <input matInput [max]="maxToDate" placeholder={{author.deathDate}}
-                                        [(ngModel)]="dateDeath" [matDatepicker]="pickerDeath"
+                                    <input  name="deatDate" matInput [max]="maxToDate" value={{author.deathDate}}  placeholder="Fecha de defunción" #authorFormElement
+                                    #authorFormControl="ngModel"
+                                        [(ngModel)]="author.deathDate" [matDatepicker]="pickerDeath"
                                         [ngModelOptions]="{standalone: true}" />
                                     <mat-datepicker-toggle matSuffix matTooltip="Fecha de defunción"
                                         [for]="pickerDeath">
@@ -58,14 +62,16 @@
                         <div flex layout-gt-sm="row" layout-align="center start">
                             <div flex-gt-sm="80">
                                 <mat-form-field>
-                                    <input type="text" matInput placeholder={{author.bornPlace}}>
+                                    <input type="text" matInput  name="bornPlace"placeholder="Lugar de nacimiento" [(ngModel)]="author.bornPlace"value={{author.bornPlace}} #authorFormElement
+                                    #authorFormControl="ngModel">
                                 </mat-form-field>
                             </div>
                         </div>
                         <div flex layout-gt-sm="row" layout-align="center start">
                             <div flex-gt-sm="80">
                                 <mat-form-field>
-                                    <input type="text" matInput placeholder={{author.urlMap}}>
+                                    <input type="text" matInput  name="urlMap" placeholder="URL Mapa" [(ngModel)]="author.urlMap" value={{author.urlMap}} #authorFormElement
+                                    #authorFormControl="ngModel">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -77,7 +83,7 @@
                         </div>
                         <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
                             <div flex-gt-sm="80">
-                                <button mat-stroked-button>
+                                <button mat-stroked-button (click)="saveEditAuthor(author)">
                                     <mat-icon>edit</mat-icon>
                                     Editar
                                 </button>
@@ -93,7 +99,7 @@
                 <div flex-gt-sm="40">
                     <img src="{{'image/' + author.imgId}}">
                     <iframe class="push-top-xs"
-                        src="https://www.google.com/maps/place/Calama,+Regi%C3%B3n+de+Antofagasta,+Chile/@-22.4611894,-68.9584051,13z/data=!3m1!4b1!4m5!3m4!1s0x96ab978f95a58b0d:0xfe7a093627c72306!8m2!3d-22.4543923!4d-68.9293819"
+                        src="{{author.urlMap}}"
                         frameborder="0" style="border:0"></iframe>
                     <!--Image and Map-->
                 </div>
