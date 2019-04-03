@@ -58,6 +58,26 @@ export class BookService {
       );
   }
 
+  saveBook (book:Book){
+    const body= JSON.stringify(book)
+    const headers = new Headers({'Content-Type': 'application/json',withCredentials: true});
+
+    if(!book.id){
+      return this.http.post(URL + "/" ,body, {headers})
+      .pipe(
+          map(response => response.json()),
+          catchError(error => this.handleError(error))
+      );
+    }
+    else{
+      return this.http.patch(URL + "/" +book.id,body, {headers})
+      .pipe(
+          map(response => response.json()),
+          catchError(error => this.handleError(error))
+      );
+    }  
+  }
+
   private handleError(error: any) {
     console.error(error);
     return Observable.throw('Server error book (' + error.status + '): ' + error.text());

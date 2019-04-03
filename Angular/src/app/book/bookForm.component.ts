@@ -15,16 +15,31 @@ import { LoginService } from '../login/login.service';
 })
 export class BookFormComponent {
    
+    book:Book;
+
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,
+        public service: BookService,
         public loginService: LoginService
-    ){}
+    ){            
+        this.book={
+            title:''
+        }
+    }
 
 
 // Timeframe
 date: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);
 
+saveBook(book:Book) {
+    console.log(book)
+    this.service.saveBook(book).subscribe(
+        _ => {},
+        (error: Error) => console.error('Error updating a book: ' + error),
+    ); 
+    window.history.back();
+}
 
 gotoBooks() {
     this.router.navigate(['/books']);

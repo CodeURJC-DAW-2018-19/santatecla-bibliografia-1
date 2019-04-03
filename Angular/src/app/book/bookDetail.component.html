@@ -17,18 +17,18 @@
       <mat-divider></mat-divider>
       <div flex layout-gt-sm="row" layout-align="center center">
         <div flex-gt-sm="60">
-          <form flex>
+          <form flex #bookForm="ngForm">
             <div flex layout-gt-sm="row" layout-align="center start">
               <div flex-gt-sm="80">
                 <mat-form-field>
-                  <input type="text" matInput placeholder={{book.title}}>
+                  <input type="text" matInput name="titulo"[(ngModel)]="book.title"placeholder="Titulo Obra" value={{book.title}}>
                 </mat-form-field>
               </div>
             </div>
             <div flex layout-gt-sm="row" layout-align="center start">
               <div flex-gt-sm="80">
                 <mat-form-field>
-                  <input type="text" matInput placeholder={{book.urlImgCoverPage}}>
+                  <input type="text" matInput name="urlImgCoverPage"[(ngModel)]="book.urlImgCoverPage" placeholder="URL Portada"value={{book.urlImgCoverPage}}>
                 </mat-form-field>
               </div>
             </div>
@@ -36,7 +36,7 @@
               <div flex-gt-sm="80">
                 <div flex-gt-sm="50">
                   <mat-form-field>
-                    <input matInput [max]="maxToDate" placeholder={{book.publishDate}} [(ngModel)]="date"
+                    <input matInput [max]="maxToDate" name="publishDate"placeholder="Fecha de Publicación" value={{book.publishDate}} [(ngModel)]="book.publishDate"
                       [matDatepicker]="pickerDate" [ngModelOptions]="{standalone: true}" />
                     <mat-datepicker-toggle matSuffix matTooltip="Fecha" [for]="pickerDate"></mat-datepicker-toggle>
                     <mat-datepicker #pickerDate [startAt]="date"></mat-datepicker>
@@ -47,14 +47,14 @@
             <div flex layout-gt-sm="row" layout-align="center start">
               <div flex-gt-sm="80">
                 <mat-form-field>
-                  <input type="text" matInput placeholder={{book.nameEdit}}>
+                  <input type="text" matInput name="nameEdit" placeholder="Nombre Editorial" [(ngModel)]="book.nameEdit" value={{book.nameEdit}}>
                 </mat-form-field>
               </div>
             </div>
             <div flex layout-gt-sm="row" layout-align="center start">
               <div flex-gt-sm="80">
                 <mat-form-field>
-                  <input type="text" matInput placeholder={{book.urlEdit}}>
+                  <input type="text" matInput name="urlEdit" placeholder="URL Editorial" [(ngModel)]="book.urlEdit"value={{book.urlEdit}}>
                 </mat-form-field>
               </div>
             </div>
@@ -77,11 +77,11 @@
             </div>
             <div class="push-top-lg" flex layout-gt-sm="row" *ngIf="loginService.isLogged && loginService.isAdmin"layout-align="center start">
               <div flex-gt-sm="80">
-                <button mat-stroked-button>
+                <button mat-stroked-button (click)=saveBook(book)>
                   <mat-icon>save</mat-icon>
                   Guardar
                 </button>
-                <button mat-stroked-button class="push-left-md">
+                <button mat-stroked-button class="push-left-md" (click)="deleteBook(book)">
                   <mat-icon>delete</mat-icon>
                   Eliminar
                 </button>
