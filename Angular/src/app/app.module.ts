@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { JsonpModule, HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatIconRegistry } from '@angular/material/icon';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -54,6 +54,9 @@ import { ThemeFormComponent } from './theme/themeForm.component';
 import { ThemeDetailComponent } from './theme/themeDetail.component';
 
 import { routing } from './app.routing';
+import { ErrorInterceptor } from './login/error.interceptor';
+import { BasicAuthInterceptor } from './login/auth.interceptor';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -85,7 +88,11 @@ import { routing } from './app.routing';
         AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent],
 
     bootstrap: [AppComponent],
-    providers: [BookService, AuthorService, ThemeService, LoginService]
+    providers: [BookService, AuthorService, ThemeService, LoginService,
+        { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: LocationStrategy, useClass: HashLocationStrategy }
+    ],
 })
 export class AppModule {
     constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
