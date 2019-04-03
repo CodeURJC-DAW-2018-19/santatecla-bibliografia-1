@@ -17,14 +17,25 @@ import { LoginService } from '../login/login.service';
 })
 export class AuthorFormComponent {
 
+    author: Author;
+
     constructor(
         private router: Router, 
         public activatedRoute: ActivatedRoute, 
         public service: AuthorService,
-        public loginService: LoginService) {}
-// Timeframe
-dateDeath: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);
-dateBirth: Date = new Date(new Date().getTime() - 1 * 60 * 60 * 24 * 1000);
-
+        public loginService: LoginService) {
+            this.author={
+                name:'',
+            }
+        }
+    
+    saveAuthor(author:Author) {
+        console.log(author)
+        this.service.saveAuthor(author).subscribe(
+            _ => {},
+            (error: Error) => console.error('Error updating an author: ' + error),
+        ); 
+        window.history.back();
+    }
 
 }

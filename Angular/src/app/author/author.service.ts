@@ -70,17 +70,24 @@ export class AuthorService {
         );
     }
 
-    patchAuthor (author:Author){
+    saveAuthor (author:Author){
       const body= JSON.stringify(author)
       const headers = new Headers({'Content-Type': 'application/json',withCredentials: true});
 
-      return this.http.patch(URL + "/" +author.id,body, {headers})
-      .pipe(
-          map(response => response.json()),
-
-          catchError(error => this.handleError(error))
-
-      );
+      if(!author.id){
+        return this.http.post(URL + "/" ,body, {headers})
+        .pipe(
+            map(response => response.json()),
+            catchError(error => this.handleError(error))
+        );
+      }
+      else{
+        return this.http.patch(URL + "/" +author.id,body, {headers})
+        .pipe(
+            map(response => response.json()),
+            catchError(error => this.handleError(error))
+        );
+      }  
     }
 
 

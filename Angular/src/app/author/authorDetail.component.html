@@ -83,11 +83,11 @@
                         </div>
                         <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
                             <div flex-gt-sm="80">
-                                <button mat-stroked-button (click)="saveEditAuthor(author)">
+                                <button mat-stroked-button (click)="saveAuthor(author)">
                                     <mat-icon>edit</mat-icon>
                                     Editar
                                 </button>
-                                <button mat-stroked-button class="push-left-md">
+                                <button mat-stroked-button (click)="deleteAuthor(author)"class="push-left-md">
                                     <mat-icon>delete</mat-icon>
                                     Eliminar
                                 </button>
