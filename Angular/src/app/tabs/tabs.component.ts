@@ -12,17 +12,14 @@ export class TabsComponent implements OnInit {
   private nTabs: Tab[] = [];
 
   constructor(
-    private tabsService:TabsService
-    ){}
+    private tabsService: TabsService
+  ) { }
 
   ngOnInit() {
-    this.exampleTabs();
+    this.nTabs = this.tabsService.initTabs();
   }
 
-  exampleTabs(){
-    return this.nTabs = this.tabsService.exampleTabs();;
-  } 
 
-  
+
 }
 
