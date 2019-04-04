@@ -19,12 +19,16 @@ export class TabsService {
         }
     }
 
-    addNewTab(name: string, url: string){
+    addTab(name: string, url: string) {
         this.nTabs.push(new Tab(name, url));
+        console.log("current tab", url)
+        this.showTabs();
     }
 
-    addTab(name: string, url: string) {
-        this.nTabs.push(new Tab("name", "url"));
+    showTabs(){
+        for (let tab in this.nTabs){
+            console.log("tab: ",tab);
+        }
     }
 
     exampleTabs(){

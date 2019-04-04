@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Author, AuthorService } from './author.service';
 import { LoginService } from '../login/login.service';
 import { TdDialogService } from '@covalent/core';
+import { TabsService } from "../tabs/tabs.service";
 
 @Component({
   templateUrl: './authorDetail.component.html',
@@ -17,7 +18,9 @@ export class AuthorDetailComponent implements OnInit{
         public activatedRoute: ActivatedRoute, 
         public service: AuthorService,
         public loginService: LoginService,
-        private _dialogService: TdDialogService,) {}
+        private _dialogService: TdDialogService,
+        private tabsService:TabsService
+        ) {}
 
     ngOnInit() {
         const id = this.activatedRoute.snapshot.params['id'];
@@ -26,6 +29,8 @@ export class AuthorDetailComponent implements OnInit{
             error => console.error(error)
         );
         console.log("Current location:", this.router.url);
+        this.tabsService.addTab("Autor ex", this.router.url);
+
     }
 
     saveAuthor(author:Author) {
