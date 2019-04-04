@@ -12,11 +12,16 @@ export class TabsService {
 
     constructor(private http: Http) { }
 
-    removeTab(name: string) {
-        for (var i = 0; i < this.nTabs.length; i++) {
-            if (this.nTabs[i].Name === name) {
-                this.nTabs.splice(i);
-            }
+    removeTab(tab: Tab) {
+        let index = this.nTabs.indexOf(tab);
+        this.nTabs.splice(index);
+        this.showTabs();
+        return this.nTabs;
+    }
+
+    showTabs() {
+        for (let tab in this.nTabs) {
+            console.log("tab: ", tab)
         }
     }
 
@@ -28,23 +33,23 @@ export class TabsService {
                 exist = true;
             }
         }
-        if (!exist){
+        if (!exist) {
             this.nTabs.push(new Tab(name, url));
             console.log("current tab", url)
-        }   
+        }
     }
 
-    initTabs(){
+    initTabs() {
         return this.nTabs;
     }
 
-    exampleTabs(){
+    exampleTabs() {
         this.nTabs.push(new Tab("Inicio", "/"));
         this.nTabs.push(new Tab("Temas", "/theme"));
         this.nTabs.push(new Tab("Autores", "/author"));
         this.nTabs.push(new Tab("Libros", "/book"));
         return this.nTabs;
-      } 
+    }
 
     changeTab(name: string) {
         console.log("1");

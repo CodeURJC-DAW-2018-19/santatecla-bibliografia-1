@@ -19,6 +19,10 @@ export class TabsComponent implements OnInit {
     this.nTabs = this.tabsService.initTabs();
   }
 
+  closeTab(url:string){
+    console.log("close tabs")
+    this.nTabs = this.tabsService.removeTab(url);
+  }
 
 
 }
