@@ -12,9 +12,19 @@ export class TabsService {
 
     constructor(private http: Http) { }
 
+    saveLocalstorage(){
+        localStorage.setItem('nTabs', JSON.stringify(this.nTabs));
+    }
+
+    getLocalstorage(){
+        this.nTabs = JSON.parse(localStorage.getItem('nTabs'));
+        return this.nTabs;
+    }
+
     removeTab(tab: Tab) {
         let index = this.nTabs.indexOf(tab);
         this.nTabs.splice(index);
+        this.saveLocalstorage();
         this.showTabs();
         return this.nTabs;
     }
@@ -37,6 +47,7 @@ export class TabsService {
             this.nTabs.push(new Tab(name, url));
             console.log("current tab", url)
         }
+        this.saveLocalstorage();
     }
 
     initTabs() {
