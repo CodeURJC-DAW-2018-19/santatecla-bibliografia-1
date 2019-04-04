@@ -16,6 +16,7 @@ import { BookService } from './book/book.service';
 import { AuthorService } from './author/author.service';
 import { ThemeService } from './theme/theme.service';
 import { LoginService } from './login/login.service';
+import { TabsService } from './tabs/tabs.service';
 
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component'
@@ -88,7 +89,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
         AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent],
 
     bootstrap: [AppComponent],
-    providers: [BookService, AuthorService, ThemeService, LoginService,
+    providers: [BookService, AuthorService, ThemeService, LoginService, TabsService,
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: LocationStrategy, useClass: HashLocationStrategy }

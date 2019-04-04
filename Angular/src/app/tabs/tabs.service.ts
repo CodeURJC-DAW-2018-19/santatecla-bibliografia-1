@@ -1,0 +1,56 @@
+import { Injectable } from '@angular/core';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators'
+import { HttpHeaders } from '@angular/common/http';
+import { Tab } from './tab';
+
+@Injectable()
+export class TabsService {
+    private nTabs: Tab[] = [];
+
+    constructor(private http: Http) { }
+
+    removeTab(name: string) {
+        for (var i = 0; i < this.nTabs.length; i++) {
+            if (this.nTabs[i].Name === name) {
+                this.nTabs.splice(i);
+            }
+        }
+    }
+
+    addNewTab(name: string, url: string){
+        this.nTabs.push(new Tab(name, url));
+    }
+
+    addTab(name: string, url: string) {
+        this.nTabs.push(new Tab("name", "url"));
+    }
+
+    exampleTabs(){
+        this.nTabs.push(new Tab("Inicio", "/"));
+        this.nTabs.push(new Tab("Temas", "/theme"));
+        this.nTabs.push(new Tab("Autores", "/author"));
+        this.nTabs.push(new Tab("Libros", "/book"));
+        return this.nTabs;
+      } 
+
+    changeTab(name: string) {
+        console.log("1");
+        if (name === "Inicio") {
+            console.log("1");
+            //this.router.navigateByUrl('/');
+        } else if (name === "Temas") {
+            //this.router.navigateByUrl('/themes');
+            console.log("1");
+        } else if (name === "Autores") {
+            //this.router.navigateByUrl('/authors');
+            console.log("1");
+        } else if (name === "Libros") {
+            //this.router.navigateByUrl('/libros');
+            console.log("1");
+        }
+
+    };
+
+}

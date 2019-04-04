@@ -23,5 +23,6 @@ export class ThemeDetailComponent implements OnInit{
             theme => this.theme = theme,
             error => console.error(error)
         );
+        console.log("Current location:", this.router.url);
     }
 }

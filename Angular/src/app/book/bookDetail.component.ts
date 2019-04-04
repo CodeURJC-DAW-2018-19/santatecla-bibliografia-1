@@ -23,13 +23,13 @@ export class BookDetailComponent implements OnInit{
         }
 
     ngOnInit() {
-        
         const id = this.activatedRoute.snapshot.params['id'];
         
         this.service.getBook(id).subscribe(
             book => this.book = book,
             error => console.error(error)
         );
+        console.log("Current location:", this.router.url);
     }
 
     saveBook(book:Book) {

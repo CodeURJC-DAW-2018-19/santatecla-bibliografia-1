@@ -25,6 +25,7 @@ export class AuthorDetailComponent implements OnInit{
             author => this.author = author,
             error => console.error(error)
         );
+        console.log("Current location:", this.router.url);
     }
 
     saveAuthor(author:Author) {
