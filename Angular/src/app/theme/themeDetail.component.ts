@@ -24,12 +24,12 @@ export class ThemeDetailComponent implements OnInit {
             params => {
                 const id = params['id'];
                 this.service.getTheme(id).subscribe(
-                    theme => this.theme = theme,
+                    theme => {
+                        this.theme = theme;
+                        this.tabsService.addTab(this.theme.name, this.router.url);
+                    },
                     error => console.error(error)
                 );
-                console.log("Current location:", this.router.url);
-                console.log("Current location:", this.router.url);
-                this.tabsService.addTab("tema", this.router.url);
             }
         )
     }

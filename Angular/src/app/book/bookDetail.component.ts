@@ -30,12 +30,13 @@ export class BookDetailComponent implements OnInit {
                 const id = params['id'];
 
                 this.service.getBook(id).subscribe(
-                    book => this.book = book,
+                    book =>{ 
+                        this.book = book;
+                        this.tabsService.addTab(this.book.title, this.router.url);
+                    },
                     error => console.error(error)
                 );
-                console.log("Current location:", this.router.url);
-                console.log("Current location:", this.router.url);
-                this.tabsService.addTab("libro", this.router.url);
+                console.log("Current location:", this.router.url); 
             }
         )
     }

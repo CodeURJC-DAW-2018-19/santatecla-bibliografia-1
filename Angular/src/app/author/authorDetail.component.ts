@@ -27,11 +27,12 @@ export class AuthorDetailComponent implements OnInit {
             params => {
                 const id = params['id'];
                 this.service.getAuthor(id).subscribe(
-                    author => this.author = author,
+                    author => {
+                        this.author = author;
+                        this.tabsService.addTab(this.author.name, this.router.url);
+                    },
                     error => console.error(error)
-                );
-                console.log("Current location:", this.router.url);
-                this.tabsService.addTab("author", this.router.url);
+                );  
             }
         )
     }
