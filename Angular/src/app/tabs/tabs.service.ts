@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
 import { HttpHeaders } from '@angular/common/http';
 import { Tab } from './tab';
+import { exists } from 'fs';
+import { prepareSyntheticListenerFunctionName } from '@angular/compiler/src/render3/util';
 
 @Injectable()
 export class TabsService {
@@ -20,8 +22,17 @@ export class TabsService {
     }
 
     addTab(name: string, url: string) {
-        this.nTabs.push(new Tab(name, url));
-        console.log("current tab", url)
+        let exist: Boolean;
+        exist = false;
+        for (var i = 0; i < this.nTabs.length; i++) {
+            if (this.nTabs[i].Url === url) {
+                exist = true;
+            }
+        }
+        if (!exist){
+            this.nTabs.push(new Tab(name, url));
+            console.log("current tab", url)
+        }   
         this.showTabs();
     }
 

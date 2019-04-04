@@ -29,7 +29,7 @@ export class AuthorDetailComponent implements OnInit{
             error => console.error(error)
         );
         console.log("Current location:", this.router.url);
-        this.tabsService.addTab("Autor ex", this.router.url);
+        this.tabsService.addTab(this.author.name, this.router.url);
 
     }
 
