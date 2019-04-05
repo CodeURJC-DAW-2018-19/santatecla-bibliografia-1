@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
 import { Theme } from '../theme/theme.service';
 import { Author } from '../author/author.service';
+import { Citation } from '../citation/citation.service';
 
 
 export interface Book {
@@ -17,6 +18,7 @@ export interface Book {
   imgId?: number;
   theme?:Theme;
   author?:Author;
+  citation?:Citation[];
 }
 
 const URL = '/api/books';

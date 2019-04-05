@@ -9,7 +9,7 @@
     <mat-card>
         <mat-card-title>
             <div layout="row" layout-align="start center">
-                <span flex>Columna de temas</span>
+                <span flex>Columna de citas</span>
             </div>
         </mat-card-title>
         <mat-divider></mat-divider>
@@ -21,7 +21,7 @@
                         <mat-card style="margin-top: 0%">
                             <mat-card-content>
                                 <div  *ngIf="loginService.isLogged" >
-                                    <button mat-button (click)="deleteTheme(theme)">
+                                    <button mat-button (click)="deleteCitation(citation)">
                                         <mat-icon>delete</mat-icon>
                                     </button>
                                 </div>

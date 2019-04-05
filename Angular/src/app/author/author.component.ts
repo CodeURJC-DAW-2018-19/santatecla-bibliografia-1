@@ -7,6 +7,7 @@ import { TdDialogService } from '@covalent/core';
 import { Book } from '../book/book.service';
 import { Theme} from '../theme/theme.service';
 import { ThemeColumnComponent } from '../theme/themeColumn.component';
+import { Citation } from '../citation/citation.service';
 
 @Component({
   templateUrl: './author.component.html',
@@ -16,21 +17,27 @@ export class AuthorComponent implements OnInit{
     author: Author;
     books:Book[];
     themes: Theme[];
+    citations:Citation[]
 
     constructor(
         private router: Router, 
         public activatedRoute: ActivatedRoute, 
         public service: AuthorService,
         public loginService: LoginService,
-        private _dialogService: TdDialogService,) {this.themes=[]}
+        private _dialogService: TdDialogService,) {this.themes=[]; this.citations=[];this.books=[]}
 
     ngOnInit() {
         const id = this.activatedRoute.snapshot.params['id'];
+        var aux:Citation[];
         this.service.getAuthor(id).subscribe(
             author => {this.author = author
             this.books=this.author.books
             this.books.forEach(book=>{
                 this.themes.push(book.theme)
+                aux=book.citation
+                aux.forEach(cit=>{
+                    this.citations.push(cit)
+                })
             })
             console.log(this.author)
         },
