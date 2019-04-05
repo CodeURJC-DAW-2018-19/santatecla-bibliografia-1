@@ -1,0 +1,55 @@
+<style>
+    #container {
+        -webkit-column-count: 2;
+        -webkit-column-gap: 2px;
+    }
+</style>
+
+<div>
+    <mat-card>
+        <mat-card-title>
+            <div layout="row" layout-align="start center">
+                <span flex>Columna de temas</span>
+            </div>
+        </mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
+                style="overflow:scroll;height: 370px;overflow-x: hidden">
+                <section id="container">
+                    <div *ngFor="let citation of citations" mat-list-item>
+                        <mat-card style="margin-top: 0%">
+                            <mat-card-content>
+                                <div  *ngIf="loginService.isLogged" >
+                                    <button mat-button (click)="deleteTheme(theme)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+                                <a >{{citation.text}}</a>
+                                <img mat-card-image style="height:10em;width:10em;" src="../assets/theme.png"
+                                    >
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </section>
+            </div>
+            <div flex layout-gt-sm="row">
+                <button matTooltip="Cargar Más" matTooltipPosition="before" type="button" mat-icon-button
+                    (click)="loadMore()">
+                    <mat-icon>expand_more</mat-icon>
+                </button>
+                <button *ngIf="loginService.isLogged && loginService.isAdmin" mat-raised-button matTooltip="Nuevo Tema"
+                    class="push-left-md" (click)="newCitation()">
+                    <mat-icon>add</mat-icon> Nuevo
+                </button>
+                <span flex *ngIf="!searchBox.searchVisible"></span>
+                <td-search-box hide-xs flex #searchBox
+                    [ngClass]="{ 'push-left push-right mat-whiteframe-z1 bgc-white tc-black': searchBox.searchVisible }"
+                    placeholder="search" [(ngModel)]=text (search)="searchCitation(text)">
+                </td-search-box>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
