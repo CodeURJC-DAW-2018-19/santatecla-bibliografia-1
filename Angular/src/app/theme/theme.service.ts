@@ -6,10 +6,12 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
+import { Book } from '../book/book.service';
 
 export interface Theme {
   id?: number;
   name: string;
+  books:Book[];
 }
 
 const URL = '/api/themes';
@@ -47,6 +49,25 @@ export class ThemeService {
       );
   }
 
+  saveTheme (theme:Theme){
+    const body= JSON.stringify(theme)
+    const headers = new Headers({'Content-Type': 'application/json',withCredentials: true});
+
+    if(!theme.id){
+      return this.http.post(URL + "/" ,body, {headers})
+      .pipe(
+          map(response => response.json()),
+          catchError(error => this.handleError(error))
+      );
+    }
+    else{
+      return this.http.patch(URL + "/" +theme.id,body, {headers})
+      .pipe(
+          map(response => response.json()),
+          catchError(error => this.handleError(error))
+      );
+    }  
+  }
 
   searchTheme(name:string){
     return this.http.get(URL + "?name=" + name, { withCredentials: true })

@@ -14,6 +14,7 @@ import { ThemeDetailComponent } from './theme/themeDetail.component';
 import { AuthorComponent } from './author/author.component';
 import { IndexComponent } from './index/index.component';
 import { BookComponent } from './book/book.component';
+import { ThemeComponent } from './theme/theme.component';
 
 const appRoutes = [
   /*{ path: 'books', component: BookListComponent, useAsDefault: true },
@@ -25,7 +26,7 @@ const appRoutes = [
   { path: 'theme', component: ThemeFormComponent },
   { path: 'author/:id', component: AuthorComponent },
   { path: 'book/:id', component: BookComponent },
-  { path: 'theme/:id', component: ThemeDetailComponent },
+  { path: 'theme/:id', component: ThemeComponent },
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

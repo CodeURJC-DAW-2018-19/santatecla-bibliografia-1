@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Theme, ThemeService } from './theme.service';
@@ -7,9 +7,10 @@ import { TabsService } from "../tabs/tabs.service";
 
 @Component({
     templateUrl: './themeDetail.component.html',
+    selector: 'themeDetail',
 })
-export class ThemeDetailComponent implements OnInit {
-
+export class ThemeDetailComponent {
+    @Input()
     theme: Theme;
 
     constructor(
@@ -19,18 +20,5 @@ export class ThemeDetailComponent implements OnInit {
         public loginService: LoginService,
         private tabsService: TabsService) { }
 
-    ngOnInit() {
-        this.activatedRoute.params.subscribe(
-            params => {
-                const id = params['id'];
-                this.service.getTheme(id).subscribe(
-                    theme => {
-                        this.theme = theme;
-                        this.tabsService.addTab(this.theme.name, this.router.url);
-                    },
-                    error => console.error(error)
-                );
-            }
-        )
-    }
+
 }

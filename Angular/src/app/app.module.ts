@@ -62,6 +62,7 @@ import { BasicAuthInterceptor } from './login/auth.interceptor';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { CitationColumnComponent } from './citation/citationColumn.component';
 import { CitationService } from './citation/citation.service';
+import { ThemeComponent } from './theme/theme.component';
 
 
 @NgModule({
@@ -90,7 +91,7 @@ import { CitationService } from './citation/citation.service';
     declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, 
         AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
-        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,CitationColumnComponent],
+        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,ThemeComponent,CitationColumnComponent],
 
     bootstrap: [AppComponent],
     providers: [BookService, AuthorService, ThemeService, LoginService, TabsService,CitationService,
