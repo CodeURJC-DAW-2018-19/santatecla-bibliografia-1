@@ -15,7 +15,7 @@
                         <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu xPosition="before" #settings1="matMenu">
-                        <button mat-menu-item (click)="openTemplate()">Settings</button>
+                       <!-- <button mat-menu-item (click)="openTemplate()">Settings</button>-->
                         <mat-divider></mat-divider>
                         <button mat-menu-item>Remove</button>
                     </mat-menu>
@@ -58,7 +58,7 @@
                                 <mat-card-content>
                                     <p>{{author.name}}</p>
                                     <img mat-card-image style="height:10em;width:10em;"
-                                     src="{{'image/' + author.imgId}}" [routerLink]="['/author', author.id]">
+                                     src="{{aux+'image/' + author.imgId}}" [routerLink]="['/author', author.id]">
                                 </mat-card-content>
                             </mat-card>
                         </a>
