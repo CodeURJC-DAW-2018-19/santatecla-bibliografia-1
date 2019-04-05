@@ -13,6 +13,7 @@ import { ThemeFormComponent } from './theme/themeForm.component';
 import { ThemeDetailComponent } from './theme/themeDetail.component';
 import { AuthorComponent } from './author/author.component';
 import { IndexComponent } from './index/index.component';
+import { BookComponent } from './book/book.component';
 
 const appRoutes = [
   /*{ path: 'books', component: BookListComponent, useAsDefault: true },
@@ -23,7 +24,7 @@ const appRoutes = [
   { path: 'author', component: AuthorFormComponent },
   { path: 'theme', component: ThemeFormComponent },
   { path: 'author/:id', component: AuthorComponent },
-  { path: 'book/:id', component: BookDetailComponent },
+  { path: 'book/:id', component: BookComponent },
   { path: 'theme/:id', component: ThemeDetailComponent },
 ];
 

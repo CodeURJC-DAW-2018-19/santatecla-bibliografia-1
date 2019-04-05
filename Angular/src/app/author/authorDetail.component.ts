@@ -6,8 +6,8 @@ import { LoginService } from '../login/login.service';
 import { TdDialogService } from '@covalent/core';
 
 @Component({
-selector: 'authorDetail',
-  templateUrl: './authorDetail.component.html',
+    selector: 'authorDetail',
+    templateUrl: './authorDetail.component.html',
 })
 export class AuthorDetailComponent implements OnInit{
     @Input()

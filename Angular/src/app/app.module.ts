@@ -21,6 +21,7 @@ import { TabsService } from './tabs/tabs.service';
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
 import{AuthorComponent} from './author/author.component';
+import{BookComponent} from './book/book.component';
 
 
 import {
@@ -89,7 +90,7 @@ import { CitationService } from './citation/citation.service';
     declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, 
         AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
-        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,CitationColumnComponent],
+        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,CitationColumnComponent],
 
     bootstrap: [AppComponent],
     providers: [BookService, AuthorService, ThemeService, LoginService, TabsService,CitationService,

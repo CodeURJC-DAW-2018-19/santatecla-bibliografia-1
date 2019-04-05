@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Book, BookService } from './book.service';
@@ -6,10 +6,12 @@ import { LoginService } from '../login/login.service';
 import { TdDialogService } from '@covalent/core';
 
 @Component({
-  templateUrl: './bookDetail.component.html',
+    selector: 'bookDetail',
+    templateUrl: './bookDetail.component.html',
+
 })
 export class BookDetailComponent implements OnInit{
-
+    @Input()
     book: Book;
     
 
@@ -23,12 +25,7 @@ export class BookDetailComponent implements OnInit{
         }
 
     ngOnInit() {
-        const id = this.activatedRoute.snapshot.params['id'];
         
-        this.service.getBook(id).subscribe(
-            book => this.book = book,
-            error => console.error(error)
-        );
         console.log("Current location:", this.router.url);
     }
 

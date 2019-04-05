@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
@@ -13,7 +13,7 @@ import { LoginService } from '../login/login.service';
     animations: [tdRotateAnimation],
 })
 export class AuthorColumnComponent implements OnInit{
-   
+   @Input()
     authors: Author[];
     page: number;
     name:string; 
@@ -31,10 +31,14 @@ export class AuthorColumnComponent implements OnInit{
         var createUrl: string;
         createUrl = "?page=" + (this.page);
         console.log(createUrl);
-        this.service.getAuthors(createUrl).subscribe(
-           authors => this.authors = authors,
-           error => console.log(error)
-        );
+        if (this.authors!=null){
+        }
+        else{
+            this.service.getAuthors(createUrl).subscribe(
+            authors => this.authors = authors,
+            error => console.log(error)
+            );
+        }
     }
 
     searchAuthor(name:string){

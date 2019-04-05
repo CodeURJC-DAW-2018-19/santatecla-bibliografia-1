@@ -3,6 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
 import { Theme } from '../theme/theme.service';
+import { Author } from '../author/author.service';
 
 
 export interface Book {
@@ -14,7 +15,8 @@ export interface Book {
   urlImgCoverPage?: string;
   urlImgEdit?: string;
   imgId?: number;
-  theme:Theme;
+  theme?:Theme;
+  author?:Author;
 }
 
 const URL = '/api/books';
