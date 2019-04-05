@@ -29,18 +29,18 @@
                                         <div flex layout-gt-sm="row" layout-align="center start">
                                             <div flex-gt-sm="80">
                                                 <mat-form-field>
-                                                    <input type="text" matInput placeholder="Texto de la cita">
+                                                    <input type="text" matInput name="text"[(ngModel)]="citation.text"value={{citation.text}} placeholder="Texto de la cita">
                                                 </mat-form-field>
                                             </div>
                                         </div>
                                         <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" layout-align="center start">
                                             <div flex layout-gt-sm="row" layout-align="center start">
                                                 <div flex-gt-sm="80">
-                                                    <button mat-stroked-button>
+                                                    <button mat-stroked-button (click)="saveCitation(citation)">
                                                         <mat-icon>save</mat-icon>
                                                         Guardar
                                                     </button>
-                                                    <button mat-stroked-button class="push-left-md">
+                                                    <button mat-stroked-button class="push-left-md" (click)="deleteCitation(citation)">
                                                         <mat-icon>delete</mat-icon>
                                                         Eliminar
                                                     </button>

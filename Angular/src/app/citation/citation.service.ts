@@ -52,7 +52,25 @@ export class CitationService {
       );
   }
 
+  saveCitation (citation:Citation){
+    const body= JSON.stringify(citation)
+    const headers = new Headers({'Content-Type': 'application/json',withCredentials: true});
 
+    if(!citation.id){
+      return this.http.post(URL + "/" ,body, {headers})
+      .pipe(
+          map(response => response.json()),
+          catchError(error => this.handleError(error))
+      );
+    }
+    else{
+      return this.http.patch(URL + "/" +citation.id,body, {headers})
+      .pipe(
+          map(response => response.json()),
+          catchError(error => this.handleError(error))
+      ); 
+    }  
+  }
   searchCitation(text:string){
     return this.http.get(URL + "?text=" + text, { withCredentials: true })
       .pipe(
