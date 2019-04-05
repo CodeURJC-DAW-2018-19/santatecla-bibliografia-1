@@ -4,6 +4,7 @@ import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
 import {ActivatedRoute,Router} from '@angular/router'
 import { Author, AuthorService } from './author.service';
+import {environment} from '../../environment/environment';
 
 @Component({
     selector: 'authorColumn',
@@ -13,6 +14,8 @@ import { Author, AuthorService } from './author.service';
 })
 export class AuthorColumnComponent implements OnInit{
    
+    aux: String;
+
     authors: Author[];
     page: number;
     constructor(
@@ -21,6 +24,7 @@ export class AuthorColumnComponent implements OnInit{
         private service: AuthorService,
     ){
         this.page = 0;
+        this.aux = environment.baseRef;
     }
 
     ngOnInit() {

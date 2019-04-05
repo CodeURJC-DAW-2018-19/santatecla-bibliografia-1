@@ -22,7 +22,8 @@ export class BookFormComponent {
 
 // Timeframe
 date: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);
-
+//Provisional para poder hacer los cosos de docker
+maxToDate: Date;
 
 gotoBooks() {
     this.router.navigate(['/books']);

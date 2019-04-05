@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['tabs.component.css'],
 })
 export class TabsComponent implements OnInit {
-  private nTabs: Tab[] = [];
+  public nTabs: Tab[] = [];
   
 
   exampleTabs(){

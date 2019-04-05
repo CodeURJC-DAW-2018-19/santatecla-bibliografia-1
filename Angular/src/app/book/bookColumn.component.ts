@@ -4,6 +4,8 @@ import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
 import {ActivatedRoute,Router} from '@angular/router'
 import { Book, BookService } from './book.service';
+import {environment} from '../../environment/environment';
+
 
 @Component({
     selector: 'bookColumn',
@@ -14,7 +16,7 @@ import { Book, BookService } from './book.service';
 export class BookColumnComponent implements OnInit{
     
     books: Book[];
-
+    aux: String;
     page: number;
     constructor(
         private router: Router,
@@ -22,6 +24,7 @@ export class BookColumnComponent implements OnInit{
         private service: BookService,
     ){
         this.page = 0;
+        this.aux = environment.baseRef;
     }
 
     ngOnInit() {

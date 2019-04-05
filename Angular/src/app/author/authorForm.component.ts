@@ -18,6 +18,7 @@ export class AuthorFormComponent {
 // Timeframe
 dateDeath: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);
 dateBirth: Date = new Date(new Date().getTime() - 1 * 60 * 60 * 24 * 1000);
-
+//Provisional para poder hacer los cosos de docker
+maxToDate: Date;
 
 }
