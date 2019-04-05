@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormGroup } from '@angular/forms';
 import { JsonpModule, HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatIconRegistry } from '@angular/material/icon';
@@ -36,7 +36,7 @@ import {
     CovalentCommonModule, CovalentLayoutModule, CovalentMediaModule,CovalentExpansionPanelModule,
     CovalentStepsModule,CovalentLoadingModule,CovalentDialogsModule, CovalentSearchModule,
     CovalentPagingModule,CovalentNotificationsModule,CovalentMenuModule,CovalentDataTableModule, 
-    CovalentMessageModule,CovalentVirtualScrollModule,
+    CovalentMessageModule,CovalentVirtualScrollModule,CovalentFileModule,
 } from '@covalent/core';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -67,7 +67,7 @@ import { ThemeComponent } from './theme/theme.component';
 
 @NgModule({
     imports: [
-        BrowserModule, BrowserAnimationsModule,FormsModule,
+        BrowserModule, BrowserAnimationsModule,FormsModule,FormGroup,
         RouterModule.forRoot([]),HttpClientModule,JsonpModule,
         /** Material Modules */
         MatButtonModule,MatListModule, MatIconModule, MatCardModule,MatCheckboxModule,
@@ -81,7 +81,7 @@ import { ThemeComponent } from './theme/theme.component';
         CovalentMediaModule, CovalentExpansionPanelModule, CovalentStepsModule,
         CovalentDialogsModule, CovalentLoadingModule, CovalentSearchModule,
         CovalentPagingModule,CovalentNotificationsModule, CovalentMenuModule,
-        CovalentDataTableModule, CovalentMessageModule,
+        CovalentDataTableModule, CovalentMessageModule,CovalentFileModule,
         /** Additional **/
         NgxChartsModule,
         routing,

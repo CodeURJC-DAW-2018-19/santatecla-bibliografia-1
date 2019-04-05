@@ -73,6 +73,11 @@
                             </div>
                         </div>
                         <div flex layout-gt-sm="row" layout-align="center start">
+                            <td-file-input [(ngModel)]="files" color="primary" (select)="selectEvent($event)" accept=".ext,.anotherExt" [disabled]="disabled" multiple>
+                                <mat-icon>attach_file</mat-icon><span>Choose a file...</span>
+                            </td-file-input>
+                        </div>
+                        <div flex layout-gt-sm="row" layout-align="center start">
                             <div flex-gt-sm="30">
                                 <mat-checkbox>Libro 1</mat-checkbox>
                                 <mat-checkbox>Libro 2</mat-checkbox>

@@ -94,6 +94,12 @@ export class AuthorService {
       }  
     }
 
+    updateAuthorImage(id:number,formData:FormData){
+      this.http.post(URL+"/"+id+"/image", formData).subscribe(
+        (res) => console.log(res),
+        (err) => console.log(err)
+      );
+    }
 
     private extractData(res: Response) {
       let body = res.json();

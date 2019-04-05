@@ -8,6 +8,7 @@ import { single, multi, pie, times } from '../histogram/data';
 import { Author, AuthorService } from './author.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../login/login.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'authorForm',
@@ -18,6 +19,8 @@ import { LoginService } from '../login/login.service';
 export class AuthorFormComponent {
 
     author: Author;
+    uploadForm: FormGroup;
+    formBuilder:FormBuilder;
 
     constructor(
         private router: Router, 
@@ -27,15 +30,30 @@ export class AuthorFormComponent {
             this.author={
                 name:'',
             }
+            this.uploadForm = this.formBuilder.group({
+                profile: ['']
+              });
         }
+
+        
     
     saveAuthor(author:Author) {
         console.log(author)
+        const formData = new FormData();
+        formData.append('file', this.uploadForm.get('profile').value);
         this.service.saveAuthor(author).subscribe(
             _ => {},
             (error: Error) => console.error('Error updating an author: ' + error),
         ); 
         window.history.back();
+
+        this.service.updateAuthorImage(this.author.id,formData);
     }
 
+    selectEvent(event){
+        if (event.target.files.length > 0) {
+            const file = event.target.files[0];
+            this.uploadForm.get('profile').setValue(file);
+          }
+    }
 }
