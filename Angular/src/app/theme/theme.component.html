@@ -1,14 +1,19 @@
 <div flex layout-gt-sm="row" layout-align="center start" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
+    <div *ngIf='theme'flex-gt-sm="80">
+        <themeDetail [theme]='theme' [citations]='citations'></themeDetail>
+    </div>
     <!--Columns -->
     <div flex-gt-sm="33">
-        <themeColumn></themeColumn>
+        <authorColumn [authors]='authors'></authorColumn>
+    </div>
+    <div *ngIf='theme' flex-gt-sm="33">
+        <bookColumn [books]='books'></bookColumn>
     </div>
     <div flex-gt-sm="33">
-        <bookColumn></bookColumn>
+        <citationColumn [citations]='citations'></citationColumn>
     </div>
-    <div flex-gt-sm="33">
-        <authorColumn></authorColumn>
-    </div>
+    
+
     <div flex layout-gt-sm="row" layout-align="center center">
         <div flex-gt-sm="100">
             <button mat-raised-button matTooltip="Histograma" class="push-left-md">

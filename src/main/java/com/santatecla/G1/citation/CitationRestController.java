@@ -25,7 +25,7 @@ import com.santatecla.G1.user.UserComponent;
 @RequestMapping("/api")
 public class CitationRestController {
 	interface CitationDetailView
-			extends Citation.BasicView, Citation.BookView, Citation.ThemeView, Book.BasicView, Theme.BasicView, Book.AuthorView, Author.BasicView {
+			extends Citation.BasicView, Citation.BookView, Citation.ThemeView,Book.NameView, Book.BasicView, Theme.BasicView, Book.AuthorView, Author.NameView, Author.BasicView {
 	}
 
 	@Autowired
@@ -99,17 +99,17 @@ public class CitationRestController {
 		Citation oldCitation = citationService.findById(id);
 		if (oldCitation != null) {
 			oldCitation.update(newCitation);
-			Book book = new Book();
-			if (oldCitation.getBook() != null) {
-				book = bookService.findById(oldCitation.getBook().getId());
+			/*Book book = new Book();
+			if (newCitation.getBook() != null) {
+				book = bookService.findById(newCitation.getBook().getId());
 				if (book != null) {
-					book.addCitations(oldCitation);
+					book.addCitations(newCitation);
 					oldCitation.setBook(book);
 					bookService.save(book);
 				} else
 					return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			} else
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);*/
 			citationService.save(oldCitation);
 			return new ResponseEntity<>(oldCitation, HttpStatus.OK);
 		} else

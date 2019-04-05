@@ -9,7 +9,7 @@
     <mat-card>
         <mat-card-title>
             <div layout="row" layout-align="start center">
-                <span flex>Columna de temas</span>
+                <span flex>Columna de citas</span>
             </div>
         </mat-card-title>
         <mat-divider></mat-divider>
@@ -17,20 +17,17 @@
             <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
                 style="overflow:scroll;height: 370px;overflow-x: hidden">
                 <section id="container">
-                    <div *ngFor="let theme of themes" mat-list-item>
+                    <div *ngFor="let citation of citations" mat-list-item>
                         <mat-card style="margin-top: 0%">
-
-                            <mat-card-content *ngIf="loginService.isLogged">
-                                <button mat-button (click)="deleteTheme(theme)">
-                                    <mat-icon>delete</mat-icon>
-                                </button>
-                                <a [routerLink]="['/theme', theme.id]">{{theme.name}}</a>
-                                <img mat-card-image style="height:10em;width:10em;" src="assets/theme.png"
-                                    [routerLink]="['/theme', theme.id]">
-                            </mat-card-content>
-                            <mat-card-content *ngIf="!loginService.isLogged">
-                                <a>{{theme.name}}</a>
-                                <img mat-card-image style="height:10em;width:10em;" src="assets/theme.png">
+                            <mat-card-content>
+                                <div  *ngIf="loginService.isLogged" >
+                                    <button mat-button (click)="deleteCitation(citation)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+                                <a >{{citation.text}}</a>
+                                <img mat-card-image style="height:10em;width:10em;" src="../assets/theme.png"
+                                    >
                             </mat-card-content>
                         </mat-card>
                     </div>
@@ -42,13 +39,13 @@
                     <mat-icon>expand_more</mat-icon>
                 </button>
                 <button *ngIf="loginService.isLogged && loginService.isAdmin" mat-raised-button matTooltip="Nuevo Tema"
-                    class="push-left-md" (click)="newTheme()">
-                    <mat-icon>add</mat-icon> New
+                    class="push-left-md" (click)="newCitation()">
+                    <mat-icon>add</mat-icon> Nuevo
                 </button>
                 <span flex *ngIf="!searchBox.searchVisible"></span>
                 <td-search-box hide-xs flex #searchBox
                     [ngClass]="{ 'push-left push-right mat-whiteframe-z1 bgc-white tc-black': searchBox.searchVisible }"
-                    placeholder="search" [(ngModel)]=name (search)="searchTheme(name)">
+                    placeholder="search" [(ngModel)]=text (search)="searchCitation(text)">
                 </td-search-box>
             </div>
         </mat-card-content>

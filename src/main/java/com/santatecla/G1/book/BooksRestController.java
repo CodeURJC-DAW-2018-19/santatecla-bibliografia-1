@@ -32,7 +32,7 @@ import com.santatecla.G1.user.UserComponent;
 public class BooksRestController {
 	interface BookBasicView extends Book.NameView, Book.BasicView {} 
 	interface BookDetailView extends Book.NameView, Book.BasicView, Book.AuthorView, Book.CitationsView, Book.ThemeView,
-			Author.BasicView, Citation.BasicView, Theme.BasicView {}
+			Author.NameView,Author.BasicView, Citation.BasicView, Theme.BasicView {}
 
 	@Autowired
 	private UserComponent userComponent;

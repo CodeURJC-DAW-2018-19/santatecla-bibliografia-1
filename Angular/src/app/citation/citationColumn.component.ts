@@ -4,25 +4,26 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
 import {ActivatedRoute,Router} from '@angular/router'
-import { Theme, ThemeService } from './theme.service';
+
 import { LoginService } from '../login/login.service';
+import { Citation, CitationService } from './citation.service';
 
 @Component({
-    selector: 'themeColumn',
-    templateUrl: './themeColumn.component.html',
+    selector: 'citationColumn',
+    templateUrl: './citationColumn.component.html',
     styleUrls: ['../app.component.css'],
     animations: [tdRotateAnimation],
 })
-export class ThemeColumnComponent implements OnInit{
+export class CitationColumnComponent implements OnInit{
     @Input()
-    themes: Theme[];
+    citations: Citation[];
     page: number;
-    name: string;
+    text: string;
 
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,
-        private service: ThemeService,
+        private service: CitationService,
         public loginService: LoginService
     ){
         this.page=0;
@@ -32,51 +33,51 @@ export class ThemeColumnComponent implements OnInit{
         var createUrl: string;
         createUrl = "?page=" + (this.page);
         console.log(createUrl);
-        if(this.themes!=null){}
+        if(this.citations!=null){}
         else{
-            this.service.getThemes(createUrl).subscribe(
-            themes => this.themes = themes,
+            this.service.getCitations(createUrl).subscribe(
+            citations => this.citations = citations,
             error => console.log(error)
             );
         }
     }
 
-    searchTheme(name:string){
+    searchCitation(text:string){
         console.log("searchpulsado")
-        console.log("Theme search name: ", name)
-        this.service.searchTheme(name).subscribe(            
-            themes => this.themes = themes,
+        console.log("Citation search text: ", text)
+        this.service.searchCitation(text).subscribe(            
+            citations => this.citations = citations,
             error => console.log(error) 
         );
-        console.log(this.themes);
+        console.log(this.citations);
     }
 
-    deleteTheme(theme:Theme){
-        console.log("delete pulsado con id: ", theme.id)
-        let aux:Theme[];
-        aux = this.themes;
+    deleteCitation(citation:Citation){
+        console.log("delete pulsado con id: ", citation.id)
+        let aux:Citation[];
+        aux = this.citations;
         aux.forEach( (item, index) => {
-            if(item === theme) aux.splice(index,1);
+            if(item === citation) aux.splice(index,1);
           });
-        this.service.deleteTheme(theme).subscribe(            
-            themes =>  this.themes = aux,
+        this.service.deleteCitation(citation).subscribe(            
+            citations =>  this.citations = aux,
             error => console.log(error) 
         );
-        console.log(this.themes);
+        console.log(this.citations);
     }
 
     loadMore(){
         var createUrl: string;
         this.page +=1;
         createUrl = "?page=" + (this.page);
-        this.service.getThemes(createUrl).subscribe(
-            themes => this.themes = this.themes.concat(themes),
+        this.service.getCitations(createUrl).subscribe(
+            citations => this.citations = this.citations.concat(citations),
             error => console.log(error)
          );
-         console.log(this.themes);
+         console.log(this.citations);
     }
     
-    newTheme() {
+    newCitation() {
         this.router.navigate(['/theme']);
     }
 

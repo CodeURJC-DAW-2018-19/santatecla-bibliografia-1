@@ -6,6 +6,8 @@ import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnim
 import { DatePipe } from '@angular/common';
 import { single, multi, pie, times } from '../histogram/data';
 import { Author, AuthorService } from './author.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LoginService } from '../login/login.service';
 
 @Component({
     selector: 'authorForm',
@@ -15,10 +17,25 @@ import { Author, AuthorService } from './author.service';
 })
 export class AuthorFormComponent {
 
-// Timeframe
-dateDeath: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);
-dateBirth: Date = new Date(new Date().getTime() - 1 * 60 * 60 * 24 * 1000);
-//Provisional para poder hacer los cosos de docker
-maxToDate: Date;
+    author: Author;
+
+    constructor(
+        private router: Router, 
+        public activatedRoute: ActivatedRoute, 
+        public service: AuthorService,
+        public loginService: LoginService) {
+            this.author={
+                name:'',
+            }
+        }
+    
+    saveAuthor(author:Author) {
+        console.log(author)
+        this.service.saveAuthor(author).subscribe(
+            _ => {},
+            (error: Error) => console.error('Error updating an author: ' + error),
+        ); 
+        window.history.back();
+    }
 
 }

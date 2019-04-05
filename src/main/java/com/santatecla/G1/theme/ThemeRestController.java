@@ -26,8 +26,8 @@ import com.santatecla.G1.user.UserComponent;
 @RequestMapping("/api")
 public class ThemeRestController {
 	interface ThemeBasicView extends Theme.NameView, Theme.BasicView {}
-	interface ThemeDetailView extends Theme.BasicView, Theme.BooksView, Book.BasicView, Book.AuthorView,
-			Author.BasicView, Book.CitationsView, Citation.BasicView {
+	interface ThemeDetailView extends Theme.BasicView, Theme.BooksView,Book.NameView, Book.BasicView, Book.AuthorView,
+			Author.NameView,Author.BasicView, Book.CitationsView, Citation.BasicView {
 	}
 	
 	@Autowired

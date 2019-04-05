@@ -8,18 +8,8 @@
 <div>
     <mat-card>
         <mat-card-title>
-            <div layout="row" layout-align="start center">
+            <div layout="row" layout-align="start center">         
                 <span flex>Columna de autores</span>
-                <span>
-                    <button mat-icon-button matTooltip="Card settings" [mat-menu-trigger-for]="settings1">
-                        <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu xPosition="before" #settings1="matMenu">
-                       <!-- <button mat-menu-item (click)="openTemplate()">Settings</button>-->
-                        <mat-divider></mat-divider>
-                        <button mat-menu-item>Remove</button>
-                    </mat-menu>
-                </span>
             </div>
         </mat-card-title>
         <mat-divider></mat-divider>
@@ -53,15 +43,23 @@
             <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
                 style="overflow:scroll;height: 370px;overflow-x: hidden">
                 <section id="container">
-                    <a *ngFor="let author of authors" mat-list-item [routerLink]="['/author', author.id]">
+                    <div *ngFor="let author of authors" mat-list-item >
                             <mat-card style="margin-top: 0%"> 
-                                <mat-card-content>
-                                    <p>{{author.name}}</p>
+                                <mat-card-content *ngIf="loginService.isLogged">
+                                    <button mat-button (click)="deleteAuthor(author)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                    <a [routerLink]="['/author', author.id]">{{author.name}}</a>
                                     <img mat-card-image style="height:10em;width:10em;"
                                      src="{{aux+'image/' + author.imgId}}" [routerLink]="['/author', author.id]">
                                 </mat-card-content>
+                                <mat-card-content *ngIf="!loginService.isLogged">
+                                    <a>{{author.name}}</a>
+                                    <img mat-card-image style="height:10em;width:10em;"
+                                     src="{{'image/' + author.imgId}}" >
+                                </mat-card-content>
                             </mat-card>
-                        </a>
+                        </div>
                 </section>
             </div>
             <div flex layout-gt-sm="row">
@@ -69,13 +67,16 @@
                     (click)="loadMore()">
                     <mat-icon>expand_more</mat-icon>
                 </button>
-                <button mat-raised-button matTooltip="Nuevo Autor" class="push-left-md" (click)="newAuthor()">
+                <button *ngIf="loginService.isLogged && loginService.isAdmin" mat-raised-button matTooltip="Nuevo Autor" class="push-left-md" (click)="newAuthor()">
                     <mat-icon>add</mat-icon> New
                 </button>
                 <span flex *ngIf="!searchBox.searchVisible"></span>
                 <td-search-box hide-xs flex #searchBox
                     [ngClass]="{ 'push-left push-right mat-whiteframe-z1 bgc-white tc-black': searchBox.searchVisible }"
-                    placeholder="search"></td-search-box>
+                    placeholder="search"
+                    [(ngModel)]=name
+                    (search)="searchAuthor(name)">
+                </td-search-box>
             </div>
         </mat-card-content>
     </mat-card>

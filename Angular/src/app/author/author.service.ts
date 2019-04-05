@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
+import { HttpHeaders } from '@angular/common/http';
+import { Book } from '../book/book.service';
+import { Theme } from '../theme/theme.service';
 
 
 export interface Author {
@@ -13,6 +16,8 @@ export interface Author {
   bornPlace?: string;
   urlMap?: string;
   imgId?: number;
+  books?:Book[];
+  themes?:Theme[];
 }
 
 const URL = '/api/authors';
@@ -34,8 +39,65 @@ export class AuthorService {
       return this.http.get(URL + "/" +id, { withCredentials: true })
         .pipe(
             map(response => response.json()),
+
+
             catchError(error => this.handleError(error))
         );
+    }
+
+    // postAuthor(url: string, param: any) {
+    //   let body = JSON.stringify(param);
+    //   return this.http
+    //       .post(url, body)
+    //       .map(this.extractData)
+    //       .catchError(this.handleError);
+    //   }
+
+    deleteAuthor(author: Author) {
+      const headers = new Headers({
+        'X-Requested-With': 'XMLHttpRequest'
+      });
+      const options = new RequestOptions({ withCredentials: true, headers });
+  
+      return this.http.delete(URL + "/" + author.id, options)
+        .pipe(
+          map(response => undefined),
+          catchError(error => this.handleError(error))
+        );
+    }
+
+    searchAuthor(name:string){
+      return this.http.get(URL + "?name=" + name, { withCredentials: true })
+        .pipe(
+            map(response => response.json()),
+            catchError(error => this.handleError(error))
+        );
+    }
+
+    saveAuthor (author:Author){
+      const body= JSON.stringify(author)
+      const headers = new Headers({'Content-Type': 'application/json',withCredentials: true});
+
+      if(!author.id){
+        return this.http.post(URL + "/" ,body, {headers})
+        .pipe(
+            map(response => response.json()),
+            catchError(error => this.handleError(error))
+        );
+      }
+      else{
+        return this.http.patch(URL + "/" +author.id,body, {headers})
+        .pipe(
+            map(response => response.json()),
+            catchError(error => this.handleError(error))
+        );
+      }  
+    }
+
+
+    private extractData(res: Response) {
+      let body = res.json();
+      return body || {};
     }
 
     private handleError(error: any) {

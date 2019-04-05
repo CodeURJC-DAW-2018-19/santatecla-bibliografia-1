@@ -4,98 +4,101 @@
         margin-left: 5px;
     }
 </style>
+<div flex layout-gt-sm="row" layout-align="center start" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']" >
+    <div flex-gt-sm="80">
+        <mat-card>
+            <mat-card-title>
+                <div>
+                    <span hide-xs>Autor</span>
+                </div>
+            </mat-card-title>
+            <mat-divider></mat-divider>
+            <div flex layout-gt-sm="row" layout-align="center center">
+                <div flex-gt-sm="60">
+                    <form flex #authorForm="ngForm">
+                        <div flex layout-gt-sm="row" layout-align="center start">
+                            <div flex-gt-sm="80">
+                                <mat-form-field>
+                                    <input type="text" matInput  name="name" [(ngModel)]="author.name" #authorFormElement
+                                        #authorFormControl="ngModel" placeholder="Nombre">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div flex layout-gt-sm="row" layout-align="center start">
+                            <div flex-gt-sm="80">
+                                <mat-form-field>
+                                    <input type="text" matInput  name="urlImage"[(ngModel)]="author.urlImage"  #authorFormElement
+                                    #authorFormControl="ngModel" placeholder="URL Imagen">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div flex layout-gt-sm="row" layout-align="center start">
+                            <div flex-gt-sm="40">
+                                <mat-form-field>
+                                    <input  name="birthDate" matInput [max]="maxToDate"  placeholder="Fecha de nacimiento" #authorFormElement
+                                        #authorFormControl="ngModel"
+                                            [(ngModel)]="author.birthDate" [matDatepicker]="pickerBirth"
+                                            [ngModelOptions]="{standalone: true}" />
+                                    <mat-datepicker-toggle matSuffix matTooltip="Fecha de nacimiento" [for]="pickerBirth">
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #pickerBirth [startAt]="dateBirth"></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div flex-gt-sm="40">
+                                <mat-form-field>
+                                    <input  name="deatDate" matInput [max]="maxToDate" placeholder="Fecha de defunción" #authorFormElement
+                                    #authorFormControl="ngModel"
+                                        [(ngModel)]="author.deathDate" [matDatepicker]="pickerDeath"
+                                        [ngModelOptions]="{standalone: true}" />
+                                    <mat-datepicker-toggle matSuffix matTooltip="Fecha de defunción" [for]="pickerDeath">
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #pickerDeath [startAt]="dateDeath"></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div flex layout-gt-sm="row" layout-align="center start">
+                            <div flex-gt-sm="80">
+                                <mat-form-field>
+                                    <input type="text" matInput  name="bornPlace"placeholder="Lugar de nacimiento" [(ngModel)]="author.bornPlace"value={{author.bornPlace}} #authorFormElement
+                                        #authorFormControl="ngModel">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div flex layout-gt-sm="row" layout-align="center start">
+                            <div flex-gt-sm="80">
+                                <mat-form-field>
+                                    <input type="text" matInput  name="urlMap" placeholder="URL Mapa" [(ngModel)]="author.urlMap" value={{author.urlMap}} #authorFormElement
+                                        #authorFormControl="ngModel">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div flex layout-gt-sm="row" layout-align="center start">
+                            <div flex-gt-sm="30">
+                                <mat-checkbox>Libro 1</mat-checkbox>
+                                <mat-checkbox>Libro 2</mat-checkbox>
+                            </div>
+                        </div>
+                        <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
+                            <div flex-gt-sm="80">
+                                <button mat-stroked-button (click)="saveAuthor(author)"> 
+                                    <mat-icon>save</mat-icon>
+                                    Guardar
+                                </button>
+                            </div>
+                        </div>
 
-<div>
-    <mat-card>
-        <mat-card-title>
-            <div>
-                <span hide-xs>Autor</span>
+                    </form>
+                </div>
+                <div flex-gt-sm="40">
+                    <img src="assets/theme.png">
+                    <iframe class="push-top-xs"
+                        src=""
+                        frameborder="0" style="border:0"></iframe>
+                    <!--Image and Map-->
+                </div>
+
             </div>
-        </mat-card-title>
-        <mat-divider></mat-divider>
-        <div flex layout-gt-sm="row" layout-align="center center">
-            <div flex-gt-sm="60">
-                <form flex>
-                    <div flex layout-gt-sm="row" layout-align="center start">
-                        <div flex-gt-sm="80">
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Nombre">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div flex layout-gt-sm="row" layout-align="center start">
-                        <div flex-gt-sm="80">
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="URL Imagen">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div flex layout-gt-sm="row" layout-align="center start">
-                        <div flex-gt-sm="40">
-                            <mat-form-field>
-                                <input matInput [max]="maxToDate" placeholder="Fecha de nacimiento"
-                                    [(ngModel)]="dateBirth" [matDatepicker]="pickerBirth"
-                                    [ngModelOptions]="{standalone: true}" />
-                                <mat-datepicker-toggle matSuffix matTooltip="Fecha de nacimiento" [for]="pickerBirth">
-                                </mat-datepicker-toggle>
-                                <mat-datepicker #pickerBirth [startAt]="dateBirth"></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                        <div flex-gt-sm="40">
-                            <mat-form-field>
-                                <input matInput [max]="maxToDate" placeholder="Fecha de defunción"
-                                    [(ngModel)]="dateDeath" [matDatepicker]="pickerDeath"
-                                    [ngModelOptions]="{standalone: true}" />
-                                <mat-datepicker-toggle matSuffix matTooltip="Fecha de defunción" [for]="pickerDeath">
-                                </mat-datepicker-toggle>
-                                <mat-datepicker #pickerDeath [startAt]="dateDeath"></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div flex layout-gt-sm="row" layout-align="center start">
-                        <div flex-gt-sm="80">
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Lugar de nacimiento">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div flex layout-gt-sm="row" layout-align="center start">
-                        <div flex-gt-sm="80">
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="URL Mapa">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div flex layout-gt-sm="row" layout-align="center start">
-                        <div flex-gt-sm="30">
-                            <mat-checkbox>Libro 1</mat-checkbox>
-                            <mat-checkbox>Libro 2</mat-checkbox>
-                        </div>
-                    </div>
-                    <div flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
-                        <div flex-gt-sm="80">
-                            <button mat-stroked-button>
-                                <mat-icon>save</mat-icon>
-                                Guardar
-                            </button>
-                            <button mat-stroked-button class="push-left-md">
-                                <mat-icon>delete</mat-icon>
-                                Eliminar
-                            </button>
-                        </div>
-                    </div>
 
-                </form>
-            </div>
-            <div flex-gt-sm="40">
-                <img src="assets/theme.png">
-                <iframe class="push-top-xs"
-                    src="https://www.google.com/maps/place/Calama,+Regi%C3%B3n+de+Antofagasta,+Chile/@-22.4611894,-68.9584051,13z/data=!3m1!4b1!4m5!3m4!1s0x96ab978f95a58b0d:0xfe7a093627c72306!8m2!3d-22.4543923!4d-68.9293819"
-                    frameborder="0" style="border:0"></iframe>
-                <!--Image and Map-->
-            </div>
-
-        </div>
-
-    </mat-card>
+        </mat-card>
+    </div>
 </div>

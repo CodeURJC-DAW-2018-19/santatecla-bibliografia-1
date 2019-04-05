@@ -1,41 +1,37 @@
+
+
+
+
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
+import { Book } from '../book/book.service';
 import { Theme } from '../theme/theme.service';
-import { Author } from '../author/author.service';
-import { Citation } from '../citation/citation.service';
 
-
-export interface Book {
+export interface Citation {
   id?: number;
-  title: string;
-  publishDate?: Date;
-  nameEdit?: string;
-  urlEdit?: string;
-  urlImgCoverPage?: string;
-  urlImgEdit?: string;
-  imgId?: number;
-  theme?:Theme;
-  author?:Author;
-  citation?:Citation[];
+  text: string;
+  textAux: string;
+  book: Book;
+  theme: Theme;
 }
 
-const URL = '/api/books';
+const URL = '/api/citations';
 
 @Injectable()
-export class BookService {
+export class CitationService {
   constructor(private http: Http) { }
 
-  getBooks(customURL: string) {
-    return this.http.get(URL+customURL, { withCredentials: false })
+  getCitations(customURL: string) {
+    return this.http.get(URL + customURL, { withCredentials: false })
       .pipe(
         map(response => response.json()),
         catchError(error => this.handleError(error))
     );
   }
 
-  getBook(id: number | string) {
+  getCitation(id: number | string) {
     return this.http.get(URL + "/" +id, { withCredentials: true })
       .pipe(
           map(response => response.json()),
@@ -43,32 +39,24 @@ export class BookService {
       );
   }
 
-  deleteBook(book: Book) {
+  deleteCitation(citation: Citation) {
     const headers = new Headers({
       'X-Requested-With': 'XMLHttpRequest'
     });
     const options = new RequestOptions({ withCredentials: true, headers });
 
-    return this.http.delete(URL + "/" + book.id, options)
+    return this.http.delete(URL + "/" + citation.id, options)
       .pipe(
         map(response => undefined),
         catchError(error => this.handleError(error))
       );
   }
 
-  searchBook(name:string){
-    return this.http.get(URL + "?title=" + name, { withCredentials: true })
-      .pipe(
-          map(response => response.json()),
-          catchError(error => this.handleError(error))
-      );
-  }
-
-  saveBook (book:Book){
-    const body= JSON.stringify(book)
+  saveCitation (citation:Citation){
+    const body= JSON.stringify(citation)
     const headers = new Headers({'Content-Type': 'application/json',withCredentials: true});
 
-    if(!book.id){
+    if(!citation.id){
       return this.http.post(URL + "/" ,body, {headers})
       .pipe(
           map(response => response.json()),
@@ -76,17 +64,26 @@ export class BookService {
       );
     }
     else{
-      return this.http.patch(URL + "/" +book.id,body, {headers})
+      return this.http.patch(URL + "/" +citation.id,body, {headers})
+      .pipe(
+          map(response => response.json()),
+          catchError(error => this.handleError(error))
+      ); 
+    }  
+  }
+  searchCitation(text:string){
+    return this.http.get(URL + "?text=" + text, { withCredentials: true })
       .pipe(
           map(response => response.json()),
           catchError(error => this.handleError(error))
       );
-    }  
   }
 
   private handleError(error: any) {
     console.error(error);
-    return Observable.throw('Server error book (' + error.status + '): ' + error.text());
+    return Observable.throw('Server error citation (' + error.status + '): ' + error.text());
   }
 }
+
+
 
