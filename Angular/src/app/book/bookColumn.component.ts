@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
@@ -13,8 +13,9 @@ import { LoginService } from '../login/login.service';
     animations: [tdRotateAnimation],
 })
 export class BookColumnComponent implements OnInit{
-    
+    @Input()
     books: Book[];
+
     page: number;
     title: string;
 
@@ -32,11 +33,15 @@ export class BookColumnComponent implements OnInit{
         var createUrl: string;
         createUrl = "?page=" + (this.page);
         console.log(createUrl);
-        this.service.getBooks(createUrl).subscribe(
-          books => this.books = books,
-          error => console.log(error)
-        );
-        console.log(this.books)
+        if (this.books!=null){
+        }
+        else{
+            this.service.getBooks(createUrl).subscribe(
+                books => this.books = books,
+                error => console.log(error)
+              );
+        }
+        
     } 
 
     deleteBook(book:Book){

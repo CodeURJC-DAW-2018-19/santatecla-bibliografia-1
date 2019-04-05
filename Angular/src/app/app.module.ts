@@ -19,7 +19,8 @@ import { LoginService } from './login/login.service';
 import { TabsService } from './tabs/tabs.service';
 
 import { TabsComponent } from './tabs/tabs.component';
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
+import{AuthorComponent} from './author/author.component';
 
 
 import {
@@ -86,7 +87,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, 
         AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
-        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent],
+        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent],
 
     bootstrap: [AppComponent],
     providers: [BookService, AuthorService, ThemeService, LoginService, TabsService,

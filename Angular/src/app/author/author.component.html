@@ -1,16 +1,17 @@
 <div flex layout-gt-sm="row" layout-align="center start" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
-    <!-- Se borrará-->
-    
+    <div *ngIf='author'flex-gt-sm="80">
+        <authorDetail [author]='author'></authorDetail>
+    </div>
     <!--/Se borrará-->
     <!--Columns -->
     <div flex-gt-sm="33">
-        <themeColumn></themeColumn>
+        <themeColumn [themes]='themes'></themeColumn>
+    </div>
+    <div *ngIf='author' flex-gt-sm="33">
+        <bookColumn [books]='books'></bookColumn>
     </div>
     <div flex-gt-sm="33">
-        <bookColumn></bookColumn>
-    </div>
-    <div flex-gt-sm="33">
-        <authorColumn></authorColumn>
+        <authorColumn ></authorColumn>
     </div>
     
     <!--<div flex-gt-sm="33">

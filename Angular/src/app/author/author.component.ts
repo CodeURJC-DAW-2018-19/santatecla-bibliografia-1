@@ -1,17 +1,21 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Author, AuthorService } from './author.service';
 import { LoginService } from '../login/login.service';
 import { TdDialogService } from '@covalent/core';
+import { Book } from '../book/book.service';
+import { Theme } from '../theme/theme.service';
+import { ThemeColumnComponent } from '../theme/themeColumn.component';
 
 @Component({
-selector: 'authorDetail',
-  templateUrl: './authorDetail.component.html',
+  templateUrl: './author.component.html',
 })
-export class AuthorDetailComponent implements OnInit{
-    @Input()
+export class AuthorComponent implements OnInit{
+
     author: Author;
+    books:Book[];
+    themes: Theme[];
 
     constructor(
         private router: Router, 
@@ -21,9 +25,18 @@ export class AuthorDetailComponent implements OnInit{
         private _dialogService: TdDialogService,) {}
 
     ngOnInit() {
-        
+        const id = this.activatedRoute.snapshot.params['id'];
+        this.service.getAuthor(id).subscribe(
+            author => {this.author = author
+            this.books=this.author.books
+            /*for(var item in this.books){
+                this.themes.push();                
+            }*/
+            console.log(this.author)
+        },
+            error => console.error(error)
+        );
         console.log("Current location:", this.router.url);
-        
     }
 
     saveAuthor(author:Author) {

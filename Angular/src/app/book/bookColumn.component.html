@@ -16,7 +16,7 @@
         <mat-card-content>
             <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
                 style="overflow:scroll;height: 370px;overflow-x: hidden">
-                <section id="container">
+                <section *ngIf="books" id="container">
                     <div *ngFor="let book of books" mat-list-item >
                         <mat-card style="margin-top: 0%">
                             <mat-card-content *ngIf="loginService.isLogged">   
