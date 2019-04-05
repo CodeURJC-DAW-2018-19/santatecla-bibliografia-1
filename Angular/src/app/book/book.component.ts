@@ -8,6 +8,7 @@ import { Book, BookService } from './book.service';
 import { Theme} from '../theme/theme.service';
 import { ThemeColumnComponent } from '../theme/themeColumn.component';
 import { Author } from '../author/author.service';
+import { Citation } from '../citation/citation.service';
 
 @Component({
   templateUrl: './book.component.html', 
@@ -17,6 +18,7 @@ export class BookComponent implements OnInit{
     book: Book;
     authors:Author[];
     themes: Theme[];
+    citations:Citation[];
 
     constructor(
         private router: Router, 
@@ -24,16 +26,20 @@ export class BookComponent implements OnInit{
         public service: BookService,
         public loginService: LoginService,
         private _dialogService: TdDialogService,) {this.themes=[];
-        this.authors=[];
+        this.authors=[]; this.citations=[]
         }
 
     ngOnInit() {
         const id = this.activatedRoute.snapshot.params['id'];
+        var aux:Citation[];
         this.service.getBook(id).subscribe(
             book => {this.book = book
             this.authors.push(book.author)
             this.themes.push(book.theme)
-            
+            aux=book.citation;
+            aux.forEach(cit => {
+                this.citations.push(cit)
+            });
             console.log(this.book)
         },
             error => console.error(error)
