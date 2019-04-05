@@ -14,8 +14,10 @@
                 </div>
             </mat-card-title>
             <mat-divider></mat-divider>
+            <mat-card-content>
             <div flex layout-gt-sm="row" layout-align="center center">
                 <div flex-gt-sm="50">
+                    <div *ngFor="let citation of citations">
                     <div flex layout-gt-sm="row" layout-align="center start">
                         <div flex-gt-sm="100">
                             <form flex>
@@ -50,39 +52,6 @@
                             </form>
                         </div>
                     </div>
-                    <div flex layout-gt-sm="row" layout-align="center start">
-                        <div flex-gt-sm="100">
-                            <form flex>
-                                <mat-card>
-                                    <mat-card-title>
-                                        <h3>Cita 2</h3>
-                                    </mat-card-title>
-                                    <mat-card-content>
-                                        <div flex layout-gt-sm="row" layout-align="center start">
-                                            <div flex-gt-sm="80">
-                                                <mat-form-field>
-                                                    <input type="text" matInput placeholder="Texto de la cita">
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" layout-align="center start">
-                                            <div flex layout-gt-sm="row" layout-align="center start">
-                                                <div flex-gt-sm="80">
-                                                    <button mat-stroked-button>
-                                                        <mat-icon>save</mat-icon>
-                                                        Guardar
-                                                    </button>
-                                                    <button mat-stroked-button class="push-left-md">
-                                                        <mat-icon>delete</mat-icon>
-                                                        Eliminar
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </mat-card-content>
-                                </mat-card>
-                            </form>
-                        </div>
                     </div>
                     <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" layout-align="center start">
                         <div flex-gt-sm="80">
@@ -114,7 +83,7 @@
                 </div>
 
             </div>
-
+        </mat-card-content>
         </mat-card>
     </div>
 </div>
