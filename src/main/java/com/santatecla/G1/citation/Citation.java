@@ -70,10 +70,10 @@ public class Citation {
 	}
 	
 	public void update(Citation c) {
-		this.book=c.book;
+		//this.book=c.book;
 		this.text=c.text;
 		this.textAux=c.textAux;
-		this.theme=c.theme;
+		//this.theme=c.theme;
 	}
 	
 	@Override
