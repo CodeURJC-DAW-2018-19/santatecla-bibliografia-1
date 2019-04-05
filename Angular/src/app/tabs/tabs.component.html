@@ -1,7 +1,12 @@
 <nav mat-tab-nav-bar>
-    <a mat-tab-link *ngFor="let tab of nTabs" [routerLink]=tab.url routerLinkActive #rla="routerLinkActive"
+    <a mat-tab-link [routerLink]="['/']" routerLinkActive #rla="routerLinkActive"
     [routerLinkActiveOptions]="{exact: true}" [active]="rla.isActive">
-        {{tab.name}}
+        Inicio
+    </a>
+    <a mat-tab-link *ngFor="let tab of nTabs" [routerLink]=tab.url routerLinkActive #rla="routerLinkActive"
+        [routerLinkActiveOptions]="{exact: true}" [active]="rla.isActive">
+        {{tab.name}} 
+        <mat-icon style="padding:4%" (click)="closeTab(tab)"> close</mat-icon>
     </a>
 </nav>
 
