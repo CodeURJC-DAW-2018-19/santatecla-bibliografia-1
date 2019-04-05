@@ -15,8 +15,11 @@
             </mat-card-title>
             <mat-divider></mat-divider>
             <mat-card-content>
-            <div flex layout-gt-sm="row" layout-align="center center">
+            <div flex layout-gt-sm="row" layout-align="start start">
                 <div flex-gt-sm="50">
+                    <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
+                        style="overflow:scroll;height: 370px;overflow-x: hidden">
+                        <section id="container">
                     <div *ngFor="let citation of citations">
                     <div flex layout-gt-sm="row" layout-align="center start">
                         <div flex-gt-sm="100">
@@ -29,18 +32,18 @@
                                         <div flex layout-gt-sm="row" layout-align="center start">
                                             <div flex-gt-sm="80">
                                                 <mat-form-field>
-                                                    <input type="text" matInput placeholder="Texto de la cita">
+                                                    <input type="text" matInput name="text"[(ngModel)]="citation.text"value={{citation.text}} placeholder="Texto de la cita">
                                                 </mat-form-field>
                                             </div>
                                         </div>
                                         <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" layout-align="center start">
                                             <div flex layout-gt-sm="row" layout-align="center start">
                                                 <div flex-gt-sm="80">
-                                                    <button mat-stroked-button>
+                                                    <button mat-stroked-button matTooltip="Guardar Cita"(click)="saveCitation(citation)">
                                                         <mat-icon>save</mat-icon>
                                                         Guardar
                                                     </button>
-                                                    <button mat-stroked-button class="push-left-md">
+                                                    <button mat-stroked-button matTooltip="Eliminar Cita"class="push-left-md" (click)="deleteCitation(citation)">
                                                         <mat-icon>delete</mat-icon>
                                                         Eliminar
                                                     </button>
@@ -52,6 +55,8 @@
                             </form>
                         </div>
                     </div>
+                    </div>
+                        </section>
                     </div>
                     <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" layout-align="center start">
                         <div flex-gt-sm="80">
@@ -73,7 +78,7 @@
                                 <mat-card-content>
                                     <mat-form-field>
                                         <textarea matInput placeholder="Autosize textarea" matTextareaAutosize
-                                            matAutosizeMinRows="30"></textarea>
+                                            matAutosizeMinRows="25"></textarea>
                                     </mat-form-field>
                                     <button mat-stroked-button>Generar y Descargar PDF</button>
                                 </mat-card-content>
