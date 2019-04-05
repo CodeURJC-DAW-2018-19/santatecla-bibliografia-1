@@ -23,9 +23,7 @@ export class BookFormComponent {
         public service: BookService,
         public loginService: LoginService
     ){            
-        this.book={
-            title:''
-        }
+
     }
 
 

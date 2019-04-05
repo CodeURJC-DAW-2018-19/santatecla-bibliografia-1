@@ -5,7 +5,7 @@ import { Author, AuthorService } from './author.service';
 import { LoginService } from '../login/login.service';
 import { TdDialogService } from '@covalent/core';
 import { Book } from '../book/book.service';
-import { Theme } from '../theme/theme.service';
+import { Theme} from '../theme/theme.service';
 import { ThemeColumnComponent } from '../theme/themeColumn.component';
 
 @Component({
@@ -22,16 +22,16 @@ export class AuthorComponent implements OnInit{
         public activatedRoute: ActivatedRoute, 
         public service: AuthorService,
         public loginService: LoginService,
-        private _dialogService: TdDialogService,) {}
+        private _dialogService: TdDialogService,) {this.themes=[]}
 
     ngOnInit() {
         const id = this.activatedRoute.snapshot.params['id'];
         this.service.getAuthor(id).subscribe(
             author => {this.author = author
             this.books=this.author.books
-            /*for(var item in this.books){
-                this.themes.push();                
-            }*/
+            this.books.forEach(book=>{
+                this.themes.push(book.theme)
+            })
             console.log(this.author)
         },
             error => console.error(error)
