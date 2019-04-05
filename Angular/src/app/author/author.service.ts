@@ -3,6 +3,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
 import { HttpHeaders } from '@angular/common/http';
+import { Book } from '../book/book.service';
+import { Theme } from '../theme/theme.service';
 
 
 export interface Author {
@@ -14,6 +16,8 @@ export interface Author {
   bornPlace?: string;
   urlMap?: string;
   imgId?: number;
+  books?:Book[];
+  themes?:Theme[];
 }
 
 const URL = '/api/authors';

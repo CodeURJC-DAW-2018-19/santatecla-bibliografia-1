@@ -6,7 +6,8 @@
 }
 </style>
 
-<div >
+<div flex layout-gt-sm="row" layout-align="center start" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']" >
+    <div flex-gt-sm="80">
         <mat-card>
             <mat-card-title>
                 <div >
@@ -20,7 +21,7 @@
                             <div flex layout-gt-sm="row" layout-align="center start">
                                 <div flex-gt-sm="80">
                                     <mat-form-field >
-                                        <input type="text" matInput name="titulo"[(ngModel)]="book.title"placeholder="Titulo Obra">
+                                        <input type="text" matInput name="title"[(ngModel)]="book.title"placeholder="Titulo Obra">
                                     </mat-form-field>
                                 </div>
                             </div> 
@@ -98,4 +99,5 @@
             </div>
            
         </mat-card>
+    </div>
 </div>

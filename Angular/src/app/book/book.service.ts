@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
+import { Theme } from '../theme/theme.service';
+import { Author } from '../author/author.service';
+import { Citation } from '../citation/citation.service';
 
 
 export interface Book {
@@ -13,6 +16,9 @@ export interface Book {
   urlImgCoverPage?: string;
   urlImgEdit?: string;
   imgId?: number;
+  theme?:Theme;
+  author?:Author;
+  citation?:Citation[];
 }
 
 const URL = '/api/books';

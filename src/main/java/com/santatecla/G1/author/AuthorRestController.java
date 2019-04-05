@@ -28,7 +28,7 @@ import com.santatecla.G1.user.UserComponent;
 @RestController
 @RequestMapping("/api")
 public class AuthorRestController {
-	interface AuthorDetailView extends Author.NameView, Author.BasicView, Author.BooksView, Book.BasicView, Book.ThemeView, Theme.BasicView, Book.CitationsView, Citation.BasicView {}
+	interface AuthorDetailView extends Author.NameView, Author.BasicView, Author.BooksView,Book.NameView, Book.BasicView, Book.ThemeView, Theme.BasicView, Book.CitationsView, Citation.BasicView {}
 	interface AuthorBasicView extends Author.NameView, Author.BasicView {}
 	
 	@Autowired

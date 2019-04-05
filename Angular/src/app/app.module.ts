@@ -19,7 +19,9 @@ import { LoginService } from './login/login.service';
 import { TabsService } from './tabs/tabs.service';
 
 import { TabsComponent } from './tabs/tabs.component';
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
+import{AuthorComponent} from './author/author.component';
+import{BookComponent} from './book/book.component';
 
 
 import {
@@ -58,6 +60,8 @@ import { routing } from './app.routing';
 import { ErrorInterceptor } from './login/error.interceptor';
 import { BasicAuthInterceptor } from './login/auth.interceptor';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { CitationColumnComponent } from './citation/citationColumn.component';
+import { CitationService } from './citation/citation.service';
 
 
 @NgModule({
@@ -86,10 +90,10 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, 
         AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
-        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent],
+        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,CitationColumnComponent],
 
     bootstrap: [AppComponent],
-    providers: [BookService, AuthorService, ThemeService, LoginService, TabsService,
+    providers: [BookService, AuthorService, ThemeService, LoginService, TabsService,CitationService,
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: LocationStrategy, useClass: HashLocationStrategy }

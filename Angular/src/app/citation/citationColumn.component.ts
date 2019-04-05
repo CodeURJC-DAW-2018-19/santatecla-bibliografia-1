@@ -1,86 +1,85 @@
+
 import { Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
 import {ActivatedRoute,Router} from '@angular/router'
-import { Author, AuthorService } from './author.service';
+
 import { LoginService } from '../login/login.service';
+import { Citation, CitationService } from './citation.service';
 
 @Component({
-    selector: 'authorColumn',
-    templateUrl: './authorColumn.component.html',
+    selector: 'citationColumn',
+    templateUrl: './citationColumn.component.html',
     styleUrls: ['../app.component.css'],
     animations: [tdRotateAnimation],
 })
-export class AuthorColumnComponent implements OnInit{
-   @Input()
-    authors: Author[];
+export class CitationColumnComponent implements OnInit{
+    @Input()
+    citations: Citation[];
     page: number;
-    name:string; 
+    text: string;
 
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,
-        private service: AuthorService,
+        private service: CitationService,
         public loginService: LoginService
     ){
-        this.page = 0;
+        this.page=0;
     }
 
     ngOnInit() {
         var createUrl: string;
         createUrl = "?page=" + (this.page);
         console.log(createUrl);
-        if (this.authors!=null){
-        }
+        if(this.citations!=null){}
         else{
-            this.service.getAuthors(createUrl).subscribe(
-            authors => this.authors = authors,
+            this.service.getCitations(createUrl).subscribe(
+            citations => this.citations = citations,
             error => console.log(error)
             );
         }
     }
 
-    searchAuthor(name:string){
+    searchCitation(text:string){
         console.log("searchpulsado")
-        console.log("Author search name: ", name)
-        this.service.searchAuthor(name).subscribe(            
-            authors => this.authors = authors,
+        console.log("Citation search text: ", text)
+        this.service.searchCitation(text).subscribe(            
+            citations => this.citations = citations,
             error => console.log(error) 
         );
-        console.log(this.authors);
+        console.log(this.citations);
     }
 
-    deleteAuthor(author:Author){
-        console.log("delete pulsado con id: ", author.id)
-        let aux:Author[];
-        aux = this.authors;
+    deleteCitation(citation:Citation){
+        console.log("delete pulsado con id: ", citation.id)
+        let aux:Citation[];
+        aux = this.citations;
         aux.forEach( (item, index) => {
-            if(item === author) aux.splice(index,1);
+            if(item === citation) aux.splice(index,1);
           });
-        this.service.deleteAuthor(author).subscribe(            
-            authors =>  this.authors = aux,
+        this.service.deleteCitation(citation).subscribe(            
+            citations =>  this.citations = aux,
             error => console.log(error) 
         );
-        console.log(this.authors);
+        console.log(this.citations);
     }
 
     loadMore(){
         var createUrl: string;
         this.page +=1;
         createUrl = "?page=" + (this.page);
-        this.service.getAuthors(createUrl).subscribe(
-            authors => this.authors = this.authors.concat(authors),
+        this.service.getCitations(createUrl).subscribe(
+            citations => this.citations = this.citations.concat(citations),
             error => console.log(error)
          );
-        console.log(this.authors);
+         console.log(this.citations);
     }
     
-    newAuthor() {
-        this.router.navigate(['/author']);
+    newCitation() {
+        this.router.navigate(['/theme']);
     }
-
-
 
 
 }

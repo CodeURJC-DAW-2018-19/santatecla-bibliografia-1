@@ -1,5 +1,5 @@
 
-import { Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
@@ -14,7 +14,7 @@ import { LoginService } from '../login/login.service';
     animations: [tdRotateAnimation],
 })
 export class ThemeColumnComponent implements OnInit{
-   
+    @Input()
     themes: Theme[];
     page: number;
     name: string;
@@ -32,10 +32,13 @@ export class ThemeColumnComponent implements OnInit{
         var createUrl: string;
         createUrl = "?page=" + (this.page);
         console.log(createUrl);
-        this.service.getThemes(createUrl).subscribe(
-           themes => this.themes = themes,
-           error => console.log(error)
-        );
+        if(this.themes!=null){}
+        else{
+            this.service.getThemes(createUrl).subscribe(
+            themes => this.themes = themes,
+            error => console.log(error)
+            );
+        }
     }
 
     searchTheme(name:string){

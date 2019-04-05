@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Book, BookService } from './book.service';
@@ -7,12 +7,13 @@ import { TdDialogService } from '@covalent/core';
 import { TabsService } from "../tabs/tabs.service";
 
 @Component({
+    selector: 'bookDetail',
     templateUrl: './bookDetail.component.html',
+
 })
-export class BookDetailComponent implements OnInit {
-
+export class BookDetailComponent{
+    @Input()
     book: Book;
-
 
     constructor(
         private router: Router,
@@ -22,23 +23,6 @@ export class BookDetailComponent implements OnInit {
         private _dialogService: TdDialogService,
         private tabsService: TabsService) {
 
-    }
-
-    ngOnInit() {
-        this.activatedRoute.params.subscribe(
-            params => {
-                const id = params['id'];
-
-                this.service.getBook(id).subscribe(
-                    book =>{ 
-                        this.book = book;
-                        this.tabsService.addTab(this.book.title, this.router.url);
-                    },
-                    error => console.error(error)
-                );
-                console.log("Current location:", this.router.url); 
-            }
-        )
     }
 
     saveBook(book: Book) {

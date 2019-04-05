@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Author, AuthorService } from './author.service';
@@ -7,11 +7,13 @@ import { TdDialogService } from '@covalent/core';
 import { TabsService } from "../tabs/tabs.service";
 
 @Component({
+    selector: 'authorDetail',
     templateUrl: './authorDetail.component.html',
 })
-export class AuthorDetailComponent implements OnInit {
-
+export class AuthorDetailComponent{
+    @Input()
     author: Author;
+
 
     constructor(
         private router: Router,
@@ -21,21 +23,6 @@ export class AuthorDetailComponent implements OnInit {
         private _dialogService: TdDialogService,
         private tabsService: TabsService
     ) { }
-
-    ngOnInit() {
-        this.activatedRoute.params.subscribe(
-            params => {
-                const id = params['id'];
-                this.service.getAuthor(id).subscribe(
-                    author => {
-                        this.author = author;
-                        this.tabsService.addTab(this.author.name, this.router.url);
-                    },
-                    error => console.error(error)
-                );  
-            }
-        )
-    }
 
     saveAuthor(author: Author) {
         console.log(author)
