@@ -2,6 +2,7 @@ import { Component, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
+import { TabsService } from '../tabs/tabs.service';
 
 @Component({
   selector: 'login',
@@ -13,7 +14,8 @@ export class LoginComponent {
   dialogRef: MatDialogRef<any, any>;
 
   constructor(public dialog: MatDialog,
-      private loginService: LoginService) { }
+      private loginService: LoginService,
+      private tabsService: TabsService) { }
 
   logIn(event: any, user: string, pass: string) {
 
@@ -22,6 +24,7 @@ export class LoginComponent {
     this.loginService.logIn(user, pass).subscribe(
       u => {
         console.log(u);
+        this.tabsService.loadSaveInfo();
         this.dialogRef.close();
       },
       error => alert('Invalid user or password')
@@ -30,7 +33,7 @@ export class LoginComponent {
 
   logOut() {
     this.loginService.logOut().subscribe(
-      response => { },
+      response => { this.tabsService.logoutTabs(); },
       error => console.log('Error when trying to log out: ' + error)
     );
   }
