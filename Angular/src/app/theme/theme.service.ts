@@ -16,12 +16,21 @@ const URL = '/api/themes';
 export class ThemeService {
   constructor(private http: HttpClient) { }
 
-  getThemes(customURL: string) {
-    return this.http.get<Theme[]>(URL + customURL, { withCredentials: false })
-      .pipe(
-        map(response => response),
-        catchError(error => this.handleError(error))
-      );
+  getThemes(customURL?: string) {
+    if(customURL!=null){
+      return this.http.get<Theme[]>(URL + customURL, { withCredentials: false })
+        .pipe(
+          map(response => response),
+          catchError(error => this.handleError(error))
+        );
+    }
+    else{
+      return this.http.get<Theme[]>(URL, { withCredentials: false })
+        .pipe(
+          map(response => response),
+          catchError(error => this.handleError(error))
+        );
+    }
   }
 
   getTheme(id: number | string) {

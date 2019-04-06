@@ -7,6 +7,7 @@ import {ActivatedRoute,Router} from '@angular/router'
 import { Book, BookService } from './book.service';
 import { LoginService } from '../login/login.service';
 import { Author, AuthorService } from '../author/author.service';
+import { ThemeService, Theme } from '../theme/theme.service';
 
 @Component({
     selector: 'bookForm',
@@ -23,11 +24,14 @@ export class BookFormComponent {
 
     authors:Author[];
 
+    themes:Theme[];
+
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,
         public service: BookService,
         public serviceAuthor: AuthorService,
+        public serviceTheme: ThemeService,
         public loginService: LoginService
     ){            
         this.book={
@@ -40,18 +44,17 @@ export class BookFormComponent {
         authors =>{this.authors=authors},
         error => console.log(error)
         );
+        this.serviceTheme.getThemes().subscribe(
+            themes =>{this.themes=themes},
+            error => console.log(error)
+            );
     
     }
 // Timeframe
 date: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);
 
 saveBook(book:Book) {
-    /*this.authors.forEach(author=>{
-        if(author.checked){
-            book.author=author;
-            console.log(book.author)
-        }
-    })*/
+
     console.log(book.author)
     this.service.saveBook(book).subscribe(
         _ => {},

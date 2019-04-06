@@ -63,7 +63,16 @@
                                 
                                 <div flex layout-gt-sm="row" layout-align="center start">
                                     <div flex-gt-sm="50">
-                                        <mat-checkbox>Cita 1</mat-checkbox>
+                                            <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
+                                            style="overflow:scroll;height: 150px;overflow-x: hidden">
+                                            <section id="container">
+                                                <mat-radio-group  name="theme"  [(ngModel)]="book.theme">
+                                                    <div flex layout-gt-sm="row" class="push-top-lg" layout-align="center start" *ngFor="let theme of themes">
+                                                    <mat-radio-button  [value]="theme">{{theme.name}}</mat-radio-button>
+                                                    </div>
+                                                </mat-radio-group>
+                                            </section>
+                                        </div> 
                                     </div>
                                     <div flex-gt-sm="50">
                                         <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
