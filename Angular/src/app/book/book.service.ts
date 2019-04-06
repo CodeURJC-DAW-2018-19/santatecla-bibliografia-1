@@ -36,11 +36,19 @@ export class BookService {
   }
 
   getBook(id: number | string) {
-    return this.http.get(URL + "/" +id, { withCredentials: true })
+    if (typeof id === "string"){
+      return this.http.get(URL + "?name=" +id, { withCredentials: true })
       .pipe(
           map(response => response.json()),
           catchError(error => this.handleError(error))
       );
+    }else if (typeof id === "number"){ 
+    return this.http.get(URL + "/" +id, { withCredentials: true })
+      .pipe(
+          map(response => response.json()),
+          catchError(error => this.handleError(error))
+      ) ;
+    }
   }
 
   deleteBook(book: Book) {

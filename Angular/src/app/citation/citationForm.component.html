@@ -1,0 +1,49 @@
+<style>
+    mat-form-field {
+        width: 90%;
+        margin-left: 5px;
+    }
+</style>
+<div flex layout-gt-sm="row" layout-align="center start" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']" >
+    <div flex-gt-sm="80">
+        <mat-card>
+            <mat-card-title>
+                <div>
+                    <span hide-xs>Citas</span>
+                </div>
+            </mat-card-title>
+            <mat-divider></mat-divider>
+            <div flex layout-gt-sm="row" layout-align="center center">
+                <div flex-gt-sm="60">
+                    <form flex #authorForm="ngForm">
+                        <div flex layout-gt-sm="row" layout-align="center start">
+                            <div flex-gt-sm="80">
+                                <mat-form-field>
+                                    <input type="text" matInput  name="text" [(ngModel)]="citation.text" #citationFormElement
+                                        #citationFormControl="ngModel" placeholder="Contenido de la cita">
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input type="text" matInput  name="text" [(ngModel)]="auxBook" #citationFormElement
+                                        #citationFormControl="ngModel" placeholder="Libro al que pertenece">
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input type="text" matInput  name="text" [(ngModel)]="auxTheme" #citationFormElement
+                                        #citationFormControl="ngModel" placeholder="Tema de la cita">
+                                </mat-form-field>
+                            </div>
+                            
+                        </div>
+                    </form>
+                    <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
+                        <div flex-gt-sm="80">
+                            <button mat-stroked-button (click)="formCitation(citation,auxBook,auxTheme)" style="margin: 10px 10px 20px 10px"> 
+                                <mat-icon>save</mat-icon>
+                                Guardar
+                            </button>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

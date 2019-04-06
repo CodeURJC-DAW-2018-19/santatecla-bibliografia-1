@@ -56,12 +56,15 @@ import { ThemeColumnComponent } from './theme/themeColumn.component';
 import { ThemeFormComponent } from './theme/themeForm.component';
 import { ThemeDetailComponent } from './theme/themeDetail.component';
 
+import { CitationColumnComponent } from './citation/citationColumn.component';
+import { CitationService } from './citation/citation.service';
+import { CitationFormComponent } from './citation/citationForm.component';
+
 import { routing } from './app.routing';
 import { ErrorInterceptor } from './login/error.interceptor';
 import { BasicAuthInterceptor } from './login/auth.interceptor';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { CitationColumnComponent } from './citation/citationColumn.component';
-import { CitationService } from './citation/citation.service';
+
 import { ThemeComponent } from './theme/theme.component';
 
 
@@ -91,7 +94,8 @@ import { ThemeComponent } from './theme/theme.component';
     declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, 
         AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
-        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,ThemeComponent,CitationColumnComponent],
+        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,
+        ThemeComponent,CitationColumnComponent,CitationFormComponent],
 
     bootstrap: [AppComponent],
     providers: [BookService, AuthorService, ThemeService, LoginService, TabsService,CitationService,

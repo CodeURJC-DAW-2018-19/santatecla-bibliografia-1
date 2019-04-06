@@ -78,7 +78,7 @@ export class CitationColumnComponent implements OnInit{
     }
     
     newCitation() {
-        this.router.navigate(['/theme']);
+        this.router.navigate(['/citation']);
     }
 
 
