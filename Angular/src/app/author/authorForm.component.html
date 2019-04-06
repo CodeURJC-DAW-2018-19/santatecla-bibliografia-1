@@ -73,9 +73,9 @@
                             </div>
                         </div>
                         <div flex layout-gt-sm="row" layout-align="center start">
-                            <div flex-gt-sm="30">
-                                <mat-checkbox>Libro 1</mat-checkbox>
-                                <mat-checkbox>Libro 2</mat-checkbox>
+                            <div *ngFor="let book of books" flex-gt-sm="30">
+                                <mat-checkbox>{{book.title}}</mat-checkbox>
+                                
                             </div>
                         </div>
                         <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">

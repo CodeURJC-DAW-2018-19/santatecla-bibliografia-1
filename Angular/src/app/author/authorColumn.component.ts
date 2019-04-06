@@ -15,6 +15,7 @@ import { LoginService } from '../login/login.service';
 export class AuthorColumnComponent implements OnInit{
    @Input()
     authors: Author[];
+    
     page: number;
     name:string; 
 

@@ -27,7 +27,7 @@ const URL = '/api/books';
 export class BookService {
   constructor(private http: Http) { }
 
-  getBooks(customURL: string) {
+  getBooks(customURL?: string) {
     return this.http.get(URL+customURL, { withCredentials: false })
       .pipe(
         map(response => response.json()),

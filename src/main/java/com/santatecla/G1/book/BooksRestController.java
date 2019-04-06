@@ -62,7 +62,7 @@ public class BooksRestController {
 		MappingJacksonValue result = new MappingJacksonValue(books);
 		if(books!=null) {
 			if(userComponent.isLoggedUser())
-				result.setSerializationView(BookBasicView.class);
+				result.setSerializationView(BookDetailView.class); 
 			else
 				result.setSerializationView(Book.NameView.class);
 			return result;
