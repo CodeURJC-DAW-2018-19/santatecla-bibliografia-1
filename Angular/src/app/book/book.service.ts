@@ -28,11 +28,19 @@ export class BookService {
   constructor(private http: Http) { }
 
   getBooks(customURL?: string) {
-    return this.http.get(URL+customURL, { withCredentials: false })
-      .pipe(
-        map(response => response.json()),
-        catchError(error => this.handleError(error))
-    );
+    if(customURL!=null){
+      return this.http.get(URL+customURL, { withCredentials: false })
+        .pipe(
+          map(response => response.json()),
+          catchError(error => this.handleError(error))
+      );}
+    else{
+      return this.http.get(URL, { withCredentials: false })
+        .pipe(
+          map(response => response.json()),
+          catchError(error => this.handleError(error))
+      );
+    }
   }
 
   getBook(id: number | string) {

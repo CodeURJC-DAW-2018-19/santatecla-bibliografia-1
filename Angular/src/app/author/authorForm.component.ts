@@ -45,12 +45,12 @@ page: number;
         var createUrl: string;
         createUrl = "?page=" + (this.page);
         console.log(createUrl);
-        var aux:Book[];
-            this.serviceBook.getBooks(createUrl).subscribe(
+        var aux:Book[]; 
+            this.serviceBook.getBooks().subscribe(
             books =>{
                 aux = books
                 aux.forEach(book=>{
-                    if(book.author == null){
+                    if(book.author === null){
                         console.log(book)
                         this.books.push(book)
                     }
