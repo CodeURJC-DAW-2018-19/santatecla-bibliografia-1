@@ -90,6 +90,7 @@ public class BooksRestController {
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/books", method = POST)
 	public ResponseEntity<Book> book(@RequestBody Book book) {
+		book.setImgId(-2);//Default book image
 		// If the book doesn't exists, we create it
 		if (bookService.findByTitleIgnoreCase(book.getTitle()) == null) {
 			// Trying to associate an author to the book

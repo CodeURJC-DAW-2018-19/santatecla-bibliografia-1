@@ -17,6 +17,7 @@ export interface Author {
   imgId?: number;
   books?: Book[];
   themes?: Theme[];
+  checked?:Boolean;
 }
 
 const URL = '/api/authors';
@@ -26,12 +27,21 @@ const URL = '/api/authors';
 export class AuthorService {
   constructor(private http: HttpClient) { }
 
-  getAuthors(customURL: string) {
-    return this.http.get<Author[]>(URL + customURL, { withCredentials: false })
-      .pipe(
-        map(response => response),
-        catchError(error => this.handleError(error))
-      );
+  getAuthors(customURL?: string) {
+    if(customURL!=null){
+      return this.http.get<Author[]>(URL + customURL, { withCredentials: false })
+        .pipe(
+          map(response => response),
+          catchError(error => this.handleError(error))
+        );
+    }
+    else{
+      return this.http.get<Author[]>(URL, { withCredentials: false })
+        .pipe(
+          map(response => response),
+          catchError(error => this.handleError(error))
+        );
+    }
   }
 
   getAuthor(id: number | string) {

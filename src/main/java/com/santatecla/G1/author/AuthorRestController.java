@@ -95,6 +95,7 @@ public class AuthorRestController {
 	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/authors", method = RequestMethod.POST)
 	public ResponseEntity<Author> author(@RequestBody Author author) {
+		author.setImgId(-1);//Default author image
 		if (authorService.findByNameIgnoreCase(author.getName()) == null) {
 			if (author.getBooks() != null) {
 				authorService.save(author);
