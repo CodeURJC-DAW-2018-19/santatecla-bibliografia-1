@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
-  selector: 'app-register',
+  selector: 'register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
