@@ -25,8 +25,9 @@ import { AuthorComponent } from './author/author.component';
 import { BookComponent } from './book/book.component';
 import { ChartComponent } from './chart/chart.component';
 
-
-
+import { CovalentBaseEchartsModule } from '@covalent/echarts/base';
+import { CovalentBarEchartsModule } from '@covalent/echarts/bar';
+import { CovalentTooltipEchartsModule } from '@covalent/echarts/tooltip';
 
 import {
     MatButtonModule,MatListModule, MatIconModule,MatCardModule,MatMenuModule,MatInputModule,
@@ -74,8 +75,6 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
     imports: [
         BrowserModule, BrowserAnimationsModule,FormsModule,
         RouterModule.forRoot([]),HttpClientModule,JsonpModule,
-        // Charts
-
         /** Material Modules */
         MatButtonModule,MatListModule, MatIconModule, MatCardModule,MatCheckboxModule,
         MatMenuModule, MatInputModule, MatSelectModule, MatButtonToggleModule,
@@ -89,6 +88,8 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
         CovalentDialogsModule, CovalentLoadingModule, CovalentSearchModule,
         CovalentPagingModule,CovalentNotificationsModule, CovalentMenuModule,
         CovalentDataTableModule, CovalentMessageModule,
+        // Chart
+        CovalentBaseEchartsModule, CovalentBarEchartsModule, CovalentTooltipEchartsModule,
         /** Additional **/
         NgxChartsModule,
         routing,
