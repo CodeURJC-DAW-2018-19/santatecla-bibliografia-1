@@ -53,6 +53,7 @@ public class UserRestController {
 		}
 	}
 	
+	@JsonView(User.BasicView.class)
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public ResponseEntity<User> signup(@RequestBody User user) {
 		if (userRepository.findByNameIgnoreCase(user.getName()) == null) {	

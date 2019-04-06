@@ -18,6 +18,7 @@ import { ThemeService } from './theme/theme.service';
 import { LoginService } from './login/login.service';
 import { TabsService } from './tabs/tabs.service';
 import { ChartService } from './chart/chart.service';
+import { SignupService } from './signup/signup.service';
 
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
@@ -69,6 +70,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { CitationColumnComponent } from './citation/citationColumn.component';
 import { CitationService } from './citation/citation.service';
 import { ThemeComponent } from './theme/theme.component';
+import { SignupComponent } from './signup/signup.component';
 import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factory_loader';
 
 
@@ -97,7 +99,7 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
         HttpModule,//Remove when migrated to HttpClient
     ],
 
-    declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, 
+    declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, SignupComponent,
         AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent, ChartComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
         AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,ThemeComponent,CitationColumnComponent, RegisterComponent],
@@ -105,7 +107,7 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
     bootstrap: [AppComponent],
     providers: [
         BookService, AuthorService, ThemeService, LoginService, 
-        TabsService,CitationService, ChartService,
+        TabsService,CitationService, ChartService, SignupService,
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: LocationStrategy, useClass: HashLocationStrategy }

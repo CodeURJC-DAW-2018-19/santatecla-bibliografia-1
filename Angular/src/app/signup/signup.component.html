@@ -1,0 +1,17 @@
+<h2>SIGNUP</h2>
+
+<div *ngIf="user">
+<div>
+    <label>User: </label>
+    <input [(ngModel)]="user.name" placeholder="Username"/>
+</div>
+
+<div>
+    <label>Password: </label>
+    <input [(ngModel)]="user.passwordHash" placeholder="Password"/>
+</div>
+
+<p>
+    <button (click)="createUser()">Sign Up</button>
+</p>
+</div>
