@@ -65,6 +65,7 @@ import { CitationColumnComponent } from './citation/citationColumn.component';
 import { CitationService } from './citation/citation.service';
 import { ThemeComponent } from './theme/theme.component';
 import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factory_loader';
+import { PdfComponent } from './pdf/pdf.component';
 
 
 @NgModule({
@@ -93,7 +94,7 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
     declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, 
         AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
-        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,ThemeComponent,CitationColumnComponent, RegisterComponent],
+        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,ThemeComponent,CitationColumnComponent, RegisterComponent, PdfComponent],
 
     bootstrap: [AppComponent],
     providers: [BookService, AuthorService, ThemeService, LoginService, TabsService,CitationService,
