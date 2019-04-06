@@ -30,7 +30,7 @@
                             <mat-card-content *ngIf="!loginService.isLogged">  
                                 <a >{{book.title}}</a>
                                 <img mat-card-image style="height:10em;width:10em;" 
-                                src="{{'image/' + book.imgId}}"> 
+                                src="{{aux+'image/' + book.imgId}}"> 
                             </mat-card-content>
                         </mat-card>
                     </div>

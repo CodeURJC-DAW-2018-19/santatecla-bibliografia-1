@@ -16,7 +16,7 @@ import { LoginService } from '../login/login.service';
 export class BookColumnComponent implements OnInit{
     @Input()
     books: Book[];
-    aux: String;
+    aux: String ;
     page: number;
     title: string;
 

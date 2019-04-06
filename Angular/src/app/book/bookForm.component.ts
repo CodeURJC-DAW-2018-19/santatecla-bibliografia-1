@@ -15,6 +15,9 @@ import { LoginService } from '../login/login.service';
 })
 export class BookFormComponent {
    
+    //FOR BUILD PROBLEMS
+    maxToDate: Date;
+    
     book:Book;
 
     constructor(
@@ -31,10 +34,6 @@ export class BookFormComponent {
 
 // Timeframe
 date: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);
-<<<<<<< HEAD
-//Provisional para poder hacer los cosos de docker
-maxToDate: Date;
-=======
 
 saveBook(book:Book) {
     console.log(book)
@@ -44,7 +43,6 @@ saveBook(book:Book) {
     ); 
     window.history.back();
 }
->>>>>>> 025c238be0831808295bca55987028021d9d0a9e
 
 gotoBooks() {
     this.router.navigate(['/books']);

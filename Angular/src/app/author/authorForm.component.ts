@@ -16,6 +16,10 @@ import { LoginService } from '../login/login.service';
     animations: [tdRotateAnimation],
 })
 export class AuthorFormComponent {
+    //FOR BUILD PROBLEMS
+    maxToDate: Date;
+    dateBirth: Date;
+    dateDeath: Date;
 
     author: Author;
 
