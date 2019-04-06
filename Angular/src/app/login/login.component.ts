@@ -14,7 +14,7 @@ export class LoginComponent {
   dialogRef: MatDialogRef<any, any>;
 
   constructor(public dialog: MatDialog,
-      private loginService: LoginService,
+      public loginService: LoginService,
       private tabsService: TabsService) { }
 
   logIn(event: any, user: string, pass: string) {

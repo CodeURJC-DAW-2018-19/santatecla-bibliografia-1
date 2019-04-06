@@ -1,6 +1,7 @@
 package com.santatecla.G1.author;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
@@ -45,12 +47,26 @@ public class AuthorRestController {
 	private BookService bookService;
 
 	@RequestMapping(value = "/authors", method = RequestMethod.GET)
-	public MappingJacksonValue authors(Pageable page, String name) {
+	public MappingJacksonValue authors(Integer page, String name) {
 		List<Author> authors;
-		if (name != null) {
-			authors = authorService.findByNameContaining(name, page);
-		} else {
-			authors = authorService.findAll(page).getContent();
+		if(name!=null) {
+			if(page!=null) {
+				Pageable pag = new PageRequest(page, 10);
+				authors = authorService.findByNameContaining(name, pag);
+			}
+			else {
+				authors = authorService.findByNameContaining(name);
+			}
+		}
+		else {
+			if(page!=null) {
+				Pageable pag = new PageRequest(page, 10);
+				authors = authorService.findAll(pag).getContent();		
+			}
+			else {
+				authors = authorService.findAll();		
+
+			}
 		}
 		MappingJacksonValue result = new MappingJacksonValue(authors);
 		if (authors != null) {

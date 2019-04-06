@@ -17,9 +17,9 @@ export interface Book {
   urlImgCoverPage?: string;
   urlImgEdit?: string;
   imgId?: number;
-  theme?:Theme;
-  author?:Author;
-  citation?:Citation[];
+  theme?: Theme;
+  author?: Author;
+  citation?: Citation[];
 }
 
 const URL = '/api/books';
@@ -28,19 +28,27 @@ const URL = '/api/books';
 export class BookService {
   constructor(private http: HttpClient) { }
 
-  getBooks(customURL: string) {
-    return this.http.get<Book[]>(URL+customURL, { withCredentials: false })
-      .pipe(
-        map(response => response),
-        catchError(error => this.handleError(error))
-    );
+  getBooks(customURL?: string) {
+    if (customURL != null) {
+      return this.http.get<Book[]>(URL + customURL, { withCredentials: false })
+        .pipe(
+          map(response => response),
+          catchError(error => this.handleError(error))
+        );
+    } else {
+      return this.http.get<Book[]>(URL + customURL, { withCredentials: false })
+        .pipe(
+          map(response => response),
+          catchError(error => this.handleError(error))
+        );
+    }
   }
 
   getBook(id: number | string) {
-    return this.http.get<Book>(URL + "/" +id, { withCredentials: true })
+    return this.http.get<Book>(URL + "/" + id, { withCredentials: true })
       .pipe(
-          map(response => response),
-          catchError(error => this.handleError(error))
+        map(response => response),
+        catchError(error => this.handleError(error))
       );
   }
 
@@ -57,34 +65,34 @@ export class BookService {
       );
   }
 
-  searchBook(name:string){
+  searchBook(name: string) {
     return this.http.get<Book[]>(URL + "?title=" + name, { withCredentials: true })
       .pipe(
-          map(response => response),
-          catchError(error => this.handleError(error))
+        map(response => response),
+        catchError(error => this.handleError(error))
       );
   }
 
-  saveBook (book:Book){
-    const body= JSON.stringify(book)
+  saveBook(book: Book) {
+    const body = JSON.stringify(book)
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
-    if(!book.id){
-      return this.http.post<Book>(URL + "/" ,body, {withCredentials: true, headers})
-      .pipe(
+    if (!book.id) {
+      return this.http.post<Book>(URL + "/", body, { withCredentials: true, headers })
+        .pipe(
           map(response => response),
           catchError(error => this.handleError(error))
-      );
+        );
     }
-    else{
-      return this.http.patch<Book>(URL + "/" +book.id,body, {headers})
-      .pipe(
+    else {
+      return this.http.patch<Book>(URL + "/" + book.id, body, { headers })
+        .pipe(
           map(response => response),
           catchError(error => this.handleError(error))
-      );
-    }  
+        );
+    }
   }
 
   private handleError(error: any) {

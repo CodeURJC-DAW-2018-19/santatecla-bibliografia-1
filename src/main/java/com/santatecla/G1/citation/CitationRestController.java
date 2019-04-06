@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,15 +39,27 @@ public class CitationRestController {
 	private BookService bookService;
 
 	@RequestMapping(value = "/citations", method = RequestMethod.GET)
-	public MappingJacksonValue authors(Pageable page, String text) {
+	public MappingJacksonValue authors(Integer page, String text) {
 		List<Citation> citations;
 		if(!userComponent.isLoggedUser())
 			return null;
 		if(text!=null) {
-			citations = citationService.findByTextContaining(text, page);
+			if(page!=null){
+				Pageable pag = new PageRequest(page, 10);
+				citations = citationService.findByTextContaining(text, pag);
+			}
+			else {
+				citations = citationService.findByTextContaining(text);
+			}
 		}
 		else {
-			citations = citationService.findAll(page).getContent();		
+			if(page!=null){
+				Pageable pag = new PageRequest(page, 10);
+				citations = citationService.findAll(pag).getContent();		
+			}
+			else {
+				citations = citationService.findAll();
+			}
 		}
 		MappingJacksonValue result = new MappingJacksonValue(citations);
 		if(citations!=null) {

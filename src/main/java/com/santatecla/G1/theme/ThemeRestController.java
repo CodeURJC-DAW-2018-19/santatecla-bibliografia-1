@@ -1,5 +1,6 @@
 package com.santatecla.G1.theme;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,12 +43,25 @@ public class ThemeRestController {
 	private BookService bookService;
 
 	@RequestMapping(value = "/themes", method = RequestMethod.GET)
-	public MappingJacksonValue themes(Pageable page, String name) {
+	public MappingJacksonValue themes(Integer page, String name) {
 		List<Theme> themes;
-		if (name != null) {
-			themes = themeService.findByNameContaining(name, page);
-		} else {
-			themes = themeService.findAll(page).getContent();
+		if(name!=null) {
+			if(page!=null){
+				Pageable pag = new PageRequest(page, 10);
+				themes = themeService.findByNameContaining(name, pag);
+			}
+			else {
+				themes = themeService.findByNameContaining(name);;
+			}
+		}
+		else {
+			if(page!=null){
+				Pageable pag = new PageRequest(page, 10);
+				themes = themeService.findAll(pag).getContent();		
+			}
+			else {
+				themes = themeService.findAll();
+			}
 		}
 		MappingJacksonValue result = new MappingJacksonValue(themes);
 		if (themes != null) {

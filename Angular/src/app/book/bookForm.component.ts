@@ -15,6 +15,9 @@ import { LoginService } from '../login/login.service';
 })
 export class BookFormComponent {
    
+    //FOR BUILD PROBLEMS
+    maxToDate: Date;
+    
     book:Book;
 
     constructor(
