@@ -1,6 +1,7 @@
 package com.santatecla.G1.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,13 +52,25 @@ public class BooksRestController {
 
 	//Get the book/s with pagination or not, to logged or not logged users.
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
-	public MappingJacksonValue books(Pageable page, String title) {
+	public MappingJacksonValue books(Integer page, String title) {
 		List<Book> books;
 		if(title!=null) {
-			books = bookService.findByTitleContaining(title, page);
+			if(page!=null){
+				Pageable pag = new PageRequest(page, 10);
+				books = bookService.findByTitleContaining(title, pag);
+			}
+			else {
+				books = bookService.findByTitleContaining(title);
+			}
 		}
 		else {
-			books = bookService.findAll(page).getContent();		
+			if(page!=null){
+				Pageable pag = new PageRequest(page, 10);
+				books = bookService.findAll(pag).getContent();		
+			}
+			else {
+				books = bookService.findAll();
+			}
 		}
 		MappingJacksonValue result = new MappingJacksonValue(books);
 		if(books!=null) {
