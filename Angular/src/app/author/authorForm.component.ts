@@ -36,15 +36,13 @@ page: number;
         public loginService: LoginService) {
             this.author={
                 name:'',
+                
             }
             this.books=[]
             this.page = 0;
         }
 
         ngOnInit(): void {
-        var createUrl: string;
-        createUrl = "?page=" + (this.page);
-        console.log(createUrl);
         var aux:Book[]; 
             this.serviceBook.getBooks().subscribe(
             books =>{
@@ -54,9 +52,6 @@ page: number;
                         console.log(book)
                         this.books.push(book)
                     }
-                    else{
-                        
-                    }
                 })
             } ,
             error => console.log(error)
@@ -65,7 +60,12 @@ page: number;
         }
 
     saveAuthor(author:Author) {
-        console.log(author)
+        author.books=[];
+        this.books.forEach(book=>{
+            if(book.checked){
+                author.books.push(book)
+            }
+        })
         this.service.saveAuthor(author).subscribe(
             _ => {},
             (error: Error) => console.error('Error updating an author: ' + error),

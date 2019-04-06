@@ -20,6 +20,7 @@ export interface Book {
   theme?: Theme;
   author?: Author;
   citation?: Citation[];
+  checked?:Boolean;
 }
 
 const URL = '/api/books';
@@ -36,7 +37,7 @@ export class BookService {
           catchError(error => this.handleError(error))
         );
     } else {
-      return this.http.get<Book[]>(URL + customURL, { withCredentials: false })
+      return this.http.get<Book[]>(URL , { withCredentials: false })
         .pipe(
           map(response => response),
           catchError(error => this.handleError(error))

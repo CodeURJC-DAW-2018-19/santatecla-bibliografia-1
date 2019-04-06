@@ -78,7 +78,7 @@
                                 <section id="container">
                             <div *ngFor="let book of books" flex-gt-sm="30">
                                 <div flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
-                                <mat-checkbox>{{book.title}}</mat-checkbox>
+                                <mat-checkbox name="checked"[(ngModel)]="book.checked">{{book.title}}</mat-checkbox>
                                 </div>
                             </div>
                             </section>
@@ -99,7 +99,7 @@
                     <img src="assets/theme.png">
                     <iframe class="push-top-xs"
                         src=""
-                        frameborder="0" style="border:0"></iframe>
+                        ></iframe>
                     <!--Image and Map-->
                 </div>
 
