@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, FormGroup } from '@angular/forms';
+import { CommonModule } from "@angular/common"
+import { FormsModule, ReactiveFormsModule  } from "@angular/forms";
 import { JsonpModule, HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatIconRegistry } from '@angular/material/icon';
@@ -67,7 +68,7 @@ import { ThemeComponent } from './theme/theme.component';
 
 @NgModule({
     imports: [
-        BrowserModule, BrowserAnimationsModule,FormsModule,FormGroup,
+        BrowserModule, BrowserAnimationsModule, CommonModule, FormsModule, ReactiveFormsModule,
         RouterModule.forRoot([]),HttpClientModule,JsonpModule,
         /** Material Modules */
         MatButtonModule,MatListModule, MatIconModule, MatCardModule,MatCheckboxModule,
