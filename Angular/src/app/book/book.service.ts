@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
@@ -25,20 +26,20 @@ const URL = '/api/books';
 
 @Injectable()
 export class BookService {
-  constructor(private http: Http) { }
+  constructor(private http: Http, private httpClient: HttpClient) { }
 
   getBooks(customURL: string) {
-    return this.http.get(URL+customURL, { withCredentials: false })
+    return this.httpClient.get<Book[]>(URL+customURL, { withCredentials: false })
       .pipe(
-        map(response => response.json()),
+        map(response => response),
         catchError(error => this.handleError(error))
     );
   }
 
   getBook(id: number | string) {
-    return this.http.get(URL + "/" +id, { withCredentials: true })
+    return this.httpClient.get<Book>(URL + "/" +id, { withCredentials: true })
       .pipe(
-          map(response => response.json()),
+          map(response => response),
           catchError(error => this.handleError(error))
       );
   }
