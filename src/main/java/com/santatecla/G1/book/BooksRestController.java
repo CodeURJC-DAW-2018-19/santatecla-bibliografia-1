@@ -31,13 +31,16 @@ import com.santatecla.G1.user.UserComponent;
 @RestController
 @RequestMapping("/api")
 public class BooksRestController {
-	interface BookBasicView extends Book.NameView, Book.BasicView {} 
+	interface BookBasicView extends Book.NameView, Book.BasicView {
+	}
+
 	interface BookDetailView extends Book.NameView, Book.BasicView, Book.AuthorView, Book.CitationsView, Book.ThemeView,
-			Author.NameView,Author.BasicView, Citation.BasicView, Theme.BasicView {}
+			Author.NameView, Author.BasicView, Citation.BasicView, Theme.BasicView {
+	}
 
 	@Autowired
 	private UserComponent userComponent;
-	
+
 	@Autowired
 	private BookService bookService;
 
@@ -50,7 +53,7 @@ public class BooksRestController {
 	@Autowired
 	private ThemeService themeService;
 
-	//Get the book/s with pagination or not, to logged or not logged users.
+	// Get the book/s with pagination or not, to logged or not logged users.
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
 	public MappingJacksonValue books(Integer page, String title) {
 		List<Book> books;
@@ -79,17 +82,17 @@ public class BooksRestController {
 			else
 				result.setSerializationView(Book.NameView.class);
 			return result;
-		}
-		else return null;
+		} else
+			return null;
 	}
-	
-	//Create a book without a img
+
+	// Create a book without a img
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/books", method = POST)
 	public ResponseEntity<Book> book(@RequestBody Book book) {
-		//If the book doesn't exists, we create it
+		// If the book doesn't exists, we create it
 		if (bookService.findByTitleIgnoreCase(book.getTitle()) == null) {
-			//Trying to associate an author to the book
+			// Trying to associate an author to the book
 			try {
 				bookService.save(book);
 				Author author = new Author();
@@ -97,13 +100,13 @@ public class BooksRestController {
 					author = authorService.findById(book.getAuthor().getId());
 					author.addBook(book);
 					book.setAuthor(author);
-					authorService.save(author);					
+					authorService.save(author);
 				}
 				bookService.save(book);
 			} catch (Exception e) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-			//Trying  to associate a theme to the book
+			// Trying to associate a theme to the book
 			try {
 				bookService.save(book);
 				Theme theme = new Theme();
@@ -117,7 +120,7 @@ public class BooksRestController {
 			} catch (Exception e) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-			//Trying to associte the citations to the boook.
+			// Trying to associte the citations to the boook.
 			try {
 				ArrayList<Citation> citations = new ArrayList<>();
 				if (book.getCitations() != null) {
@@ -136,82 +139,95 @@ public class BooksRestController {
 			return new ResponseEntity<>(HttpStatus.IM_USED);
 
 	}
+
 	// Get the book by the id
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/books/{id}", method = GET)
 	public ResponseEntity<Book> getBook(@PathVariable long id) {
-		Book book = bookService.findOne(id);
-		if (book != null) {
-			return new ResponseEntity<>(book, HttpStatus.OK);
+		if (userComponent.isLoggedUser()) {
+			Book book = bookService.findOne(id);
+			if (book != null) {
+				return new ResponseEntity<>(book, HttpStatus.OK);
+			} else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
+
 	// Delete the book by the id
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/books/{id}", method = DELETE)
 	public ResponseEntity<Book> deleteAuthor(@PathVariable long id) {
-		Book book = bookService.findOne(id);
-		if (book != null) {
-			bookService.deleteById(id);
-			return new ResponseEntity<>(book, HttpStatus.OK);
+		if (userComponent.isLoggedUser()) {
+			Book book = bookService.findOne(id);
+			if (book != null) {
+				bookService.deleteById(id);
+				return new ResponseEntity<>(book, HttpStatus.OK);
+			} else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
-	
-	//Update the book by id.
+
+	// Update the book by id.
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "books/{id}", method = PATCH)
 	public ResponseEntity<Book> updateBook2(@RequestBody Book newBook, @PathVariable long id) {
-		Book oldBook = bookService.findOne(id);
-		if (oldBook != null) {
-			oldBook.update(newBook);
-			Author author = new Author();
-			if (oldBook.getAuthor() != null) {
-				author = authorService.findById(oldBook.getAuthor().getId());
-				if (author != null) {
-					oldBook.setAuthor(author);
-					author.addBook(oldBook);
-					authorService.save(author);
+		if (userComponent.isLoggedUser()) {
+			Book oldBook = bookService.findOne(id);
+			if (oldBook != null) {
+				oldBook.update(newBook);
+				Author author = new Author();
+				if (oldBook.getAuthor() != null) {
+					author = authorService.findById(oldBook.getAuthor().getId());
+					if (author != null) {
+						oldBook.setAuthor(author);
+						author.addBook(oldBook);
+						authorService.save(author);
+					}
 				}
-			}
-			Theme theme = new Theme();
-			if (oldBook.getTheme() != null) {
-				theme = themeService.findById(oldBook.getTheme().getId());
-				if (theme != null) {
-					oldBook.setTheme(theme);
-					theme.addBook(oldBook);
-					themeService.save(theme);
+				Theme theme = new Theme();
+				if (oldBook.getTheme() != null) {
+					theme = themeService.findById(oldBook.getTheme().getId());
+					if (theme != null) {
+						oldBook.setTheme(theme);
+						theme.addBook(oldBook);
+						themeService.save(theme);
+					}
 				}
-			}
-			bookService.save(oldBook);
-			return new ResponseEntity<>(oldBook, HttpStatus.OK);
+				bookService.save(oldBook);
+				return new ResponseEntity<>(oldBook, HttpStatus.OK);
+			} else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
 	// ----------------------------- METHODS WITH UPLOAD IMAGES
 	// -------------------------------------------------
-	
+
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "books/{id}/image", method = PATCH)
-	public ResponseEntity<Book> updateBook(Model model, Book newBook, @PathVariable long id,
-			MultipartFile file, Long authorId, Long themeId) {
-		Book oldBook = bookService.findOne(id);
-		if (oldBook != null) {
-			oldBook.update(newBook);
-			if ((file != null) && (!file.isEmpty())) {
-				int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
-				oldBook.setImgId(imgId);
-				com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
-			}
-			bookService.save(oldBook);
-			model.addAttribute("text", "Libro actualizado correctamente");
-			return new ResponseEntity<>(oldBook, HttpStatus.OK);
+	public ResponseEntity<Book> updateBook(Model model, Book newBook, @PathVariable long id, MultipartFile file,
+			Long authorId, Long themeId) {
+		if (userComponent.isLoggedUser()) {
+			Book oldBook = bookService.findOne(id);
+			if (oldBook != null) {
+				oldBook.update(newBook);
+				if ((file != null) && (!file.isEmpty())) {
+					int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
+					oldBook.setImgId(imgId);
+					com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
+				}
+				bookService.save(oldBook);
+				model.addAttribute("text", "Libro actualizado correctamente");
+				return new ResponseEntity<>(oldBook, HttpStatus.OK);
+			} else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
-	
-	
-	
 
 }
+
+

@@ -2,14 +2,13 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/internal/Observable";
 import { map } from "rxjs/operators";
-import { isNullOrUndefined } from "util";
 
 import { UserInterface } from "../register/user-interface";
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  constructor(private htttp: HttpClient) {}
+  constructor(private htttp: HttpClient) { }
   headers: HttpHeaders = new HttpHeaders({
     "Content-Type": "application/json"
   });
@@ -35,7 +34,7 @@ export class AuthService {
 
   getCurrentUser(): UserInterface {
     let user_string = localStorage.getItem("currentUser");
-    if (!isNullOrUndefined(user_string)) {
+    if (user_string != null && user_string != undefined) {
       let user: UserInterface = JSON.parse(user_string);
       return user;
     } else {
