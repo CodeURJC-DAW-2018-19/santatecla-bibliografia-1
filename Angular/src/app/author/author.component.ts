@@ -38,7 +38,8 @@ export class AuthorComponent implements OnInit {
                         this.books = this.author.books
                         this.books.forEach(book => { 
                             //Hay que comprobar que no se repitan temas
-                            this.themes.push(book.theme)
+                            if(book.theme!=null)
+                                this.themes.push(book.theme)
                             aux = book.citation
                             aux.forEach(cit => {
                                 this.citations.push(cit)

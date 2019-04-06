@@ -38,7 +38,9 @@ export class BookComponent implements OnInit {
                 this.service.getBook(id).subscribe(
                     book => {
                     this.book = book
+                    if (book.author!=null)
                         this.authors.push(book.author)
+                    if(book.theme!=null)
                         this.themes.push(book.theme)
                         aux = book.citation;
                         aux.forEach(cit => {

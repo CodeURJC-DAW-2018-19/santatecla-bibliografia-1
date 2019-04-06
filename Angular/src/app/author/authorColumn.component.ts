@@ -19,6 +19,7 @@ export class AuthorColumnComponent implements OnInit{
 
    @Input()
     authors: Author[];
+    
     page: number;
     name:string; 
 

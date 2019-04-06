@@ -4,7 +4,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
 import { DatePipe } from '@angular/common';
-import { single, multi, pie, times } from 'src/app/histogram/data';
 import { Theme, ThemeService } from './theme.service';
 
 @Component({

@@ -6,6 +6,8 @@ import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnim
 import {ActivatedRoute,Router} from '@angular/router'
 import { Book, BookService } from './book.service';
 import { LoginService } from '../login/login.service';
+import { Author, AuthorService } from '../author/author.service';
+import { ThemeService, Theme } from '../theme/theme.service';
 
 @Component({
     selector: 'bookForm',
@@ -20,10 +22,16 @@ export class BookFormComponent {
     
     book:Book;
 
+    authors:Author[];
+
+    themes:Theme[];
+
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,
         public service: BookService,
+        public serviceAuthor: AuthorService,
+        public serviceTheme: ThemeService,
         public loginService: LoginService
     ){            
         this.book={
@@ -31,12 +39,23 @@ export class BookFormComponent {
         }
     }
 
-
+    ngOnInit(): void {
+        this.serviceAuthor.getAuthors().subscribe(
+        authors =>{this.authors=authors},
+        error => console.log(error)
+        );
+        this.serviceTheme.getThemes().subscribe(
+            themes =>{this.themes=themes},
+            error => console.log(error)
+            );
+    
+    }
 // Timeframe
 date: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);
 
 saveBook(book:Book) {
-    console.log(book)
+
+    console.log(book.author)
     this.service.saveBook(book).subscribe(
         _ => {},
         (error: Error) => console.error('Error updating a book: ' + error),

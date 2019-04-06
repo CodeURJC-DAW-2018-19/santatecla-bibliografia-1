@@ -20,9 +20,15 @@ import { TabsService } from './tabs/tabs.service';
 
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
-import{AuthorComponent} from './author/author.component';
-import{BookComponent} from './book/book.component';
+import { RegisterComponent } from "./register/register.component";
+import { AuthorComponent } from './author/author.component';
+import { BookComponent } from './book/book.component';
+import { ChartComponent } from './chart/chart.component';
 
+/*
+import { CovalentBaseEchartsModule } from '@covalent/echarts/base';
+import { CovalentBarEchartsModule } from '@covalent/echarts/bar';
+import { CovalentTooltipEchartsModule } from '@covalent/echarts/tooltip';*/
 
 import {
     MatButtonModule,MatListModule, MatIconModule,MatCardModule,MatMenuModule,MatInputModule,
@@ -36,7 +42,7 @@ import {
     CovalentCommonModule, CovalentLayoutModule, CovalentMediaModule,CovalentExpansionPanelModule,
     CovalentStepsModule,CovalentLoadingModule,CovalentDialogsModule, CovalentSearchModule,
     CovalentPagingModule,CovalentNotificationsModule,CovalentMenuModule,CovalentDataTableModule, 
-    CovalentMessageModule,CovalentVirtualScrollModule,
+    CovalentMessageModule,CovalentVirtualScrollModule
 } from '@covalent/core';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -66,6 +72,7 @@ import { BasicAuthInterceptor } from './login/auth.interceptor';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { ThemeComponent } from './theme/theme.component';
+import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factory_loader';
 
 
 @NgModule({
@@ -85,17 +92,20 @@ import { ThemeComponent } from './theme/theme.component';
         CovalentDialogsModule, CovalentLoadingModule, CovalentSearchModule,
         CovalentPagingModule,CovalentNotificationsModule, CovalentMenuModule,
         CovalentDataTableModule, CovalentMessageModule,
+        // Chart
+        /*
+        CovalentBaseEchartsModule, CovalentBarEchartsModule, CovalentTooltipEchartsModule,
         /** Additional **/
         NgxChartsModule,
         routing,
-        HttpModule, //Remove when migrated to HttpClient
+        HttpModule,//Remove when migrated to HttpClient
     ],
 
     declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, 
-        AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent,
+        AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent, ChartComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
         AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,
-        ThemeComponent,CitationColumnComponent,CitationFormComponent],
+        ThemeComponent,CitationColumnComponent,CitationFormComponent, RegisterComponent],
 
     bootstrap: [AppComponent],
     providers: [BookService, AuthorService, ThemeService, LoginService, TabsService,CitationService,
