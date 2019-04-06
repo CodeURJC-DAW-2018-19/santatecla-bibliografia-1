@@ -14,8 +14,8 @@ export class LoginComponent {
   dialogRef: MatDialogRef<any, any>;
 
   constructor(public dialog: MatDialog,
-      public loginService: LoginService,
-      private tabsService: TabsService) { }
+    public loginService: LoginService,
+    private tabsService: TabsService) { }
 
   logIn(event: any, user: string, pass: string) {
 
@@ -38,11 +38,11 @@ export class LoginComponent {
     );
   }
 
-  openLoginDialog(){
+  openLoginDialog() {
     this.dialogRef = this.dialog.open(this.loginDialog, {
-        width: '50%',
-        height: '50%',
-      });
-}
+      width: '50%',
+      height: '50%',
+    });
+  }
 
 }
