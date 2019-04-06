@@ -16,10 +16,16 @@ import { BookService, Book } from '../book/book.service';
     styleUrls: ['../app.component.css'],
     animations: [tdRotateAnimation],
 })
-export class AuthorFormComponent implements OnInit{
-    page: number;
+
+export class AuthorFormComponent {
+    //FOR BUILD PROBLEMS
+    maxToDate: Date;
+    dateBirth: Date;
+    dateDeath: Date;
+page: number;
     
     books:Book[];
+
     author: Author;
 
     constructor(

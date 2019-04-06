@@ -19,17 +19,18 @@
                 <section id="container">
                     <div *ngFor="let theme of themes" mat-list-item>
                         <mat-card style="margin-top: 0%">
+
                             <mat-card-content *ngIf="loginService.isLogged">
                                 <button mat-button (click)="deleteTheme(theme)">
                                     <mat-icon>delete</mat-icon>
                                 </button>
                                 <a [routerLink]="['/theme', theme.id]">{{theme.name}}</a>
-                                <img mat-card-image style="height:10em;width:10em;" src="../assets/theme.png"
+                                <img mat-card-image style="height:10em;width:10em;" src="assets/theme.png"
                                     [routerLink]="['/theme', theme.id]">
                             </mat-card-content>
                             <mat-card-content *ngIf="!loginService.isLogged">
                                 <a>{{theme.name}}</a>
-                                <img mat-card-image style="height:10em;width:10em;" src="../assets/theme.png">
+                                <img mat-card-image style="height:10em;width:10em;" src="assets/theme.png">
                             </mat-card-content>
                         </mat-card>
                     </div>

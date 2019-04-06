@@ -51,12 +51,12 @@
                                     </button>
                                     <a [routerLink]="['/author', author.id]">{{author.name}}</a>
                                     <img mat-card-image style="height:10em;width:10em;"
-                                     src="{{'image/' + author.imgId}}" [routerLink]="['/author', author.id]">
+                                     src="{{aux+'image/' + author.imgId}}" [routerLink]="['/author', author.id]">
                                 </mat-card-content>
                                 <mat-card-content *ngIf="!loginService.isLogged">
                                     <a>{{author.name}}</a>
                                     <img mat-card-image style="height:10em;width:10em;"
-                                     src="{{'image/' + author.imgId}}" >
+                                     src="{{aux+'image/' + author.imgId}}" >
                                 </mat-card-content>
                             </mat-card>
                         </div>
