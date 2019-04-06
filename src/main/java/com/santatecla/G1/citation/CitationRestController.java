@@ -76,8 +76,9 @@ public class CitationRestController {
 			Book book = new Book();
 			if (citation.getBook() != null) {
 				book = bookService.findById(citation.getBook().getId());
-
 				citation.setBook(book);
+				citation.setTheme(book.getTheme());
+				book.addCitations(citation);
 			}
 			citationService.save(citation);
 			return new ResponseEntity<>(citation, HttpStatus.CREATED);

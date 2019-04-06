@@ -8,27 +8,24 @@ import { Theme, ThemeService } from '../theme/theme.service';
 
 
 @Component({
-    selector: 'authorForm',
+    selector: 'citationForm',
     templateUrl: './citationForm.component.html',
     styleUrls: ['../app.component.css'],
-    animations: [tdRotateAnimation],
 })
 export class CitationFormComponent {
 
     citation: Citation;
-    auxBook: string;
-    auxTheme: string;
-
-    tmpBook: Book;
-    tmpTheme: Theme;
-
+    books:Book[];
+    themes: Theme[];
+  
     constructor(
         private router: Router, 
         public activatedRoute: ActivatedRoute, 
         public service: CitationService,
         public themeService: ThemeService,
         public bookService: BookService,
-        public loginService: LoginService) {
+        public loginService: LoginService) 
+        {
             this.citation={
                 text:'',
                 book: null,
@@ -37,33 +34,18 @@ export class CitationFormComponent {
             
         }
 
-        
-
-    formCitation(citation:Citation,auxBook:string,auxTheme:string){
-        var bk: Book;
-        this.citation.text = citation.text
-        this.bookService.getBook(auxBook).subscribe(
-            book=> bk = book
-        )
-        console.log("Sigues vacio?")
-        console.log(bk)
-        
-        this.themeService.getThemeSt(auxTheme).subscribe(
-            th => citation.theme = th,
-        )
-        console.log("Esto es lo que sale")
-        console.log(citation.text)
-        console.log(citation.theme)
-        console.log(citation.book)
-        console.log(citation)
-        
-        console.log("Salio?")
-        
-        this.saveCitation(citation);
+    ngOnInit(): void {
+        this.themeService.getThemes().subscribe(
+            th => {this.themes = th},
+            error => console.log(error)
+            );
+        this.bookService.getBooks().subscribe(
+            book =>{this.books=book},
+            error => console.log(error)
+            );
     }
-
+    
     saveCitation(citation:Citation) {
-        console.log("Empezamos a hacer cosas"+citation);
         console.log(citation);
         this.service.saveCitation(citation).subscribe(
             _ => {},
