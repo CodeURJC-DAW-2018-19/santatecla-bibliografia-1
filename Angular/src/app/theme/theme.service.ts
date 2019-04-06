@@ -1,9 +1,5 @@
-
-
-
-
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
 import { Book } from '../book/book.service';
@@ -11,68 +7,70 @@ import { Book } from '../book/book.service';
 export interface Theme {
   id?: number;
   name: string;
-  books:Book[];
+  books: Book[];
 }
 
 const URL = '/api/themes';
 
 @Injectable()
 export class ThemeService {
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   getThemes(customURL: string) {
-    return this.http.get(URL + customURL, { withCredentials: false })
+    return this.http.get<Theme[]>(URL + customURL, { withCredentials: false })
       .pipe(
-        map(response => response.json()),
+        map(response => response),
         catchError(error => this.handleError(error))
-    );
+      );
   }
 
   getTheme(id: number | string) {
-    return this.http.get(URL + "/" +id, { withCredentials: true })
+    return this.http.get<Theme>(URL + "/" +id, { withCredentials: true })
       .pipe(
-          map(response => response.json()),
+          map(response => response),
           catchError(error => this.handleError(error))
       );
   }
 
   deleteTheme(theme: Theme) {
-    const headers = new Headers({
+    const headers = new HttpHeaders({
       'X-Requested-With': 'XMLHttpRequest'
     });
-    const options = new RequestOptions({ withCredentials: true, headers });
 
-    return this.http.delete(URL + "/" + theme.id, options)
+
+    return this.http.delete(URL + "/" + theme.id, { withCredentials: true, headers })
       .pipe(
         map(response => undefined),
         catchError(error => this.handleError(error))
       );
   }
 
-  saveTheme (theme:Theme){
+  saveTheme(theme: Theme) {
     const body= JSON.stringify(theme)
-    const headers = new Headers({'Content-Type': 'application/json',withCredentials: true});
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
 
     if(!theme.id){
-      return this.http.post(URL + "/" ,body, {headers})
+      return this.http.post<Theme>(URL + "/" ,body, {withCredentials: true, headers})
       .pipe(
-          map(response => response.json()),
+          map(response => response),
           catchError(error => this.handleError(error))
       );
     }
     else{
-      return this.http.patch(URL + "/" +theme.id,body, {headers})
+      return this.http.patch<Theme>(URL + "/" +theme.id,body, {headers})
       .pipe(
-          map(response => response.json()),
+          map(response => response),
           catchError(error => this.handleError(error))
       );
     }  
   }
 
-  searchTheme(name:string){
-    return this.http.get(URL + "?name=" + name, { withCredentials: true })
+  searchTheme(name: string) {
+    return this.http.get<Theme[]>(URL + "?name=" + name, { withCredentials: true })
       .pipe(
-          map(response => response.json()),
+          map(response => response),
           catchError(error => this.handleError(error))
       );
   }
