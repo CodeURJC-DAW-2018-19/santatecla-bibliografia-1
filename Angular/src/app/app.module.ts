@@ -21,8 +21,11 @@ import { TabsService } from './tabs/tabs.service';
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from "./register/register.component";
-import{AuthorComponent} from './author/author.component';
-import{BookComponent} from './book/book.component';
+import { AuthorComponent } from './author/author.component';
+import { BookComponent } from './book/book.component';
+import { ChartComponent } from './chart/chart.component';
+
+
 
 
 import {
@@ -37,7 +40,7 @@ import {
     CovalentCommonModule, CovalentLayoutModule, CovalentMediaModule,CovalentExpansionPanelModule,
     CovalentStepsModule,CovalentLoadingModule,CovalentDialogsModule, CovalentSearchModule,
     CovalentPagingModule,CovalentNotificationsModule,CovalentMenuModule,CovalentDataTableModule, 
-    CovalentMessageModule,CovalentVirtualScrollModule,
+    CovalentMessageModule,CovalentVirtualScrollModule
 } from '@covalent/core';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -71,6 +74,8 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
     imports: [
         BrowserModule, BrowserAnimationsModule,FormsModule,
         RouterModule.forRoot([]),HttpClientModule,JsonpModule,
+        // Charts
+
         /** Material Modules */
         MatButtonModule,MatListModule, MatIconModule, MatCardModule,MatCheckboxModule,
         MatMenuModule, MatInputModule, MatSelectModule, MatButtonToggleModule,
@@ -91,7 +96,7 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
     ],
 
     declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, 
-        AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent,
+        AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent, ChartComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
         AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,ThemeComponent,CitationColumnComponent, RegisterComponent],
 

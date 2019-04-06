@@ -3,7 +3,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
 import { DatePipe } from '@angular/common';
-import { single, multi, pie, times } from './histogram/data';
 
 @Component({
     selector: 'my-app',
@@ -56,8 +55,6 @@ export class AppComponent implements AfterViewInit {
                 'https://raw.githubusercontent.com/Teradata/covalent-quickstart/develop/src/assets/icons/covalent.svg',
             ),
         );
-
-        Object.assign(this, { pie, single, multi, times });
     }
 
     ngAfterViewInit(): void {
