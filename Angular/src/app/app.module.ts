@@ -17,6 +17,7 @@ import { AuthorService } from './author/author.service';
 import { ThemeService } from './theme/theme.service';
 import { LoginService } from './login/login.service';
 import { TabsService } from './tabs/tabs.service';
+import { ChartService } from './chart/chart.service';
 
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
@@ -102,7 +103,9 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
         AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,ThemeComponent,CitationColumnComponent, RegisterComponent],
 
     bootstrap: [AppComponent],
-    providers: [BookService, AuthorService, ThemeService, LoginService, TabsService,CitationService,
+    providers: [
+        BookService, AuthorService, ThemeService, LoginService, 
+        TabsService,CitationService, ChartService,
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: LocationStrategy, useClass: HashLocationStrategy }
