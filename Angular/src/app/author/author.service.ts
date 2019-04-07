@@ -95,7 +95,7 @@ export class AuthorService {
         ));
       }
       else{
-        return this.http.patch(URL + "/" +author.id,body,{withCredentials: true, headers})
+        return this.http.patch<Author>(URL + "/" +author.id,body,{withCredentials: true, headers})
         .pipe(
             map(author => author,
             catchError(error => this.handleError(error))

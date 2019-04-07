@@ -89,7 +89,7 @@ export class BookService {
         ));
       }
       else{
-        return this.http.patch(URL + "/" +book.id,body,{withCredentials: true, headers})
+        return this.http.patch<Book>(URL + "/" +book.id,body,{withCredentials: true, headers})
         .pipe(
             map(author => author,
             catchError(error => this.handleError(error))
