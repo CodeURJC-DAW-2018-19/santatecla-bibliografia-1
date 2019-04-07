@@ -48,7 +48,7 @@
                             </div>
                             <div flex-gt-sm="40">
                                 <mat-form-field>
-                                    <input  name="deatDate" matInput [max]="maxToDate" value={{author.deathDate}}  placeholder="Fecha de defunción" #authorFormElement
+                                    <input  name="deathDate" matInput [max]="maxToDate" value={{author.deathDate}}  placeholder="Fecha de defunción" #authorFormElement
                                     #authorFormControl="ngModel"
                                         [(ngModel)]="author.deathDate" [matDatepicker]="pickerDeath"
                                         [ngModelOptions]="{standalone: true}" />
@@ -83,13 +83,6 @@
                             </td-file-input>
                         </div>
                         
-                        <div flex layout-gt-sm="row" layout-align="center start">
-                            <div flex-gt-sm="30">
-                                <mat-checkbox>Libro 1</mat-checkbox>
-                                <mat-checkbox>Libro 2</mat-checkbox>
-                            </div>
-                        </div>
-
                         <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
                             <div flex-gt-sm="80">
                                 <button mat-stroked-button (click)="saveAuthor(author)">
