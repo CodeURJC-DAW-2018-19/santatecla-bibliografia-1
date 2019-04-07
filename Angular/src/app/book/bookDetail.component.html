@@ -58,7 +58,7 @@
             <div flex layout-gt-sm="row" layout-align="center start">
               <div flex-gt-sm="80">
                 <mat-form-field>
-                  <input type="text" matInput name="urlEdit" placeholder="URL Editorial" [(ngModel)]="book.urlEdit"
+                  <input id="urlEdit" type="text" matInput name="urlEdit" placeholder="URL Editorial" [(ngModel)]="book.urlEdit"
                     value={{book.urlEdit}}>
                 </mat-form-field>
               </div>
@@ -108,10 +108,10 @@
         </div>
         <div flex-gt-sm="40">
           <div flex-gt-sm="100">
-            <img src="assets/theme.png">
+            <img width="200" height="200" src="{{'image/' + book.imgId}}" [routerLink]="['/book', book.id]">
           </div>
           <div class="push-top-xs" lex-gt-sm="100">
-            <img src="assets/theme.png">
+            <img width="200" height="200" src="theme.png" > <!--TODO: Cambiar a editorial urlEdit-->
           </div>
           <!--Image and Map-->
         </div>
