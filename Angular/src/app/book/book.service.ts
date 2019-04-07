@@ -71,7 +71,7 @@ export class BookService {
     if(!book.id){
       return this.http.post(URL + "/" ,body, {headers})
       .pipe(
-          map(response => response.json()),
+          map(book => book.json()),
           catchError(error => this.handleError(error))
       );
     }

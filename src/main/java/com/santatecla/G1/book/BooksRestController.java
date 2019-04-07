@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -181,21 +181,19 @@ public class BooksRestController {
 	
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "books/{id}/image", method = PATCH)
-	public ResponseEntity<Book> updateBook(Model model, Book newBook, @PathVariable long id,
-			MultipartFile file, Long authorId, Long themeId) {
-		Book oldBook = bookService.findOne(id);
+	public ResponseEntity<Book> updateAuthorImage(Model model, @PathVariable long id, @RequestParam(value="file")MultipartFile file) {
+		Book oldBook = bookService.findById(id);
 		if (oldBook != null) {
-			oldBook.update(newBook);
 			if ((file != null) && (!file.isEmpty())) {
 				int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
-				oldBook.setImgId(imgId);
 				com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
+				oldBook.setImgId(imgId);
 			}
 			bookService.save(oldBook);
-			model.addAttribute("text", "Libro actualizado correctamente");
 			return new ResponseEntity<>(oldBook, HttpStatus.OK);
-		} else
+		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	
