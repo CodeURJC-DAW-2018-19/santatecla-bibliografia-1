@@ -68,19 +68,33 @@
                             </div>
 
                         <div flex layout-gt-sm="row" layout-align="center center"> 
-                            <div flex layout-gt-sm="row" layout-align="center start">
-                                <div flex-gt-sm="30">
-                                    <mat-checkbox>Cita 1</mat-checkbox>
-                                    <mat-checkbox>Cita 2</mat-checkbox>
-                                </div>
-                            </div>
-                        
-                            <div flex layout-gt-sm="row" layout-align="center start">
-                                <div flex-gt-sm="30">
-                                        <mat-radio-group>
-                                            <mat-radio-button value="1">Tema 1</mat-radio-button>
-                                            <mat-radio-button value="2">Tema 2</mat-radio-button>
-                                        </mat-radio-group>
+                            <div flex-gt-sm="80">
+                                
+                                <div flex layout-gt-sm="row" layout-align="center start">
+                                    <div flex-gt-sm="50">
+                                            <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
+                                            style="overflow:scroll;height: 150px;overflow-x: hidden">
+                                            <section id="container">
+                                                <mat-radio-group  name="theme"  [(ngModel)]="book.theme">
+                                                    <div flex layout-gt-sm="row" class="push-top-lg" layout-align="center start" *ngFor="let theme of themes">
+                                                    <mat-radio-button  [value]="theme">{{theme.name}}</mat-radio-button>
+                                                    </div>
+                                                </mat-radio-group>
+                                            </section>
+                                        </div> 
+                                    </div>
+                                    <div flex-gt-sm="50">
+                                        <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
+                                            style="overflow:scroll;height: 150px;overflow-x: hidden">
+                                            <section id="container">
+                                                <mat-radio-group  name="author"  [(ngModel)]="book.author">
+                                                    <div flex layout-gt-sm="row" class="push-top-lg" layout-align="center start" *ngFor="let author of authors">
+                                                    <mat-radio-button  [value]="author">{{author.name}}</mat-radio-button>
+                                                    </div>
+                                                </mat-radio-group>
+                                            </section>
+                                        </div>                            
+                                    </div>
                                 </div>
                             </div>
                         </div>

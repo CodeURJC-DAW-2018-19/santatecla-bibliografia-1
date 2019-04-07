@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatIconRegistry, MatDialog } from '@angular/material';
@@ -6,7 +6,11 @@ import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnim
 import {ActivatedRoute,Router} from '@angular/router'
 import { Book, BookService } from './book.service';
 import { LoginService } from '../login/login.service';
+
 import { ImagesService } from '../images/images.service';
+import { Author, AuthorService } from '../author/author.service';
+import { ThemeService, Theme } from '../theme/theme.service';
+
 
 @Component({
     selector: 'bookForm',
@@ -14,16 +18,26 @@ import { ImagesService } from '../images/images.service';
     styleUrls: ['../app.component.css'],
     animations: [tdRotateAnimation],
 })
-export class BookFormComponent {
+export class BookFormComponent implements OnInit{
    
+    //FOR BUILD PROBLEMS
+    maxToDate: Date;
+    
     book:Book;
     image = null;
+
+    authors:Author[];
+
+    themes:Theme[];
 
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,
         public service: BookService,
+
         private imagesService: ImagesService,
+        public serviceAuthor: AuthorService,
+        public serviceTheme: ThemeService,
         public loginService: LoginService
     ){            
         this.book={
@@ -55,6 +69,19 @@ export class BookFormComponent {
         ); 
         window.history.back();
     }
+
+    ngOnInit(): void {
+        this.serviceAuthor.getAuthors().subscribe(
+        authors =>{this.authors=authors},
+        error => console.log(error)
+        );
+        this.serviceTheme.getThemes().subscribe(
+            themes =>{this.themes=themes},
+            error => console.log(error)
+            );
+    
+    }
+
 
 gotoBooks() {
     this.router.navigate(['/books']);

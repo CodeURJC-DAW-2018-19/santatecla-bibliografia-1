@@ -89,6 +89,7 @@
                                 <mat-checkbox>Libro 2</mat-checkbox>
                             </div>
                         </div>
+
                         <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
                             <div flex-gt-sm="80">
                                 <button mat-stroked-button (click)="saveAuthor(author)">
@@ -106,9 +107,9 @@
                 </div>
                 <div flex-gt-sm="40">
                     <img src="{{'image/' + author.imgId}}">
-                    <iframe class="push-top-xs"
+                    <iframe class="push-top-xs push-bottom-xs"
                         src="{{author.urlMap}}"
-                        frameborder="0" style="border:0"></iframe>
+                        ></iframe>
                     <!--Image and Map-->
                 </div>
 

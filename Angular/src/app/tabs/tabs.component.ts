@@ -10,24 +10,18 @@ import { Tab } from './tab';
   styleUrls: ['tabs.component.css'],
 })
 export class TabsComponent implements OnInit {
-  private nTabs: Tab[] = [];
+  public nTabs: Tab[] = [];
 
   constructor(
-    private tabsService: TabsService,
-    private loginService: LoginService
+    private tabsService: TabsService
   ) { }
 
   ngOnInit() {
-    if (this.loginService.isLogged){
-      let tabs = this.tabsService.getLocalstorage();
-      if (tabs != null){
-        this.nTabs=tabs;
-      } else{
-        this.nTabs = this.tabsService.initTabs();
-      }
-      
-    }
-    
+    this.tabsService.readyloadData().subscribe(
+      nTabs => this.nTabs = nTabs
+    );
+
+    this.tabsService.loadSaveInfo();
   }
 
   closeTab(tab:Tab){

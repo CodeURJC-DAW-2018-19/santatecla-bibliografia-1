@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-
 import { LoginService } from '../login/login.service';
 import { TdDialogService } from '@covalent/core';
 import { Book, BookService } from './book.service';
@@ -40,7 +38,9 @@ export class BookComponent implements OnInit {
                 this.service.getBook(id).subscribe(
                     book => {
                     this.book = book
+                    if (book.author!=null)
                         this.authors.push(book.author)
+                    if(book.theme!=null)
                         this.themes.push(book.theme)
                         aux = book.citation;
                         aux.forEach(cit => {

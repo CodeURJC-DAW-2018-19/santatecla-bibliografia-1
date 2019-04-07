@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { Author, AuthorService } from './author.service';
 import { LoginService } from '../login/login.service';
 import { TdDialogService } from '@covalent/core';
 import { Book } from '../book/book.service';
 import { Theme } from '../theme/theme.service';
-import { ThemeColumnComponent } from '../theme/themeColumn.component';
 import { Citation } from '../citation/citation.service';
 import { TabsService } from '../tabs/tabs.service';
+
 @Component({
     templateUrl: './author.component.html',
 })
@@ -39,7 +38,8 @@ export class AuthorComponent implements OnInit {
                         this.books = this.author.books
                         this.books.forEach(book => { 
                             //Hay que comprobar que no se repitan temas
-                            this.themes.push(book.theme)
+                            if(book.theme!=null)
+                                this.themes.push(book.theme)
                             aux = book.citation
                             aux.forEach(cit => {
                                 this.citations.push(cit)

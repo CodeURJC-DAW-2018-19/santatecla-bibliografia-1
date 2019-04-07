@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
 import { Theme } from '../theme/theme.service';
 import { Author } from '../author/author.service';
 import { Citation } from '../citation/citation.service';
+import { RequestOptions } from '@angular/http';
 
 
 export interface Book {
@@ -16,72 +17,86 @@ export interface Book {
   urlImgCoverPage?: string;
   urlImgEdit?: string;
   imgId?: number;
-  theme?:Theme;
-  author?:Author;
-  citation?:Citation[];
+  theme?: Theme;
+  author?: Author;
+  citation?: Citation[];
+  checked?:Boolean;
 }
 
 const URL = '/api/books';
 
 @Injectable()
 export class BookService {
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
-  getBooks(customURL: string) {
-    return this.http.get(URL+customURL, { withCredentials: false })
-      .pipe(
-        map(response => response.json()),
-        catchError(error => this.handleError(error))
-    );
+  getBooks(customURL?: string) {
+    if (customURL != null) {
+      return this.http.get<Book[]>(URL + customURL, { withCredentials: false })
+        .pipe(
+          map(response => response),
+          catchError(error => this.handleError(error))
+        );
+    } else {
+      return this.http.get<Book[]>(URL , { withCredentials: false })
+        .pipe(
+          map(response => response),
+          catchError(error => this.handleError(error))
+        );
+    }
   }
 
   getBook(id: number | string) {
-    return this.http.get(URL + "/" +id, { withCredentials: true })
+    return this.http.get<Book>(URL + "/" + id, { withCredentials: true })
       .pipe(
-          map(response => response.json()),
-          catchError(error => this.handleError(error))
+        map(response => response),
+        catchError(error => this.handleError(error))
       );
+    
   }
 
   deleteBook(book: Book) {
-    const headers = new Headers({
+    const headers = new HttpHeaders({
       'X-Requested-With': 'XMLHttpRequest'
     });
-    const options = new RequestOptions({ withCredentials: true, headers });
 
-    return this.http.delete(URL + "/" + book.id, options)
+
+    return this.http.delete(URL + "/" + book.id, { withCredentials: true, headers })
       .pipe(
         map(response => undefined),
         catchError(error => this.handleError(error))
       );
   }
 
-  searchBook(name:string){
-    return this.http.get(URL + "?title=" + name, { withCredentials: true })
+  searchBook(name: string) {
+    return this.http.get<Book[]>(URL + "?title=" + name, { withCredentials: true })
       .pipe(
-          map(response => response.json()),
-          catchError(error => this.handleError(error))
+        map(response => response),
+        catchError(error => this.handleError(error))
       );
   }
 
-  saveBook (book:Book){
-    const body= JSON.stringify(book)
-    const headers = new Headers({'Content-Type': 'application/json',withCredentials: true});
+  saveBook(book: Book) {
+    const body = JSON.stringify(book)
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
 
     if(!book.id){
       return this.http.post(URL + "/" ,body, {headers})
       .pipe(
           map(book => book.json()),
           catchError(error => this.handleError(error))
-      );
+        );
     }
+
     else{
       return this.http.patch(URL + "/" +book.id,body, {headers})
       .pipe(
           map(book => book.json()),
           catchError(error => this.handleError(error))
-      );
-    }  
+        );
+    }
   }
 
   private handleError(error: any) {

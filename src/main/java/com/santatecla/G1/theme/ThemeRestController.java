@@ -1,5 +1,6 @@
 package com.santatecla.G1.theme;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,11 +26,13 @@ import com.santatecla.G1.user.UserComponent;
 @RestController
 @RequestMapping("/api")
 public class ThemeRestController {
-	interface ThemeBasicView extends Theme.NameView, Theme.BasicView {}
-	interface ThemeDetailView extends Theme.BasicView, Theme.BooksView,Book.NameView, Book.BasicView, Book.AuthorView,
-			Author.NameView,Author.BasicView, Book.CitationsView, Citation.BasicView {
+	interface ThemeBasicView extends Theme.NameView, Theme.BasicView {
 	}
-	
+
+	interface ThemeDetailView extends Theme.BasicView, Theme.BooksView, Book.NameView, Book.BasicView, Book.AuthorView,
+			Author.NameView, Author.BasicView, Book.CitationsView, Citation.BasicView {
+	}
+
 	@Autowired
 	private UserComponent userComponent;
 
@@ -40,23 +43,35 @@ public class ThemeRestController {
 	private BookService bookService;
 
 	@RequestMapping(value = "/themes", method = RequestMethod.GET)
-	public MappingJacksonValue themes(Pageable page, String name) {
+	public MappingJacksonValue themes(Integer page, String name) {
 		List<Theme> themes;
 		if(name!=null) {
-			themes = themeService.findByNameContaining(name, page);
+			if(page!=null){
+				Pageable pag = new PageRequest(page, 10);
+				themes = themeService.findByNameContaining(name, pag);
+			}
+			else {
+				themes = themeService.findByNameContaining(name);;
+			}
 		}
 		else {
-			themes = themeService.findAll(page).getContent();		
+			if(page!=null){
+				Pageable pag = new PageRequest(page, 10);
+				themes = themeService.findAll(pag).getContent();		
+			}
+			else {
+				themes = themeService.findAll();
+			}
 		}
 		MappingJacksonValue result = new MappingJacksonValue(themes);
-		if(themes!=null) {
-			if(userComponent.isLoggedUser())
+		if (themes != null) {
+			if (userComponent.isLoggedUser())
 				result.setSerializationView(ThemeBasicView.class);
 			else
 				result.setSerializationView(Theme.NameView.class);
 			return result;
-		}
-		else return null;
+		} else
+			return null;
 	}
 
 	@JsonView(ThemeDetailView.class)
@@ -66,11 +81,11 @@ public class ThemeRestController {
 			if (theme.getBook() != null) {
 				try {
 					themeService.save(theme);
-					Book bookAux= new Book();
+					Book bookAux = new Book();
 					ArrayList<Book> books = new ArrayList<>();
 					for (Book book : theme.getBook()) {
 						books.add(bookService.findById(book.getId()));
-						bookAux=bookService.findById(book.getId());
+						bookAux = bookService.findById(book.getId());
 						bookAux.setTheme(theme);
 						bookService.save(bookAux);
 					}
@@ -89,46 +104,55 @@ public class ThemeRestController {
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/themes/{id}", method = GET)
 	public ResponseEntity<Theme> theme(@PathVariable long id) {
-		Theme theme = themeService.findById(id);
-		if (theme != null) {
-			List<Book> books = bookService.findByTheme(theme);
-			List<Author> authors = new ArrayList<>();
-			List<Citation> citation = new ArrayList<>();
-			for (Book b : books) {
-				authors.add(b.getAuthor());
-				System.out.println(b.getTitle());
-				List<Citation> aux = b.getCitations();
-				for (Citation c : aux) {
-					citation.add(c);
+		if (userComponent.isLoggedUser()) {
+			Theme theme = themeService.findById(id);
+			if (theme != null) {
+				List<Book> books = bookService.findByTheme(theme);
+				List<Author> authors = new ArrayList<>();
+				List<Citation> citation = new ArrayList<>();
+				for (Book b : books) {
+					authors.add(b.getAuthor());
+					System.out.println(b.getTitle());
+					List<Citation> aux = b.getCitations();
+					for (Citation c : aux) {
+						citation.add(c);
+					}
 				}
-			}
-			return new ResponseEntity<>(theme, HttpStatus.OK);
+				return new ResponseEntity<>(theme, HttpStatus.OK);
+			} else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/themes/{id}", method = PATCH)
 	public ResponseEntity<Theme> updateTheme(@RequestBody Theme newTheme, @PathVariable long id) {
-		Theme oldTheme = themeService.findById(id);
-		if (oldTheme != null) {
-			oldTheme.update(newTheme);
-			themeService.save(oldTheme);
-			return new ResponseEntity<>(oldTheme, HttpStatus.OK);
+		if (userComponent.isLoggedUser()) {
+			Theme oldTheme = themeService.findById(id);
+			if (oldTheme != null) {
+				oldTheme.update(newTheme);
+				themeService.save(oldTheme);
+				return new ResponseEntity<>(oldTheme, HttpStatus.OK);
+			} else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 
 	}
 
 	@JsonView(ThemeDetailView.class)
 	@RequestMapping(value = "/themes/{id}", method = DELETE)
 	public ResponseEntity<Theme> deleteTheme(@PathVariable long id) {
-		Theme theme = themeService.findById(id);
-		if (theme != null) {
-			themeService.deleteById(id);
-			return new ResponseEntity<>(theme, HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		if (userComponent.isLoggedUser()) {
+			Theme theme = themeService.findById(id);
+			if (theme != null) {
+				themeService.deleteById(id);
+				return new ResponseEntity<>(theme, HttpStatus.OK);
+			}
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
 }

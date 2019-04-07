@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ import com.santatecla.G1.user.UserComponent;
 @RequestMapping("/api")
 public class CitationRestController {
 	interface CitationDetailView
-			extends Citation.BasicView, Citation.BookView, Citation.ThemeView, Book.BasicView, Theme.BasicView, Book.AuthorView, Author.BasicView {
+			extends Citation.BasicView, Citation.BookView, Citation.ThemeView,Book.NameView, Book.BasicView, Theme.BasicView, Book.AuthorView, Author.NameView, Author.BasicView {
 	}
 
 	@Autowired
@@ -38,15 +39,27 @@ public class CitationRestController {
 	private BookService bookService;
 
 	@RequestMapping(value = "/citations", method = RequestMethod.GET)
-	public MappingJacksonValue authors(Pageable page, String text) {
+	public MappingJacksonValue authors(Integer page, String text) {
 		List<Citation> citations;
 		if(!userComponent.isLoggedUser())
 			return null;
 		if(text!=null) {
-			citations = citationService.findByTextContaining(text, page);
+			if(page!=null){
+				Pageable pag = new PageRequest(page, 10);
+				citations = citationService.findByTextContaining(text, pag);
+			}
+			else {
+				citations = citationService.findByTextContaining(text);
+			}
 		}
 		else {
-			citations = citationService.findAll(page).getContent();		
+			if(page!=null){
+				Pageable pag = new PageRequest(page, 10);
+				citations = citationService.findAll(pag).getContent();		
+			}
+			else {
+				citations = citationService.findAll();
+			}
 		}
 		MappingJacksonValue result = new MappingJacksonValue(citations);
 		if(citations!=null) {
@@ -63,8 +76,9 @@ public class CitationRestController {
 			Book book = new Book();
 			if (citation.getBook() != null) {
 				book = bookService.findById(citation.getBook().getId());
-
 				citation.setBook(book);
+				citation.setTheme(book.getTheme());
+				book.addCitations(citation);
 			}
 			citationService.save(citation);
 			return new ResponseEntity<>(citation, HttpStatus.CREATED);
@@ -99,17 +113,17 @@ public class CitationRestController {
 		Citation oldCitation = citationService.findById(id);
 		if (oldCitation != null) {
 			oldCitation.update(newCitation);
-			Book book = new Book();
-			if (oldCitation.getBook() != null) {
-				book = bookService.findById(oldCitation.getBook().getId());
+			/*Book book = new Book();
+			if (newCitation.getBook() != null) {
+				book = bookService.findById(newCitation.getBook().getId());
 				if (book != null) {
-					book.addCitations(oldCitation);
+					book.addCitations(newCitation);
 					oldCitation.setBook(book);
 					bookService.save(book);
 				} else
 					return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			} else
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);*/
 			citationService.save(oldCitation);
 			return new ResponseEntity<>(oldCitation, HttpStatus.OK);
 		} else

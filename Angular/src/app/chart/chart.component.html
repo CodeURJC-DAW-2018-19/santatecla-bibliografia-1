@@ -1,0 +1,37 @@
+<div style="background-color: whitesmoke; height:50px !important; text-align: center;
+  padding-top: 20px; padding-bottom: 30px;">
+  <h2>Número de libros por tema</h2>
+</div>
+
+<div style="background-color: whitesmoke; padding-bottom: 40px;">
+  <td-chart [style.height.px]="300">
+    <td-chart-tooltip [trigger]="'item'" [textStyle]="{ color: '#818181' }" [backgroundColor]="'#ffffff'">
+      <ng-template let-params let-ticket="ticket" tdTooltipFormatter>
+        <ng-container *ngIf="params">
+          <div layout="row" layout-align="start center">
+            <mat-icon>
+              <span [style.color]="params.color">library_books
+              </span>
+            </mat-icon>
+            <span class="mat-caption pad-left-sm">
+              {{params.seriesName + ': ' + params.value}}
+            </span>
+          </div>
+        </ng-container>
+      </ng-template>
+    </td-chart-tooltip>
+    <td-chart-x-axis [show]="true" [position]="'bottom'" [type]="'category'"
+      [data]="themes.names" [boundaryGap]="true">
+    </td-chart-x-axis>
+    <td-chart-y-axis [show]="true" [type]="'value'" [position]="'left'" [max]="2.5">
+    </td-chart-y-axis>
+    <td-chart-series td-bar [data]="themes.values" [name]="'Número Libros'" [color]="'#2CB4D1'">
+    </td-chart-series>
+  </td-chart>
+
+  <div style="background-color: whitesmoke; padding-left: 3em; padding-right: 3em">
+    <h3>Leyenda:</h3>
+    <span *ngFor="let theme of themes.names">{{theme}}, </span>
+  </div>
+</div>
+

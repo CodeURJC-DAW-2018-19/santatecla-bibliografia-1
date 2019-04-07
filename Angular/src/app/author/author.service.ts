@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
-import { HttpHeaders } from '@angular/common/http';
 import { Book } from '../book/book.service';
 import { Theme } from '../theme/theme.service';
 
@@ -16,8 +15,9 @@ export interface Author {
   bornPlace?: string;
   urlMap?: string;
   imgId?: number;
-  books?:Book[];
-  themes?:Theme[];
+  books?: Book[];
+  themes?: Theme[];
+  checked?:Boolean;
 }
 
 const URL = '/api/authors';
@@ -25,54 +25,76 @@ const URL = '/api/authors';
 
 @Injectable()
 export class AuthorService {
-    constructor(private http: Http) {}
+  constructor(private http: HttpClient) { }
 
-    getAuthors(customURL: string) {
-        return this.http.get(URL+customURL,{ withCredentials: false })
-          .pipe(
-            map(response => response.json()),
-            catchError(error => this.handleError(error))
+  getAuthors(customURL?: string) {
+    if(customURL!=null){
+      return this.http.get<Author[]>(URL + customURL, { withCredentials: false })
+        .pipe(
+          map(response => response),
+          catchError(error => this.handleError(error))
         );
     }
-
-    getAuthor(id: number | string) {
-      return this.http.get(URL + "/" +id, { withCredentials: true })
+    else{
+      return this.http.get<Author[]>(URL, { withCredentials: false })
         .pipe(
-            map(response => response.json()),
-
-
-            catchError(error => this.handleError(error))
+          map(response => response),
+          catchError(error => this.handleError(error))
         );
     }
+  }
 
-    // postAuthor(url: string, param: any) {
-    //   let body = JSON.stringify(param);
-    //   return this.http
-    //       .post(url, body)
-    //       .map(this.extractData)
-    //       .catchError(this.handleError);
-    //   }
+  getAuthor(id: number | string) {
+    return this.http.get<Author>(URL + "/" + id, { withCredentials: true })
+      .pipe(
+        map(response => response),
+        catchError(error => this.handleError(error))
+      );
+  }
 
-    deleteAuthor(author: Author) {
-      const headers = new Headers({
-        'X-Requested-With': 'XMLHttpRequest'
-      });
-      const options = new RequestOptions({ withCredentials: true, headers });
-  
-      return this.http.delete(URL + "/" + author.id, options)
+  // postAuthor(url: string, param: any) {
+  //   let body = JSON.stringify(param);
+  //   return this.http
+  //       .post(url, body)
+  //       .map(this.extractData)
+  //       .catchError(this.handleError);
+  //   }
+
+  deleteAuthor(author: Author) {
+    const headers = new HttpHeaders({
+      'X-Requested-With': 'XMLHttpRequest'
+    });
+
+
+    return this.http.delete(URL + "/" + author.id, { withCredentials: true, headers })
+      .pipe(
+        map(response => undefined),
+        catchError(error => this.handleError(error))
+      );
+  }
+
+  searchAuthor(name: string) {
+    return this.http.get<Author[]>(URL + "?name=" + name, { withCredentials: true })
+      .pipe(
+        map(response => response),
+        catchError(error => this.handleError(error))
+      );
+  }
+
+  saveAuthor(author: Author) {
+    const body = JSON.stringify(author)
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    if (!author.id) {
+      return this.http.post<Author>(URL + "/", body, { withCredentials: true, headers })
         .pipe(
-          map(response => undefined),
+          map(response => response),
           catchError(error => this.handleError(error))
         );
     }
 
-    searchAuthor(name:string){
-      return this.http.get(URL + "?name=" + name, { withCredentials: true })
-        .pipe(
-            map(response => response.json()),
-            catchError(error => this.handleError(error))
-        );
-    }
 
     saveAuthor (author:Author){
       const body= JSON.stringify(author)
@@ -90,9 +112,10 @@ export class AuthorService {
         .pipe(
             map(author => author.json()),
             catchError(error => this.handleError(error))
+
         );
-      }  
     }
+  }
 
     updateAuthorImage(id:number,formData:FormData){
       this.http.post(URL+"/"+id+"/image", formData).subscribe(
@@ -101,13 +124,13 @@ export class AuthorService {
       );
     }
 
-    private extractData(res: Response) {
-      let body = res.json();
-      return body || {};
-    }
+  private extractData(res: Response) {
+    let body = res.json();
+    return body || {};
+  }
 
-    private handleError(error: any) {
-        console.error(error);
-        return Observable.throw('Server error author (' + error.status + '): ' + error.text());
-    }
+  private handleError(error: any) {
+    console.error(error);
+    return Observable.throw('Server error author (' + error.status + '): ' + error.text());
+  }
 }

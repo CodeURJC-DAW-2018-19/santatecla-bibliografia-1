@@ -13,33 +13,7 @@
             </div>
         </mat-card-title>
         <mat-divider></mat-divider>
-        <!-- NOT WORK-->
-        <!--<td-virtual-scroll-container [style.height.px]="200">
-                <ng-template let-row="row" tdVirtualScrollRow>
-                
-                </ng-template>
-            </td-virtual-scroll-container>-->
         <mat-card-content>
-            <!--<div flex layout-gt-sm="row" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']">
-                    <div flex-gt-sm="50">
-                        <mat-card>
-                            <mat-card-content>
-                                <h3>Card with Image First</h3>
-                                
-                                <img mat-card-image src="assets/theme.png">
-                            </mat-card-content>
-                        </mat-card>
-                    </div>
-                    <div flex-gt-sm="50">
-                        <mat-card>
-                            <mat-card-content>
-                                <h3>Card with Image First</h3>
-                                <p>100% Width Image</p>
-                                <img mat-card-image src="assets/theme.png">
-                            </mat-card-content>
-                        </mat-card>
-                    </div>
-                </div>-->
             <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
                 style="overflow:scroll;height: 370px;overflow-x: hidden">
                 <section id="container">
@@ -51,12 +25,12 @@
                                     </button>
                                     <a [routerLink]="['/author', author.id]">{{author.name}}</a>
                                     <img mat-card-image style="height:10em;width:10em;"
-                                     src="{{'image/' + author.imgId}}" [routerLink]="['/author', author.id]">
+                                     src="{{aux+'image/' + author.imgId}}" [routerLink]="['/author', author.id]">
                                 </mat-card-content>
                                 <mat-card-content *ngIf="!loginService.isLogged">
                                     <a>{{author.name}}</a>
                                     <img mat-card-image style="height:10em;width:10em;"
-                                     src="{{'image/' + author.imgId}}" >
+                                     src="{{aux+'image/' + author.imgId}}" >
                                 </mat-card-content>
                             </mat-card>
                         </div>

@@ -4,6 +4,7 @@ import { MatIconRegistry, MatDialog } from '@angular/material';
 import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnimation } from '@covalent/core';
 import {ActivatedRoute,Router} from '@angular/router'
 import { Author, AuthorService } from './author.service';
+import {environment} from '../../environment/environment';
 import { LoginService } from '../login/login.service';
 
 @Component({
@@ -13,8 +14,12 @@ import { LoginService } from '../login/login.service';
     animations: [tdRotateAnimation],
 })
 export class AuthorColumnComponent implements OnInit{
+   
+    aux: String;
+
    @Input()
     authors: Author[];
+    
     page: number;
     name:string; 
 
@@ -25,6 +30,7 @@ export class AuthorColumnComponent implements OnInit{
         public loginService: LoginService
     ){
         this.page = 0;
+        this.aux = environment.baseRef;
     }
 
     ngOnInit() {

@@ -18,13 +18,20 @@ import { AuthorService } from './author/author.service';
 import { ThemeService } from './theme/theme.service';
 import { LoginService } from './login/login.service';
 import { TabsService } from './tabs/tabs.service';
+import { ChartService } from './chart/chart.service';
+import { SignupService } from './signup/signup.service';
 
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from "./register/register.component";
-import{AuthorComponent} from './author/author.component';
-import{BookComponent} from './book/book.component';
 
+import { AuthorComponent } from './author/author.component';
+import { BookComponent } from './book/book.component';
+import { ChartComponent } from './chart/chart.component';
+
+import { CovalentBaseEchartsModule } from '@covalent/echarts/base';
+import { CovalentBarEchartsModule } from '@covalent/echarts/bar';
+import { CovalentTooltipEchartsModule } from '@covalent/echarts/tooltip';
 
 import {
     MatButtonModule,MatListModule, MatIconModule,MatCardModule,MatMenuModule,MatInputModule,
@@ -39,6 +46,7 @@ import {
     CovalentStepsModule,CovalentLoadingModule,CovalentDialogsModule, CovalentSearchModule,
     CovalentPagingModule,CovalentNotificationsModule,CovalentMenuModule,CovalentDataTableModule, 
     CovalentMessageModule,CovalentVirtualScrollModule,CovalentFileModule,
+
 } from '@covalent/core';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -58,15 +66,19 @@ import { ThemeColumnComponent } from './theme/themeColumn.component';
 import { ThemeFormComponent } from './theme/themeForm.component';
 import { ThemeDetailComponent } from './theme/themeDetail.component';
 
+import { CitationColumnComponent } from './citation/citationColumn.component';
+import { CitationService } from './citation/citation.service';
+import { CitationFormComponent } from './citation/citationForm.component';
+
 import { routing } from './app.routing';
 import { ErrorInterceptor } from './login/error.interceptor';
 import { BasicAuthInterceptor } from './login/auth.interceptor';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { CitationColumnComponent } from './citation/citationColumn.component';
-import { CitationService } from './citation/citation.service';
+
 import { ThemeComponent } from './theme/theme.component';
 import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factory_loader';
 import { ImagesService } from './images/images.service';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -85,21 +97,29 @@ import { ImagesService } from './images/images.service';
         CovalentMediaModule, CovalentExpansionPanelModule, CovalentStepsModule,
         CovalentDialogsModule, CovalentLoadingModule, CovalentSearchModule,
         CovalentPagingModule,CovalentNotificationsModule, CovalentMenuModule,
-        CovalentDataTableModule, CovalentMessageModule,CovalentFileModule,
+
+        CovalentDataTableModule, CovalentMessageModule,
+        // Chart
+        
+        CovalentBaseEchartsModule, CovalentBarEchartsModule, CovalentTooltipEchartsModule, CovalentFileModule,
         /** Additional **/
         NgxChartsModule,
         routing,
-        HttpModule, //Remove when migrated to HttpClient
+        HttpModule,//Remove when migrated to HttpClient
     ],
 
-    declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, 
-        AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent,
+    declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, SignupComponent,
+        AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent, ChartComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
-        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,ThemeComponent,CitationColumnComponent, RegisterComponent],
+
+        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,
+        ThemeComponent,CitationColumnComponent,CitationFormComponent, RegisterComponent],
 
     bootstrap: [AppComponent],
-    providers: [ BookService, AuthorService, ThemeService, LoginService, 
-        TabsService, CitationService, ImagesService,        
+    providers: [
+        BookService, AuthorService, ThemeService, LoginService, 
+        TabsService,CitationService, ChartService, SignupService,ImagesService,
+
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: LocationStrategy, useClass: HashLocationStrategy }

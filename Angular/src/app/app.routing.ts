@@ -15,6 +15,7 @@ import { AuthorComponent } from './author/author.component';
 import { IndexComponent } from './index/index.component';
 import { BookComponent } from './book/book.component';
 import { ThemeComponent } from './theme/theme.component';
+import { CitationFormComponent } from './citation/citationForm.component';
 
 const appRoutes = [
   /*{ path: 'books', component: BookListComponent, useAsDefault: true },
@@ -24,6 +25,7 @@ const appRoutes = [
   { path: 'book', component: BookFormComponent},
   { path: 'author', component: AuthorFormComponent },
   { path: 'theme', component: ThemeFormComponent },
+  { path: 'citation', component: CitationFormComponent},
   { path: 'author/:id', component: AuthorComponent },
   { path: 'book/:id', component: BookComponent },
   { path: 'theme/:id', component: ThemeComponent },

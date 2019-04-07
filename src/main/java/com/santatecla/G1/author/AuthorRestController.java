@@ -1,6 +1,7 @@
 package com.santatecla.G1.author;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.santatecla.G1.book.Book;
@@ -28,12 +30,16 @@ import com.santatecla.G1.user.UserComponent;
 @RestController
 @RequestMapping("/api")
 public class AuthorRestController {
-	interface AuthorDetailView extends Author.NameView, Author.BasicView, Author.BooksView,Book.NameView, Book.BasicView, Book.ThemeView, Theme.BasicView, Book.CitationsView, Citation.BasicView {}
-	interface AuthorBasicView extends Author.NameView, Author.BasicView {}
-	
+	interface AuthorDetailView extends Author.NameView, Author.BasicView, Author.BooksView, Book.NameView,
+			Book.BasicView, Book.ThemeView, Theme.BasicView, Book.CitationsView, Citation.BasicView {
+	}
+
+	interface AuthorBasicView extends Author.NameView, Author.BasicView {
+	}
+
 	@Autowired
 	private UserComponent userComponent;
-	
+
 	@Autowired
 	private AuthorService authorService;
 
@@ -41,48 +47,63 @@ public class AuthorRestController {
 	private BookService bookService;
 
 	@RequestMapping(value = "/authors", method = RequestMethod.GET)
-	public MappingJacksonValue authors(Pageable page, String name) {
+	public MappingJacksonValue authors(Integer page, String name) {
 		List<Author> authors;
 		if(name!=null) {
-			authors = authorService.findByNameContaining(name, page);
+			if(page!=null) {
+				Pageable pag = new PageRequest(page, 10);
+				authors = authorService.findByNameContaining(name, pag);
+			}
+			else {
+				authors = authorService.findByNameContaining(name);
+			}
 		}
 		else {
-			authors = authorService.findAll(page).getContent();		
+			if(page!=null) {
+				Pageable pag = new PageRequest(page, 10);
+				authors = authorService.findAll(pag).getContent();		
+			}
+			else {
+				authors = authorService.findAll();		
+
+			}
 		}
 		MappingJacksonValue result = new MappingJacksonValue(authors);
-		if(authors!=null) {
-			if(userComponent.isLoggedUser())
+		if (authors != null) {
+			if (userComponent.isLoggedUser())
 				result.setSerializationView(AuthorBasicView.class);
 			else
 				result.setSerializationView(Author.NameView.class);
 			return result;
-		}
-		else return null;
+		} else
+			return null;
 	}
-	
 
 	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/authors/{id}", method = GET)
 	public ResponseEntity<Author> getAuthor(@PathVariable long id) {
-		Author a = authorService.findById(id);
-		if (a != null)
-			return new ResponseEntity<>(a, HttpStatus.OK);
-		else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		if (userComponent.isLoggedUser()) {
+			Author a = authorService.findById(id);
+			if (a != null)
+				return new ResponseEntity<>(a, HttpStatus.OK);
+			else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
-	
-	
+
 	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/authors", method = RequestMethod.POST)
 	public ResponseEntity<Author> author(@RequestBody Author author) {
+		author.setImgId(-1);//Default author image
 		if (authorService.findByNameIgnoreCase(author.getName()) == null) {
 			if (author.getBooks() != null) {
 				authorService.save(author);
 				ArrayList<Book> books = new ArrayList<>();
-				Book bookAux= new Book();
+				Book bookAux = new Book();
 				for (Book book : author.getBooks()) {
 					books.add(bookService.findById(book.getId()));
-					bookAux=bookService.findById(book.getId());
+					bookAux = bookService.findById(book.getId());
 					bookAux.setAuthor(author);
 					bookService.save(bookAux);
 				}
@@ -97,57 +118,63 @@ public class AuthorRestController {
 	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/authors/{id}", method = PATCH)
 	public ResponseEntity<Author> updateAuthor(@RequestBody Author newAuthor, @PathVariable long id) {
-		Author oldAuthor = authorService.findById(id);
-		if (oldAuthor != null) {
-			oldAuthor.update(newAuthor);
-			authorService.save(oldAuthor);
-			return new ResponseEntity<>(oldAuthor, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+		if (userComponent.isLoggedUser()) {
+			Author oldAuthor = authorService.findById(id);
+			if (oldAuthor != null) {
+				oldAuthor.update(newAuthor);
+				authorService.save(oldAuthor);
+				return new ResponseEntity<>(oldAuthor, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
 	@RequestMapping(value = "/authors/{id}", method = DELETE)
 	public ResponseEntity<Author> deleteAuthor(@PathVariable long id) {
-		Author author = authorService.findById(id);
-		if (author != null) {
-			if (author.getBooks()!=null) {
-				author.setBooks(null);
-				authorService.save(author);
-				authorService.deleteById(id);
-				return new ResponseEntity<>(author, HttpStatus.OK);
-			}
-			else {
-				return new ResponseEntity<>(HttpStatus.IM_USED);
-			}
-			
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+		if (userComponent.isLoggedUser()) {
+			Author author = authorService.findById(id);
+			if (author != null) {
+				if (author.getBooks() != null) {
+					author.setBooks(null);
+					authorService.save(author);
+					authorService.deleteById(id);
+					return new ResponseEntity<>(author, HttpStatus.OK);
+				} else {
+					return new ResponseEntity<>(HttpStatus.IM_USED);
+				}
 
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
-	
-	
-	
-	
-	// ----------------------------- METHODS WITH UPLOAD IMAGES -------------------------------------------------
-	
-	
-	
+
+	// ----------------------------- METHODS WITH UPLOAD IMAGES
+	// -------------------------------------------------
+
 	@JsonView(AuthorDetailView.class)
 	@RequestMapping(value = "/authors/{id}/image", method = PATCH)
-	public ResponseEntity<Author> updateAuthorImage(Model model, @PathVariable long id, @RequestParam(value="file")MultipartFile file) {
-		Author oldAuthor = authorService.findById(id);
-		if (oldAuthor != null) {
-			if ((file != null) && (!file.isEmpty())) {
-				int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
-				com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
-				oldAuthor.setImgId(imgId);
+	public ResponseEntity<Author> updateAuthorImage(Model model, @PathVariable long id,
+			@RequestParam(value = "file") MultipartFile file) {
+		if (userComponent.isLoggedUser()) {
+			Author oldAuthor = authorService.findById(id);
+			if (oldAuthor != null) {
+				if ((file != null) && (!file.isEmpty())) {
+					int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
+					com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
+					oldAuthor.setImgId(imgId);
+				}
+				authorService.save(oldAuthor);
+				return new ResponseEntity<>(oldAuthor, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
-			authorService.save(oldAuthor);
-			return new ResponseEntity<>(oldAuthor, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+		} else
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 }
+
+

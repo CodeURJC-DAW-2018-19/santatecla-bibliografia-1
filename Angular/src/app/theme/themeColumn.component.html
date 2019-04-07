@@ -19,17 +19,18 @@
                 <section id="container">
                     <div *ngFor="let theme of themes" mat-list-item>
                         <mat-card style="margin-top: 0%">
+
                             <mat-card-content *ngIf="loginService.isLogged">
                                 <button mat-button (click)="deleteTheme(theme)">
                                     <mat-icon>delete</mat-icon>
                                 </button>
                                 <a [routerLink]="['/theme', theme.id]">{{theme.name}}</a>
-                                <img mat-card-image style="height:10em;width:10em;" src="../assets/theme.png"
+                                <img mat-card-image style="height:10em;width:10em;" src="assets/theme.png"
                                     [routerLink]="['/theme', theme.id]">
                             </mat-card-content>
                             <mat-card-content *ngIf="!loginService.isLogged">
                                 <a>{{theme.name}}</a>
-                                <img mat-card-image style="height:10em;width:10em;" src="../assets/theme.png">
+                                <img mat-card-image style="height:10em;width:10em;" src="assets/theme.png">
                             </mat-card-content>
                         </mat-card>
                     </div>
@@ -42,7 +43,7 @@
                 </button>
                 <button *ngIf="loginService.isLogged && loginService.isAdmin" mat-raised-button matTooltip="Nuevo Tema"
                     class="push-left-md" (click)="newTheme()">
-                    <mat-icon>add</mat-icon> New
+                    <mat-icon>add</mat-icon> Nuevo
                 </button>
                 <span flex *ngIf="!searchBox.searchVisible"></span>
                 <td-search-box hide-xs flex #searchBox

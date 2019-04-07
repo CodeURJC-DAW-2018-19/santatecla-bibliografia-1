@@ -1,6 +1,7 @@
 package com.santatecla.G1.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,13 +31,16 @@ import com.santatecla.G1.user.UserComponent;
 @RestController
 @RequestMapping("/api")
 public class BooksRestController {
-	interface BookBasicView extends Book.NameView, Book.BasicView {} 
+	interface BookBasicView extends Book.NameView, Book.BasicView {
+	}
+
 	interface BookDetailView extends Book.NameView, Book.BasicView, Book.AuthorView, Book.CitationsView, Book.ThemeView,
-			Author.NameView,Author.BasicView, Citation.BasicView, Theme.BasicView {}
+			Author.NameView, Author.BasicView, Citation.BasicView, Theme.BasicView {
+	}
 
 	@Autowired
 	private UserComponent userComponent;
-	
+
 	@Autowired
 	private BookService bookService;
 
@@ -49,34 +53,47 @@ public class BooksRestController {
 	@Autowired
 	private ThemeService themeService;
 
-	//Get the book/s with pagination or not, to logged or not logged users.
+	// Get the book/s with pagination or not, to logged or not logged users.
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
-	public MappingJacksonValue books(Pageable page, String title) {
+	public MappingJacksonValue books(Integer page, String title) {
 		List<Book> books;
 		if(title!=null) {
-			books = bookService.findByTitleContaining(title, page);
+			if(page!=null){
+				Pageable pag = new PageRequest(page, 10);
+				books = bookService.findByTitleContaining(title, pag);
+			}
+			else {
+				books = bookService.findByTitleContaining(title);
+			}
 		}
 		else {
-			books = bookService.findAll(page).getContent();		
+			if(page!=null){
+				Pageable pag = new PageRequest(page, 10);
+				books = bookService.findAll(pag).getContent();		
+			}
+			else {
+				books = bookService.findAll();
+			}
 		}
 		MappingJacksonValue result = new MappingJacksonValue(books);
 		if(books!=null) {
 			if(userComponent.isLoggedUser())
-				result.setSerializationView(BookBasicView.class);
+				result.setSerializationView(BookDetailView.class); 
 			else
 				result.setSerializationView(Book.NameView.class);
 			return result;
-		}
-		else return null;
+		} else
+			return null;
 	}
-	
-	//Create a book without a img
+
+	// Create a book without a img
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/books", method = POST)
 	public ResponseEntity<Book> book(@RequestBody Book book) {
-		//If the book doesn't exists, we create it
+		book.setImgId(-2);//Default book image
+		// If the book doesn't exists, we create it
 		if (bookService.findByTitleIgnoreCase(book.getTitle()) == null) {
-			//Trying to associate an author to the book
+			// Trying to associate an author to the book
 			try {
 				bookService.save(book);
 				Author author = new Author();
@@ -84,13 +101,13 @@ public class BooksRestController {
 					author = authorService.findById(book.getAuthor().getId());
 					author.addBook(book);
 					book.setAuthor(author);
-					authorService.save(author);					
+					authorService.save(author);
 				}
 				bookService.save(book);
 			} catch (Exception e) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-			//Trying  to associate a theme to the book
+			// Trying to associate a theme to the book
 			try {
 				bookService.save(book);
 				Theme theme = new Theme();
@@ -104,7 +121,7 @@ public class BooksRestController {
 			} catch (Exception e) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-			//Trying to associte the citations to the boook.
+			// Trying to associte the citations to the boook.
 			try {
 				ArrayList<Citation> citations = new ArrayList<>();
 				if (book.getCitations() != null) {
@@ -123,29 +140,37 @@ public class BooksRestController {
 			return new ResponseEntity<>(HttpStatus.IM_USED);
 
 	}
+
 	// Get the book by the id
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/books/{id}", method = GET)
 	public ResponseEntity<Book> getBook(@PathVariable long id) {
-		Book book = bookService.findOne(id);
-		if (book != null) {
-			return new ResponseEntity<>(book, HttpStatus.OK);
+		if (userComponent.isLoggedUser()) {
+			Book book = bookService.findOne(id);
+			if (book != null) {
+				return new ResponseEntity<>(book, HttpStatus.OK);
+			} else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
+
 	// Delete the book by the id
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "/books/{id}", method = DELETE)
 	public ResponseEntity<Book> deleteAuthor(@PathVariable long id) {
-		Book book = bookService.findOne(id);
-		if (book != null) {
-			bookService.deleteById(id);
-			return new ResponseEntity<>(book, HttpStatus.OK);
+		if (userComponent.isLoggedUser()) {
+			Book book = bookService.findOne(id);
+			if (book != null) {
+				bookService.deleteById(id);
+				return new ResponseEntity<>(book, HttpStatus.OK);
+			} else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
-	
-	//Update the book by id.
+
+	// Update the book by id.
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "books/{id}", method = PATCH)
 	public ResponseEntity<Book> updateBook2(@RequestBody Book newBook, @PathVariable long id) {
@@ -169,18 +194,20 @@ public class BooksRestController {
 					theme.addBook(oldBook);
 					themeService.save(theme);
 				}
-			}
-			bookService.save(oldBook);
-			return new ResponseEntity<>(oldBook, HttpStatus.OK);
+				bookService.save(oldBook);
+				return new ResponseEntity<>(oldBook, HttpStatus.OK);
+			} else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
 	// ----------------------------- METHODS WITH UPLOAD IMAGES
 	// -------------------------------------------------
-	
+
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "books/{id}/image", method = PATCH)
+
 	public ResponseEntity<Book> updateBookImage(Model model, @PathVariable long id, @RequestParam(value="file")MultipartFile file) {
 		Book oldBook = bookService.findById(id);
 		if (oldBook != null) {
@@ -194,9 +221,9 @@ public class BooksRestController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+
 	}
-	
-	
-	
 
 }
+
+

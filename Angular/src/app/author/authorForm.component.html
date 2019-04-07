@@ -85,9 +85,15 @@
 
 
                         <div flex layout-gt-sm="row" layout-align="center start">
-                            <div flex-gt-sm="30">
-                                <mat-checkbox>Libro 1</mat-checkbox>
-                                <mat-checkbox>Libro 2</mat-checkbox>
+                            <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
+                                style="overflow:scroll;height: 150px;overflow-x: hidden">
+                                <section id="container">
+                                    <div *ngFor="let book of books" flex-gt-sm="30">
+                                        <div flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
+                                        <mat-checkbox name="checked"[(ngModel)]="book.checked">{{book.title}}</mat-checkbox>
+                                        </div>
+                                    </div>
+                                </section>
                             </div>
                         </div>
                         <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
@@ -105,7 +111,7 @@
                     <img src="assets/theme.png">
                     <iframe class="push-top-xs"
                         src=""
-                        frameborder="0" style="border:0"></iframe>
+                        ></iframe>
                     <!--Image and Map-->
                 </div>
 
