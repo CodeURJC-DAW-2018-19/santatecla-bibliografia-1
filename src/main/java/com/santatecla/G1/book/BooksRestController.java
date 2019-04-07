@@ -174,32 +174,35 @@ public class BooksRestController {
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "books/{id}", method = PATCH)
 	public ResponseEntity<Book> updateBook2(@RequestBody Book newBook, @PathVariable long id) {
-		Book oldBook = bookService.findOne(id);
-		if (oldBook != null) {
-			oldBook.update(newBook);
-			Author author = new Author();
-			if (newBook.getAuthor() != null) {
-				author = authorService.findById(newBook.getAuthor().getId());
-				if (author != null) {
-					oldBook.setAuthor(author);
-					author.addBook(oldBook);
-					authorService.save(author);
+		if(userComponent.isLoggedUser()) {
+			Book oldBook = bookService.findOne(id);
+			if (oldBook != null) {
+				oldBook.update(newBook);
+				Author author = new Author();
+				if (newBook.getAuthor() != null) {
+					author = authorService.findById(newBook.getAuthor().getId());
+					if (author != null) {
+						oldBook.setAuthor(author);
+						author.addBook(oldBook);
+						authorService.save(author);
+					}
 				}
-			}
-			Theme theme = new Theme();
-			if (newBook.getTheme() != null) {
-				theme = themeService.findById(newBook.getTheme().getId());
-				if (theme != null) {
-					oldBook.setTheme(theme);
-					theme.addBook(oldBook);
-					themeService.save(theme);
+				Theme theme = new Theme();
+				if (newBook.getTheme() != null) {
+					theme = themeService.findById(newBook.getTheme().getId());
+					if (theme != null) {
+						oldBook.setTheme(theme);
+						theme.addBook(oldBook);
+						themeService.save(theme);
+					}
+					bookService.save(oldBook);
 				}
-				bookService.save(oldBook);
 				return new ResponseEntity<>(oldBook, HttpStatus.OK);
 			} else
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else
-			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
 	}
 
 	// ----------------------------- METHODS WITH UPLOAD IMAGES
