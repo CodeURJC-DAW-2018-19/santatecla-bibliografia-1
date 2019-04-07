@@ -6,17 +6,19 @@ import { TabsService } from "../tabs/tabs.service";
 import { Citation, CitationService } from '../citation/citation.service';
 import { Book, BookService } from '../book/book.service';
 import { TdDialogService } from '@covalent/core';
+import * as jspdf from 'jspdf';  
+import html2canvas from 'html2canvas'; 
 
 @Component({
     templateUrl: './themeDetail.component.html',
     selector: 'themeDetail',
 })
-export class ThemeDetailComponent {
+export class ThemeDetailComponent{
     @Input()
     theme: Theme;
     @Input()
     citations:Citation[]
-    
+    bk: any[];
 
     constructor(
         private router: Router,
@@ -41,16 +43,23 @@ export class ThemeDetailComponent {
                 theme => ( theme.books.forEach(
                     book=> {
                         if (typeof book !== 'undefined' && book.citation !== null){
-                            bk.push(book)
+                            try{bk.push(book)
+                            }catch{
+                                console.log("Can't do push")
+                            }
                         }
-                        if(bk.length>0){
-                            bk.forEach(
-                                book=> this.citations.concat(book.citation)
-                            )
+                        try{
+                            if(bk.length>0){
+                                bk.forEach(
+                                    book=> this.citations.concat(book.citation)
+                                )
+                            }
+                        }catch{
+                            console.log("Can't see the lenght")
                         }
                     }
                 ))
-            );
+        );
         }
     
         deleteCitation(citation: Citation) {
@@ -68,4 +77,24 @@ export class ThemeDetailComponent {
                 window.history.back();
             });
         }
+
+        public captureScreen()  
+          {  
+            document.getElementById('destination').textContent = document.getElementById("contentToConvert").innerHTML;
+            
+            var data = document.getElementById('contentToConvert');  
+                html2canvas(data).then(canvas => {  
+                  // Few necessary setting options  
+                  var imgWidth = 208;   
+                  var pageHeight = 295;    
+                  var imgHeight = canvas.height * imgWidth / canvas.width;  
+                  var heightLeft = imgHeight;  
+              
+                  const contentDataURL = canvas.toDataURL('image/png')  
+                  let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+                  var position = 0;  
+                  pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth,imgHeight)  
+                  pdf.save(this.theme.name+'.pdf'); // Generated PDF   
+                }); 
+          } 
 }

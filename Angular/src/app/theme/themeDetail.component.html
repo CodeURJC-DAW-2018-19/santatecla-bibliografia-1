@@ -15,16 +15,16 @@
             </mat-card-title>
             <mat-divider></mat-divider>
             <mat-card-content>
-            <div flex layout-gt-sm="row" layout-align="start start">
+            <div flex layout-gt-sm="row" layout-align="start start" >
                 <div flex-gt-sm="50">
                     <div flex tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']"
                         style="overflow:scroll;height: 370px;overflow-x: hidden">
                         <section id="container">
-                    <div *ngFor="let citation of citations">
+                    <div *ngFor="let citation of citations" >
                     <div flex layout-gt-sm="row" layout-align="center start">
                         <div flex-gt-sm="100">
                             <form flex>
-                                <mat-card>
+                                <mat-card id="contentToConvert">
                                     <mat-card-title>
                                         <h3>Cita</h3>
                                     </mat-card-title>
@@ -77,10 +77,10 @@
                             <mat-card>
                                 <mat-card-content>
                                     <mat-form-field>
-                                        <textarea matInput placeholder="Autosize textarea" matTextareaAutosize
-                                            matAutosizeMinRows="25"></textarea>
+                                        <textarea id="destination" matInput placeholder="Autosize textarea" matTextareaAutosize
+                                            matAutosizeMinRows="25" style="max-height: 375px"></textarea>
                                     </mat-form-field>
-                                    <button mat-stroked-button>Generar y Descargar PDF</button>
+                                    <button mat-stroked-button (click)="captureScreen()">Generar y Descargar PDF</button>
                                 </mat-card-content>
                             </mat-card>
                         </div>
