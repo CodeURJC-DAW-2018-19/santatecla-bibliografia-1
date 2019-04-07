@@ -39,6 +39,7 @@ export class ThemeDetailComponent{
         }
         ngOnInit(): void {
             var bk: Book[];
+            bk=[];
             this.themeService.getTheme(this.theme.id).subscribe(
                 theme => ( theme.books.forEach(
                     book=> {

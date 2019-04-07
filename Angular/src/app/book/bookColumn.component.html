@@ -20,7 +20,7 @@
                     <div *ngFor="let book of books" mat-list-item >
                         <mat-card style="margin-top: 0%">
                             <mat-card-content *ngIf="loginService.isLogged">   
-                                <button mat-button (click)="deleteBook(book)">
+                                <button mat-button *ngIf="loginService.isAdmin" (click)="deleteBook(book)">
                                     <mat-icon>delete</mat-icon>
                                 </button>
                                 <a [routerLink]="['/book', book.id]">{{book.title}}</a>

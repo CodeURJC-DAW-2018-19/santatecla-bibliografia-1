@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from "@angular/common"
+import { FormsModule, ReactiveFormsModule  } from "@angular/forms";
 import { JsonpModule, HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatIconRegistry } from '@angular/material/icon';
@@ -23,6 +24,7 @@ import { SignupService } from './signup/signup.service';
 import { TabsComponent } from './tabs/tabs.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from "./register/register.component";
+
 import { AuthorComponent } from './author/author.component';
 import { BookComponent } from './book/book.component';
 import { ChartComponent } from './chart/chart.component';
@@ -43,7 +45,8 @@ import {
     CovalentCommonModule, CovalentLayoutModule, CovalentMediaModule,CovalentExpansionPanelModule,
     CovalentStepsModule,CovalentLoadingModule,CovalentDialogsModule, CovalentSearchModule,
     CovalentPagingModule,CovalentNotificationsModule,CovalentMenuModule,CovalentDataTableModule, 
-    CovalentMessageModule,CovalentVirtualScrollModule
+    CovalentMessageModule,CovalentVirtualScrollModule,CovalentFileModule,
+
 } from '@covalent/core';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -73,13 +76,14 @@ import { BasicAuthInterceptor } from './login/auth.interceptor';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { ThemeComponent } from './theme/theme.component';
-import { SignupComponent } from './signup/signup.component';
 import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factory_loader';
+import { ImagesService } from './images/images.service';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
     imports: [
-        BrowserModule, BrowserAnimationsModule,FormsModule,
+        BrowserModule, BrowserAnimationsModule, CommonModule, FormsModule, ReactiveFormsModule,
         RouterModule.forRoot([]),HttpClientModule,JsonpModule,
         /** Material Modules */
         MatButtonModule,MatListModule, MatIconModule, MatCardModule,MatCheckboxModule,
@@ -93,10 +97,11 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
         CovalentMediaModule, CovalentExpansionPanelModule, CovalentStepsModule,
         CovalentDialogsModule, CovalentLoadingModule, CovalentSearchModule,
         CovalentPagingModule,CovalentNotificationsModule, CovalentMenuModule,
+
         CovalentDataTableModule, CovalentMessageModule,
         // Chart
         
-        CovalentBaseEchartsModule, CovalentBarEchartsModule, CovalentTooltipEchartsModule,
+        CovalentBaseEchartsModule, CovalentBarEchartsModule, CovalentTooltipEchartsModule, CovalentFileModule,
         /** Additional **/
         NgxChartsModule,
         routing,
@@ -106,13 +111,15 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
     declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, SignupComponent,
         AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent, ChartComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
+
         AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,
         ThemeComponent,CitationColumnComponent,CitationFormComponent, RegisterComponent],
 
     bootstrap: [AppComponent],
     providers: [
         BookService, AuthorService, ThemeService, LoginService, 
-        TabsService,CitationService, ChartService, SignupService,
+        TabsService,CitationService, ChartService, SignupService,ImagesService,
+
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: LocationStrategy, useClass: HashLocationStrategy }

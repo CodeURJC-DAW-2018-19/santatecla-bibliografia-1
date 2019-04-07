@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -174,13 +174,13 @@ public class BooksRestController {
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "books/{id}", method = PATCH)
 	public ResponseEntity<Book> updateBook2(@RequestBody Book newBook, @PathVariable long id) {
-		if (userComponent.isLoggedUser()) {
+		if(userComponent.isLoggedUser()) {
 			Book oldBook = bookService.findOne(id);
 			if (oldBook != null) {
 				oldBook.update(newBook);
 				Author author = new Author();
-				if (oldBook.getAuthor() != null) {
-					author = authorService.findById(oldBook.getAuthor().getId());
+				if (newBook.getAuthor() != null) {
+					author = authorService.findById(newBook.getAuthor().getId());
 					if (author != null) {
 						oldBook.setAuthor(author);
 						author.addBook(oldBook);
@@ -188,20 +188,21 @@ public class BooksRestController {
 					}
 				}
 				Theme theme = new Theme();
-				if (oldBook.getTheme() != null) {
-					theme = themeService.findById(oldBook.getTheme().getId());
+				if (newBook.getTheme() != null) {
+					theme = themeService.findById(newBook.getTheme().getId());
 					if (theme != null) {
 						oldBook.setTheme(theme);
 						theme.addBook(oldBook);
 						themeService.save(theme);
 					}
+					bookService.save(oldBook);
 				}
-				bookService.save(oldBook);
 				return new ResponseEntity<>(oldBook, HttpStatus.OK);
 			} else
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else
-			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
 	}
 
 	// ----------------------------- METHODS WITH UPLOAD IMAGES
@@ -209,24 +210,21 @@ public class BooksRestController {
 
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "books/{id}/image", method = PATCH)
-	public ResponseEntity<Book> updateBook(Model model, Book newBook, @PathVariable long id, MultipartFile file,
-			Long authorId, Long themeId) {
-		if (userComponent.isLoggedUser()) {
-			Book oldBook = bookService.findOne(id);
-			if (oldBook != null) {
-				oldBook.update(newBook);
-				if ((file != null) && (!file.isEmpty())) {
-					int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
-					oldBook.setImgId(imgId);
-					com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
-				}
-				bookService.save(oldBook);
-				model.addAttribute("text", "Libro actualizado correctamente");
-				return new ResponseEntity<>(oldBook, HttpStatus.OK);
-			} else
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} else
-			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+	public ResponseEntity<Book> updateBookImage(Model model, @PathVariable long id, @RequestParam(value="file")MultipartFile file) {
+		Book oldBook = bookService.findById(id);
+		if (oldBook != null) {
+			if ((file != null) && (!file.isEmpty())) {
+				int imgId = com.santatecla.G1.image.ImageManagerController.getNextId();
+				com.santatecla.G1.image.ImageManagerController.handleFileUpload(model, file, imgId);
+				oldBook.setImgId(imgId);
+			}
+			bookService.save(oldBook);
+			return new ResponseEntity<>(oldBook, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
 	}
 
 }

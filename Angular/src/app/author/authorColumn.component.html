@@ -20,7 +20,7 @@
                     <div *ngFor="let author of authors" mat-list-item >
                             <mat-card style="margin-top: 0%"> 
                                 <mat-card-content *ngIf="loginService.isLogged">
-                                    <button mat-button (click)="deleteAuthor(author)">
+                                    <button *ngIf="loginService.isAdmin" mat-button (click)="deleteAuthor(author)">
                                         <mat-icon>delete</mat-icon>
                                     </button>
                                     <a [routerLink]="['/author', author.id]">{{author.name}}</a>

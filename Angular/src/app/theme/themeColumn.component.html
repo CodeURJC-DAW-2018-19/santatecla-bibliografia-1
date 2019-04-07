@@ -21,7 +21,7 @@
                         <mat-card style="margin-top: 0%">
 
                             <mat-card-content *ngIf="loginService.isLogged">
-                                <button mat-button (click)="deleteTheme(theme)">
+                                <button *ngIf="loginService.isAdmin" mat-button (click)="deleteTheme(theme)">
                                     <mat-icon>delete</mat-icon>
                                 </button>
                                 <a [routerLink]="['/theme', theme.id]">{{theme.name}}</a>

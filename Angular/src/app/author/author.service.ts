@@ -81,28 +81,35 @@ export class AuthorService {
       );
   }
 
-  saveAuthor(author: Author) {
-    const body = JSON.stringify(author)
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
+    saveAuthor (author:Author){
+      const body= JSON.stringify(author)
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+      });
+      id:Number;
+      if(!author.id){
+        return this.http.post<Author>(URL + "/" ,body, {withCredentials: true, headers})
+        .pipe(
+            map(author => author, //Hace falta guardar el id del nuevo author para hacer luego el updateImage, creo que también habría que llamarlo desde aqui dentro para asegurar que se guarde antes de actualizarlo
+            catchError(error => this.handleError(error))
+        ));
+      }
+      else{
+        return this.http.patch<Author>(URL + "/" +author.id,body,{withCredentials: true, headers})
+        .pipe(
+            map(author => author,
+            catchError(error => this.handleError(error))
 
-    if (!author.id) {
-      return this.http.post<Author>(URL + "/", body, { withCredentials: true, headers })
-        .pipe(
-          map(response => response),
-          catchError(error => this.handleError(error))
-        );
-    }
-    else {
-      return this.http.patch<Author>(URL + "/" + author.id, body, { headers })
-        .pipe(
-          map(response => response),
-          catchError(error => this.handleError(error))
-        );
+        ));
     }
   }
 
+    updateAuthorImage(id:number,formData:FormData){
+      this.http.post(URL+"/"+id+"/image", formData).subscribe(
+        (res) => console.log(res),
+        (err) => console.log(err)
+      );
+    }
 
   private extractData(res: Response) {
     let body = res.json();
