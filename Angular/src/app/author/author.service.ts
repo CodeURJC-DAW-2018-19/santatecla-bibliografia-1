@@ -88,7 +88,7 @@ export class AuthorService {
       else{
         return this.http.patch(URL + "/" +author.id,body, {headers})
         .pipe(
-            map(response => response.json()),
+            map(author => author.json()),
             catchError(error => this.handleError(error))
         );
       }  

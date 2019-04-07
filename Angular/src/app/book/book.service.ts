@@ -78,7 +78,7 @@ export class BookService {
     else{
       return this.http.patch(URL + "/" +book.id,body, {headers})
       .pipe(
-          map(response => response.json()),
+          map(book => book.json()),
           catchError(error => this.handleError(error))
       );
     }  

@@ -21,14 +21,16 @@
             <div flex layout-gt-sm="row" layout-align="center start">
               <div flex-gt-sm="80">
                 <mat-form-field>
-                  <input type="text" matInput name="titulo"[(ngModel)]="book.title"placeholder="Titulo Obra" value={{book.title}}>
+                  <input type="text" matInput name="titulo" [(ngModel)]="book.title" placeholder="Titulo Obra"
+                    value={{book.title}}>
                 </mat-form-field>
               </div>
             </div>
             <div flex layout-gt-sm="row" layout-align="center start">
               <div flex-gt-sm="80">
                 <mat-form-field>
-                  <input type="text" matInput name="urlImgCoverPage"[(ngModel)]="book.urlImgCoverPage" placeholder="URL Portada"value={{book.urlImgCoverPage}}>
+                  <input type="text" matInput name="urlImgCoverPage" [(ngModel)]="book.urlImgCoverPage"
+                    placeholder="URL Portada" value={{book.urlImgCoverPage}}>
                 </mat-form-field>
               </div>
             </div>
@@ -36,8 +38,9 @@
               <div flex-gt-sm="80">
                 <div flex-gt-sm="50">
                   <mat-form-field>
-                    <input matInput [max]="maxToDate" name="publishDate"placeholder="Fecha de Publicación" value={{book.publishDate}} [(ngModel)]="book.publishDate"
-                      [matDatepicker]="pickerDate" [ngModelOptions]="{standalone: true}" />
+                    <input matInput [max]="maxToDate" name="publishDate" placeholder="Fecha de Publicación"
+                      value={{book.publishDate}} [(ngModel)]="book.publishDate" [matDatepicker]="pickerDate"
+                      [ngModelOptions]="{standalone: true}" />
                     <mat-datepicker-toggle matSuffix matTooltip="Fecha" [for]="pickerDate"></mat-datepicker-toggle>
                     <mat-datepicker #pickerDate [startAt]="date"></mat-datepicker>
                   </mat-form-field>
@@ -47,17 +50,28 @@
             <div flex layout-gt-sm="row" layout-align="center start">
               <div flex-gt-sm="80">
                 <mat-form-field>
-                  <input type="text" matInput name="nameEdit" placeholder="Nombre Editorial" [(ngModel)]="book.nameEdit" value={{book.nameEdit}}>
+                  <input type="text" matInput name="nameEdit" placeholder="Nombre Editorial" [(ngModel)]="book.nameEdit"
+                    value={{book.nameEdit}}>
                 </mat-form-field>
               </div>
             </div>
             <div flex layout-gt-sm="row" layout-align="center start">
               <div flex-gt-sm="80">
                 <mat-form-field>
-                  <input type="text" matInput name="urlEdit" placeholder="URL Editorial" [(ngModel)]="book.urlEdit"value={{book.urlEdit}}>
+                  <input type="text" matInput name="urlEdit" placeholder="URL Editorial" [(ngModel)]="book.urlEdit"
+                    value={{book.urlEdit}}>
                 </mat-form-field>
               </div>
             </div>
+
+            <div flex layout-gt-sm="row" layout-align="center start">
+              <td-file-input [(ngModel)]="image" color="primary" (select)="imageBook(image)" accept=".jpg, .jpeg"
+                [ngModelOptions]="{standalone: true}" [disabled]="disabled" multiple>
+                <mat-icon>attach_file</mat-icon><span>Elija una imagen...</span>
+              </td-file-input>
+            </div>
+
+
             <div flex layout-gt-sm="row" layout-align="center center">
               <div flex layout-gt-sm="row" layout-align="center start">
                 <div flex-gt-sm="30">
@@ -75,7 +89,8 @@
                 </div>
               </div>
             </div>
-            <div class="push-top-lg" flex layout-gt-sm="row" *ngIf="loginService.isLogged && loginService.isAdmin"layout-align="center start">
+            <div class="push-top-lg" flex layout-gt-sm="row" *ngIf="loginService.isLogged && loginService.isAdmin"
+              layout-align="center start">
               <div flex-gt-sm="80">
                 <button mat-stroked-button (click)=saveBook(book)>
                   <mat-icon>save</mat-icon>

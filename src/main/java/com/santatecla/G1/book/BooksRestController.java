@@ -181,7 +181,7 @@ public class BooksRestController {
 	
 	@JsonView(BookDetailView.class)
 	@RequestMapping(value = "books/{id}/image", method = PATCH)
-	public ResponseEntity<Book> updateAuthorImage(Model model, @PathVariable long id, @RequestParam(value="file")MultipartFile file) {
+	public ResponseEntity<Book> updateBookImage(Model model, @PathVariable long id, @RequestParam(value="file")MultipartFile file) {
 		Book oldBook = bookService.findById(id);
 		if (oldBook != null) {
 			if ((file != null) && (!file.isEmpty())) {
