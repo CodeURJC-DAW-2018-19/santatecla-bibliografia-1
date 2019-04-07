@@ -5,6 +5,7 @@ import { Author, AuthorService } from './author.service';
 import { LoginService } from '../login/login.service';
 import { TdDialogService } from '@covalent/core';
 import { TabsService } from "../tabs/tabs.service";
+import { ImagesService } from "../images/images.service";
 
 @Component({
     selector: 'authorDetail',
@@ -14,6 +15,7 @@ export class AuthorDetailComponent{
     @Input()
     author: Author;
 
+    image = null;
 
     constructor(
         private router: Router,
@@ -21,16 +23,31 @@ export class AuthorDetailComponent{
         public service: AuthorService,
         public loginService: LoginService,
         private _dialogService: TdDialogService,
-        private tabsService: TabsService
+        private tabsService: TabsService,
+        private imagesService: ImagesService,
     ) { }
 
     saveAuthor(author: Author) {
-        console.log(author)
+        const formData = new FormData();
+        formData.append('file', null);
         this.service.saveAuthor(author).subscribe(
-            _ => { },
+            author => {
+                console.log(author)
+                let id = author.id;
+                if (this.image !== null) {
+                    this.imagesService.imageAuthor(this.image, id).subscribe(
+                        _ => { },
+                        (error: Error) => console.error('Error updating an author: ' + error),
+                    );
+                }
+            },
             (error: Error) => console.error('Error updating an author: ' + error),
         );
         window.history.back();
+    }
+
+    imageAuthor(image) {
+        this.image = image;
     }
 
     deleteAuthor(author: Author) {
