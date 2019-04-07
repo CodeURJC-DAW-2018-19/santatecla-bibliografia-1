@@ -25,10 +25,9 @@ import { AuthorComponent } from './author/author.component';
 import { BookComponent } from './book/book.component';
 import { ChartComponent } from './chart/chart.component';
 
-/*
 import { CovalentBaseEchartsModule } from '@covalent/echarts/base';
 import { CovalentBarEchartsModule } from '@covalent/echarts/bar';
-import { CovalentTooltipEchartsModule } from '@covalent/echarts/tooltip';*/
+import { CovalentTooltipEchartsModule } from '@covalent/echarts/tooltip';
 
 import {
     MatButtonModule,MatListModule, MatIconModule,MatCardModule,MatMenuModule,MatInputModule,
@@ -93,7 +92,7 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
         CovalentPagingModule,CovalentNotificationsModule, CovalentMenuModule,
         CovalentDataTableModule, CovalentMessageModule,
         // Chart
-        /*
+        
         CovalentBaseEchartsModule, CovalentBarEchartsModule, CovalentTooltipEchartsModule,
         /** Additional **/
         NgxChartsModule,
