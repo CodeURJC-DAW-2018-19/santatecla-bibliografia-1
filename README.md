@@ -89,6 +89,14 @@ To know how to use the API rest go to the link below.
 
 [API DOC](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/API.md)
 
+# Phase 4 DOC
+
+## Getting started with Angular
+1.
+
+
+## Angular class diagram
+
 ## Getting started with docker
 
 1. Be sure u are using Windows Pro/Student/Enterprise, Linux, or iOS otherwise docker will not work in your computer.
