@@ -81,17 +81,19 @@ export class BookService {
       'Content-Type': 'application/json'
     });
 
-    if (!book.id) {
-      return this.http.post<Book>(URL + "/", body, { withCredentials: true, headers })
-        .pipe(
-          map(response => response),
+
+    if(!book.id){
+      return this.http.post(URL + "/" ,body, {headers})
+      .pipe(
+          map(book => book.json()),
           catchError(error => this.handleError(error))
         );
     }
-    else {
-      return this.http.patch<Book>(URL + "/" + book.id, body, { headers })
-        .pipe(
-          map(response => response),
+
+    else{
+      return this.http.patch(URL + "/" +book.id,body, {headers})
+      .pipe(
+          map(book => book.json()),
           catchError(error => this.handleError(error))
         );
     }

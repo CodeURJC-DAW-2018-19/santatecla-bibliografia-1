@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatIconRegistry, MatDialog } from '@angular/material';
@@ -6,8 +6,11 @@ import { TdMediaService, TdDigitsPipe, TdLayoutManageListComponent, tdRotateAnim
 import {ActivatedRoute,Router} from '@angular/router'
 import { Book, BookService } from './book.service';
 import { LoginService } from '../login/login.service';
+
+import { ImagesService } from '../images/images.service';
 import { Author, AuthorService } from '../author/author.service';
 import { ThemeService, Theme } from '../theme/theme.service';
+
 
 @Component({
     selector: 'bookForm',
@@ -15,12 +18,13 @@ import { ThemeService, Theme } from '../theme/theme.service';
     styleUrls: ['../app.component.css'],
     animations: [tdRotateAnimation],
 })
-export class BookFormComponent {
+export class BookFormComponent implements OnInit{
    
     //FOR BUILD PROBLEMS
     maxToDate: Date;
     
     book:Book;
+    image = null;
 
     authors:Author[];
 
@@ -30,6 +34,8 @@ export class BookFormComponent {
         private router: Router,
         activatedRoute: ActivatedRoute,
         public service: BookService,
+
+        private imagesService: ImagesService,
         public serviceAuthor: AuthorService,
         public serviceTheme: ThemeService,
         public loginService: LoginService
@@ -37,6 +43,31 @@ export class BookFormComponent {
         this.book={
             title:'',
         }
+    }
+
+    imageBook(image) {
+        this.image = image;
+    }
+
+    // Timeframe
+    date: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);
+
+    saveBook(book:Book) {
+        const formData = new FormData();
+        formData.append('file', null);
+        this.service.saveBook(book).subscribe(
+            book => {
+                let id = book.id;
+                if (this.image !== null) {
+                    this.imagesService.imageBook(this.image, id).subscribe(
+                        _ => { },
+                        (error: Error) => console.error('Error updating an author: ' + error),
+                    );
+                }
+            },
+            (error: Error) => console.error('Error updating a book: ' + error),
+        ); 
+        window.history.back();
     }
 
     ngOnInit(): void {
@@ -50,18 +81,7 @@ export class BookFormComponent {
             );
     
     }
-// Timeframe
-date: Date = new Date(new Date().getTime() - 2 * 60 * 60 * 24 * 1000);
 
-saveBook(book:Book) {
-
-    console.log(book.author)
-    this.service.saveBook(book).subscribe(
-        _ => {},
-        (error: Error) => console.error('Error updating a book: ' + error),
-    ); 
-    window.history.back();
-}
 
 gotoBooks() {
     this.router.navigate(['/books']);

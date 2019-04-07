@@ -5,6 +5,7 @@ import { Book, BookService } from './book.service';
 import { LoginService } from '../login/login.service';
 import { TdDialogService } from '@covalent/core';
 import { TabsService } from "../tabs/tabs.service";
+import { ImagesService } from "../images/images.service";
 
 @Component({
     selector: 'bookDetail',
@@ -14,6 +15,7 @@ import { TabsService } from "../tabs/tabs.service";
 export class BookDetailComponent{
     @Input()
     book: Book;
+    image = null;
 
     constructor(
         private router: Router,
@@ -21,16 +23,31 @@ export class BookDetailComponent{
         public service: BookService,
         public loginService: LoginService,
         private _dialogService: TdDialogService,
-        private tabsService: TabsService) {
+        private tabsService: TabsService,
+        private imagesService: ImagesService) {
 
     }
 
+    imageBook(image) {
+        this.image = image;
+    }
+
     saveBook(book: Book) {
-        console.log(book)
+        const formData = new FormData();
+        formData.append('file', null);
         this.service.saveBook(book).subscribe(
-            _ => { },
+            book => {
+                console.log(book)
+                let id = book.id;
+                if (this.image !== null) {
+                    this.imagesService.imageBook(this.image, id).subscribe(
+                        _ => { },
+                        (error: Error) => console.error('Error updating an author: ' + error),
+                    );
+                }
+            },
             (error: Error) => console.error('Error updating a book: ' + error),
-        );
+        ); 
         window.history.back();
     }
 
