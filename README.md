@@ -92,16 +92,21 @@ To know how to use the API rest go to the link below.
 # Phase 4 DOC
 
 ## Getting started with Angular
-1.
 
+1. The first step is to install NodeJs if you don´t have it, you can download it here [NodeJs](https://nodejs.org/es/download/)
+2. Then you have to clone this repository and open it as a project in Visual Studio.
+2. Now you will be able to isntall angular using the command ``` npm install -g @Angular/cli```
+3. A new directory will be created in your project, so execute ```cd Angular```
+4. And finally use the command ```npm start``` and the application will be ready in the 4200 port.
 
 ## Angular class diagram
 
+
 ## Getting started with docker
 
-1. Be sure u are using Windows Pro/Student/Enterprise, Linux, or iOS otherwise docker will not work in your computer.
-2. Download and install Docker. [Docker download] (https://hub.docker.com/editions/community/docker-ce-desktop-windows)
-3. Download and install Maven. [Maven download] (https://maven.apache.org/download.cgi)
+1. Be sure that you are using Windows Pro/Student/Enterprise, Linux, or iOS otherwise docker will not work in your computer.
+2. Download and install [Docker](https://hub.docker.com/editions/community/docker-ce-desktop-windows).
+3. Download and install [Maven](https://maven.apache.org/download.cgi).
 4. Go to the /Docker folder in the project and run docker_develop.sh
 
 ## Instructions to execute the dockerized application
@@ -109,8 +114,8 @@ To know how to use the API rest go to the link below.
 To run the dockerize application, you need instal docker (with docker compose)
 1. From the root of the project, go to the Docker folder.
 2. Generate the image of the application, by running the script "docker_develop.sh".
-3. Then check if the image has been correctly created executing ``` docker images ´´´
-4. Execute the instruction ```docker-compose up ´´´, that command will download the image of the DDBB and it will run the 2 containers
+3. Then check if the image has been correctly created executing ``` docker images ```
+4. Execute the instruction ```docker-compose up ```, that command will download the image of the DDBB and it will run the 2 containers
 
 * Optionally if you want upload your image to a docker repository, you can use the "upload_docker_image.sh" wich need as arguments the name of the image, the version, the user of dockerhub, the password, and the repository. 
 *IN THIS CASE WE UNDERSTAND YOU ARE A DEVELOP, SO YOU HAVE TO HAD MAVEN (2.*) INSTALLED*
