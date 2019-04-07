@@ -81,7 +81,7 @@ export class AuthorService {
       if(!author.id){
         return this.http.post(URL + "/" ,body, {headers})
         .pipe(
-            map(_ => {}), //Hace falta guardar el id del nuevo author para hacer luego el updateImage, creo que también habría que llamarlo desde aqui dentro para asegurar que se guarde antes de actualizarlo
+            map(author => author.json()), //Hace falta guardar el id del nuevo author para hacer luego el updateImage, creo que también habría que llamarlo desde aqui dentro para asegurar que se guarde antes de actualizarlo
             catchError(error => this.handleError(error))
         );
       }

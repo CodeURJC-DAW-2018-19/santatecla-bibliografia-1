@@ -12,6 +12,9 @@
                     <span hide-xs>Autor</span>
                 </div>
             </mat-card-title>
+
+            <input type="file" (change)="imageAuthor(image)" #image/>
+
             <mat-divider></mat-divider>
             <div flex layout-gt-sm="row" layout-align="center center">
                 <div flex-gt-sm="60">
