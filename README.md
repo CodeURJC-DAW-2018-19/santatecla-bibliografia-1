@@ -100,6 +100,13 @@ To know how to use the API rest go to the link below.
 4. And finally use the command ```npm start``` and the application will be ready in the 4200 port.
 
 ## Angular class diagram
+Here is showed the entire structure of the angular project,we have one component for each entity and it´s organized as showed in the picture.
+
+![Image of diagram](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/CapturaAngularStructure.PNG)
+
+And also the internal structure of the Angular components is separated in the service and the component who are both used by the interface in the form and details. 
+
+![Image of diagram](https://github.com/CodeURJC-DAW-2018-19/santatecla-bibliografia-1/blob/master/assets/img/icons/angularAuthor.png)
 
 
 ## Getting started with docker
