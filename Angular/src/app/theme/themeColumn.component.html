@@ -43,7 +43,7 @@
                 </button>
                 <button *ngIf="loginService.isLogged && loginService.isAdmin" mat-raised-button matTooltip="Nuevo Tema"
                     class="push-left-md" (click)="newTheme()">
-                    <mat-icon>add</mat-icon> New
+                    <mat-icon>add</mat-icon> Nuevo
                 </button>
                 <span flex *ngIf="!searchBox.searchVisible"></span>
                 <td-search-box hide-xs flex #searchBox
