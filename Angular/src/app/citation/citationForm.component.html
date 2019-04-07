@@ -1,0 +1,56 @@
+<style>
+    mat-form-field {
+        width: 90%;
+        margin-left: 5px;
+    }
+</style>
+<div flex layout-gt-sm="row" layout-align="center start" tdMediaToggle="gt-xs" layout-wrap [mediaClasses]="['push-sm']" >
+    <div flex-gt-sm="80">
+        <mat-card>
+            <mat-card-title>
+                <div>
+                    <span hide-xs>Citas</span>
+                </div>
+            </mat-card-title>
+            <mat-divider></mat-divider>
+            <div flex layout-gt-sm="row" layout-align="center center">
+                <div flex-gt-sm="60">
+                    <form flex #authorForm="ngForm">
+                        <div flex layout-gt-sm="row" layout-align="center start">
+                            <div flex-gt-sm="80">
+                                <mat-form-field>
+                                    <input type="text" matInput  name="text" [(ngModel)]="citation.text" placeholder="Contenido de la cita">
+                                </mat-form-field>
+                                <div layout="row">
+                                    <div flex style="max-height: 100px;overflow:auto;">
+                                        <mat-radio-group  name="book"  [(ngModel)]="citation.book" >
+                                                <div flex layout-gt-sm="row" class="push-top-lg" layout-align="center start" *ngFor="let book of books">
+                                                <mat-radio-button  [value]="book">{{book.title}}</mat-radio-button>
+                                                </div>
+                                        </mat-radio-group>
+                                    </div>
+                                    <div flex style="max-height: 100px;overflow:auto;">
+                                        <mat-radio-group  name="theme"  [(ngModel)]="citation.theme" >
+                                                <div flex layout-gt-sm="row" class="push-top-lg" layout-align="center start" *ngFor="let theme of themes">
+                                                <mat-radio-button  [value]="theme">{{theme.name}}</mat-radio-button>
+                                                </div>
+                                        </mat-radio-group>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </form>
+                    <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
+                        <div flex-gt-sm="80">
+                            <button mat-stroked-button (click)="saveCitation(citation)" style="margin: 10px 10px 20px 10px"> 
+                                <mat-icon>save</mat-icon>
+                                Guardar
+                            </button>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

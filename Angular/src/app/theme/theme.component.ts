@@ -30,7 +30,7 @@ export class ThemeComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.params.subscribe(
             params => {
-                const id = params['id'];
+                const id = +params['id'];
                 var aux: Citation[];
                 this.service.getTheme(id).subscribe(
                     theme => {

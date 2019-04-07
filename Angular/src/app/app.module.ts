@@ -63,12 +63,15 @@ import { ThemeColumnComponent } from './theme/themeColumn.component';
 import { ThemeFormComponent } from './theme/themeForm.component';
 import { ThemeDetailComponent } from './theme/themeDetail.component';
 
+import { CitationColumnComponent } from './citation/citationColumn.component';
+import { CitationService } from './citation/citation.service';
+import { CitationFormComponent } from './citation/citationForm.component';
+
 import { routing } from './app.routing';
 import { ErrorInterceptor } from './login/error.interceptor';
 import { BasicAuthInterceptor } from './login/auth.interceptor';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { CitationColumnComponent } from './citation/citationColumn.component';
-import { CitationService } from './citation/citation.service';
+
 import { ThemeComponent } from './theme/theme.component';
 import { SignupComponent } from './signup/signup.component';
 import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factory_loader';
@@ -92,6 +95,7 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
         CovalentPagingModule,CovalentNotificationsModule, CovalentMenuModule,
         CovalentDataTableModule, CovalentMessageModule,
         // Chart
+        
         CovalentBaseEchartsModule, CovalentBarEchartsModule, CovalentTooltipEchartsModule,
         /** Additional **/
         NgxChartsModule,
@@ -102,7 +106,8 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
     declarations: [AppComponent, HelloComponent, HeaderComponent, LoginComponent, SignupComponent,
         AuthorDetailComponent, BookDetailComponent, ThemeDetailComponent, ChartComponent,
         IndexComponent, AuthorColumnComponent,BookColumnComponent, ThemeColumnComponent,LoginComponent,
-        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,ThemeComponent,CitationColumnComponent, RegisterComponent],
+        AuthorFormComponent,BookFormComponent, ThemeFormComponent, TabsComponent, AuthorComponent,BookComponent,
+        ThemeComponent,CitationColumnComponent,CitationFormComponent, RegisterComponent],
 
     bootstrap: [AppComponent],
     providers: [

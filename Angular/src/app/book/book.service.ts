@@ -51,6 +51,7 @@ export class BookService {
         map(response => response),
         catchError(error => this.handleError(error))
       );
+    
   }
 
   deleteBook(book: Book) {

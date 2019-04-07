@@ -1,7 +1,3 @@
-
-
-
-
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
@@ -12,7 +8,7 @@ import { Theme } from '../theme/theme.service';
 export interface Citation {
   id?: number;
   text: string;
-  textAux: string;
+  textAux?: string;
   book: Book;
   theme: Theme;
 }
