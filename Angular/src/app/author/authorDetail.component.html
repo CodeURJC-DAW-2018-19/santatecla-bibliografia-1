@@ -76,18 +76,11 @@
                             </div>
                         </div>
 
-                        <div flex layout-gt-sm="row" layout-align="center start">
+                        <div *ngIf="loginService.isLogged && loginService.isAdmin"  flex layout-gt-sm="row" layout-align="center start">
                             <td-file-input [(ngModel)]="image" color="primary" (select)="imageAuthor(image)"
                              accept=".jpg, .jpeg" [ngModelOptions]="{standalone: true}" [disabled]="disabled" multiple>
                                 <mat-icon>attach_file</mat-icon><span>Elija una imagen...</span>
                             </td-file-input>
-                        </div>
-                        
-                        <div flex layout-gt-sm="row" layout-align="center start">
-                            <div flex-gt-sm="30">
-                                <mat-checkbox>Libro 1</mat-checkbox>
-                                <mat-checkbox>Libro 2</mat-checkbox>
-                            </div>
                         </div>
 
                         <div *ngIf="loginService.isLogged && loginService.isAdmin" flex layout-gt-sm="row" class="push-top-lg" layout-align="center start">
