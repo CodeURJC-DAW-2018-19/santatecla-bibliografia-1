@@ -13,8 +13,6 @@
                 </div>
             </mat-card-title>
 
-            <input type="file" (change)="imageAuthor(image)" #image/>
-
             <mat-divider></mat-divider>
             <div flex layout-gt-sm="row" layout-align="center center">
                 <div flex-gt-sm="60">
@@ -75,11 +73,17 @@
                                 </mat-form-field>
                             </div>
                         </div>
+
+
                         <div flex layout-gt-sm="row" layout-align="center start">
-                            <td-file-input [(ngModel)]="authorForm.files" color="primary" (select)="selectEvent($event)" accept=".jpg, .jpeg" [ngModelOptions]="{standalone: true}" [disabled]="disabled" multiple>
-                                <mat-icon>attach_file</mat-icon><span>Choose a file...</span>
+                            <td-file-input [(ngModel)]="image" color="primary" (select)="imageAuthor(image)"
+                             accept=".jpg, .jpeg" [ngModelOptions]="{standalone: true}" [disabled]="disabled" multiple>
+                                <mat-icon>attach_file</mat-icon><span>Elija una imagen...</span>
                             </td-file-input>
                         </div>
+
+
+
                         <div flex layout-gt-sm="row" layout-align="center start">
                             <div flex-gt-sm="30">
                                 <mat-checkbox>Libro 1</mat-checkbox>
