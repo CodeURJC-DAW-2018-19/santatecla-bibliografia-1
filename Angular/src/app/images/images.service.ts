@@ -23,6 +23,17 @@ export class ImagesService {
         );
     }
 
+    imageBook(image, id:number) {
+        const formData = new FormData();
+        formData.append('file', image);
+
+        return this.http.patch("/api/books/" + id + "/image", formData, { withCredentials: true })
+        .pipe(
+            map(response => response.json()),
+            catchError(error => this.handleError(error))
+        );
+    }
+
     private handleError(error: any) {
         console.error(error);
         return Observable.throw('Server error author (' + error.status + '): ' + error.text());

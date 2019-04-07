@@ -41,15 +41,12 @@ export class AuthorFormComponent {
 
 
     imageAuthor(image) {
-        if (image.files.length > 0) {
-            this.image = image.files[0];
-        }
+        this.image = image;
     }
 
     saveAuthor(author: Author) {
-        console.log(author)
         const formData = new FormData();
-        formData.append('file', this.uploadForm.get('profile').value);
+        formData.append('file', null);
         this.service.saveAuthor(author).subscribe(
             author => {
                 console.log(author)
