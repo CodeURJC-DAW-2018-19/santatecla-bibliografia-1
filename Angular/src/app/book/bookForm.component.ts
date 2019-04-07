@@ -22,6 +22,7 @@ export class BookFormComponent implements OnInit{
    
     //FOR BUILD PROBLEMS
     maxToDate: Date;
+    disabled:any;
     
     book:Book;
     image = null;

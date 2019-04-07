@@ -13,8 +13,11 @@ export class ChartComponent implements OnInit {
 
     chart: Chart;
     themes = {};
+    
+    
 
-    constructor(private service: ChartService){}
+    constructor(private service: ChartService){
+    }
 
     ngOnInit(){
         this.service.getChart().subscribe(
@@ -24,6 +27,8 @@ export class ChartComponent implements OnInit {
             },
             error => console.error(error)
         );
+        let names=<any>{};
+        let values=<any>{};
     }
 
     showThemes(){

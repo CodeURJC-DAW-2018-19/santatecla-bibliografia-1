@@ -6,6 +6,8 @@ import { LoginService } from '../login/login.service';
 import { TdDialogService } from '@covalent/core';
 import { TabsService } from "../tabs/tabs.service";
 import { ImagesService } from "../images/images.service";
+import {environment} from '../../environment/environment';
+
 
 @Component({
     selector: 'authorDetail',
@@ -14,6 +16,8 @@ import { ImagesService } from "../images/images.service";
 export class AuthorDetailComponent{
     @Input()
     author: Author;
+    aux: String ;
+
 
     image = null;
 
@@ -25,7 +29,9 @@ export class AuthorDetailComponent{
         private _dialogService: TdDialogService,
         private tabsService: TabsService,
         private imagesService: ImagesService,
-    ) { }
+    ) { 
+        this.aux = environment.baseRef;
+    }
 
     saveAuthor(author: Author) {
         const formData = new FormData();

@@ -26,13 +26,14 @@ export class AuthorFormComponent {
     dateBirth: Date;
     dateDeath: Date;
 page: number;
-    
     books:Book[];
-
     author: Author;
     uploadForm: FormGroup;
     image = null;
     private files: FileList;
+
+    //Docker corrections
+    disabled:any;
 
     constructor(
         private formBuilder: FormBuilder,

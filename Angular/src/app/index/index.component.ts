@@ -9,7 +9,9 @@ import {ActivatedRoute,Router} from '@angular/router'
     animations: [tdRotateAnimation],
 })
 export class IndexComponent{
-
+    //Docker corrections
+    show:any;
+    
     constructor(
         private router: Router,
         activatedRoute: ActivatedRoute,

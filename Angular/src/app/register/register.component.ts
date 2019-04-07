@@ -12,6 +12,9 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  //Docker corrections
+  loginService:any;
+
   constructor(private authService: AuthService, private router: Router, private location: Location) { }
   private user: UserInterface = {
     name: '',

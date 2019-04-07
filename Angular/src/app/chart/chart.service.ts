@@ -7,6 +7,7 @@ import { Theme } from '../theme/theme.service';
 export interface Chart {
     themes: Theme[];
     numBooks: number[];
+    names?:any;
 }
 
 @Injectable()

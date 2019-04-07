@@ -6,6 +6,7 @@ import { LoginService } from '../login/login.service';
 import { TdDialogService } from '@covalent/core';
 import { TabsService } from "../tabs/tabs.service";
 import { ImagesService } from "../images/images.service";
+import {environment} from '../../environment/environment';
 
 @Component({
     selector: 'bookDetail',
@@ -15,6 +16,7 @@ import { ImagesService } from "../images/images.service";
 export class BookDetailComponent{
     @Input()
     book: Book;
+    aux: String ;
     image = null;
 
     constructor(
@@ -25,6 +27,7 @@ export class BookDetailComponent{
         private _dialogService: TdDialogService,
         private tabsService: TabsService,
         private imagesService: ImagesService) {
+            this.aux = environment.baseRef;
 
     }
 
