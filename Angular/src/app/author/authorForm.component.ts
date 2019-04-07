@@ -20,9 +20,10 @@ export class AuthorFormComponent {
 
     author: Author;
     uploadForm: FormGroup;
-    formBuilder:FormBuilder;
+    private files:FileList;
 
     constructor(
+        private formBuilder:FormBuilder,
         private router: Router, 
         public activatedRoute: ActivatedRoute, 
         public service: AuthorService,
@@ -50,10 +51,16 @@ export class AuthorFormComponent {
         this.service.updateAuthorImage(this.author.id,formData);
     }
 
-    selectEvent(event){
-        if (event.target.files.length > 0) {
-            const file = event.target.files[0];
+    selectEvent(files: File|FileList){
+        if(files instanceof FileList){
+            if (this.files.length > 0) {
+                const file = this.files[0];
+               this.uploadForm.get('profile').setValue(file);
+            }
+        }
+        else{
+            const file = files;
             this.uploadForm.get('profile').setValue(file);
-          }
+        }
     }
 }

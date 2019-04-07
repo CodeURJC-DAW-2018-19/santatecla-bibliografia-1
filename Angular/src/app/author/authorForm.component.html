@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <div flex layout-gt-sm="row" layout-align="center start">
-                            <td-file-input [(ngModel)]="files" color="primary" (select)="selectEvent($event)" accept=".ext,.anotherExt" [disabled]="disabled" multiple>
+                            <td-file-input [(ngModel)]="authorForm.files" color="primary" (select)="selectEvent($event)" accept=".jpg, .jpeg" [ngModelOptions]="{standalone: true}" [disabled]="disabled" multiple>
                                 <mat-icon>attach_file</mat-icon><span>Choose a file...</span>
                             </td-file-input>
                         </div>
