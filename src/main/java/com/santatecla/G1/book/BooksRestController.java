@@ -153,8 +153,8 @@ public class BooksRestController {
 		if (oldBook != null) {
 			oldBook.update(newBook);
 			Author author = new Author();
-			if (oldBook.getAuthor() != null) {
-				author = authorService.findById(oldBook.getAuthor().getId());
+			if (newBook.getAuthor() != null) {
+				author = authorService.findById(newBook.getAuthor().getId());
 				if (author != null) {
 					oldBook.setAuthor(author);
 					author.addBook(oldBook);
@@ -162,8 +162,8 @@ public class BooksRestController {
 				}
 			}
 			Theme theme = new Theme();
-			if (oldBook.getTheme() != null) {
-				theme = themeService.findById(oldBook.getTheme().getId());
+			if (newBook.getTheme() != null) {
+				theme = themeService.findById(newBook.getTheme().getId());
 				if (theme != null) {
 					oldBook.setTheme(theme);
 					theme.addBook(oldBook);
